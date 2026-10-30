@@ -21,6 +21,8 @@ export interface Tenant {
   docsInVault: number;
   onboardingStep: 1 | 2 | 3 | 4; // 1: Signup, 2: Cofre, 3: 1a Análise, 4: Ativação Pro/Crédito
   status: "active" | "blocked";
+  accessStatus?: "PENDING" | "ACTIVE" | "BANNED";
+  banReason?: string;
   isFounder?: boolean;
   // Campos de Governança LGPD / Aceite de Termos
   termsAccepted?: boolean;

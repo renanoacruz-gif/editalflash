@@ -35,26 +35,26 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 p-[1px] shadow-lg shadow-emerald-500/20">
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-[#2740F0] to-blue-400 p-[1px] shadow-lg shadow-blue-500/20">
             <div className="w-full h-full bg-[#090d16] rounded-xl flex items-center justify-center">
-              <FileSearch className="w-5 h-5 text-emerald-400" />
+              <FileSearch className="w-5 h-5 text-[#8F9CFF]" />
             </div>
             <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2740F0]"></span>
             </span>
           </div>
 
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-white">
-                Edital<span className="text-emerald-400">Flash</span>
+              <span className="text-xl font-bold tracking-tight text-white font-display">
+                Edital<span className="text-[#8F9CFF]">Flash</span>
               </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wide uppercase bg-blue-500/10 text-[#8F9CFF] border border-blue-500/30">
                 <Sparkles className="w-2.5 h-2.5" /> IA Jurídica
               </span>
             </div>
-            <span className="text-[11px] text-slate-400 hidden sm:inline">Lei 14.133/21 Compliance</span>
+            <span className="text-[11px] text-slate-400 hidden sm:inline font-mono">Lei 14.133/21 Compliance</span>
           </div>
         </div>
 
@@ -88,13 +88,13 @@ export const Navbar = () => {
 
         {/* CTA Button */}
         <div className="hidden sm:flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-xs text-slate-400 mr-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-1.5 text-xs text-slate-400 mr-2 font-mono">
+            <ShieldCheck className="w-4 h-4 text-[#8F9CFF]" />
             <span>Auditoria 100% Segura</span>
           </div>
           <button
             onClick={() => scrollToSection("demo")}
-            className="group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg text-slate-950 bg-gradient-to-r from-emerald-400 to-teal-300 hover:from-emerald-300 hover:to-teal-200 transition-all duration-200 shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/40 active:scale-95"
+            className="group relative inline-flex items-center gap-2 px-5 py-2.5 text-xs font-mono font-bold rounded-xl text-white bg-[#2740F0] hover:bg-blue-600 transition-all duration-200 shadow-md shadow-blue-500/20 hover:shadow-blue-500/40 active:scale-95 cursor-pointer"
           >
             <span>Testar Edital</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

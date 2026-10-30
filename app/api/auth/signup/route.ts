@@ -54,17 +54,35 @@ export async function POST(req: NextRequest) {
           createdUserId = authUser.user.id;
         }
 
-        // 2. Insere/atualiza registro na tabela de tenants/users
-        await supabaseAdmin.from("tenants").insert({
-          user_id: createdUserId,
-          razao_social: company || name,
-          nome_fantasia: name,
-          cnpj: "00.000.000/0001-00", // Placeholder atualizável no onboarding
+        // 2. Insere/atualiza registro na tabela profiles com status PENDING_APPROVAL
+        const { error: profileError } = await supabaseAdmin.from("profiles").upsert({
+          id: createdUserId,
           email: cleanEmail,
+          company_name: company || name,
           primary_vertical: primary_vertical || "Obras Públicas e Engenharia",
-          plan: "Starter",
-          created_at: new Date().toISOString(),
+          terms_accepted: true,
+          terms_accepted_at: termsAcceptedAt,
+          terms_version: CURRENT_TERMS_VERSION,
+          account_status: "PENDING_APPROVAL",
         });
+
+        if (profileError) {
+          console.warn("[API/AUTH/SIGNUP] Profile upsert notice:", profileError.message);
+        }
+
+        // 3. Compatibilidade legada com tabela tenants caso ainda exista
+        try {
+          await supabaseAdmin.from("tenants").insert({
+            user_id: createdUserId,
+            razao_social: company || name,
+            nome_fantasia: name,
+            cnpj: "00.000.000/0001-00",
+            email: cleanEmail,
+            primary_vertical: primary_vertical || "Obras Públicas e Engenharia",
+            plan: "Starter",
+            created_at: new Date().toISOString(),
+          });
+        } catch (_) {}
       } catch (dbErr: any) {
         console.warn("[API/AUTH/SIGNUP] Supabase sync notice:", dbErr?.message);
       }

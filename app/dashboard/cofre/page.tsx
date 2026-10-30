@@ -117,6 +117,7 @@ export default function CofreDocumentosPage() {
   const [deleteCandidate, setDeleteCandidate] = useState<CompanyDocumentVaultItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isExportingPDF, setIsExportingPDF] = useState(false);
+  const [isAutoRenewing, setIsAutoRenewing] = useState(false);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -196,6 +197,44 @@ export default function CofreDocumentosPage() {
     }
   };
 
+  const handleAutoRenewCertidoes = async () => {
+    setIsAutoRenewing(true);
+    try {
+      const res = await fetch("/api/vault/auto-renew", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cnpj: user?.cnpj || "12.345.678/0001-90" }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erro ao consultar bases públicas.");
+
+      if (data.certidoes && data.certidoes.length > 0) {
+        const convertedDocs: CompanyDocumentVaultItem[] = data.certidoes.map((c: any) => ({
+          id: c.id,
+          tipo: c.tipo === "CND_FEDERAL" ? "Certidão Fiscal" : c.tipo === "FGTS" ? "Certidão de FGTS" : "Qualificação Trabalhista",
+          nome: c.nome,
+          emissor: c.emissor,
+          dataEmissao: c.dataEmissao,
+          dataValidade: c.dataValidade,
+          diasParaVencer: c.diasParaVencer,
+          status: c.status,
+        }));
+
+        setDocs((prev) => {
+          const ids = new Set(convertedDocs.map((x) => x.id));
+          const filtered = prev.filter((p) => !ids.has(p.id));
+          return [...convertedDocs, ...filtered];
+        });
+
+        showToast("3 Certidões renovadas e sincronizadas com sucesso.");
+      }
+    } catch (err: any) {
+      showToast("Falha na auto-renovação: " + (err?.message || "Erro desconhecido"));
+    } finally {
+      setIsAutoRenewing(false);
+    }
+  };
+
   const filteredDocs = docs.filter((d) => {
     if (filterType === "EXPIRING") {
       return d.status === "EXPIRANDO" || (d.diasParaVencer >= 0 && d.diasParaVencer <= 30);
@@ -246,6 +285,17 @@ export default function CofreDocumentosPage() {
           </div>
 
           <div className="flex items-center gap-2.5 flex-wrap">
+            <button
+              type="button"
+              onClick={handleAutoRenewCertidoes}
+              disabled={isAutoRenewing}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2740F0] hover:bg-blue-600 text-white shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+              title="Consulta bases públicas da Receita Federal, Caixa e TST para renovar CNDs"
+            >
+              <ShieldCheck className="w-4 h-4 text-white" strokeWidth={1.75} />
+              <span>{isAutoRenewing ? "Consultando Bases Públicas..." : "Auto-Renovar CNDs (Robô)"}</span>
+            </button>
+
             <button
               type="button"
               onClick={handleExportChecklistPDF}
@@ -358,7 +408,7 @@ export default function CofreDocumentosPage() {
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredDocs.map((doc) => {
                 const isExpiring = doc.status === "EXPIRANDO" || (doc.diasParaVencer >= 0 && doc.diasParaVencer <= 30);
                 const isExpired = doc.status === "VENCIDO" || doc.diasParaVencer < 0;
@@ -366,12 +416,12 @@ export default function CofreDocumentosPage() {
                 return (
                   <div
                     key={doc.id}
-                    className={`bento-card bg-[var(--surface)] rounded-xl p-5 sm:p-6 border transition-all duration-200 flex flex-col md:flex-row md:items-center justify-between gap-4 group ${
+                    className={`bento-card bg-[var(--surface)] rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between gap-4 group hover:-translate-y-0.5 shadow-sm hover:shadow-md ${
                       isExpired
-                        ? "border-[var(--bad)]/70 bg-[var(--bad-bg)]/20 shadow-xs"
+                        ? "border-rose-300/80 bg-rose-50/30 dark:bg-rose-950/20"
                         : isExpiring
-                        ? "border-[var(--warn)]/70 bg-[var(--warn-bg)]/20 shadow-xs"
-                        : "border-[var(--line)] hover:border-[var(--brand)]/40 shadow-xs"
+                        ? "border-amber-300/80 bg-amber-50/30 dark:bg-amber-950/20"
+                        : "border-[var(--line)] hover:border-[#2740F0]/50"
                     }`}
                   >
                     <div className="space-y-2 min-w-0">

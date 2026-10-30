@@ -429,7 +429,7 @@ export default function AdminSystemPage() {
                     </div>
                     <p className="text-[12px] text-white font-medium">{item.objeto}</p>
                     <div className="text-[11px] font-mono text-amber-300/90 bg-amber-950/40 px-2 py-1 rounded border border-amber-500/20">
-                      ⚠️ {item.issue}
+                      [DIVERGENCIA] {item.issue}
                     </div>
                   </div>
 

@@ -25,15 +25,25 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const appBaseUrl =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : "https://editalflash.pages.dev");
+
 export const metadata: Metadata = {
   title: "EditalFlash | Auditoria Preventiva de Habilitação (Art. 62 Lei 14.133)",
   description:
     "Responda antes de disputar: Minha empresa tem risco real de inabilitação? Auditoria preventiva de certidões, balanço (PL ≥ 10%) e atestados com prova de página e linha do edital.",
-  metadataBase: new URL("https://editalflash.com.br"),
+  metadataBase: new URL(appBaseUrl),
+  alternates: {
+    canonical: "/",
+  },
+  verification: {
+    google: "", // Campo preparado para preenchimento posterior com o token do Search Console
+  },
   openGraph: {
     title: "EditalFlash | Auditoria Preventiva de Habilitação",
     description: "Cruzamos seu cofre de documentos com o edital (Art. 62 Lei 14.133/2021) e apontamos vereditos com prova de página e linha.",
-    url: "https://editalflash.com.br",
+    url: appBaseUrl,
     siteName: "EditalFlash",
     locale: "pt_BR",
     type: "website",

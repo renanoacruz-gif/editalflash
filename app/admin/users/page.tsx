@@ -42,6 +42,12 @@ export default function AdminUsersPage() {
   const [editCredits, setEditCredits] = useState<number>(0);
   const [editStatus, setEditStatus] = useState<"active" | "blocked">("active");
 
+  // Admin Ban modal state
+  const [showBanModal, setShowBanModal] = useState(false);
+  const [banTenantTarget, setBanTenantTarget] = useState<Tenant | null>(null);
+  const [banReasonText, setBanReasonText] = useState("");
+  const [adminActionLoading, setAdminActionLoading] = useState(false);
+
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
@@ -49,6 +55,62 @@ export default function AdminUsersPage() {
 
   const reloadData = () => {
     setTenants(adminStore.getTenants());
+  };
+
+  const handleApproveTenant = async (t: Tenant) => {
+    setAdminActionLoading(true);
+    try {
+      await fetch("/api/admin/user-action", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "approve", userId: t.id, userEmail: t.responsibleEmail }),
+      });
+      adminStore.updateTenant(t.id, {
+        status: "active",
+        accessStatus: "ACTIVE",
+      });
+      showToast(`Acesso aprovado com sucesso para ${t.name}.`);
+      reloadData();
+    } catch (err: any) {
+      showToast(`Falha ao aprovar: ${err?.message || "Erro de rede"}`);
+    } finally {
+      setAdminActionLoading(false);
+    }
+  };
+
+  const handleOpenBanModal = (t: Tenant) => {
+    setBanTenantTarget(t);
+    setBanReasonText("");
+    setShowBanModal(true);
+  };
+
+  const handleConfirmBan = async () => {
+    if (!banTenantTarget || !banReasonText.trim()) return;
+    setAdminActionLoading(true);
+    try {
+      await fetch("/api/admin/user-action", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ban",
+          userId: banTenantTarget.id,
+          userEmail: banTenantTarget.responsibleEmail,
+          banReason: banReasonText.trim(),
+        }),
+      });
+      adminStore.updateTenant(banTenantTarget.id, {
+        status: "blocked",
+        accessStatus: "BANNED",
+        banReason: banReasonText.trim(),
+      });
+      showToast(`Conta de ${banTenantTarget.name} banida com sucesso.`);
+      setShowBanModal(false);
+      reloadData();
+    } catch (err: any) {
+      showToast(`Falha ao banir: ${err?.message || "Erro de rede"}`);
+    } finally {
+      setAdminActionLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -205,6 +267,7 @@ export default function AdminUsersPage() {
                 <tr className="text-[10px] uppercase font-mono text-[var(--ink-2)] font-semibold">
                   <th className="py-3 px-4">Licitante (CNPJ / Responsável)</th>
                   <th className="py-3 px-4">Vertical Principal</th>
+                  <th className="py-3 px-4">Status Acesso</th>
                   <th className="py-3 px-4">Plano & Status</th>
                   <th className="py-3 px-4 text-center">Créditos</th>
                   <th className="py-3 px-4 text-center">Cofre Docs</th>
@@ -251,6 +314,35 @@ export default function AdminUsersPage() {
                         <span className="inline-block px-2 py-0.5 rounded text-[11px] bg-[var(--bg)] text-[var(--ink)] font-medium border border-[var(--line)]">
                           {t.primary_vertical}
                         </span>
+                      </td>
+
+                      {/* Coluna: Status Acesso (Badge Colorido) */}
+                      <td className="py-3.5 px-4">
+                        {(() => {
+                          const currentAccess = t.accessStatus || (t.status === "blocked" ? "BANNED" : "ACTIVE");
+                          if (currentAccess === "BANNED") {
+                            return (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/30">
+                                <Ban className="w-3 h-3 text-red-400" />
+                                <span>BANNED</span>
+                              </span>
+                            );
+                          }
+                          if (currentAccess === "PENDING") {
+                            return (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                                <Clock className="w-3 h-3 text-amber-400" />
+                                <span>PENDING</span>
+                              </span>
+                            );
+                          }
+                          return (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                              <span>ACTIVE</span>
+                            </span>
+                          );
+                        })()}
                       </td>
 
                       <td className="py-3.5 px-4">
@@ -324,6 +416,26 @@ export default function AdminUsersPage() {
 
                       <td className="py-3.5 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          {(t.accessStatus === "PENDING" || t.status === "blocked") && (
+                            <button
+                              onClick={() => handleApproveTenant(t)}
+                              disabled={adminActionLoading}
+                              className="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-mono font-bold transition-all shadow-xs disabled:opacity-50"
+                              title="Aprovar Acesso Imediatamente"
+                            >
+                              Aprovar
+                            </button>
+                          )}
+                          {t.accessStatus !== "BANNED" && t.status !== "blocked" && !t.isFounder && (
+                            <button
+                              onClick={() => handleOpenBanModal(t)}
+                              disabled={adminActionLoading}
+                              className="px-2 py-1 rounded bg-red-950/60 hover:bg-red-900 text-red-300 border border-red-500/30 text-[11px] font-mono font-bold transition-all disabled:opacity-50"
+                              title="Banir e Revogar Acesso"
+                            >
+                              Banir
+                            </button>
+                          )}
                           <button
                             onClick={() => handleOpenEdit(t)}
                             className="px-2.5 py-1 rounded bg-[var(--bg)] hover:bg-[var(--line)] text-[var(--ink)] border border-[var(--line)] text-[11px] font-mono font-semibold transition-colors"
@@ -414,6 +526,55 @@ export default function AdminUsersPage() {
                   className="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-slate-950 transition-colors shadow-sm"
                 >
                   Salvar Alterações
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Modal de Confirmação de Banimento com Motivo Obrigatório */}
+        {showBanModal && banTenantTarget && (
+          <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4">
+            <div className="bg-[#0b101d] border border-red-500/50 rounded-2xl max-w-md w-full p-6 space-y-4 text-left shadow-2xl">
+              <div className="flex items-center gap-2.5 text-red-400">
+                <Ban className="w-5 h-5" />
+                <h3 className="text-base font-bold text-white font-display">
+                  Revogação Imediata de Acesso (Banir)
+                </h3>
+              </div>
+
+              <div className="p-3 rounded-xl bg-red-950/40 border border-red-500/30 text-xs text-red-200">
+                Você está prestes a bloquear o acesso da empresa <strong>{banTenantTarget.name}</strong> ({banTenantTarget.responsibleEmail}). Todas as sessões ativas serão invalidadas.
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-300 block">
+                  Motivo Obrigatório do Banimento:
+                </label>
+                <textarea
+                  rows={3}
+                  required
+                  placeholder="Ex: Fraude documental, violação reiterada dos termos de serviço ou solicitação judicial..."
+                  value={banReasonText}
+                  onChange={(e) => setBanReasonText(e.target.value)}
+                  className="w-full p-3 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-red-500"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2.5 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowBanModal(false)}
+                  className="px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  disabled={!banReasonText.trim() || adminActionLoading}
+                  onClick={handleConfirmBan}
+                  className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-red-600 hover:bg-red-500 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-md shadow-red-600/20"
+                >
+                  Confirmar e Banir
                 </button>
               </div>
             </div>

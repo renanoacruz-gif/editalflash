@@ -25,6 +25,8 @@ import { PrimaryVertical } from "@/lib/types";
 function SignupForm() {
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan");
+  const inviteParam = searchParams.get("invite");
+  const emailParam = searchParams.get("email");
   const initialPlan =
     planParam === "starter"
       ? "Starter"
@@ -35,7 +37,8 @@ function SignupForm() {
   // Form states
   const [step, setStep] = useState<1 | 2 | 3>(1); // Step 1: Credentials, Step 2: Vertical, Step 3: Email Verification Code
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(emailParam || "");
+  const [inviteToken, setInviteToken] = useState(inviteParam || "");
   const [company, setCompany] = useState("");
   const [password, setPassword] = useState("");
   const [legalConsent, setLegalConsent] = useState(false);
@@ -166,6 +169,20 @@ function SignupForm() {
         throw new Error(resData.error || "Erro ao processar cadastro.");
       }
 
+      // Se houver token de convite de equipe, aceita automaticamente
+      if (inviteToken && resData?.user?.id) {
+        try {
+          await fetch("/api/team/accept-invite", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              token: inviteToken,
+              userId: resData.user.id,
+            }),
+          });
+        } catch (_) {}
+      }
+
       // Registra a conta limpa (sem plano Pro padrão; o usuário escolherá seu plano na página /pricing)
       await signup(name, email, password, company, primaryVertical);
       // Redireciona obrigatoriamente para a escolha consciente de planos
@@ -197,7 +214,7 @@ function SignupForm() {
             </div>
 
             <div className="p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-200 font-mono space-y-1">
-              <div>⚠️ Risco de Falso Positivo: Alto</div>
+              <div>[ALERTA] Risco de Falso Positivo: Alto</div>
               <div>Exigências técnicas eliminatórias de conselho ou vigilância sanitária não serão cruzadas contra seu cofre.</div>
             </div>
 
@@ -373,13 +390,13 @@ function SignupForm() {
                 <label htmlFor="terms-acceptance" className="text-xs sm:text-sm text-[var(--ink-2)] leading-relaxed cursor-pointer select-none">
                   Li e aceito os{" "}
                   <Link href="/termos" target="_blank" rel="noopener noreferrer" className="text-[var(--brand)] hover:underline font-medium">
-                    Termos de Uso
+                    Termos
                   </Link>{" "}
-                  e a{" "}
+                  e{" "}
                   <Link href="/privacidade" target="_blank" rel="noopener noreferrer" className="text-[var(--brand)] hover:underline font-medium">
                     Política de Privacidade
                   </Link>
-                  . Autorizo o tratamento dos meus dados corporativos para auditoria de habilitação conforme a LGPD.
+                  . Autorizo tratamento de dados corporativos conforme LGPD.
                 </label>
               </div>
 

@@ -35,6 +35,17 @@ export default function AccountSettingsPage() {
   const [vertical, setVertical] = useState<PrimaryVertical>(user?.primary_vertical || "Obras Públicas e Engenharia");
   const [savedSuccess, setSavedSuccess] = useState(false);
 
+  // Estados de Auto-Gestão de Assinatura e Conta (LGPD)
+  const [subscriptionStatus, setSubscriptionStatus] = useState<"ACTIVE" | "PAUSED" | "CANCELLED">("ACTIVE");
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [cancelOtherText, setCancelOtherText] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
+  const [deleteConfirmedCheckbox, setDeleteConfirmedCheckbox] = useState(false);
+  const [accountActionLoading, setAccountActionLoading] = useState(false);
+  const [actionNotice, setActionNotice] = useState<string | null>(null);
+
   // Estados da aba de Indicação
   const [copiedLink, setCopiedLink] = useState(false);
   const referralCode = user?.id ? user.id.slice(0, 8).toUpperCase() : "FLASH50";
@@ -366,6 +377,89 @@ export default function AccountSettingsPage() {
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
+
+            {/* SEÇÃO: AUTO-GESTÃO DE ASSINATURA */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div>
+                <h3 className="text-base font-bold text-slate-900 font-display">
+                  Gestão da Assinatura
+                </h3>
+                <p className="text-xs text-slate-500 mt-1">
+                  Pause temporariamente para preservar seus dados ou encerre a renovação automática.
+                </p>
+              </div>
+
+              {actionNotice && (
+                <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 font-mono">
+                  {actionNotice}
+                </div>
+              )}
+
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  type="button"
+                  disabled={accountActionLoading || subscriptionStatus === "PAUSED"}
+                  onClick={async () => {
+                    if (!confirm("Deseja pausar sua assinatura por até 30 dias? Seus dados e cofre serão mantidos intactos.")) return;
+                    setAccountActionLoading(true);
+                    try {
+                      const res = await fetch("/api/account/manage", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "pause", userId: user?.id, userEmail: user?.email }),
+                      });
+                      const data = await res.json();
+                      if (!res.ok) throw new Error(data.error || "Erro ao pausar assinatura.");
+                      setSubscriptionStatus("PAUSED");
+                      setActionNotice("Assinatura pausada com sucesso. Seus dados permanecerão preservados por 30 dias.");
+                    } catch (err: any) {
+                      alert(err.message || "Falha na comunicação.");
+                    } finally {
+                      setAccountActionLoading(false);
+                    }
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 border border-amber-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {subscriptionStatus === "PAUSED" ? "Assinatura Pausada (30 dias)" : "Pausar Assinatura"}
+                </button>
+
+                <button
+                  type="button"
+                  disabled={accountActionLoading || subscriptionStatus === "CANCELLED"}
+                  onClick={() => setShowCancelModal(true)}
+                  className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {subscriptionStatus === "CANCELLED" ? "Assinatura Cancelada" : "Cancelar Assinatura"}
+                </button>
+              </div>
+            </div>
+
+            {/* SEÇÃO: ZONA DE PERIGO (EXCLUIR CONTA LGPD) */}
+            <div className="p-6 rounded-2xl bg-red-50/50 border border-red-200 shadow-sm space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-xl bg-red-100 text-red-600 shrink-0">
+                  <AlertTriangle className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-red-900 font-display">
+                    Zona de Perigo: Exclusão Definitiva de Conta (LGPD)
+                  </h3>
+                  <p className="text-xs text-red-700 mt-1 leading-relaxed">
+                    A exclusão da conta é irreversível. Todos os editais auditados, certidões e balanços do cofre documental serão excluídos permanentemente (hard delete). Registros contábeis e fiscais de faturamento são mantidos anonimizados para auditoria fiscal obrigatória (soft delete).
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(true)}
+                  className="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition-colors cursor-pointer"
+                >
+                  Excluir Minha Conta
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
@@ -604,6 +698,174 @@ export default function AccountSettingsPage() {
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Gere o relatório pericial formal em PDF A4 institucional para apresentar à diretoria ou clique em <strong>"Gerar Minuta de Impugnação"</strong> para copiar uma petição do Art. 164 pronta com fundamentação do TCU para protocolo.
                 </p>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* POPUP SURVEY DE CANCELAMENTO */}
+        {showCancelModal && (
+          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full p-6 space-y-4">
+              <div className="space-y-1">
+                <h3 className="text-lg font-bold text-slate-900 font-display">
+                  Confirmação de Cancelamento
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Por favor, informe o motivo principal do cancelamento para nos ajudar a melhorar o serviço:
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <select
+                  value={cancelReason}
+                  onChange={(e) => setCancelReason(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-[#2740F0]"
+                >
+                  <option value="">Selecione um motivo...</option>
+                  <option value="Preço / Orçamento">Preço ou orçamento reduzido</option>
+                  <option value="Não participo mais de licitações">Não participo mais de licitações no momento</option>
+                  <option value="Dificuldade na usabilidade">Dificuldade técnica na usabilidade da plataforma</option>
+                  <option value="Faltam recursos para meu nicho">Faltam recursos ou regras específicas para meu nicho</option>
+                  <option value="Outro">Outro motivo</option>
+                </select>
+
+                {cancelReason === "Outro" && (
+                  <textarea
+                    rows={3}
+                    placeholder="Conte-nos brevemente o que motivou sua decisão..."
+                    value={cancelOtherText}
+                    onChange={(e) => setCancelOtherText(e.target.value)}
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2740F0]"
+                  />
+                )}
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowCancelModal(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                >
+                  Voltar
+                </button>
+                <button
+                  type="button"
+                  disabled={!cancelReason || (cancelReason === "Outro" && !cancelOtherText.trim()) || accountActionLoading}
+                  onClick={async () => {
+                    const finalReason = cancelReason === "Outro" ? cancelOtherText.trim() : cancelReason;
+                    setAccountActionLoading(true);
+                    try {
+                      const res = await fetch("/api/account/manage", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          action: "cancel",
+                          userId: user?.id,
+                          userEmail: user?.email,
+                          reason: finalReason,
+                        }),
+                      });
+                      const data = await res.json();
+                      if (!res.ok) throw new Error(data.error || "Erro ao cancelar.");
+                      setSubscriptionStatus("CANCELLED");
+                      setShowCancelModal(false);
+                      setActionNotice("Assinatura cancelada com sucesso. O acesso continuará até o término do ciclo.");
+                    } catch (err: any) {
+                      alert(err.message || "Erro na solicitação.");
+                    } finally {
+                      setAccountActionLoading(false);
+                    }
+                  }}
+                  className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  Confirmar Cancelamento
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MODAL DE CONFIRMAÇÃO DE EXCLUSÃO DE CONTA (ZONA DE PERIGO) */}
+        {showDeleteModal && (
+          <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl border border-red-200 shadow-2xl max-w-md w-full p-6 space-y-4">
+              <div className="flex items-center gap-2.5 text-red-600">
+                <AlertTriangle className="w-5 h-5" />
+                <h3 className="text-lg font-bold font-display text-slate-900">
+                  Exclusão Definitiva de Conta
+                </h3>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 space-y-1">
+                <p className="font-bold">Aviso Crítico de Irreversibilidade:</p>
+                <p>Todos os editais auditados e documentos do seu cofre serão eliminados permanentemente sem possibilidade de recuperação.</p>
+              </div>
+
+              <div className="space-y-3 pt-1">
+                <div>
+                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    Digite sua senha atual para autorizar:
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="••••••••"
+                    value={deletePassword}
+                    onChange={(e) => setDeletePassword(e.target.value)}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-mono"
+                  />
+                </div>
+
+                <label className="flex items-start gap-2.5 pt-1 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={deleteConfirmedCheckbox}
+                    onChange={(e) => setDeleteConfirmedCheckbox(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-slate-300 text-red-600 accent-red-600 focus:ring-red-500 shrink-0"
+                  />
+                  <span className="text-xs text-slate-700 select-none">
+                    Compreendo que esta ação é irreversível e autorizo a eliminação definitiva de todos os meus dados e documentos.
+                  </span>
+                </label>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-3">
+                <button
+                  type="button"
+                  onClick={() => setShowDeleteModal(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                >
+                  Voltar com Segurança
+                </button>
+                <button
+                  type="button"
+                  disabled={!deletePassword || !deleteConfirmedCheckbox || accountActionLoading}
+                  onClick={async () => {
+                    setAccountActionLoading(true);
+                    try {
+                      const res = await fetch("/api/account/manage", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          action: "delete_account",
+                          userId: user?.id,
+                          userEmail: user?.email,
+                          password: deletePassword,
+                        }),
+                      });
+                      const data = await res.json();
+                      if (!res.ok) throw new Error(data.error || "Erro ao excluir conta.");
+                      alert("Conta excluída com sucesso em conformidade com a LGPD.");
+                      window.location.href = "/";
+                    } catch (err: any) {
+                      alert(err.message || "Erro na comunicação.");
+                    } finally {
+                      setAccountActionLoading(false);
+                    }
+                  }}
+                  className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  Excluir Permanentemente
+                </button>
               </div>
             </div>
           </div>

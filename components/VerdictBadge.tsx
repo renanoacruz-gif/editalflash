@@ -29,15 +29,15 @@ export const VerdictBadge: React.FC<VerdictBadgeProps> = ({
   const config = {
     PASSA: {
       defaultLabel: "PASSA",
-      bgClass: "bg-[var(--ok-bg)] text-[var(--ok-fg)] border border-[var(--ok)]/30",
+      bgClass: "bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/40",
       shape: "circle",
       icon: (
-        <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0 fill-current" aria-hidden="true">
+        <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 shrink-0 fill-emerald-600 dark:fill-emerald-400" aria-hidden="true">
           <circle cx="8" cy="8" r="7" />
           <path
             d="M4.6 8.2l2.4 2.4 4.4-4.8"
             fill="none"
-            stroke="var(--surface, #fff)"
+            stroke="#ffffff"
             strokeWidth="1.8"
             strokeLinecap="square"
           />
@@ -46,37 +46,37 @@ export const VerdictBadge: React.FC<VerdictBadgeProps> = ({
     },
     RESSALVA: {
       defaultLabel: "RESSALVA",
-      bgClass: "bg-[var(--warn-bg)] text-[var(--warn-fg)] border border-[var(--warn)]/30",
+      bgClass: "bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/40",
       shape: "triangle",
       icon: (
-        <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0 fill-current" aria-hidden="true">
+        <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 shrink-0 fill-amber-600 dark:fill-amber-400" aria-hidden="true">
           <path d="M8 1.2l7 12.6H1z" />
-          <path d="M8 5.8v3.6M8 11v1.2" stroke="var(--warn-bg, #fff)" strokeWidth="1.7" />
+          <path d="M8 5.8v3.6M8 11v1.2" stroke="#ffffff" strokeWidth="1.7" />
         </svg>
       ),
     },
     ELIMINATORIA: {
       defaultLabel: "ELIMINATÓRIA",
-      bgClass: "bg-[var(--bad-bg)] text-[var(--bad-fg)] border border-[var(--bad)]/30",
+      bgClass: "bg-rose-50 text-rose-800 border border-rose-200 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800/40",
       shape: "square",
       icon: (
-        <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0 fill-current" aria-hidden="true">
-          <rect x="1.5" y="1.5" width="13" height="13" rx="1.5" />
-          <path d="M5.3 5.3l5.4 5.4M10.7 5.3l-5.4 5.4" stroke="var(--bad-bg, #fff)" strokeWidth="1.8" />
+        <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 shrink-0 fill-rose-600 dark:fill-rose-400" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="13" height="13" rx="2" />
+          <path d="M5.3 5.3l5.4 5.4M10.7 5.3l-5.4 5.4" stroke="#ffffff" strokeWidth="1.8" />
         </svg>
       ),
     },
     REVISAO_HUMANA: {
       defaultLabel: "REVISÃO HUMANA NECESSÁRIA",
-      bgClass: "bg-[var(--rev-bg)] text-[var(--rev-fg)] border border-[var(--rev)]/30",
+      bgClass: "bg-indigo-50 text-indigo-800 border border-indigo-200 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-800/40",
       shape: "diamond",
       icon: (
-        <svg viewBox="0 0 16 16" className="w-4 h-4 shrink-0 fill-current" aria-hidden="true">
+        <svg viewBox="0 0 16 16" className="w-3.5 h-3.5 shrink-0 fill-indigo-600 dark:fill-indigo-400" aria-hidden="true">
           <path d="M8 .9l7.1 7.1L8 15.1.9 8z" />
           <path
             d="M6.3 6.4a1.8 1.8 0 113 1.3c-.7.5-1.2.8-1.2 1.6M8.1 11.2v.2"
             fill="none"
-            stroke="var(--rev-bg, #fff)"
+            stroke="#ffffff"
             strokeWidth="1.6"
           />
         </svg>

@@ -163,13 +163,13 @@ export default function SplitDiffViewer() {
             </div>
           </div>
 
-          {/* Divisor Visual Central (Arrastável) */}
+          {/* Divisor Visual Central (Arrastável 60fps) */}
           <div
-            className="absolute inset-y-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.7)] pointer-events-none"
+            className="absolute inset-y-0 w-[2px] bg-white shadow-[0_0_20px_rgba(255,255,255,0.8)] pointer-events-none transition-transform"
             style={{ left: `${sliderPos}%` }}
           >
-            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-2xl text-xs font-bold">
-              ↔
+            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white text-slate-900 border-2 border-slate-900 flex items-center justify-center shadow-2xl text-xs font-bold transition-transform hover:scale-110 active:scale-95">
+              <span className="font-mono tracking-tighter">⇄</span>
             </div>
           </div>
         </div>

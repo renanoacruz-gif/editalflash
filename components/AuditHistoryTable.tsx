@@ -397,8 +397,8 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
         </div>
       </div>
 
-      {/* Tabela de Histórico */}
-      <div className="overflow-x-auto border border-[var(--line)] rounded-lg">
+      {/* Tabela de Histórico (Visível no Desktop md:block) */}
+      <div className="hidden md:block overflow-x-auto border border-[var(--line)] rounded-lg">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
             <tr className="bg-[var(--bg)] border-b border-[var(--line)] text-[10px] font-mono uppercase tracking-wider text-[var(--ink-2)]">
@@ -423,13 +423,11 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                 const dateStr = dateObj.toLocaleDateString("pt-BR");
                 const timeStr = dateObj.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 
-                // SUGESTÃO #3: Cálculo do prazo útil de impugnação
                 const prazoImpugnacaoStr = item.payload.dados_gerais?.prazo_impugnacao;
                 const businessDaysCalc = prazoImpugnacaoStr
                   ? calculateRemainingBusinessDays(prazoImpugnacaoStr)
                   : null;
 
-                // SUGESTÃO #2: Cálculo de margem de folga de PL (Art. 69)
                 const plData = item.payload.calculo_patrimonio_liquido;
                 let plFolgaLabel: string | null = null;
                 let plFolgaPositive = false;
@@ -470,7 +468,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                       </div>
                     </td>
 
-                    {/* Valor Estimado + Margem de Folga de PL (Sugestão #2) */}
+                    {/* Valor Estimado + Margem de Folga de PL */}
                     <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-xs font-semibold text-[var(--ink)]">
                       <div>{item.valorEstimado}</div>
                       {plFolgaLabel && (
@@ -494,7 +492,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                       </div>
                     </td>
 
-                    {/* Cláusulas / Prazos de Impugnação (Sugestão #3) */}
+                    {/* Cláusulas / Prazos de Impugnação */}
                     <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-[11px]">
                       {item.armadilhasCount > 0 ? (
                         <div className="space-y-1">
@@ -502,7 +500,6 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                             {item.armadilhasCount} Restritiva(s)
                           </span>
 
-                          {/* Alerta de urgência da janela de impugnação */}
                           {businessDaysCalc && (
                             <div className="text-[10px] flex items-center gap-1 font-semibold">
                               {businessDaysCalc.isUrgent ? (
@@ -527,10 +524,9 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                       )}
                     </td>
 
-                    {/* Ações (Sugestão #4: Atalho direto para Minuta Art. 164) */}
+                    {/* Ações */}
                     <td className="py-3 px-3.5 align-top whitespace-nowrap text-right">
                       <div className="flex items-center justify-end gap-1.5">
-                        {/* Botão de Minuta Rápida caso haja armadilhas */}
                         {item.armadilhasCount > 0 && (
                           <button
                             type="button"
@@ -573,6 +569,101 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Visualização Mobile em Cards Empilhados (Visível exclusivamente em md:hidden) */}
+      <div className="block md:hidden space-y-3">
+        {filtered.length === 0 ? (
+          <div className="p-6 text-center text-xs text-[var(--ink-2)] font-mono border border-[var(--line)] rounded-lg bg-[var(--surface)]">
+            Nenhuma auditoria encontrada com os filtros selecionados.
+          </div>
+        ) : (
+          filtered.map((item) => {
+            const dateObj = new Date(item.dataAuditoria);
+            const dateStr = dateObj.toLocaleDateString("pt-BR");
+            const prazoImpugnacaoStr = item.payload.dados_gerais?.prazo_impugnacao;
+            const businessDaysCalc = prazoImpugnacaoStr
+              ? calculateRemainingBusinessDays(prazoImpugnacaoStr)
+              : null;
+
+            return (
+              <div
+                key={`mobile-${item.id}`}
+                className="p-4 rounded-lg border border-[var(--line)] bg-[var(--surface)] space-y-3 shadow-xs"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono text-[var(--ink-2)]">
+                      {dateStr} • {item.orgao}
+                    </span>
+                    <h3 className="text-sm font-bold font-display text-[var(--ink)]">
+                      {item.numeroEdital}
+                    </h3>
+                  </div>
+                  <VerdictBadge status={item.vereditoGeral} size="sm" />
+                </div>
+
+                <p className="text-xs text-[var(--ink-2)] line-clamp-2 italic font-sans">
+                  {item.objeto}
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono pt-2 border-t border-[var(--line)]">
+                  <div>
+                    <span className="text-[10px] text-[var(--ink-2)] block uppercase">Valor Estimado</span>
+                    <span className="font-bold text-[var(--ink)]">{item.valorEstimado}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-[var(--ink-2)] block uppercase">Cláusulas Restritivas</span>
+                    {item.armadilhasCount > 0 ? (
+                      <span className="text-[var(--bad-fg)] font-bold">{item.armadilhasCount} restrição(ões)</span>
+                    ) : (
+                      <span className="text-[var(--ok-fg)] font-bold">0 apontamentos</span>
+                    )}
+                  </div>
+                </div>
+
+                {businessDaysCalc && businessDaysCalc.isUrgent && (
+                  <div className="text-[11px] font-mono font-semibold bg-[var(--warn-bg)] text-[var(--warn-fg)] p-2 rounded border border-[var(--warn)]/30 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>Impugnação: {businessDaysCalc.days} dias úteis restantes</span>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-2 pt-2 border-t border-[var(--line)]">
+                  {item.armadilhasCount > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleOpenQuickMinuta(item)}
+                      className="flex-1 py-2 rounded text-xs font-semibold bg-[var(--warn-bg)] text-[var(--warn-fg)] border border-[var(--warn)]/40 flex items-center justify-center gap-1"
+                    >
+                      <PenLine className="w-3 h-3" />
+                      <span>Minuta Art. 164</span>
+                    </button>
+                  )}
+                  {onSelectAudit && (
+                    <button
+                      type="button"
+                      onClick={() => onSelectAudit(item.payload, item.fileName)}
+                      className="flex-1 py-2 rounded text-xs font-semibold bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] flex items-center justify-center gap-1"
+                    >
+                      <Eye className="w-3.5 h-3.5 text-[var(--brand)]" />
+                      <span>Ver Parecer</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleDownloadPDF(item)}
+                    disabled={downloadingId === item.id}
+                    className="py-2 px-3 rounded text-xs font-semibold bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] flex items-center justify-center gap-1 disabled:opacity-50"
+                  >
+                    <Download className="w-3.5 h-3.5 text-[var(--brand)]" />
+                    <span>{downloadingId === item.id ? "..." : "PDF"}</span>
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -606,20 +606,70 @@ export default function LandingPage() {
 
       {/* FOOTER INSTITUCIONAL */}
       <footer className="py-12 px-4 sm:px-8 bg-[var(--surface)] border-t border-[var(--line)] text-xs text-[var(--ink-2)]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2.5">
-            <BrandIcon name="mark" size="s20" color="brand" />
-            <span className="font-display font-bold text-sm text-[var(--ink)]">EditalFlash</span>
-            <span className="text-[11px] font-mono text-[var(--ink-2)]">· Auditoria Preventiva de Habilitação (Lei 14.133/2021)</span>
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-2.5">
+              <BrandIcon name="mark" size="s20" color="brand" />
+              <span className="font-display font-bold text-sm text-[var(--ink)]">EditalFlash</span>
+              <span className="text-[11px] font-mono text-[var(--ink-2)]">· Auditoria Preventiva de Habilitação (Lei 14.133/2021)</span>
+            </div>
+
+            <div className="flex items-center gap-6 font-mono text-[11px]">
+              <Link href="/termos" className="hover:text-[var(--ink)] transition-colors">Termos de Uso</Link>
+              <Link href="/privacidade" className="hover:text-[var(--ink)] transition-colors">Privacidade &amp; LGPD</Link>
+              <Link href="/seguranca" className="hover:text-[var(--ink)] transition-colors">Segurança da Informação</Link>
+            </div>
           </div>
 
-          <div className="flex items-center gap-6 font-mono text-[11px]">
-            <Link href="/termos" className="hover:text-[var(--ink)] transition-colors">Termos de Uso</Link>
-            <Link href="/privacidade" className="hover:text-[var(--ink)] transition-colors">Privacidade &amp; LGPD</Link>
-            <Link href="/seguranca" className="hover:text-[var(--ink)] transition-colors">Segurança da Informação</Link>
+          {/* Dados Legais e Fiscais Obrigatórios (Decreto 7.962/2013 - E-Commerce) */}
+          <div className="pt-6 border-t border-[var(--line)] flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[var(--ink-2)] text-center md:text-left">
+            <div>
+              <span>EditalFlash · 51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · Curitiba/PR</span>
+            </div>
+            <div>
+              <span>Contato Oficial: <a href="mailto:contatoeditalflash@gmail.com" className="text-[var(--brand)] hover:underline">contatoeditalflash@gmail.com</a></span>
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* Script JSON-LD de Dados Estruturados (SoftwareApplication & Organization) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "EditalFlash",
+                "applicationCategory": "BusinessApplication",
+                "operatingSystem": "Web",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "197.00",
+                  "priceCurrency": "BRL",
+                  "priceValidUntil": "2027-12-31"
+                },
+                "description": "Plataforma de auditoria preventiva de habilitação jurídica, fiscal e econômico-financeira para licitantes sob a Lei 14.133/2021."
+              },
+              {
+                "@type": "Organization",
+                "name": "EditalFlash",
+                "legalName": "51.926.034 RENAN OSCAR ARAUJO CRUZ",
+                "taxID": "51.926.034/0001-42",
+                "email": "contatoeditalflash@gmail.com",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Curitiba",
+                  "addressRegion": "PR",
+                  "addressCountry": "BR"
+                }
+              }
+            ]
+          }),
+        }}
+      />
 
       {/* Botão Global de Voltar ao Topo */}
       <BackToTopButton />

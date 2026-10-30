@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       customerCnpj,
       planTier = "Pro",
       billingCycle = "monthly",
-      amountCents = 19700, // R$ 197,00
+      additionalSeats = 0, // Suporte a assentos multi-user (0 a 5)
     } = body;
 
     if (!customerEmail) {
@@ -42,6 +42,18 @@ export async function POST(req: NextRequest) {
         { error: "E-mail do pagador é obrigatório para emissão do PIX." },
         { status: 400 }
       );
+    }
+
+    // Trava de segurança: Máximo 5 seats adicionais
+    const validatedSeats = Math.max(0, Math.min(5, Number(additionalSeats) || 0));
+
+    // Cálculo dinâmico e seguro do valor no servidor (evita adulteração no frontend)
+    let amountCents = 19700; // Base Pro: R$ 197,00
+    if (planTier === "Starter") {
+      amountCents = 2900; // Starter: R$ 29,00
+    } else {
+      // Pro: R$ 197,00 + (R$ 29,00 * seats adicionais)
+      amountCents = 19700 + (validatedSeats * 2900);
     }
 
     const transactionId = "tx_" + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
@@ -76,6 +88,7 @@ export async function POST(req: NextRequest) {
               userId,
               planTier,
               billingCycle,
+              additionalSeats: validatedSeats,
             },
           }),
         });
@@ -127,6 +140,7 @@ export async function POST(req: NextRequest) {
           expires_at: expiresAt,
           metadata: {
             clientIp,
+            additionalSeats: validatedSeats,
             createdAt: new Date().toISOString(),
           },
         });

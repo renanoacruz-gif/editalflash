@@ -87,6 +87,7 @@ export async function GET(req: NextRequest) {
       },
       {
         headers: {
+          "Cache-Control": "public, max-age=300, s-maxage=300, stale-while-revalidate=60",
           "X-RateLimit-Limit": String(rateResult.limit),
           "X-RateLimit-Remaining": String(rateResult.remaining),
         },

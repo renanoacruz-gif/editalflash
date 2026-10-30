@@ -60,65 +60,75 @@ export const InteractiveHeroScanner: React.FC = () => {
       {/* Container Bento Estilo Linear/Stripe */}
       <div className="bento-card border border-[var(--line)] bg-[#0A111F] text-[#E8ECF5] shadow-2xl rounded-2xl overflow-hidden relative">
         {/* Topo do Arquivo Simulado */}
-        <div className="px-4 py-3 border-b border-[#26324A] bg-[#121B2D] flex items-center justify-between">
+        <div className="px-4 py-3 border-b border-[#26324A] bg-[#121B2D]/90 flex items-center justify-between backdrop-blur-md">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-            <span className="ml-2 text-xs font-mono text-[#A3AEC4] hidden sm:inline">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block transition-transform hover:scale-125" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block transition-transform hover:scale-125" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block transition-transform hover:scale-125" />
+            <span className="ml-2.5 text-[11px] font-mono text-[#A3AEC4] hidden sm:inline tracking-tight">
               Edital_Pregao_Eletronico_14133_Obras.pdf
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-[#8F9CFF] text-[10px] font-mono font-bold">
-              <Cpu className="w-3 h-3 animate-pulse" />
-              <span>Simulador Pericial em Tempo Real</span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1B2347] border border-[#4A5FFF]/40 text-[#8F9CFF] text-[10px] font-mono font-bold shadow-sm">
+              <Cpu className="w-3 h-3 text-[#4A5FFF] animate-pulse" />
+              <span>Simulador Pericial 60fps</span>
             </span>
           </div>
         </div>
 
         {/* Corpo: Edital Sendo Escaneado + Card de Diagnóstico Brotanto */}
         <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 relative min-h-[300px]">
-          {/* Laser Scanner Effect */}
-          <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#4A5FFF] to-transparent pointer-events-none radar-scanner-line z-20" />
+          {/* Laser Scanner Effect com Gradiente Radial Suave (60fps GPU-accelerated) */}
+          <div
+            className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#4A5FFF] to-transparent pointer-events-none z-20 opacity-80"
+            style={{
+              boxShadow: "0 0 16px 2px rgba(74, 95, 255, 0.45)",
+              animation: "scannerLaser 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate",
+              willChange: "transform",
+            }}
+          />
 
           {/* Coluna 1: O Texto Bruto do Edital com Marca-Texto Dinâmico */}
           <div className="md:col-span-7 space-y-4 font-mono text-xs text-[#A3AEC4] leading-relaxed relative">
-            <div className="text-[10px] uppercase text-[#6B7A99] tracking-wider font-bold">
-              Varredura de Conformidade • Lei 14.133/2021
+            <div className="text-[10px] uppercase text-[#6B7A99] tracking-wider font-bold flex items-center justify-between">
+              <span>Varredura de Conformidade • Lei 14.133/2021</span>
+              <span className="text-[#8F9CFF] font-mono text-[10px]">Passo {activeStep + 1} de {steps.length}</span>
             </div>
 
-            <p className="opacity-60 text-[11px]">
+            <p className="opacity-50 text-[11px] leading-relaxed select-none">
               "O MUNICÍPIO, por meio de sua Comissão de Contratação, torna público que realizará licitação na modalidade PREGÃO ELETRÔNICO..."
             </p>
 
-            <div className="p-3.5 rounded-lg bg-[#121B2D] border border-[#4A5FFF]/40 text-[#E8ECF5] shadow-inner relative overflow-hidden transition-all duration-300">
-              <div className="absolute top-0 left-0 bottom-0 w-1 bg-[#4A5FFF]" />
-              <div className="text-[10px] text-[#8F9CFF] font-bold mb-1 flex items-center justify-between">
-                <span>{current.page}</span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#1B2347] text-[#8F9CFF]">
+            <div className="p-4 rounded-xl bg-[#121B2D] border border-[#4A5FFF]/40 text-[#E8ECF5] shadow-lg relative overflow-hidden transition-all duration-300 transform translate-y-0">
+              <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#4A5FFF]" />
+              <div className="text-[10px] text-[#8F9CFF] font-bold mb-1.5 flex items-center justify-between">
+                <span className="font-mono tracking-tight">{current.page}</span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-[#8F9CFF] font-mono font-semibold">
                   Extração Conforme
                 </span>
               </div>
-              <p className="font-semibold text-xs text-white">
+              <p className="font-semibold text-xs text-white leading-snug">
                 "{current.highlightLine}"
               </p>
             </div>
 
-            <p className="opacity-60 text-[11px]">
+            <p className="opacity-50 text-[11px] leading-relaxed select-none">
               "A inabilitação da licitante importará preclusão do direito de participar das fases subsequentes, lavrando-se ata circunstanciada..."
             </p>
 
-            {/* Stepper Dots */}
+            {/* Stepper Dots com Transição Fluida 60fps */}
             <div className="pt-2 flex items-center gap-2">
               {steps.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveStep(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    activeStep === idx ? "w-8 bg-[#4A5FFF]" : "w-2 bg-[#26324A] hover:bg-[#4A5FFF]/50"
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeStep === idx
+                      ? "w-8 bg-[#4A5FFF] shadow-[0_0_8px_rgba(74,95,255,0.6)]"
+                      : "w-2 bg-[#26324A] hover:bg-[#4A5FFF]/50"
                   }`}
                   aria-label={`Ir para etapa ${idx + 1}`}
                 />
@@ -126,29 +136,29 @@ export const InteractiveHeroScanner: React.FC = () => {
             </div>
           </div>
 
-          {/* Coluna 2: Card de Veredito Imediato (Harvey / Stripe style) */}
-          <div className="md:col-span-5 flex flex-col justify-between p-5 rounded-xl bg-[#121B2D]/80 border border-[#26324A] backdrop-blur-sm relative z-10 space-y-4">
+          {/* Coluna 2: Card de Veredito Imediato (Estilo Linear / GetLayers) */}
+          <div className="md:col-span-5 flex flex-col justify-between p-5 rounded-2xl bg-[#121B2D]/90 border border-[#26324A] backdrop-blur-md relative z-10 space-y-4 shadow-xl transition-all duration-300 hover:border-[#4A5FFF]/40">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A3AEC4]">
+              <div className="flex items-center justify-between mb-3.5">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A3AEC4] font-semibold">
                   Diagnóstico Automático
                 </span>
-                <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${current.badgeBg}`}>
+                <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border shadow-sm ${current.badgeBg}`}>
                   {current.verdict}
                 </span>
               </div>
 
-              <h4 className="text-sm font-bold text-white font-display mb-2">
+              <h4 className="text-sm font-bold text-white font-display mb-2 tracking-tight">
                 {current.title}
               </h4>
 
-              <p className="text-xs text-[#A3AEC4] leading-relaxed">
+              <p className="text-xs text-[#A3AEC4] leading-relaxed font-sans">
                 {current.statusText}
               </p>
             </div>
 
-            <div className="pt-3 border-t border-[#26324A] flex items-center justify-between">
-              <span className="text-[11px] font-mono text-[#8F9CFF] flex items-center gap-1">
+            <div className="pt-3.5 border-t border-[#26324A] flex items-center justify-between">
+              <span className="text-[11px] font-mono text-[#8F9CFF] flex items-center gap-1.5 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#4A5FFF]" />
                 <span>Auditoria Pericial</span>
               </span>

@@ -24,16 +24,17 @@ export async function POST(req: NextRequest) {
 
     const email = userEmail || "usuario@empresa.com.br";
 
-    // 1. Registro em log de auditoria para conformidade e rastreabilidade LGPD
+    // 1. Registro em log de auditoria com dados PII anonimizados (LGPD Art. 18 / Art. 62)
     try {
+      const sanitizedDocName = fileName ? fileName.replace(/(\d{2})\d{6,8}(\d{2})/, "$1.***.***-$2") : "documento.pdf";
       adminStore.addAuditEvent({
-        actorEmail: email,
+        actorEmail: email.replace(/(.{2})(.*)(@.*)/, "$1***$3"),
         actorRole: email.includes("renan") ? "superadmin" : "tenant_user",
         action: "DOCUMENT_DELETED_PERMANENTLY",
         entityAffected: "Vault Document",
         payload: {
           docId,
-          fileName: fileName || "documento.pdf",
+          fileName: sanitizedDocName,
           deletedAt: new Date().toISOString(),
           compliance: "LGPD Art. 18 / Art. 62",
         },

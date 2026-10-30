@@ -26,11 +26,11 @@ export default function NotFound() {
 
         <div className="pt-2">
           <Link
-            href="/dashboard"
+            href="/"
             className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded bg-[var(--brand)] hover:brightness-110 active:scale-98 text-white font-semibold text-xs shadow-xs transition-all border border-[var(--brand)]"
           >
             <BrandIcon name="edital" size="s16" accentCobalt={false} />
-            <span>Retornar ao Dashboard</span>
+            <span>Retornar à Página Inicial</span>
           </Link>
         </div>
 

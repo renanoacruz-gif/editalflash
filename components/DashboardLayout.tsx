@@ -24,6 +24,7 @@ import {
   X,
   Search,
   Settings,
+  Users,
 } from "lucide-react";
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: string }> = ({
@@ -83,6 +84,8 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
     { id: "acervo", label: "Portfólio de Acervo", icon: Award, href: "/dashboard/acervo" },
     { id: "calendario", label: "Calendário Unificado", icon: Calendar, href: "/dashboard/calendario" },
     { id: "pncp", label: "Radar PNCP", icon: Radio, href: "/dashboard/nova-analise?tab=pncp" },
+    { id: "radar", label: "Inteligência & Concorrentes", icon: Radio, href: "/dashboard/radar" },
+    { id: "equipe", label: "Equipe & Assentos", icon: Users, href: "/dashboard/equipe" },
     { id: "plano", label: "Créditos e Assinatura", icon: CreditCard, href: "/pricing" },
     { id: "configuracoes", label: "Gestão da Conta", icon: Settings, href: "/dashboard/configuracoes" },
   ];

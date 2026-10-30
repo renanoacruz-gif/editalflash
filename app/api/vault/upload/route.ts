@@ -12,7 +12,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateUploadedPdf, sanitizeFilename } from "@/lib/validations";
 import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
-import { randomUUID } from "crypto";
 
 // Classificador inteligente de metadados baseado no nome e conteúdo
 function extractDocMetadata(filename: string, extractedText: string = ""): {
@@ -148,7 +147,7 @@ export async function POST(req: NextRequest) {
     }
 
     const metadata = extractDocMetadata(sanitizedName, extractedText);
-    const docId = `doc-${randomUUID()}`;
+    const docId = `doc-${crypto.randomUUID()}`;
     const storagePath = `vault/${userEmail.replace(/[^a-zA-Z0-9]/g, "_")}/${docId}_${sanitizedName}`;
 
     // Persistência Supabase (Se configurado)

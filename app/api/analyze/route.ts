@@ -14,7 +14,6 @@ import { PrimaryVertical } from "@/lib/types";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { validateUploadedPdf, PrimaryVerticalEnum } from "@/lib/validations";
 import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
-import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
   try {
@@ -63,7 +62,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Validação Backend de Cota de Créditos do Usuário (Se autenticado com Supabase)
+    // 2. Validação Backend de Cota de Créditos do Usuário (Suporte a Multi-User Pool)
     const userId = req.headers.get("x-user-id");
     const isAdminUser =
       authHeader?.includes("renan.oacruz@gmail.com") ||
@@ -72,10 +71,21 @@ export async function POST(req: NextRequest) {
 
     if (isSupabaseConfigured && userId && !isAdminUser) {
       try {
+        // Verificar se usuário é MEMBER (usa créditos da organização) ou titular ADMIN
+        const { data: userProfile } = await supabaseAdmin
+          .from("profiles")
+          .select("id, organization_id, role, credits, analyses_limit, analyses_used")
+          .eq("id", userId)
+          .single();
+
+        const payerId = (userProfile?.role === "MEMBER" && userProfile?.organization_id)
+          ? userProfile.organization_id
+          : userId;
+
         const { data: tenantData } = await supabaseAdmin
           .from("tenants")
           .select("analyses_limit, analyses_used, plan")
-          .eq("user_id", userId)
+          .eq("user_id", payerId)
           .single();
 
         if (tenantData) {
@@ -84,7 +94,9 @@ export async function POST(req: NextRequest) {
           if (used >= limit) {
             return NextResponse.json(
               {
-                error: "Você atingiu o limite de auditorias do seu plano atual. Adquira créditos adicionais ou faça upgrade para continuar.",
+                error: userProfile?.role === "MEMBER"
+                  ? "A sua organização atingiu o limite de auditorias do plano. Solicite ao administrador da conta que adquira créditos ou faça upgrade."
+                  : "Você atingiu o limite de auditorias do seu plano atual. Adquira créditos adicionais ou faça upgrade para continuar.",
                 code: "CREDITS_EXHAUSTED",
                 limit,
                 used,
@@ -93,14 +105,23 @@ export async function POST(req: NextRequest) {
             );
           }
 
-          // Debita 1 crédito no banco de dados
+          // Debita 1 crédito no banco de dados da conta titular (pool compartilhado)
           await supabaseAdmin
             .from("tenants")
             .update({
               analyses_used: used + 1,
               updated_at: new Date().toISOString(),
             })
-            .eq("user_id", userId);
+            .eq("user_id", payerId);
+
+          // Sincroniza também no profiles do titular se existir campo credits
+          await supabaseAdmin
+            .from("profiles")
+            .update({
+              analyses_used: used + 1,
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", payerId);
         }
       } catch (errCredit: any) {
         console.warn("[API/ANALYZE] Aviso na checagem de cota Supabase:", errCredit?.message);
@@ -125,7 +146,23 @@ export async function POST(req: NextRequest) {
       // Import dinâmico do pdf-parse compatível com runtime Node.js
       const pdfModule: any = await import("pdf-parse");
       const parseFunction = pdfModule?.default || pdfModule;
-      const pdfData = await parseFunction(buffer);
+      
+      // Limite de páginas para resguardar memória do Edge/Worker (< 128MB ceiling)
+      const options = {
+        max: 120, // Audita até as primeiras 120 páginas (cobre amplamente o edital e anexos de habilitação)
+      };
+      
+      const pdfData = await parseFunction(buffer, options);
+      
+      if (pdfData?.numpages && pdfData.numpages > 250) {
+        return NextResponse.json(
+          {
+            error: `O documento possui ${pdfData.numpages} páginas e excede o limite máximo de 250 páginas para auditoria instantânea. Para editais complexos desta magnitude, divida o anexo de termos de habilitação técnica ou envie os cadernos separadamente.`,
+          },
+          { status: 413 }
+        );
+      }
+
       extractedText = pdfData?.text || "";
     } catch (parseError: any) {
       console.warn("[API/ANALYZE] Aviso na extração estruturada do PDF:", parseError?.message);
@@ -165,7 +202,7 @@ export async function POST(req: NextRequest) {
     const analysisResult = await analyzeEdital(extractedText, vertical);
 
     // 6. Persistência Cloud na tabela audited_tenders (Step 2 do Plano de Migração)
-    let analysisId = "anls_" + randomUUID();
+    let analysisId = "anls_" + crypto.randomUUID();
     const userIdHeader = req.headers.get("x-user-id");
     const editalTitle = analysisResult.dados_gerais?.numero_edital || file.name || "Edital de Licitação";
     const editalPncpId = analysisResult.dados_gerais?.numero_edital || null;

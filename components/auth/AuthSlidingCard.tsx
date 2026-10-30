@@ -281,11 +281,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                     Senha de Acesso
                   </label>
                   <a
-                    href="#esqueci-senha"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert("Para redefinição de senha corporativa, consulte o administrador titular ou envie e-mail para suporte@editalflash.com.br");
-                    }}
+                    href="mailto:contatoeditalflash@gmail.com?subject=Recupera%C3%A7%C3%A3o%20de%20Acesso%20-%20EditalFlash&body=Ol%C3%A1%2C%20preciso%20redefinir%20minha%20senha.%20Meu%20e-mail%20de%20cadastro%20%C3%A9%3A"
                     className="text-xs font-medium text-[#2740F0] hover:underline"
                   >
                     Esqueceu a senha?

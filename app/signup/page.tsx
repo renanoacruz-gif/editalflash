@@ -27,6 +27,8 @@ function SignupForm() {
   const planParam = searchParams.get("plan");
   const inviteParam = searchParams.get("invite");
   const emailParam = searchParams.get("email");
+  const welcomeParam = searchParams.get("welcome");
+  const isFreeAudit = welcomeParam === "true";
   const initialPlan =
     planParam === "starter"
       ? "Starter"
@@ -272,11 +274,17 @@ function SignupForm() {
         <h2 className="mt-5 text-2xl font-bold text-white tracking-tight legal-serif">
           {step === 1 ? "Cadastro de Licitante" : "Foco Principal de Atuação"}
         </h2>
-        <p className="mt-1 text-xs text-slate-400">
-          {step === 1
-            ? "Crie sua conta para auditar editais e blindar sua habilitação"
-            : "Parametrização adaptativa do motor de regras da Lei 14.133"}
-        </p>
+        {isFreeAudit && step === 1 ? (
+          <div className="mt-3 p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-xs text-blue-200 font-sans leading-relaxed text-center">
+            <strong>Crie sua conta gratuita.</strong> Sua primeira análise de habilitação é por nossa conta. Sem cartão de crédito.
+          </div>
+        ) : (
+          <p className="mt-1 text-xs text-slate-400">
+            {step === 1
+              ? "Crie sua conta para auditar editais e blindar sua habilitação"
+              : "Parametrização adaptativa do motor de regras da Lei 14.133"}
+          </p>
+        )}
 
         {/* Progress indicator */}
         <div className="mt-4 flex items-center justify-center gap-2">

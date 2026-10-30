@@ -99,7 +99,10 @@ export const InteractiveParecerPreview: React.FC = () => {
               Visualização Interativa A4 • Pág. 1 de 2
             </span>
             <a
-              href="/pricing"
+              href="/assets/exemplo-parecer-editalflash.pdf"
+              download="exemplo-parecer-editalflash.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#2740F0] hover:bg-[#1f33c7] text-white font-bold text-xs transition-colors shadow-xs"
             >
               <Download className="w-3 h-3" />
@@ -254,6 +257,17 @@ export const InteractiveParecerPreview: React.FC = () => {
                 <span>•</span>
                 <span>Página 1 de 2</span>
               </div>
+            </div>
+            <div className="bg-[#121B2D] border border-[#26324A] rounded-lg p-3 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <span className="text-[#A3AEC4] font-mono">
+                Gostou do rigor pericial deste parecer? Gere o relatório oficial da sua própria empresa.
+              </span>
+              <a
+                href="/signup"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#2740F0] hover:bg-[#1f33c7] text-white font-bold text-xs transition-colors shadow-xs whitespace-nowrap"
+              >
+                <span>Gere o da sua empresa → /signup</span>
+              </a>
             </div>
           </div>
         </div>

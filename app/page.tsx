@@ -123,17 +123,17 @@ export default function LandingPage() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/login"
+              href="/signup"
               className="text-[13px] font-semibold text-[var(--ink-2)] hover:text-[var(--ink)] px-3 py-1.5 rounded transition-colors font-mono"
             >
-              Acessar Conta
+              Criar Conta Gratuita
             </Link>
             <Link
-              href="/dashboard/nova-analise"
+              href="/signup?welcome=true"
               className="inline-flex items-center gap-2 text-[13px] font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white px-4 py-2 rounded-md shadow-xs transition-all active:scale-98"
             >
               <BrandIcon name="auditoria" size="s16" accentCobalt={false} />
-              <span>Auditar Edital Agora</span>
+              <span>Auditar Edital Grátis</span>
             </Link>
           </div>
         </div>
@@ -190,25 +190,28 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Link
-              href="/dashboard/nova-analise"
+              href="/signup?welcome=true"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[var(--brand-solid)] hover:brightness-110 active:scale-98 text-white font-bold text-[15px] shadow-sm transition-all"
             >
               <BrandIcon name="edital" size="s20" accentCobalt={false} />
-              <span>Auditar um Edital em 60 Segundos</span>
+              <span>Auditar um Edital em 60 Segundos (Grátis)</span>
             </Link>
             <a
-              href="#parecer"
+              href="/assets/exemplo-parecer-editalflash.pdf"
+              download="exemplo-parecer-editalflash.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[var(--bg)] hover:bg-[var(--line)]/50 active:scale-98 text-[var(--ink)] font-semibold text-[15px] border border-[var(--line)] transition-all font-mono"
             >
               <Download className="w-4 h-4 text-[var(--brand)]" />
-              <span>Ver Modelo de Parecer A4</span>
+              <span>Baixar Modelo de Parecer A4 (PDF)</span>
             </a>
           </div>
 
           <div className="flex items-center justify-center gap-6 text-[12px] text-[var(--ink-2)] font-mono flex-wrap">
             <span className="inline-flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-              Zero Risco de Inabilitação por Falha de Leitura
+              Redução Drástica do Risco de Inabilitação por Falhas Documentais
             </span>
             <span className="hidden sm:inline text-[var(--line)]">|</span>
             <span className="inline-flex items-center gap-1.5">
@@ -624,7 +627,7 @@ export default function LandingPage() {
           {/* Dados Legais e Fiscais Obrigatórios (Decreto 7.962/2013 - E-Commerce) */}
           <div className="pt-6 border-t border-[var(--line)] flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[var(--ink-2)] text-center md:text-left">
             <div>
-              <span>EditalFlash · 51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · Curitiba/PR</span>
+              <span>EditalFlash · 51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200</span>
             </div>
             <div>
               <span>Contato Oficial: <a href="mailto:contatoeditalflash@gmail.com" className="text-[var(--brand)] hover:underline">contatoeditalflash@gmail.com</a></span>
@@ -661,8 +664,10 @@ export default function LandingPage() {
                 "email": "contatoeditalflash@gmail.com",
                 "address": {
                   "@type": "PostalAddress",
+                  "streetAddress": "AV SANTA BERNADETHE, 310",
                   "addressLocality": "Curitiba",
                   "addressRegion": "PR",
+                  "postalCode": "81010-200",
                   "addressCountry": "BR"
                 }
               }

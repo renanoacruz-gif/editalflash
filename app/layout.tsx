@@ -25,9 +25,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const appBaseUrl =
+const rawBaseUrl =
   process.env.NEXT_PUBLIC_APP_URL ||
   (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : "https://editalflash.pages.dev");
+
+// Higieniza qualquer duplicação de protocolo (ex: https://https/...)
+const appBaseUrl = rawBaseUrl.replace(/^https?:\/\/(https?:\/\/)?/i, "https://");
 
 export const metadata: Metadata = {
   title: "EditalFlash | Auditoria Preventiva de Habilitação (Art. 62 Lei 14.133)",

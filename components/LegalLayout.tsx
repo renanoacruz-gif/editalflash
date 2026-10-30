@@ -99,8 +99,13 @@ export const LegalLayout: React.FC<LegalLayoutProps> = ({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[var(--line)] bg-[var(--surface)] py-6 px-4 text-center text-xs text-[var(--ink-2)] font-mono">
-        EditalFlash · Auditoria Preventiva de Habilitação (Art. 62 Lei 14.133/2021) · CNPJ: 54.120.932/0001-08
+      <footer className="border-t border-[var(--line)] bg-[var(--surface)] py-6 px-4 text-center text-xs text-[var(--ink-2)] font-mono space-y-1">
+        <div>
+          EditalFlash · 51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42
+        </div>
+        <div>
+          AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200 · Contato: contatoeditalflash@gmail.com
+        </div>
       </footer>
     </div>
   );

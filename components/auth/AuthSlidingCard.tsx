@@ -166,7 +166,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#0E1626] text-slate-100 selection:bg-[#2740F0] selection:text-white">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#06141B] text-slate-100 selection:bg-[#CCD0CF] selection:text-white">
       {/* Background Decorativo Sutil */}
       <div
         className="fixed inset-0 opacity-[0.025] pointer-events-none"
@@ -175,8 +175,8 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
           backgroundSize: "28px 28px",
         }}
       />
-      <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#2740F0]/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="fixed -bottom-40 -right-40 w-96 h-96 bg-[#2740F0]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#CCD0CF]/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed -bottom-40 -right-40 w-96 h-96 bg-[#CCD0CF]/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* =========================================================================
           CONTAINER PRINCIPAL DO CARTÃO (MÁXIMO 1080px)
@@ -202,7 +202,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               onClick={() => switchMode("login")}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all ${
                 mode === "login"
-                  ? "bg-[#2740F0] text-white shadow-xs"
+                  ? "bg-[#CCD0CF] text-white shadow-xs"
                   : "text-[#A3AEC4] hover:text-white"
               }`}
             >
@@ -213,7 +213,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               onClick={() => switchMode("signup")}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all ${
                 mode === "signup"
-                  ? "bg-[#2740F0] text-white shadow-xs"
+                  ? "bg-[#CCD0CF] text-white shadow-xs"
                   : "text-[#A3AEC4] hover:text-white"
               }`}
             >
@@ -235,20 +235,20 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
           <div>
             <div className="hidden md:flex items-center gap-3 mb-8">
               <Link href="/" className="inline-flex items-center gap-2 group">
-                <div className="w-9 h-9 rounded-xl bg-[#0E1626] border border-slate-200 flex items-center justify-center text-white shadow-xs">
+                <div className="w-9 h-9 rounded-xl bg-[#06141B] border border-slate-200 flex items-center justify-center text-white shadow-xs">
                   <Scale className="w-4 h-4 text-[#8F9CFF]" />
                 </div>
-                <span className="text-lg font-bold tracking-tight text-[#0E1626] font-display">
-                  Edital<span className="text-[#2740F0]">Flash</span>
+                <span className="text-lg font-bold tracking-tight text-[#06141B] font-display">
+                  Edital<span className="text-[#CCD0CF]">Flash</span>
                 </span>
               </Link>
             </div>
 
             <div className="space-y-2 mb-6">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#2740F0] font-bold block">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#CCD0CF] font-bold block">
                 Ambiente de Auditoria Jurídica
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0E1626] font-display tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#06141B] font-display tracking-tight">
                 Acesse sua conta
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 font-sans">
@@ -283,7 +283,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     placeholder="gestor@suaempresa.com.br"
-                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] focus:bg-white focus:ring-2 focus:ring-[#2740F0]/10 transition-all font-sans"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] focus:bg-white focus:ring-2 focus:ring-[#CCD0CF]/10 transition-all font-sans"
                   />
                 </div>
               </div>
@@ -296,7 +296,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                   <button
                     type="button"
                     onClick={handleForgotPassword}
-                    className="text-xs font-medium text-[#2740F0] hover:underline cursor-pointer bg-transparent border-none p-0"
+                    className="text-xs font-medium text-[#CCD0CF] hover:underline cursor-pointer bg-transparent border-none p-0"
                   >
                     Esqueceu a senha?
                   </button>
@@ -309,7 +309,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] focus:bg-white focus:ring-2 focus:ring-[#2740F0]/10 transition-all font-sans"
+                    className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] focus:bg-white focus:ring-2 focus:ring-[#CCD0CF]/10 transition-all font-sans"
                   />
                 </div>
               </div>
@@ -317,7 +317,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#2740F0] hover:bg-blue-600 shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+                className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#CCD0CF] hover:bg-[#11212D] shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
               >
                 {loginLoading ? (
                   <div className="flex items-center gap-2">
@@ -338,7 +338,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
             <button
               type="button"
               onClick={() => switchMode("signup")}
-              className="text-[#2740F0] font-bold hover:underline font-mono"
+              className="text-[#CCD0CF] font-bold hover:underline font-mono"
             >
               Criar nova conta corporativa →
             </button>
@@ -361,7 +361,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
         >
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#2740F0] font-bold">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#CCD0CF] font-bold">
                 Passo {signupStep} de 2: {signupStep === 1 ? "Dados Corporativos" : "Vertical de Atuação"}
               </span>
               {signupStep === 2 && (
@@ -375,7 +375,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               )}
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0E1626] font-display tracking-tight mb-2">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#06141B] font-display tracking-tight mb-2">
               Cadastre sua Empresa
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-sans mb-6">
@@ -404,7 +404,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                         value={signupName}
                         onChange={(e) => setSignupName(e.target.value)}
                         placeholder="Ex: Carlos Andrade"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] transition-all font-sans"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -421,7 +421,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                         value={signupEmail}
                         onChange={(e) => setSignupEmail(e.target.value)}
                         placeholder="carlos@licitante.com.br"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] transition-all font-sans"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -437,7 +437,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                         value={signupCompany}
                         onChange={(e) => setSignupCompany(e.target.value)}
                         placeholder="Ex: Andrade Engenharia LTDA"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] transition-all font-sans"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -454,7 +454,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                         value={signupPassword}
                         onChange={(e) => setSignupPassword(e.target.value)}
                         placeholder="Mínimo 8 dígitos"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2740F0] transition-all font-sans"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#CCD0CF] transition-all font-sans"
                       />
                     </div>
                   </div>
@@ -465,7 +465,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                         type="checkbox"
                         checked={signupConsent}
                         onChange={(e) => setSignupConsent(e.target.checked)}
-                        className="mt-0.5 rounded border-slate-300 text-[#2740F0] focus:ring-[#2740F0]"
+                        className="mt-0.5 rounded border-slate-300 text-[#CCD0CF] focus:ring-[#CCD0CF]"
                       />
                       <span>
                         Declaro que li e concordo com os Termos de Uso e a Política de Privacidade (LGPD).
@@ -475,7 +475,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
 
                   <button
                     type="submit"
-                    className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#2740F0] hover:bg-blue-600 shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer mt-2"
+                    className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#CCD0CF] hover:bg-[#11212D] shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer mt-2"
                   >
                     <span>Continuar para Vertical</span>
                     <ArrowRight className="w-4 h-4" />
@@ -493,11 +493,11 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                           onClick={() => setSignupVertical(v.id)}
                           className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center gap-3 ${
                             isSelected
-                              ? "bg-blue-50 border-[#2740F0] text-[#0E1626] font-semibold"
+                              ? "bg-blue-50 border-[#CCD0CF] text-[#06141B] font-semibold"
                               : "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100"
                           }`}
                         >
-                          <div className={`p-2 rounded-lg ${isSelected ? "bg-[#2740F0] text-white" : "bg-white text-slate-500"}`}>
+                          <div className={`p-2 rounded-lg ${isSelected ? "bg-[#CCD0CF] text-white" : "bg-white text-slate-500"}`}>
                             <Icon className="w-4 h-4" />
                           </div>
                           <span className="text-xs font-sans">{v.label}</span>
@@ -509,7 +509,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                   <button
                     type="submit"
                     disabled={signupLoading}
-                    className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#2740F0] hover:bg-blue-600 shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer mt-4"
+                    className="w-full h-11 sm:h-12 rounded-xl text-xs font-mono font-bold text-white bg-[#CCD0CF] hover:bg-[#11212D] shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer mt-4"
                   >
                     {signupLoading ? (
                       <div className="flex items-center gap-2">
@@ -532,7 +532,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
             <button
               type="button"
               onClick={() => switchMode("login")}
-              className="text-[#2740F0] font-bold hover:underline font-mono"
+              className="text-[#CCD0CF] font-bold hover:underline font-mono"
             >
               ← Já tem uma conta? Entrar
             </button>
@@ -566,8 +566,8 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                 backgroundSize: "20px 20px",
               }}
             />
-            <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#2740F0]/20 rounded-full blur-[100px]" />
-            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#2740F0]/15 rounded-full blur-[100px]" />
+            <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#CCD0CF]/20 rounded-full blur-[100px]" />
+            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#CCD0CF]/15 rounded-full blur-[100px]" />
 
             {/* Conteúdo Interno com Contratransformação skewX(+6deg) para anular distorção */}
             <div className={`relative z-10 h-full flex flex-col justify-between skew-x-6 ${
@@ -595,7 +595,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                       <button
                         type="button"
                         onClick={() => switchMode("signup")}
-                        className="pointer-events-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-white bg-[#2740F0] hover:bg-blue-600 border border-blue-400/30 transition-all active:scale-95 cursor-pointer shadow-lg shadow-blue-600/30"
+                        className="pointer-events-auto inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-white bg-[#CCD0CF] hover:bg-[#11212D] border border-blue-400/30 transition-all active:scale-95 cursor-pointer shadow-lg shadow-blue-600/30"
                       >
                         <span>Não tem conta? Cadastre-se</span>
                         <ArrowRight className="w-4 h-4" />

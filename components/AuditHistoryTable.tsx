@@ -231,7 +231,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
       {activeMinutaItem && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-[#0b101d] border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl p-6 sm:p-7 space-y-4 max-h-[90vh] flex flex-col">
-            <div className="flex items-start justify-between pb-3 border-b border-slate-800">
+            <div className="flex items-start justify-between pb-3 border-b border-[#253745]">
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
                   <Scale className="w-3.5 h-3.5 text-blue-400" />
@@ -250,11 +250,11 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 rounded-xl bg-[#060a12] border border-slate-800 text-slate-300 font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
+            <div className="flex-1 overflow-y-auto p-4 rounded-xl bg-[#06141B] border border-[#253745] text-slate-300 font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
               {activeMinutaItem.draft}
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-slate-800 flex-wrap gap-2">
+            <div className="flex items-center justify-between pt-2 border-t border-[#253745] flex-wrap gap-2">
               <span className="text-[11px] text-slate-500 font-mono">
                 Petição fundamentada em acórdãos do TCU e dispositivos da Lei 14.133/21
               </span>
@@ -273,7 +273,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     setCopiedMinuta(true);
                     setTimeout(() => setCopiedMinuta(false), 2000);
                   }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-md shadow-blue-600/30 transition-all active:scale-98"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#11212D] hover:bg-[#253745] shadow-md shadow-blue-600/30 transition-all active:scale-98"
                 >
                   {copiedMinuta ? (
                     <>
@@ -402,12 +402,12 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
         <table className="w-full text-left border-collapse text-xs">
           <thead>
             <tr className="bg-[var(--bg)] border-b border-[var(--line)] text-[10px] font-mono uppercase tracking-wider text-[var(--ink-2)]">
-              <th className="py-2.5 px-3.5 font-bold">Data / Hora</th>
-              <th className="py-2.5 px-3.5 font-bold">Certame &amp; Órgão</th>
-              <th className="py-2.5 px-3.5 font-bold">Valor Estimado</th>
-              <th className="py-2.5 px-3.5 font-bold">Veredito Art. 62</th>
-              <th className="py-2.5 px-3.5 font-bold">Cláusulas / Prazos</th>
-              <th className="py-2.5 px-3.5 font-bold text-right">Ações</th>
+              <th className="py-4 px-4 font-bold">Data / Hora</th>
+              <th className="py-4 px-4 font-bold">Certame &amp; Órgão</th>
+              <th className="py-4 px-4 font-bold">Valor Estimado</th>
+              <th className="py-4 px-4 font-bold">Veredito Art. 62</th>
+              <th className="py-4 px-4 font-bold">Cláusulas / Prazos</th>
+              <th className="py-4 px-4 font-bold text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--line)]">
@@ -450,13 +450,13 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     className="hover:bg-[var(--bg)]/60 transition-colors group"
                   >
                     {/* Data / Hora */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-[11px] text-[var(--ink-2)]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-[11px] text-[var(--ink-2)]">
                       <div className="text-[var(--ink)] font-semibold">{dateStr}</div>
                       <div>{timeStr}</div>
                     </td>
 
                     {/* Certame & Órgão */}
-                    <td className="py-3 px-3.5 align-top max-w-xs sm:max-w-sm">
+                    <td className="py-4 px-4 align-top max-w-xs sm:max-w-sm">
                       <div className="font-bold text-[var(--ink)] font-display text-xs group-hover:text-[var(--brand)] transition-colors">
                         {item.numeroEdital}
                       </div>
@@ -469,7 +469,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Valor Estimado + Margem de Folga de PL */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-xs font-semibold text-[var(--ink)]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-xs font-semibold text-[var(--ink)]">
                       <div>{item.valorEstimado}</div>
                       {plFolgaLabel && (
                         <div
@@ -485,7 +485,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Veredito */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap">
+                    <td className="py-4 px-4 align-top whitespace-nowrap">
                       <VerdictBadge status={item.vereditoGeral} size="sm" />
                       <div className="text-[10px] font-mono text-[var(--ink-2)] mt-1">
                         {item.passaCount}P • {item.ressalvaCount}R • {item.eliminatoriaCount}E
@@ -493,7 +493,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Cláusulas / Prazos de Impugnação */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-[11px]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-[11px]">
                       {item.armadilhasCount > 0 ? (
                         <div className="space-y-1">
                           <span className="text-[var(--bad-fg)] font-semibold bg-[var(--bad-bg)] px-2 py-0.5 rounded border border-[var(--bad)]/30 inline-block">
@@ -525,7 +525,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Ações */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap text-right">
+                    <td className="py-4 px-4 align-top whitespace-nowrap text-right">
                       <div className="flex items-center justify-end gap-1.5">
                         {item.armadilhasCount > 0 && (
                           <button

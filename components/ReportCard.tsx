@@ -116,7 +116,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
       const saved = localStorage.getItem("editalflash_last_impugnation_cnpj");
       if (saved) return saved;
     }
-    return user?.cnpj || "12.345.678/0001-90";
+    return user?.cnpj || "51.926.034/0001-42";
   });
 
   const [gestorName, setGestorName] = useState(() => {

@@ -40,8 +40,8 @@ interface AuditHistoryTableProps {
 
 export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
   onSelectAudit,
-  companyName = "EMPRESA LICITANTE LTDA",
-  companyCnpj = "12.345.678/0001-90",
+  companyName = "51.926.034 RENAN OSCAR ARAUJO CRUZ",
+  companyCnpj = "51.926.034/0001-42",
   userGestorName = "Gestor de Licitações",
 }) => {
   const { user } = useAuth();

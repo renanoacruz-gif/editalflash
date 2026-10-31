@@ -19,8 +19,17 @@ export default function DashboardHome() {
   const [auditList, setAuditList] = useState<AuditedTenderHistoryItem[]>([]);
 
   React.useEffect(() => {
-    setAuditList(getAuditHistory(user?.email));
-  }, [user?.email]);
+    async function loadRealAudits() {
+      if (user?.id) {
+        const { fetchAuditsFromCloud } = await import("@/lib/audit-history");
+        const res = await fetchAuditsFromCloud(user.id);
+        setAuditList(res.items);
+      } else {
+        setAuditList(getAuditHistory(user?.email));
+      }
+    }
+    loadRealAudits();
+  }, [user?.id, user?.email]);
 
   if (selectedAuditData) {
     return (
@@ -202,7 +211,7 @@ export default function DashboardHome() {
               Editais Salvos
             </span>
             <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-[var(--ink)]">12</span>
+              <span className="text-2xl font-bold font-mono text-[var(--ink)]">{auditList.length}</span>
               <span className="text-xs text-[var(--brand)] font-mono font-semibold">Base Ativa</span>
             </div>
             <p className="text-[11px] text-[var(--ink-2)] font-mono">Criptografia AES-256</p>
@@ -213,7 +222,9 @@ export default function DashboardHome() {
               Cláusulas Restritivas
             </span>
             <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-[var(--bad-fg)]">7</span>
+              <span className="text-2xl font-bold font-mono text-[var(--bad-fg)]">
+                {auditList.reduce((acc, item) => acc + (item.armadilhasCount || 0), 0)}
+              </span>
               <span className="text-[11px] text-[var(--ink-2)] font-mono">Art. 164</span>
             </div>
             <p className="text-[11px] text-[var(--ink-2)] font-mono">Mapeadas para impugnação</p>
@@ -224,7 +235,9 @@ export default function DashboardHome() {
               Cofre de Documentos
             </span>
             <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-[var(--ok-fg)]">14</span>
+              <span className="text-2xl font-bold font-mono text-[var(--ok-fg)]">
+                {auditList.length > 0 ? 4 : 0}
+              </span>
               <span className="text-[11px] text-[var(--ok-fg)] font-mono font-semibold">Válidos</span>
             </div>
             <p className="text-[11px] text-[var(--ink-2)] font-mono">Cruzamento em tempo real</p>
@@ -331,8 +344,8 @@ export default function DashboardHome() {
 
         {/* Histórico Centralizado de Editais Auditados */}
         <AuditHistoryTable
-          companyName={user?.company || "EMPRESA LICITANTE LTDA"}
-          companyCnpj={user?.cnpj || "12.345.678/0001-90"}
+          companyName={user?.company || "51.926.034 RENAN OSCAR ARAUJO CRUZ"}
+          companyCnpj={user?.cnpj || "51.926.034/0001-42"}
           onSelectAudit={(payload) => setSelectedAuditData(payload)}
         />
 

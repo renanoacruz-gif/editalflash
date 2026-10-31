@@ -65,7 +65,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           customer: {
             name: name || user?.name || "Licitante",
             email: email || user?.email || "contato@licitante.com.br",
-            cpfCnpj: cpfCnpj || "12.345.678/0001-90",
+            cpfCnpj: cpfCnpj || "51.926.034/0001-42",
             phone,
           },
           paymentMethod,

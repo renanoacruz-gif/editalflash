@@ -67,8 +67,8 @@ export default function HistoryPage() {
 
         {/* Tabela de Histórico Conectada ao Supabase Cloud com Queries de Servidor */}
         <AuditHistoryTable
-          companyName={user?.company || "EMPRESA LICITANTE LTDA"}
-          companyCnpj={user?.cnpj || "12.345.678/0001-90"}
+          companyName={user?.company || "51.926.034 RENAN OSCAR ARAUJO CRUZ"}
+          companyCnpj={user?.cnpj || "51.926.034/0001-42"}
           onSelectAudit={(payload) => setSelectedAuditData(payload)}
         />
       </div>

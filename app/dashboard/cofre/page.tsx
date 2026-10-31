@@ -171,7 +171,7 @@ export default function CofreDocumentosPage() {
         body: JSON.stringify({
           type: "checklist",
           companyName: user?.company || "EMPRESA LICITANTE LTDA",
-          companyCnpj: user?.cnpj || "12.345.678/0001-90",
+          companyCnpj: user?.cnpj || "51.926.034/0001-42",
           docs: docs,
         }),
       });
@@ -203,7 +203,7 @@ export default function CofreDocumentosPage() {
       const res = await fetch("/api/vault/auto-renew", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cnpj: user?.cnpj || "12.345.678/0001-90" }),
+        body: JSON.stringify({ cnpj: user?.cnpj || "51.926.034/0001-42" }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Erro ao consultar bases públicas.");

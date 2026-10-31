@@ -214,12 +214,17 @@ function NovaAnaliseContent() {
     setActiveSession(null);
   };
 
+  const [isDemoMode, setIsDemoMode] = useState(false);
+
   const handleUseExampleData = () => {
+    setIsDemoMode(true);
     setCurrentFileName("Edital_Exemplo_TRF.pdf");
     handleAnalysisStart("Edital_Exemplo_TRF.pdf");
     setTimeout(() => {
-      handleAnalysisSuccess(defaultMockData);
-    }, 1200);
+      // No modo demonstração, exibe o parecer sem gastar crédito e sem gravar no histórico do banco
+      setReportData(defaultMockData);
+      setAppState("report");
+    }, 800);
   };
 
   const toggleSourceSelection = (source: SourceType) => {
@@ -818,7 +823,32 @@ function NovaAnaliseContent() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <ReportCard data={reportData} onReset={handleReset} />
+              {isDemoMode && (
+                <div className="mb-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+                  <div className="flex items-center gap-2.5">
+                    <span className="px-2.5 py-1 rounded-md bg-red-600 text-white font-mono font-black text-xs tracking-wider animate-pulse uppercase">
+                      MODO DEMONSTRAÇÃO - DADOS FICTÍCIOS
+                    </span>
+                    <span className="text-xs font-sans">
+                      Este parecer foi gerado com edital demonstrativo para teste. Nenhuma informação foi gravada no histórico real do seu banco.
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDemoMode(false);
+                      handleReset();
+                    }}
+                    className="px-3.5 py-1.5 rounded-lg bg-white text-slate-900 font-bold text-xs hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+                  >
+                    Auditar Edital Real
+                  </button>
+                </div>
+              )}
+              <ReportCard data={reportData} onReset={() => {
+                setIsDemoMode(false);
+                handleReset();
+              }} />
             </motion.div>
           )}
         </AnimatePresence>

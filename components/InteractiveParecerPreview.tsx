@@ -129,8 +129,8 @@ export const InteractiveParecerPreview: React.FC = () => {
                 PARECER TÉCNICO PRELIMINAR DE HABILITAÇÃO
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 mt-2 font-mono">
-                <div>Licitante: <strong className="text-black">CONSTRUTORA &amp; ENGENHARIA LTDA</strong></div>
-                <div>CNPJ: <strong className="text-black">12.345.678/0001-90</strong></div>
+                <div>Licitante: <strong className="text-black">51.926.034 RENAN OSCAR ARAUJO CRUZ</strong></div>
+                <div>CNPJ: <strong className="text-black">51.926.034/0001-42</strong></div>
                 <div>Edital: <strong className="text-black">Concorrência nº 042/2026</strong></div>
                 <div>Órgão: <strong className="text-black">SEDUC - Secretaria de Educação</strong></div>
               </div>

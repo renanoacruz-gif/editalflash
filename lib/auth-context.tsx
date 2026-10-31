@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { PrimaryVertical } from "@/lib/types";
+import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 
 export interface User {
   id: string;
@@ -38,13 +39,14 @@ interface AuthContextType {
   impersonation: ImpersonationState | null;
   login: (email: string, pass: string) => Promise<boolean>;
   signup: (name: string, email: string, pass: string, company?: string, primary_vertical?: PrimaryVertical) => Promise<boolean>;
-  selectPlan: (plan: "Starter" | "Pro" | "Enterprise", cycle?: "monthly" | "annual") => void;
-  addCredits: (amount: number) => void;
-  consumeCredit: () => boolean;
-  updatePrimaryVertical: (vertical: PrimaryVertical) => void;
+  selectPlan: (plan: "Starter" | "Pro" | "Enterprise", cycle?: "monthly" | "annual") => Promise<void>;
+  addCredits: (amount: number) => Promise<void>;
+  consumeCredit: () => Promise<boolean>;
+  updatePrimaryVertical: (vertical: PrimaryVertical) => Promise<void>;
   startImpersonation: (tenantId: string) => boolean;
   stopImpersonation: () => void;
-  logout: () => void;
+  logout: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -62,294 +64,302 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       user?.email?.toLowerCase().trim() === "renanoacruz@gmail.com"
   );
 
-  useEffect(() => {
-    // Carrega sessão salva no localStorage
-    const storedUser = localStorage.getItem("editalflash_user");
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser);
-        const cleanEmail = (parsed.email || "").toLowerCase().trim();
-        const isAdmin = cleanEmail === "renan.oacruz@gmail.com" || cleanEmail === "renanoacruz@gmail.com";
-        if (isAdmin) {
-          parsed.role = "superadmin";
-          parsed.is_superadmin = true;
-          parsed.company = "51.926.034 RENAN OSCAR ARAUJO CRUZ";
-          parsed.cnpj = "51.926.034/0001-42";
-          parsed.primary_vertical = "Serviços Contínuos (Limpeza, Segurança, Manutenção)";
-          parsed.plan = "Pro";
-          parsed.analysesLimit = 999999;
-          // Assegura cookie de admin sincronizado sem precisar relogar
-          if (typeof document !== "undefined") {
-            document.cookie = `editalflash_admin_session=${cleanEmail}; path=/; max-age=86400; SameSite=Lax`;
-          }
-        } else {
-          parsed.role = parsed.role || "tenant_user";
-          parsed.is_superadmin = false;
+  // Carrega e sincroniza o perfil do Supabase dado o Auth User
+  const loadProfileFromSupabase = async (authUserId: string, authEmail: string, userMeta?: any): Promise<User> => {
+    const cleanEmail = (authEmail || "").toLowerCase().trim();
+    const isAdmin = cleanEmail === "renan.oacruz@gmail.com" || cleanEmail === "renanoacruz@gmail.com";
+
+    try {
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", authUserId)
+        .single();
+
+      if (profile && !error) {
+        const mappedUser: User = {
+          id: profile.id,
+          name: profile.full_name || userMeta?.name || splitEmail(cleanEmail),
+          email: profile.email || cleanEmail,
+          role: (profile.role === "superadmin" || isAdmin) ? "superadmin" : "tenant_user",
+          is_superadmin: Boolean(profile.role === "superadmin" || isAdmin),
+          company: profile.company_name || (isAdmin ? "51.926.034 RENAN OSCAR ARAUJO CRUZ" : "Empresa Licitante"),
+          cnpj: profile.cnpj || (isAdmin ? "51.926.034/0001-42" : undefined),
+          primary_vertical: (profile.primary_vertical as PrimaryVertical) || "Obras Públicas e Engenharia",
+          plan: (profile.plan as any) || (isAdmin ? "Pro" : "Starter"),
+          billingCycle: (profile.billing_cycle as any) || (isAdmin ? "annual" : "monthly"),
+          analysesUsed: profile.analyses_used || 0,
+          analysesLimit: isAdmin ? 999999 : (profile.analyses_limit || 1),
+        };
+
+        if (isAdmin && typeof document !== "undefined") {
+          document.cookie = `editalflash_admin_session=${cleanEmail}; path=/; max-age=86400; SameSite=Lax`;
         }
-        setUser(parsed);
-      } catch (e) {
-        localStorage.removeItem("editalflash_user");
+        return mappedUser;
       }
+    } catch (err) {
+      console.warn("[AUTH] Falha ao carregar perfil de profiles, usando metadados:", err);
     }
 
-    const storedImp = localStorage.getItem("editalflash_impersonation");
-    if (storedImp) {
-      try {
-        setImpersonation(JSON.parse(storedImp));
-      } catch (_) {
-        localStorage.removeItem("editalflash_impersonation");
-      }
-    }
-
-    setIsLoading(false);
-  }, []);
-
-  const login = async (email: string): Promise<boolean> => {
-    setIsLoading(true);
-    const cleanEmail = email.trim().toLowerCase();
-    const isAdminUser = cleanEmail === "renan.oacruz@gmail.com" || cleanEmail === "renanoacruz@gmail.com";
-
-    // Simulação de login autêntico com concessão de privilégios para admin
-    const loggedUser: User = {
-      id: isAdminUser ? "usr_founder_renan" : "usr_" + Math.random().toString(36).substring(2, 9),
-      name: isAdminUser ? "Renan Oscar Araujo Cruz (Founder & SuperAdmin)" : cleanEmail.split("@")[0].toUpperCase(),
+    // Fallback estruturado a partir dos metadados da sessão Auth
+    const fallbackUser: User = {
+      id: authUserId,
+      name: userMeta?.name || userMeta?.full_name || splitEmail(cleanEmail),
       email: cleanEmail,
-      role: isAdminUser ? "superadmin" : "tenant_user",
-      is_superadmin: isAdminUser,
-      company: isAdminUser ? "51.926.034 RENAN OSCAR ARAUJO CRUZ" : "Empresa Licitante B2B",
-      cnpj: isAdminUser ? "51.926.034/0001-42" : undefined,
-      primary_vertical: isAdminUser ? "Serviços Contínuos (Limpeza, Segurança, Manutenção)" : "Todos / Não tenho preferência definida",
-      plan: isAdminUser ? "Pro" : null,
-      billingCycle: "annual",
+      role: isAdmin ? "superadmin" : "tenant_user",
+      is_superadmin: isAdmin,
+      company: isAdmin ? "51.926.034 RENAN OSCAR ARAUJO CRUZ" : (userMeta?.company || "Empresa Licitante"),
+      cnpj: isAdmin ? "51.926.034/0001-42" : undefined,
+      primary_vertical: userMeta?.primary_vertical || "Obras Públicas e Engenharia",
+      plan: isAdmin ? "Pro" : "Starter",
+      billingCycle: isAdmin ? "annual" : "monthly",
       analysesUsed: 0,
-      analysesLimit: isAdminUser ? 999999 : 15,
+      analysesLimit: isAdmin ? 999999 : 1,
     };
 
-    // Auto-set admin session cookie se for o admin para acesso unificado sem novo login
-    if (isAdminUser) {
+    if (isAdmin && typeof document !== "undefined") {
       document.cookie = `editalflash_admin_session=${cleanEmail}; path=/; max-age=86400; SameSite=Lax`;
     }
-
-    // Se já havia plano salvo previamente, recupera
-    const prev = localStorage.getItem("editalflash_user");
-    if (prev) {
-      try {
-        const parsed = JSON.parse(prev);
-        if (parsed.email === cleanEmail && parsed.plan && !isAdminUser) {
-          loggedUser.plan = parsed.plan;
-          loggedUser.primary_vertical = parsed.primary_vertical || "Todos / Não tenho preferência definida";
-          loggedUser.analysesUsed = parsed.analysesUsed || 0;
-          loggedUser.analysesLimit = parsed.analysesLimit || 15;
-        }
-      } catch (_) {}
-    }
-
-    setUser(loggedUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(loggedUser));
-    setIsLoading(false);
-
-    if (isAdminUser || loggedUser.plan) {
-      router.push("/dashboard");
-    } else {
-      router.push("/pricing");
-    }
-    return true;
+    return fallbackUser;
   };
 
+  function splitEmail(em: string): string {
+    return em.split("@")[0].toUpperCase();
+  }
+
+  // Inicializa sessão via Supabase Auth
+  useEffect(() => {
+    let mounted = true;
+
+    async function initSession() {
+      try {
+        if (!isSupabaseConfigured) {
+          setIsLoading(false);
+          return;
+        }
+
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user && mounted) {
+          const profile = await loadProfileFromSupabase(session.user.id, session.user.email || "", session.user.user_metadata);
+          setUser(profile);
+        }
+      } catch (err) {
+        console.error("[AUTH] Erro ao obter sessão inicial:", err);
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    initSession();
+
+    // Listener para mudanças de estado de autenticação (login, logout, refresh de token)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!mounted) return;
+
+      if (event === "SIGNED_IN" && session?.user) {
+        const profile = await loadProfileFromSupabase(session.user.id, session.user.email || "", session.user.user_metadata);
+        setUser(profile);
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+        if (typeof document !== "undefined") {
+          document.cookie = "editalflash_admin_session=; path=/; max-age=0";
+        }
+      }
+    });
+
+    return () => {
+      mounted = false;
+      subscription?.unsubscribe();
+    };
+  }, []);
+
+  const refreshProfile = async () => {
+    if (!user?.id) return;
+    const refreshed = await loadProfileFromSupabase(user.id, user.email);
+    setUser(refreshed);
+  };
+
+  // Login Real via Supabase Auth
+  const login = async (email: string, pass: string): Promise<boolean> => {
+    setIsLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: pass,
+      });
+
+      if (error) {
+        throw new Error(error.message === "Invalid login credentials" ? "Credenciais inválidas. Verifique seu e-mail e senha." : error.message);
+      }
+
+      if (!data.user) {
+        throw new Error("Usuário não encontrado no banco de dados.");
+      }
+
+      const profile = await loadProfileFromSupabase(data.user.id, data.user.email || cleanEmail, data.user.user_metadata);
+      setUser(profile);
+      setIsLoading(false);
+
+      if (profile.is_superadmin || profile.plan) {
+        router.push("/dashboard");
+      } else {
+        router.push("/dashboard");
+      }
+      return true;
+    } catch (err: any) {
+      setIsLoading(false);
+      throw err;
+    }
+  };
+
+  // Cadastro Real via Supabase Auth
   const signup = async (
     name: string,
     email: string,
-    _pass: string,
+    pass: string,
     company?: string,
     primary_vertical: PrimaryVertical = "Obras Públicas e Engenharia"
   ): Promise<boolean> => {
     setIsLoading(true);
-    const newUser: User = {
-      id: "usr_" + Math.random().toString(36).substring(2, 9),
-      name: name || "Gestor de Licitações",
-      email: email,
-      role: "tenant_user",
-      is_superadmin: false,
-      company: company || "Minha Empresa Licitante",
-      primary_vertical: primary_vertical,
-      plan: null,
-      analysesUsed: 0,
-      analysesLimit: 15,
-    };
+    const cleanEmail = email.trim().toLowerCase();
 
-    setUser(newUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(newUser));
-    setIsLoading(false);
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: cleanEmail,
+        password: pass,
+        options: {
+          data: {
+            full_name: name,
+            name: name,
+            company_name: company || "Minha Empresa Licitante",
+            primary_vertical: primary_vertical,
+          },
+        },
+      });
 
-    router.push("/pricing");
-    return true;
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!data.user) {
+        throw new Error("Não foi possível registrar o usuário no Supabase.");
+      }
+
+      const profile = await loadProfileFromSupabase(data.user.id, data.user.email || cleanEmail, data.user.user_metadata);
+      setUser(profile);
+      setIsLoading(false);
+
+      router.push("/dashboard");
+      return true;
+    } catch (err: any) {
+      setIsLoading(false);
+      throw err;
+    }
   };
 
-  const updatePrimaryVertical = (vertical: PrimaryVertical) => {
+  const updatePrimaryVertical = async (vertical: PrimaryVertical) => {
     if (!user) return;
-    const updated = { ...user, primary_vertical: vertical };
-    setUser(updated);
-    localStorage.setItem("editalflash_user", JSON.stringify(updated));
+    try {
+      await supabase
+        .from("profiles")
+        .update({ primary_vertical: vertical, updated_at: new Date().toISOString() })
+        .eq("id", user.id);
+      setUser({ ...user, primary_vertical: vertical });
+    } catch (err) {
+      console.error("[AUTH] Erro ao atualizar vertical:", err);
+    }
   };
 
-  const addCredits = (amount: number) => {
+  const addCredits = async (amount: number) => {
     if (!user) return;
-    const updatedUser: User = {
-      ...user,
-      analysesLimit: (user.analysesLimit || 0) + amount,
-    };
-    setUser(updatedUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(updatedUser));
+    try {
+      const newLimit = (user.analysesLimit || 0) + amount;
+      await supabase
+        .from("profiles")
+        .update({ analyses_limit: newLimit, updated_at: new Date().toISOString() })
+        .eq("id", user.id);
+      setUser({ ...user, analysesLimit: newLimit });
+    } catch (err) {
+      console.error("[AUTH] Erro ao adicionar créditos:", err);
+    }
   };
 
-  const consumeCredit = (): boolean => {
+  const consumeCredit = async (): Promise<boolean> => {
     if (!user) return false;
-    // Admins have unlimited credits
     if (isSuperAdmin || user.is_superadmin) return true;
-    
+
     const currentUsed = user.analysesUsed || 0;
-    const limit = user.analysesLimit || 15;
-    
-    const updatedUser: User = {
-      ...user,
-      analysesUsed: currentUsed + 1,
-    };
-    setUser(updatedUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(updatedUser));
-    return true;
+    const limit = user.analysesLimit || 1;
+
+    if (currentUsed >= limit) {
+      return false;
+    }
+
+    try {
+      await supabase
+        .from("profiles")
+        .update({ analyses_used: currentUsed + 1, updated_at: new Date().toISOString() })
+        .eq("id", user.id);
+      setUser({ ...user, analysesUsed: currentUsed + 1 });
+      return true;
+    } catch (err) {
+      console.error("[AUTH] Erro ao debitar crédito:", err);
+      return false;
+    }
   };
 
-  const selectPlan = (plan: "Starter" | "Pro" | "Enterprise", cycle: "monthly" | "annual" = "monthly") => {
+  const selectPlan = async (plan: "Starter" | "Pro" | "Enterprise", cycle: "monthly" | "annual" = "monthly") => {
     if (!user) {
       router.push("/signup");
       return;
     }
 
-    const updatedUser: User = {
-      ...user,
-      plan,
-      billingCycle: cycle,
-      analysesLimit: plan === "Starter" ? 5 : plan === "Pro" ? 15 : 99999,
-    };
+    const newLimit = plan === "Starter" ? 5 : plan === "Pro" ? 15 : 99999;
+    try {
+      await supabase
+        .from("profiles")
+        .update({
+          plan,
+          billing_cycle: cycle,
+          analyses_limit: newLimit,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", user.id);
 
-    setUser(updatedUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(updatedUser));
+      setUser({
+        ...user,
+        plan,
+        billingCycle: cycle,
+        analysesLimit: newLimit,
+      });
 
-    router.push("/dashboard");
+      router.push("/dashboard");
+    } catch (err) {
+      console.error("[AUTH] Erro ao atualizar plano:", err);
+    }
   };
 
-  // Impersonation for Founder Support Mode
-  const startImpersonation = (tenantId: string): boolean => {
-    if (!user || (!isSuperAdmin && !user.is_superadmin)) {
-      return false;
-    }
-
-    // Dynamic import avoidance; load from stored tenants if available
-    let tenantData: any = null;
-    try {
-      const stored = localStorage.getItem("editalflash_superadmin_tenants");
-      if (stored) {
-        const tenants = JSON.parse(stored);
-        tenantData = tenants.find((t: any) => t.id === tenantId);
-      }
-    } catch (_) {}
-
-    if (!tenantData) {
-      tenantData = {
-        id: tenantId,
-        name: "Licitante em Auditoria",
-        responsibleEmail: "cliente@licitante.com.br",
-        primary_vertical: "Obras Públicas e Engenharia",
-      };
-    }
-
-    const newImpersonation: ImpersonationState = {
-      isImpersonating: true,
-      originalUser: { ...user },
-      tenant: {
-        id: tenantData.id,
-        name: tenantData.name,
-        email: tenantData.responsibleEmail,
-        company: tenantData.name,
-        primary_vertical: tenantData.primary_vertical || "Obras Públicas e Engenharia",
-      },
-    };
-
-    setImpersonation(newImpersonation);
-    localStorage.setItem("editalflash_impersonation", JSON.stringify(newImpersonation));
-
-    // Audit event log in local store
-    try {
-      const rawEvents = localStorage.getItem("editalflash_superadmin_events") || "[]";
-      const events = JSON.parse(rawEvents);
-      events.unshift({
-        id: "evt_" + Math.random().toString(36).substring(2, 9),
-        actorEmail: user.email,
-        actorRole: "superadmin",
-        action: "SUPPORT_IMPERSONATION_STARTED",
-        tenantId: tenantData.id,
-        tenantName: tenantData.name,
-        entityAffected: "Impersonation Session",
-        payload: { simulatedVertical: tenantData.primary_vertical, timestamp: new Date().toISOString() },
-        timestamp: new Date().toISOString(),
-      });
-      localStorage.setItem("editalflash_superadmin_events", JSON.stringify(events));
-    } catch (_) {}
-
-    // Switch context
-    const impersonatedUser: User = {
-      id: tenantData.id,
-      name: `${tenantData.name} (Modo Suporte)`,
-      email: tenantData.responsibleEmail,
-      company: tenantData.name,
-      primary_vertical: tenantData.primary_vertical,
-      plan: tenantData.plan || "Pro",
-      role: "tenant_user",
-      is_superadmin: false,
-      analysesUsed: 2,
-      analysesLimit: 15,
-    };
-    setUser(impersonatedUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(impersonatedUser));
-
-    router.push("/dashboard");
-    return true;
+  const startImpersonation = (_tenantId: string): boolean => {
+    return false;
   };
 
   const stopImpersonation = () => {
-    if (!impersonation) return;
-
-    // Audit event log
-    try {
-      const rawEvents = localStorage.getItem("editalflash_superadmin_events") || "[]";
-      const events = JSON.parse(rawEvents);
-      events.unshift({
-        id: "evt_" + Math.random().toString(36).substring(2, 9),
-        actorEmail: impersonation.originalUser.email,
-        actorRole: "superadmin",
-        action: "SUPPORT_IMPERSONATION_ENDED",
-        tenantId: impersonation.tenant.id,
-        tenantName: impersonation.tenant.name,
-        entityAffected: "Impersonation Session",
-        payload: { revertedAt: new Date().toISOString() },
-        timestamp: new Date().toISOString(),
-      });
-      localStorage.setItem("editalflash_superadmin_events", JSON.stringify(events));
-    } catch (_) {}
-
-    setUser(impersonation.originalUser);
-    localStorage.setItem("editalflash_user", JSON.stringify(impersonation.originalUser));
     setImpersonation(null);
-    localStorage.removeItem("editalflash_impersonation");
-
-    router.push("/admin/users");
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut();
+    } catch (_) {}
     setUser(null);
     setImpersonation(null);
-    localStorage.removeItem("editalflash_user");
-    localStorage.removeItem("editalflash_impersonation");
+    if (typeof document !== "undefined") {
+      document.cookie = "editalflash_admin_session=; path=/; max-age=0";
+    }
     router.push("/");
   };
 
@@ -369,6 +379,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         startImpersonation,
         stopImpersonation,
         logout,
+        refreshProfile,
       }}
     >
       {children}

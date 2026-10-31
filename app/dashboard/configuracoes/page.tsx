@@ -28,12 +28,58 @@ export default function AccountSettingsPage() {
   const [activeTab, setActiveTab] = useState<"perfil" | "plano" | "indicacao" | "seguranca" | "como-usar">("perfil");
 
   // Estados do formulário de Perfil
-  const [companyName, setCompanyName] = useState(user?.company || "Alpha Construtora e Comércio Ltda");
-  const [cnpj, setCnpj] = useState(user?.cnpj || "12.345.678/0001-90");
-  const [contactName, setContactName] = useState(user?.name || "Roberto Mendes");
-  const [contactEmail, setContactEmail] = useState(user?.email || "roberto@empresa.com.br");
+  const [companyName, setCompanyName] = useState(user?.company || "");
+  const [cnpj, setCnpj] = useState(user?.cnpj || "");
+  const [contactName, setContactName] = useState(user?.name || "");
+  const [contactEmail, setContactEmail] = useState(user?.email || "");
   const [vertical, setVertical] = useState<PrimaryVertical>(user?.primary_vertical || "Obras Públicas e Engenharia");
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  // Sincroniza campos quando o user carregar do Supabase
+  React.useEffect(() => {
+    if (user) {
+      setCompanyName(user.company || "");
+      setCnpj(user.cnpj || "");
+      setContactName(user.name || "");
+      setContactEmail(user.email || "");
+      if (user.primary_vertical) {
+        setVertical(user.primary_vertical);
+      }
+    }
+  }, [user]);
+
+  // Estados de Troca de Senha
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [passwordMsg, setPasswordMsg] = useState<{ text: string; ok: boolean } | null>(null);
+
+  const handleUpdatePassword = async () => {
+    if (!newPassword || newPassword.length < 6) {
+      setPasswordMsg({ text: "A nova senha deve ter no mínimo 6 caracteres.", ok: false });
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordMsg({ text: "As senhas não coincidem.", ok: false });
+      return;
+    }
+    setPasswordLoading(true);
+    setPasswordMsg(null);
+    try {
+      const { supabase } = await import("@/lib/supabase");
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) throw error;
+      setPasswordMsg({ text: "Senha atualizada com sucesso no Supabase!", ok: true });
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (err: any) {
+      setPasswordMsg({ text: err?.message || "Erro ao atualizar senha.", ok: false });
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
 
   // Estados de Auto-Gestão de Assinatura e Conta (LGPD)
   const [subscriptionStatus, setSubscriptionStatus] = useState<"ACTIVE" | "PAUSED" | "CANCELLED">("ACTIVE");
@@ -49,7 +95,13 @@ export default function AccountSettingsPage() {
   // Estados da aba de Indicação
   const [copiedLink, setCopiedLink] = useState(false);
   const referralCode = user?.id ? user.id.slice(0, 8).toUpperCase() : "FLASH50";
-  const referralLink = `https://editalflash.com.br/convite?ref=${referralCode}`;
+  const [referralLink, setReferralLink] = useState(`https://editalflash.pages.dev/convite?ref=${referralCode}`);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setReferralLink(`${window.location.origin}/convite?ref=${referralCode}`);
+    }
+  }, [referralCode]);
 
   // Estados de Notificações
   const [alert15Days, setAlert15Days] = useState(true);
@@ -63,13 +115,36 @@ export default function AccountSettingsPage() {
     setTimeout(() => setCopiedLink(false), 2500);
   };
 
-  const handleSaveProfile = (e: React.FormEvent) => {
+  const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (updatePrimaryVertical) {
-      updatePrimaryVertical(vertical);
+    if (!user?.id) return;
+    setSaveLoading(true);
+    setSaveError(null);
+    try {
+      const { supabase } = await import("@/lib/supabase");
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          company_name: companyName.trim(),
+          cnpj: cnpj.trim(),
+          full_name: contactName.trim(),
+          primary_vertical: vertical,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", user.id);
+
+      if (error) throw error;
+
+      if (updatePrimaryVertical) {
+        await updatePrimaryVertical(vertical);
+      }
+      setSavedSuccess(true);
+      setTimeout(() => setSavedSuccess(false), 3000);
+    } catch (err: any) {
+      setSaveError(err?.message || "Falha ao salvar dados no Supabase.");
+    } finally {
+      setSaveLoading(false);
     }
-    setSavedSuccess(true);
-    setTimeout(() => setSavedSuccess(false), 3000);
   };
 
   return (
@@ -379,60 +454,62 @@ export default function AccountSettingsPage() {
             </div>
 
             {/* SEÇÃO: AUTO-GESTÃO DE ASSINATURA */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-              <div>
-                <h3 className="text-base font-bold text-slate-900 font-display">
-                  Gestão da Assinatura
-                </h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  Pause temporariamente para preservar seus dados ou encerre a renovação automática.
-                </p>
-              </div>
-
-              {actionNotice && (
-                <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 font-mono">
-                  {actionNotice}
+            {user?.plan && user.plan !== "Starter" && (
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 font-display">
+                    Gestão da Assinatura
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Pause temporariamente para preservar seus dados ou encerre a renovação automática.
+                  </p>
                 </div>
-              )}
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  type="button"
-                  disabled={accountActionLoading || subscriptionStatus === "PAUSED"}
-                  onClick={async () => {
-                    if (!confirm("Deseja pausar sua assinatura por até 30 dias? Seus dados e cofre serão mantidos intactos.")) return;
-                    setAccountActionLoading(true);
-                    try {
-                      const res = await fetch("/api/account/manage", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "pause", userId: user?.id, userEmail: user?.email }),
-                      });
-                      const data = await res.json();
-                      if (!res.ok) throw new Error(data.error || "Erro ao pausar assinatura.");
-                      setSubscriptionStatus("PAUSED");
-                      setActionNotice("Assinatura pausada com sucesso. Seus dados permanecerão preservados por 30 dias.");
-                    } catch (err: any) {
-                      alert(err.message || "Falha na comunicação.");
-                    } finally {
-                      setAccountActionLoading(false);
-                    }
-                  }}
-                  className="px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 border border-amber-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
-                >
-                  {subscriptionStatus === "PAUSED" ? "Assinatura Pausada (30 dias)" : "Pausar Assinatura"}
-                </button>
+                {actionNotice && (
+                  <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 font-mono">
+                    {actionNotice}
+                  </div>
+                )}
 
-                <button
-                  type="button"
-                  disabled={accountActionLoading || subscriptionStatus === "CANCELLED"}
-                  onClick={() => setShowCancelModal(true)}
-                  className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
-                >
-                  {subscriptionStatus === "CANCELLED" ? "Assinatura Cancelada" : "Cancelar Assinatura"}
-                </button>
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    disabled={accountActionLoading || subscriptionStatus === "PAUSED"}
+                    onClick={async () => {
+                      if (!confirm("Deseja pausar sua assinatura por até 30 dias? Seus dados e cofre serão mantidos intactos.")) return;
+                      setAccountActionLoading(true);
+                      try {
+                        const res = await fetch("/api/account/manage", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ action: "pause", userId: user?.id, userEmail: user?.email }),
+                        });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error || "Erro ao pausar assinatura.");
+                        setSubscriptionStatus("PAUSED");
+                        setActionNotice("Assinatura pausada com sucesso. Seus dados permanecerão preservados por 30 dias.");
+                      } catch (err: any) {
+                        alert(err.message || "Falha na comunicação.");
+                      } finally {
+                        setAccountActionLoading(false);
+                      }
+                    }}
+                    className="px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 border border-amber-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                  >
+                    {subscriptionStatus === "PAUSED" ? "Assinatura Pausada (30 dias)" : "Pausar Assinatura"}
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={accountActionLoading || subscriptionStatus === "CANCELLED"}
+                    onClick={() => setShowCancelModal(true)}
+                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                  >
+                    {subscriptionStatus === "CANCELLED" ? "Assinatura Cancelada" : "Cancelar Assinatura"}
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* SEÇÃO: ZONA DE PERIGO (EXCLUIR CONTA LGPD) */}
             <div className="p-6 rounded-2xl bg-red-50/50 border border-red-200 shadow-sm space-y-4">
@@ -597,6 +674,13 @@ export default function AccountSettingsPage() {
               <h2 className="text-base font-bold text-slate-900 font-display">
                 Segurança da Conta &amp; Autenticação
               </h2>
+              {passwordMsg && (
+                <div className={`p-3 rounded-xl border text-xs flex items-center gap-2 ${
+                  passwordMsg.ok ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-rose-50 border-rose-200 text-rose-800"
+                }`}>
+                  <span>{passwordMsg.text}</span>
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-semibold text-slate-700 block mb-1">
@@ -604,7 +688,9 @@ export default function AccountSettingsPage() {
                   </label>
                   <input
                     type="password"
-                    placeholder="••••••••"
+                    placeholder="Mínimo 6 caracteres"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
@@ -614,7 +700,9 @@ export default function AccountSettingsPage() {
                   </label>
                   <input
                     type="password"
-                    placeholder="••••••••"
+                    placeholder="Repita a nova senha"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
@@ -622,10 +710,11 @@ export default function AccountSettingsPage() {
               <div className="pt-2">
                 <button
                   type="button"
-                  onClick={() => alert("Senha atualizada com sucesso!")}
-                  className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors cursor-pointer"
+                  disabled={passwordLoading}
+                  onClick={handleUpdatePassword}
+                  className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors cursor-pointer disabled:opacity-50"
                 >
-                  Atualizar Senha
+                  {passwordLoading ? "Atualizando..." : "Atualizar Senha"}
                 </button>
               </div>
             </div>

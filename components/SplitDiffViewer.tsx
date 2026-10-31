@@ -91,7 +91,7 @@ export default function SplitDiffViewer() {
                 </div>
                 <div>
                   <span className="text-xs font-mono text-[var(--muted)]">Risco Residual:</span>
-                  <div className="text-base font-bold font-mono text-emerald-400">Zero Risco Oculto</div>
+                  <div className="text-base font-bold font-mono text-emerald-400">Mitigação Preventiva de Riscos</div>
                 </div>
               </div>
             </div>

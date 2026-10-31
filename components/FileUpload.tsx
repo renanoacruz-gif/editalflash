@@ -244,10 +244,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                   e.stopPropagation();
                   onUseExampleData();
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-blue-300 border border-slate-700 hover:border-blue-500/40 transition-all active:scale-[0.98]"
+                className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-amber-300 border border-amber-500/30 hover:border-amber-500/60 transition-all active:scale-[0.98]"
+                title="Carrega visualização demonstrativa com dados simulados"
               >
-                <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                <span>Usar Exemplo</span>
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>Usar Exemplo (Demonstração)</span>
               </button>
             </div>
 

@@ -44,6 +44,30 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
   const [loginPassword, setLoginPassword] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [resetSuccess, setResetSuccess] = useState<string | null>(null);
+
+  const handleForgotPassword = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!loginEmail) {
+      setLoginError("Informe seu e-mail no campo acima para receber o link de recuperação.");
+      return;
+    }
+    setLoginLoading(true);
+    setLoginError(null);
+    try {
+      const { supabase } = await import("@/lib/supabase");
+      const { error } = await supabase.auth.resetPasswordForEmail(loginEmail.trim().toLowerCase(), {
+        redirectTo: `${typeof window !== "undefined" ? window.location.origin : "https://editalflash.pages.dev"}/dashboard/configuracoes`,
+      });
+      if (error) throw error;
+      setResetSuccess("Link de redefinição de senha enviado para seu e-mail.");
+      setTimeout(() => setResetSuccess(null), 6000);
+    } catch (err: any) {
+      setLoginError(err?.message || "Falha ao enviar e-mail de recuperação de senha.");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
 
   // Estados do Formulário de Cadastro (Multi-step)
   const [signupStep, setSignupStep] = useState<1 | 2>(1);
@@ -125,25 +149,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
     setSignupLoading(true);
     setSignupError(null);
     try {
-      // Criação da conta via API
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: signupName.trim(),
-          email: signupEmail.trim(),
-          password: signupPassword,
-          company: signupCompany.trim() || "Minha Empresa Licitante",
-          primary_vertical: signupVertical,
-        }),
-      });
-
-      const resData = await res.json();
-      if (!res.ok) {
-        throw new Error(resData.error || "Erro ao processar cadastro corporativo.");
-      }
-
-      await signup(signupName, signupEmail, signupPassword, signupCompany, signupVertical);
+      await signup(signupName.trim(), signupEmail.trim(), signupPassword, signupCompany.trim() || "Minha Empresa Licitante", signupVertical);
     } catch (err: any) {
       setSignupError(err?.message || "Erro ao criar conta.");
       setSignupLoading(false);
@@ -257,6 +263,13 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               </div>
             )}
 
+            {resetSuccess && (
+              <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
+                <span>{resetSuccess}</span>
+              </div>
+            )}
+
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-mono font-medium text-slate-700 mb-1.5 uppercase">
@@ -280,12 +293,13 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                   <label className="text-xs font-mono font-medium text-slate-700 uppercase">
                     Senha de Acesso
                   </label>
-                  <a
-                    href="mailto:contatoeditalflash@gmail.com?subject=Recupera%C3%A7%C3%A3o%20de%20Acesso%20-%20EditalFlash&body=Ol%C3%A1%2C%20preciso%20redefinir%20minha%20senha.%20Meu%20e-mail%20de%20cadastro%20%C3%A9%3A"
-                    className="text-xs font-medium text-[#2740F0] hover:underline"
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
+                    className="text-xs font-medium text-[#2740F0] hover:underline cursor-pointer bg-transparent border-none p-0"
                   >
                     Esqueceu a senha?
-                  </a>
+                  </button>
                 </div>
                 <div className="relative">
                   <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />

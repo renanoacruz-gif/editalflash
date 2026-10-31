@@ -79,23 +79,23 @@ export const InteractiveParecerPreview: React.FC = () => {
   return (
     <div className="w-full max-w-4xl mx-auto space-y-4">
       {/* Moldura de Visualizador de Documento Interativo (PDF Scroll Viewport) */}
-      <div className="bg-[#121B2D] border border-[#26324A] rounded-2xl shadow-2xl overflow-hidden text-left">
-        {/* Barra Superior do Visualizador (Estilo Chrome PDF Viewer / MacOS Preview) */}
-        <div className="px-5 py-3 border-b border-[#26324A] bg-[#0A111F] flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#A3AEC4]">
+      <div className="bg-[#11212D] border border-[#253745] rounded-2xl shadow-2xl overflow-hidden text-left">
+        {/* Barra Superior do Visualizador */}
+        <div className="px-5 py-3 border-b border-[#253745] bg-[#06141B] flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-[#9BA8AB]">
           <div className="flex items-center gap-2.5">
             <div className="flex items-center gap-1.5">
               <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
               <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
             </div>
-            <span className="text-[#E8ECF5] font-semibold text-xs ml-2 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-[#4A5FFF]" />
+            <span className="text-[#CCD0CF] font-semibold text-xs ml-2 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-[#9BA8AB]" />
               <span>Parecer_Preliminar_Concorrencia_042_2026.pdf</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] bg-[#121B2D] px-2.5 py-0.5 rounded border border-[#26324A] text-[#8F9CFF]">
+            <span className="text-[11px] bg-[#11212D] px-2.5 py-0.5 rounded border border-[#253745] text-[#CCD0CF]">
               Visualização Interativa A4 • Pág. 1 de 2
             </span>
             <a
@@ -103,7 +103,7 @@ export const InteractiveParecerPreview: React.FC = () => {
               download="exemplo-parecer-editalflash.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#2740F0] hover:bg-[#1f33c7] text-white font-bold text-xs transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#253745] hover:bg-[#324859] text-white font-bold text-xs transition-colors shadow-xs border border-[#9BA8AB]/30"
             >
               <Download className="w-3 h-3" />
               <span>Baixar Parecer em PDF</span>
@@ -112,20 +112,20 @@ export const InteractiveParecerPreview: React.FC = () => {
         </div>
 
         {/* Viewport com Rolagem Interna com Efeito de Folha A4 Real */}
-        <div className="p-4 sm:p-8 bg-[#070B14] max-h-[580px] overflow-y-auto space-y-6">
+        <div className="p-4 sm:p-8 bg-[#06141B] max-h-[580px] overflow-y-auto space-y-6">
           {/* Folha A4 Simulação Visual com Papel Branco e Tipografia Solene */}
-          <div className="bg-white text-[#0E1626] p-6 sm:p-10 rounded-xl shadow-2xl border border-gray-200 max-w-3xl mx-auto space-y-6 font-sans">
+          <div className="bg-white text-[#06141B] p-6 sm:p-10 rounded-xl shadow-2xl border border-gray-200 max-w-3xl mx-auto space-y-6 font-sans">
             {/* Cabeçalho Oficial do Parecer */}
-            <div className="border-b-2 border-[#0E1626] pb-4">
+            <div className="border-b-2 border-[#06141B] pb-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#2740F0]">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#253745]">
                   PARECER TÉCNICO DE HABILITAÇÃO PRELIMINAR (LEI 14.133/2021)
                 </span>
                 <span className="text-[10px] font-mono text-gray-500">
                   Emissão: 29/10/2026 às 06:45 BRT
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-[#0E1626] mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-[#06141B] mt-1">
                 PARECER TÉCNICO PRELIMINAR DE HABILITAÇÃO
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 mt-2 font-mono">
@@ -223,7 +223,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                 {filtered.map((item, idx) => (
                   <div key={idx} className="p-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50/80 transition-colors">
                     <div className="col-span-3">
-                      <span className="text-[10px] font-mono text-[#2740F0] font-bold block">
+                      <span className="text-[10px] font-mono text-[#253745] font-bold block">
                         {item.artigo}
                       </span>
                       <strong className="text-xs text-black block leading-snug">{item.exigencia}</strong>
@@ -258,13 +258,13 @@ export const InteractiveParecerPreview: React.FC = () => {
                 <span>Página 1 de 2</span>
               </div>
             </div>
-            <div className="bg-[#121B2D] border border-[#26324A] rounded-lg p-3 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-              <span className="text-[#A3AEC4] font-mono">
+            <div className="bg-[#11212D] border border-[#253745] rounded-lg p-3 text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <span className="text-[#9BA8AB] font-mono">
                 Gostou do rigor pericial deste parecer? Gere o relatório oficial da sua própria empresa.
               </span>
               <a
                 href="/signup"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#2740F0] hover:bg-[#1f33c7] text-white font-bold text-xs transition-colors shadow-xs whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#253745] hover:bg-[#324859] text-white font-bold text-xs transition-colors shadow-xs whitespace-nowrap border border-[#9BA8AB]/30"
               >
                 <span>Gere o da sua empresa → /signup</span>
               </a>

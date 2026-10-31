@@ -159,23 +159,23 @@ export const ChecklistArt62: React.FC = () => {
   };
 
   return (
-    <div className="rounded-2xl p-6 border border-slate-700/80 bg-[#0c1322] shadow-xl space-y-6">
+    <div className="rounded-2xl p-6 border border-[#253745] bg-[#11212D] shadow-xl space-y-6">
       {/* Header com Progresso & Botão Exportar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#253745]">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30">
+          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
             <FileCheck className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h4 className="text-base font-bold text-white">
+              <h4 className="text-base font-bold text-[#CCD0CF]">
                 Checklist de Habilitação Integral (Art. 62 da Lei 14.133/21)
               </h4>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 font-bold">
                 {percent}% Concluído
               </span>
             </div>
-            <p className="text-xs text-slate-300 mt-0.5">
+            <p className="text-xs text-[#9BA8AB] mt-0.5">
               Auditoria documental estruturada com links oficiais para emissão direta das certidões
             </p>
           </div>
@@ -185,9 +185,9 @@ export const ChecklistArt62: React.FC = () => {
         <button
           type="button"
           onClick={handleExportPDF}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all shadow-sm active:scale-95"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#253745] hover:bg-[#324859] text-white border border-[#9BA8AB]/30 transition-all shadow-sm active:scale-95"
         >
-          <Printer className="w-3.5 h-3.5 text-blue-400" />
+          <Printer className="w-3.5 h-3.5 text-[#CCD0CF]" />
           <span>Exportar Checklist PDF</span>
         </button>
       </div>
@@ -202,29 +202,29 @@ export const ChecklistArt62: React.FC = () => {
           return (
             <div
               key={cat}
-              className="rounded-xl border border-slate-700/80 bg-slate-900/60 overflow-hidden shadow-sm"
+              className="rounded-xl border border-[#253745] bg-[#06141B] overflow-hidden shadow-sm"
             >
               {/* Header da Categoria */}
               <button
                 type="button"
                 onClick={() => toggleSection(cat)}
-                className="w-full px-4 py-3 bg-slate-900/90 flex items-center justify-between text-left hover:bg-slate-800/80 transition-colors"
+                className="w-full px-4 py-3 bg-[#11212D] flex items-center justify-between text-left hover:bg-[#253745] transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-white">{cat}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.2 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                  <span className="text-xs font-bold text-[#CCD0CF]">{cat}</span>
+                  <span className="text-[10px] font-mono px-2 py-0.2 rounded bg-[#06141B] text-[#9BA8AB] border border-[#253745]">
                     {completedInCat}/{catItems.length} prontos
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 text-slate-400">
+                <div className="flex items-center gap-2 text-[#9BA8AB]">
                   {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </div>
               </button>
 
               {/* Itens da Categoria */}
               {isExpanded && (
-                <div className="p-3 space-y-2.5 divide-y divide-slate-800/60">
+                <div className="p-3 space-y-2.5 divide-y divide-[#253745]/60">
                   {catItems.map((item) => {
                     const isChecked = checkedIds.includes(item.id);
 
@@ -232,7 +232,7 @@ export const ChecklistArt62: React.FC = () => {
                       <div
                         key={item.id}
                         className={`pt-2.5 first:pt-0 flex items-start justify-between gap-3 p-2 rounded-lg transition-colors ${
-                          isChecked ? "bg-emerald-950/20" : "hover:bg-slate-800/40"
+                          isChecked ? "bg-emerald-950/20" : "hover:bg-[#11212D]/60"
                         }`}
                       >
                         {/* Checkbox + Descrição */}
@@ -240,11 +240,11 @@ export const ChecklistArt62: React.FC = () => {
                           onClick={() => toggleItem(item.id)}
                           className="flex items-start gap-2.5 flex-1 cursor-pointer select-none"
                         >
-                          <div className="mt-0.5 text-slate-400">
+                          <div className="mt-0.5 text-[#9BA8AB]">
                             {isChecked ? (
                               <CheckSquare className="w-4 h-4 text-emerald-400" />
                             ) : (
-                              <Square className="w-4 h-4 text-slate-400 hover:text-slate-200" />
+                              <Square className="w-4 h-4 text-[#9BA8AB] hover:text-[#CCD0CF]" />
                             )}
                           </div>
 
@@ -252,7 +252,7 @@ export const ChecklistArt62: React.FC = () => {
                             <div className="flex items-center gap-2 flex-wrap">
                               <span
                                 className={`text-xs font-semibold ${
-                                  isChecked ? "line-through text-slate-500" : "text-slate-100"
+                                  isChecked ? "line-through text-[#9BA8AB]/60" : "text-[#CCD0CF]"
                                 }`}
                               >
                                 {item.documento}
@@ -262,12 +262,12 @@ export const ChecklistArt62: React.FC = () => {
                                   Obrigatório
                                 </span>
                               ) : (
-                                <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                                <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#11212D] text-[#9BA8AB] border border-[#253745]">
                                   Facultativo
                                 </span>
                               )}
                             </div>
-                            <p className="text-[11px] text-slate-300 leading-relaxed">
+                            <p className="text-[11px] text-[#9BA8AB] leading-relaxed">
                               {item.descricao}
                             </p>
                           </div>

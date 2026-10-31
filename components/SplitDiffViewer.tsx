@@ -19,32 +19,32 @@ export default function SplitDiffViewer() {
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-t border-[var(--border)] overflow-hidden bg-[#070B14]">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 border-t border-[var(--line)] overflow-hidden bg-[#06141B]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--brand)]/30 bg-[var(--brand)]/10 text-xs font-mono text-[var(--brand)] uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#253745] bg-[#11212D] text-xs font-mono text-[#CCD0CF] uppercase tracking-wider mb-4">
             Auditoria Comparativa
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[var(--foreground)] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#CCD0CF] tracking-tight">
             Antes vs. Depois: O Salto de Segurança Jurídica
           </h2>
-          <p className="mt-4 text-base text-[var(--muted)] font-sans">
+          <p className="mt-4 text-base text-[#9BA8AB] font-sans">
             Arraste o divisor para comparar a triagem artesanal com a precisão determinística do EditalFlash.
           </p>
         </div>
 
         {/* Card Container com Slider Interativo */}
         <div
-          className="relative w-full h-[540px] rounded-2xl border border-[var(--border)] overflow-hidden select-none cursor-ew-resize shadow-2xl bg-[#090D17]"
+          className="relative w-full h-[540px] rounded-2xl border border-[#253745] overflow-hidden select-none cursor-ew-resize shadow-2xl bg-[#06141B]"
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}
         >
           {/* LADO DIREITO: EditalFlash (Base completa por baixo) */}
-          <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-[#0B1220] to-[#060911] text-[var(--foreground)]">
-            <div className="flex items-center justify-between pb-4 border-b border-[var(--brand)]/20">
+          <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-br from-[#11212D] to-[#06141B] text-[#CCD0CF]">
+            <div className="flex items-center justify-between pb-4 border-b border-[#253745]">
               <div className="flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-[var(--brand)] animate-pulse" />
-                <span className="text-xs font-mono font-bold tracking-wider text-[var(--brand)] uppercase">
+                <span className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono font-bold tracking-wider text-[#CCD0CF] uppercase">
                   Com EditalFlash • 32 segundos
                 </span>
               </div>
@@ -54,12 +54,12 @@ export default function SplitDiffViewer() {
             </div>
 
             <div className="space-y-4 my-auto">
-              <div className="bg-[#0D1626] border border-[var(--brand)]/30 rounded-xl p-4">
-                <div className="flex items-center justify-between text-xs font-mono text-[var(--brand)] mb-1">
+              <div className="bg-[#06141B] border border-[#253745] rounded-xl p-4">
+                <div className="flex items-center justify-between text-xs font-mono text-[#CCD0CF] mb-1">
                   <span>ÍNDICES CONTÁBEIS (SG, LG, LC)</span>
                   <span>Art. 69, Lei 14.133</span>
                 </div>
-                <div className="text-lg font-bold font-mono text-[var(--foreground)]">
+                <div className="text-lg font-bold font-mono text-white">
                   LC: 1.42 • LG: 1.28 • SG: 1.35
                 </div>
                 <p className="text-xs text-emerald-400 mt-1 font-mono">
@@ -67,12 +67,12 @@ export default function SplitDiffViewer() {
                 </p>
               </div>
 
-              <div className="bg-[#0D1626] border border-amber-500/30 rounded-xl p-4">
+              <div className="bg-[#06141B] border border-amber-500/30 rounded-xl p-4">
                 <div className="flex items-center justify-between text-xs font-mono text-amber-400 mb-1">
                   <span>ALERTA PREVENTIVO DE CLÁUSULA ILEGAL</span>
                   <span>Súmula 263 TCU</span>
                 </div>
-                <div className="text-sm font-semibold text-[var(--foreground)]">
+                <div className="text-sm font-semibold text-white">
                   Edital exige atestado exclusivo com CAT do Estado de SP
                 </div>
                 <p className="text-xs text-amber-300 mt-1 font-mono">
@@ -80,31 +80,31 @@ export default function SplitDiffViewer() {
                 </p>
               </div>
 
-              <div className="bg-[#0D1626] border border-[var(--border)] rounded-xl p-4 flex items-center justify-between">
+              <div className="bg-[#06141B] border border-[#253745] rounded-xl p-4 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-mono text-[var(--muted)]">Tempo de Resposta:</span>
-                  <div className="text-base font-bold font-mono text-[var(--foreground)]">32 segundos</div>
+                  <span className="text-xs font-mono text-[#9BA8AB]">Tempo de Resposta:</span>
+                  <div className="text-base font-bold font-mono text-[#CCD0CF]">32 segundos</div>
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[var(--muted)]">Veredito Executivo:</span>
-                  <div className="text-base font-bold font-mono text-[var(--brand)]">Habilitável com Impugnação</div>
+                  <span className="text-xs font-mono text-[#9BA8AB]">Veredito Executivo:</span>
+                  <div className="text-base font-bold font-mono text-[#CCD0CF]">Habilitável com Impugnação</div>
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[var(--muted)]">Risco Residual:</span>
+                  <span className="text-xs font-mono text-[#9BA8AB]">Risco Residual:</span>
                   <div className="text-base font-bold font-mono text-emerald-400">Mitigação Preventiva de Riscos</div>
                 </div>
               </div>
             </div>
 
-            <div className="text-xs font-mono text-[var(--muted)] border-t border-[var(--border)] pt-3 flex justify-between">
+            <div className="text-xs font-mono text-[#9BA8AB] border-t border-[#253745] pt-3 flex justify-between">
               <span>Parecer assinado com Hash Criptográfico</span>
-              <span className="text-[var(--brand)]">Visualização Automatizada</span>
+              <span className="text-[#CCD0CF]">Visualização Automatizada</span>
             </div>
           </div>
 
           {/* LADO ESQUERDO: Manual (Clipada pela porcentagem do slider) */}
           <div
-            className="absolute inset-y-0 left-0 bg-[#0F141F] border-r border-red-500/40 p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
+            className="absolute inset-y-0 left-0 bg-[#06141B] border-r border-red-500/40 p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
             style={{ width: `${sliderPos}%` }}
           >
             <div className="min-w-[500px]">
@@ -121,7 +121,7 @@ export default function SplitDiffViewer() {
               </div>
 
               <div className="space-y-4 my-6">
-                <div className="bg-[#151C2C] border border-red-500/30 rounded-xl p-4 opacity-90">
+                <div className="bg-[#11212D] border border-red-500/30 rounded-xl p-4 opacity-90">
                   <span className="text-xs font-mono text-red-400 block mb-1">CONFERÊNCIA DE PDF ESCANEADO</span>
                   <p className="text-sm text-neutral-300 font-mono">
                     "Edital_Pregao_44_2024_com_anexos_v3_final.pdf" (184 páginas)
@@ -131,8 +131,8 @@ export default function SplitDiffViewer() {
                   </p>
                 </div>
 
-                <div className="bg-[#151C2C] border border-[var(--border)] rounded-xl p-4 opacity-90">
-                  <span className="text-xs font-mono text-[var(--muted)] block mb-1">CÁLCULO MANUAL EM PLANILHA</span>
+                <div className="bg-[#11212D] border border-[#253745] rounded-xl p-4 opacity-90">
+                  <span className="text-xs font-mono text-[#9BA8AB] block mb-1">CÁLCULO MANUAL EM PLANILHA</span>
                   <div className="text-sm font-mono text-neutral-300">
                     Fórmulas de SG/LG digitadas à mão. Risco de erro de digitação no Balanço.
                   </div>

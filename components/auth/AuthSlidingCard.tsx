@@ -166,44 +166,44 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
   ];
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#0E1626] text-slate-100 selection:bg-[#2740F0] selection:text-white">
+    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10 bg-[#06141B] text-[#CCD0CF] selection:bg-[#11212D] selection:text-[#CCD0CF]">
       {/* Background Decorativo Sutil */}
       <div
         className="fixed inset-0 opacity-[0.025] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(#8F9CFF 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(#9BA8AB 1px, transparent 1px)`,
           backgroundSize: "28px 28px",
         }}
       />
-      <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#2740F0]/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="fixed -bottom-40 -right-40 w-96 h-96 bg-[#2740F0]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#11212D]/40 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed -bottom-40 -right-40 w-96 h-96 bg-[#11212D]/30 rounded-full blur-[140px] pointer-events-none" />
 
       {/* =========================================================================
           CONTAINER PRINCIPAL DO CARTÃO (MÁXIMO 1080px)
           ========================================================================= */}
-      <div className="relative w-full max-w-5xl min-h-[640px] rounded-3xl bg-white text-slate-900 shadow-2xl border border-[#26324A]/40 overflow-hidden flex flex-col md:flex-row">
+      <div className="relative w-full max-w-5xl min-h-[640px] rounded-3xl bg-white text-slate-900 shadow-2xl border border-[#253745]/40 overflow-hidden flex flex-col md:flex-row">
         
         {/* =======================================================================
             CONTROLE MOBILE DE ABAS (VISÍVEL APENAS EM TELAS < 768px)
             ======================================================================= */}
-        <div className="md:hidden flex items-center justify-between p-4 bg-[#0A111F] border-b border-[#26324A] text-white">
+        <div className="md:hidden flex items-center justify-between p-4 bg-[#06141B] border-b border-[#253745] text-white">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-[#8F9CFF]">
+            <div className="w-8 h-8 rounded-lg bg-[#11212D] border border-[#253745] flex items-center justify-center text-[#CCD0CF]">
               <Scale className="w-4 h-4" />
             </div>
             <span className="font-bold text-sm tracking-tight">
-              Edital<span className="text-[#8F9CFF]">Flash</span>
+              Edital<span className="text-[#CCD0CF]">Flash</span>
             </span>
           </Link>
 
-          <div className="flex bg-[#121B2D] p-1 rounded-xl border border-[#26324A]">
+          <div className="flex bg-[#11212D] p-1 rounded-xl border border-[#253745]">
             <button
               type="button"
               onClick={() => switchMode("login")}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all ${
                 mode === "login"
-                  ? "bg-[#2740F0] text-white shadow-xs"
-                  : "text-[#A3AEC4] hover:text-white"
+                  ? "bg-[#253745] text-white shadow-xs"
+                  : "text-[#9BA8AB] hover:text-white"
               }`}
             >
               Entrar
@@ -213,8 +213,8 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
               onClick={() => switchMode("signup")}
               className={`px-3 py-1.5 text-xs font-mono font-bold rounded-lg transition-all ${
                 mode === "signup"
-                  ? "bg-[#2740F0] text-white shadow-xs"
-                  : "text-[#A3AEC4] hover:text-white"
+                  ? "bg-[#253745] text-white shadow-xs"
+                  : "text-[#9BA8AB] hover:text-white"
               }`}
             >
               Cadastrar

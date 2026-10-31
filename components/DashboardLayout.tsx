@@ -94,10 +94,10 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col md:flex-row font-sans antialiased selection:bg-[#2740F0] selection:text-white">
-      {/* SIDEBAR DESKTOP — Tinta Sólida Nobre (#0E1626) com suporte a recolhimento suave */}
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col md:flex-row font-sans antialiased selection:bg-[#11212D] selection:text-[#CCD0CF]">
+      {/* SIDEBAR DESKTOP — Azul Marinho Profundo (#11212D) com suporte a recolhimento suave */}
       <aside
-        className={`hidden md:flex flex-col border-r border-[#26324A] bg-[#0E1626] text-[#E8ECF5] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
+        className={`hidden md:flex flex-col border-r border-[#253745] bg-[#11212D] text-[#CCD0CF] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
           collapsed ? "w-[72px]" : "w-64"
         }`}
       >
@@ -106,7 +106,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
           type="button"
           onClick={toggleCollapse}
           title={collapsed ? "Expandir menu lateral" : "Recolher menu lateral"}
-          className="absolute -right-4 top-5 z-40 w-8 h-8 rounded-full bg-[#2740F0] hover:bg-blue-500 text-white border-2 border-white flex items-center justify-center shadow-lg hover:shadow-blue-500/30 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
+          className="absolute -right-4 top-5 z-40 w-8 h-8 rounded-full bg-[#11212D] hover:bg-[#253745] text-[#CCD0CF] border-2 border-[#9BA8AB] flex items-center justify-center shadow-lg transition-all cursor-pointer transform hover:scale-105 active:scale-95"
         >
           {collapsed ? <ChevronRight className="w-4 h-4 stroke-[2.5]" /> : <ChevronLeft className="w-4 h-4 stroke-[2.5]" />}
         </button>
@@ -115,20 +115,20 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
           {/* Logo Oficial com Wordmark */}
           <Link
             href="/dashboard"
-            className={`flex items-center gap-2.5 pb-4 border-b border-[#26324A] ${
+            className={`flex items-center gap-2.5 pb-4 border-b border-[#253745] ${
               collapsed ? "justify-center px-0" : "px-1"
             }`}
           >
-            <div className="w-8 h-8 rounded-md bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-[#E8ECF5] shrink-0">
+            <div className="w-8 h-8 rounded-md bg-[#06141B] border border-[#253745] flex items-center justify-center text-[#CCD0CF] shrink-0">
               <BrandIcon name="mark" size={20} />
             </div>
             {!collapsed && (
               <div className="min-w-0">
                 <span className="text-base tracking-tight block font-display leading-none">
-                  <span className="font-medium text-[#E8ECF5]">Edital</span>
-                  <span className="font-extrabold text-[#E8ECF5]">Flash</span>
+                  <span className="font-medium text-[#CCD0CF]">Edital</span>
+                  <span className="font-extrabold text-[#CCD0CF]">Flash</span>
                 </span>
-                <span className="text-[10px] text-slate-400 font-mono block mt-1 truncate">
+                <span className="text-[10px] text-[#9BA8AB] font-mono block mt-1 truncate">
                   Auditoria de Habilitação
                 </span>
               </div>
@@ -137,30 +137,30 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
           {/* Badge de Preferência Operacional Ativa */}
           {!collapsed ? (
-            <div className="p-3 rounded-lg bg-[#121B2D] border border-[#26324A] space-y-1">
+            <div className="p-3 rounded-lg bg-[#06141B] border border-[#253745] space-y-1">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#8F9CFF] uppercase tracking-wider font-mono flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4A5FFF]" />
+                <span className="text-[10px] font-bold text-[#CCD0CF] uppercase tracking-wider font-mono flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                   <span>Vertical Ativa</span>
                 </span>
               </div>
-              <p className="text-xs font-bold text-[#E8ECF5] truncate" title={user.primary_vertical}>
+              <p className="text-xs font-bold text-[#CCD0CF] truncate" title={user.primary_vertical}>
                 {user.primary_vertical || "Obras Públicas e Engenharia"}
               </p>
             </div>
           ) : (
             <div
-              className="flex justify-center p-2 rounded-lg bg-[#121B2D] border border-[#26324A]"
+              className="flex justify-center p-2 rounded-lg bg-[#06141B] border border-[#253745]"
               title={`Vertical Ativa: ${user.primary_vertical}`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#4A5FFF]" />
+              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
             </div>
           )}
 
           {/* Navigation Links */}
           <nav className="space-y-1.5">
             {!collapsed && (
-              <div className="px-2.5 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+              <div className="px-2.5 pb-1 text-[10px] font-bold uppercase tracking-wider text-[#9BA8AB] font-mono">
                 Operações
               </div>
             )}
@@ -176,11 +176,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                     collapsed ? "justify-center px-0" : ""
                   } ${
                     isActive
-                      ? "bg-[rgba(39,64,240,0.18)] text-white font-semibold border-l-4 border-[#2740F0]"
-                      : "text-slate-300 hover:text-white hover:bg-[rgba(255,255,255,0.06)]"
+                      ? "bg-[#253745] text-white font-semibold border-l-4 border-[#CCD0CF]"
+                      : "text-[#9BA8AB] hover:text-white hover:bg-[rgba(255,255,255,0.06)]"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#8F9CFF]" : "text-slate-400"}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-white" : "text-[#9BA8AB]"}`} />
                   {!collapsed && <span className="truncate">{item.label}</span>}
                 </Link>
               );
@@ -189,15 +189,15 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
 
         {/* User Card e Logout */}
-        <div className="pt-4 border-t border-[#26324A] space-y-3">
+        <div className="pt-4 border-t border-[#253745] space-y-3">
           <div className={`flex items-center gap-2.5 px-1 ${collapsed ? "justify-center" : ""}`}>
-            <div className="w-8 h-8 rounded-full bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-slate-300 font-bold font-mono text-xs shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#06141B] border border-[#253745] flex items-center justify-center text-[#CCD0CF] font-bold font-mono text-xs shrink-0">
               {user.name?.charAt(0).toUpperCase() || "L"}
             </div>
             {!collapsed && (
               <div className="flex-1 min-w-0">
                 <span className="text-xs font-bold text-white truncate block">{user.name}</span>
-                <span className="text-[10px] text-[#8F9CFF] font-semibold block uppercase font-mono">
+                <span className="text-[10px] text-[#9BA8AB] font-semibold block uppercase font-mono">
                   Plano {user.plan}
                 </span>
               </div>
@@ -209,11 +209,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <Link
               href="/admin/dashboard"
               title="Acessar Centro de Gestão e Operações SaaS"
-              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-[#1B2347] hover:bg-[#273360] text-white border border-[#2740F0]/50 transition-colors shadow-sm ${
+              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-[#253745] hover:bg-[#324859] text-white border border-[#9BA8AB]/40 transition-colors shadow-sm ${
                 collapsed ? "px-0" : ""
               }`}
             >
-              <Sliders className="w-4 h-4 text-[#8F9CFF]" />
+              <Sliders className="w-4 h-4 text-[#CCD0CF]" />
               {!collapsed && <span>Painel Master</span>}
             </Link>
           )}
@@ -222,7 +222,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             type="button"
             onClick={logout}
             title={collapsed ? "Sair da conta" : undefined}
-            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#121B2D] hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 border border-[#26324A] transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#06141B] hover:bg-rose-950/40 text-[#9BA8AB] hover:text-rose-300 border border-[#253745] transition-colors cursor-pointer ${
               collapsed ? "px-0" : ""
             }`}
           >
@@ -233,16 +233,16 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       </aside>
 
       {/* MOBILE BAR */}
-      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-slate-200 bg-[#0E1626] text-white">
+      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-[#253745] bg-[#11212D] text-white">
         <Link href="/dashboard" className="flex items-center gap-2">
           <BrandIcon name="mark" size={20} />
           <span className="text-sm font-bold font-display">
-            Edital<span className="font-extrabold text-[#8F9CFF]">Flash</span>
+            Edital<span className="font-extrabold text-[#CCD0CF]">Flash</span>
           </span>
         </Link>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="p-1.5 text-slate-300 hover:text-white"
+          className="p-1.5 text-[#9BA8AB] hover:text-white"
         >
           {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -250,7 +250,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
       {/* MOBILE DROPDOWN */}
       {mobileSidebarOpen && (
-        <div className="md:hidden bg-[#0E1626] border-b border-[#26324A] p-3 space-y-1.5 text-white">
+        <div className="md:hidden bg-[#11212D] border-b border-[#253745] p-3 space-y-1.5 text-white">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -258,9 +258,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileSidebarOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:bg-[#121B2D]"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-[#CCD0CF] hover:bg-[#253745]"
               >
-                <Icon className="w-4 h-4 text-slate-400" />
+                <Icon className="w-4 h-4 text-[#9BA8AB]" />
                 <span>{item.label}</span>
               </Link>
             );
@@ -269,9 +269,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <Link
               href="/admin/dashboard"
               onClick={() => setMobileSidebarOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs font-bold text-white bg-[#1B2347] border border-[#2740F0]/50"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs font-bold text-white bg-[#253745] border border-[#9BA8AB]/40"
             >
-              <Sliders className="w-4 h-4 text-[#8F9CFF]" />
+              <Sliders className="w-4 h-4 text-[#CCD0CF]" />
               <span>Painel do Administrador (Master)</span>
             </Link>
           )}
@@ -284,15 +284,15 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
       )}
 
-      {/* ÁREA DE CONTEÚDO PRINCIPAL — Fundo Branco Puro e Limpo (#FFFFFF / Slate-50) */}
-      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-white">
-        {/* Sticky Header Limpo com Fundo Branco Suave */}
-        <header className="sticky top-0 z-40 backdrop-blur-md bg-white/95 border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+      {/* ÁREA DE CONTEÚDO PRINCIPAL — Fundo Suave Institucional (#CCD0CF) */}
+      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-[var(--bg)]">
+        {/* Sticky Header com Fundo Superfície Suave */}
+        <header className="sticky top-0 z-40 backdrop-blur-md bg-[var(--surface)]/95 border-b border-[var(--line)] px-6 py-4 flex items-center justify-between shadow-xs">
           <div className="flex items-center gap-3">
-            <h2 className="text-base font-bold font-display text-slate-900 tracking-tight">
+            <h2 className="text-base font-bold font-display text-[var(--ink)] tracking-tight">
               {navItems.find((n) => n.id === activeTab)?.label || "Workspace de Habilitação"}
             </h2>
-            <span className="hidden sm:inline-block text-[11px] font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
+            <span className="hidden sm:inline-block text-[11px] font-mono text-[var(--ink-2)] bg-[var(--bg)] px-2.5 py-0.5 rounded border border-[var(--line)]">
               Lei Federal 14.133/2021
             </span>
           </div>
@@ -303,19 +303,19 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               onClick={() => {
                 window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }));
               }}
-              className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 text-[11px] transition-all shadow-xs cursor-pointer"
+              className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg)] hover:bg-[var(--surface-subtle)] border border-[var(--line)] text-[var(--ink-2)] text-[11px] transition-all shadow-xs cursor-pointer"
               title="Abrir Command Palette (Ctrl+K)"
             >
-              <Search className="w-3.5 h-3.5 text-slate-400" />
+              <Search className="w-3.5 h-3.5 text-[var(--ink-3)]" />
               <span>Comandos Rápidos</span>
               <span className="keycap">Ctrl K</span>
             </button>
 
-            <span className="text-slate-500 hidden sm:inline">
-              Empresa: <strong className="text-slate-800">{user.company || "Licitante"}</strong>
+            <span className="text-[var(--ink-3)] hidden sm:inline">
+              Empresa: <strong className="text-[var(--ink)]">{user.company || "Licitante"}</strong>
             </span>
-            <span className="hidden md:inline text-slate-200">|</span>
-            <span className="text-emerald-700 font-semibold flex items-center gap-1.5 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+            <span className="hidden md:inline text-[var(--line)]">|</span>
+            <span className="text-emerald-700 font-semibold flex items-center gap-1.5 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Sessão Conforme
             </span>

@@ -114,14 +114,14 @@ export const HeroSection = ({ onCtaClick }: { onCtaClick: () => void }) => {
           >
             {/* Visual glow frame */}
             <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-              <div className="glass-card rounded-2xl p-5 border border-slate-800 shadow-2xl relative overflow-hidden backdrop-blur-xl bg-gradient-to-b from-slate-900/90 to-[#0c1220]/90">
+              <div className="rounded-2xl p-5 border border-[#253745] shadow-2xl relative overflow-hidden backdrop-blur-xl bg-[#11212D]">
                 {/* Header Bar */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div className="flex items-center justify-between pb-4 border-b border-[#253745]">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-rose-500/80" />
                     <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                     <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                    <span className="text-xs font-mono text-slate-400 ml-2">scanner_edital_v2.ai</span>
+                    <span className="text-xs font-mono text-[#9BA8AB] ml-2">scanner_edital_v2.ai</span>
                   </div>
                   <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
                     <Clock className="w-3 h-3" /> Análise Ativa
@@ -129,16 +129,16 @@ export const HeroSection = ({ onCtaClick }: { onCtaClick: () => void }) => {
                 </div>
 
                 {/* Document Preview with Laser Scan effect */}
-                <div className="mt-4 relative bg-[#060911] rounded-xl p-4 border border-slate-800/80 overflow-hidden">
+                <div className="mt-4 relative bg-[#06141B] rounded-xl p-4 border border-[#253745] overflow-hidden">
                   {/* Laser Beam */}
                   <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_15px_#10b981] animate-laser z-20 pointer-events-none" />
 
                   {/* Document Simulated text lines */}
                   <div className="space-y-2 opacity-50">
-                    <div className="h-2.5 bg-slate-700 rounded w-3/4"></div>
-                    <div className="h-2 bg-slate-800 rounded w-full"></div>
-                    <div className="h-2 bg-slate-800 rounded w-5/6"></div>
-                    <div className="h-2 bg-slate-800 rounded w-4/5"></div>
+                    <div className="h-2.5 bg-[#253745] rounded w-3/4"></div>
+                    <div className="h-2 bg-[#11212D] rounded w-full"></div>
+                    <div className="h-2 bg-[#11212D] rounded w-5/6"></div>
+                    <div className="h-2 bg-[#11212D] rounded w-4/5"></div>
                   </div>
 
                   {/* Overlay Extraction Badges popping up */}
@@ -148,13 +148,13 @@ export const HeroSection = ({ onCtaClick }: { onCtaClick: () => void }) => {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="p-2.5 rounded-lg bg-slate-900/90 border border-slate-700/60 flex items-center justify-between text-xs"
+                      className="p-2.5 rounded-lg bg-[#11212D] border border-[#253745] flex items-center justify-between text-xs"
                     >
-                      <span className="text-slate-400 flex items-center gap-1.5">
-                        <FileText className="w-3.5 h-3.5 text-blue-400" />
+                      <span className="text-[#9BA8AB] flex items-center gap-1.5">
+                        <FileText className="w-3.5 h-3.5 text-[#CCD0CF]" />
                         Objeto Identificado
                       </span>
-                      <span className="text-slate-200 font-medium truncate max-w-[160px]">
+                      <span className="text-[#CCD0CF] font-medium truncate max-w-[160px]">
                         Serviços de Nuvem e TI
                       </span>
                     </motion.div>

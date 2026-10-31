@@ -49,6 +49,8 @@ export interface HabilitacaoItem {
   mitigacao?: string;
   linkRenovacao?: string;
   revisaoHumana?: boolean;
+  fonteOficialUrl?: string; // Link direto para a fonte oficial com âncora (ex: Art. 67 no Planalto)
+  dispositivoLegal?: string; // Ex: "Art. 67, inciso I da Lei 14.133/2021"
 }
 
 export interface CalculoPatrimonioLiquido {

@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { useAuth } from "@/lib/auth-context";
-import { BrandIcon } from "@/components/brand-icons";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { AuditHistoryTable } from "@/components/AuditHistoryTable";
 import { ReportCard } from "@/components/ReportCard";
 import { RoiDashboard } from "@/components/RoiDashboard";
 import { EditalAnalysisResponse, AuditedTenderHistoryItem } from "@/lib/types";
 import { getAuditHistory } from "@/lib/audit-history";
-import { ArrowUpRight, ShieldCheck, Sparkles, Plus, Clock, FileText, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowUpRight, Plus, ShieldCheck, Database, Calendar, AlertTriangle } from "lucide-react";
 
 export default function DashboardHome() {
   const { user } = useAuth();
@@ -36,15 +36,16 @@ export default function DashboardHome() {
     return (
       <DashboardLayout activeTab="analises">
         <div className="space-y-6 max-w-7xl mx-auto">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-            <button
-              type="button"
+          <div className="flex items-center justify-between pb-3 border-b border-[#253745]">
+            <Button
+              variant="outline"
+              size="sm"
               onClick={() => setSelectedAuditData(null)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 transition-all cursor-pointer"
+              className="gap-1.5"
             >
               ← Voltar ao Histórico
-            </button>
-            <span className="text-xs font-mono text-slate-500">
+            </Button>
+            <span className="text-xs font-mono text-[#9BA8AB]">
               Visualizando Parecer Salvo (Sem consumo de créditos)
             </span>
           </div>
@@ -64,43 +65,42 @@ export default function DashboardHome() {
     <DashboardLayout activeTab="analises">
       <div className="space-y-10 max-w-6xl mx-auto pb-16">
         
-        {/* CABEÇALHO LIMPO E DIRETO - SEM CARDS FECHADOS */}
-        <section className="border-b border-slate-200 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        {/* CABEÇALHO SÓBRIO SEM CARDS FECHADOS */}
+        <section className="border-b border-[#253745] pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-[#2740F0] text-xs font-mono font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#11212D] border border-[#253745] text-[#CCD0CF] text-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
                 {user?.primary_vertical || "Serviços Contínuos"}
               </span>
-              <span className="text-xs font-mono text-slate-400">Lei 14.133/2021</span>
+              <span className="text-xs font-mono text-[#4A5C6A]">Lei 14.133/2021</span>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight font-display">
-              Olá, {user?.name?.split(" ")[0] || "Gestor"}
+            <h1 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-display">
+              {user?.name?.split(" ")[0] ? `Olá, ${user.name.split(" ")[0]}` : "Painel de Auditoria"}
             </h1>
-            <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
-              Auditoria preventiva de habilitação. Descubra com prova de página e linha se sua empresa passa antes de disputar.
+            <p className="text-sm text-[#9BA8AB] max-w-2xl leading-relaxed">
+              Auditoria preventiva de conformidade documental para certames públicos. Verificação pericial com prova de página e linha.
             </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <Link
-              href="/dashboard/nova-analise"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold bg-[#2740F0] hover:bg-blue-600 text-white shadow-md shadow-blue-500/15 transition-all active:scale-95 cursor-pointer"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Auditar Novo Edital</span>
+            <Link href="/dashboard/nova-analise">
+              <Button variant="primary" size="md" className="gap-2 bg-[#11212D] hover:bg-[#253745] border-[#253745]">
+                <Plus className="w-4 h-4 text-[#CCD0CF]" />
+                <span>Auditar Novo Edital</span>
+              </Button>
             </Link>
           </div>
         </section>
 
-        {/* MÉTRICAS FLUIDAS EM LINHA - SEM BORDAS PESADAS DE CARD */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 py-2 border-b border-slate-200 pb-8">
+        {/* MÉTRICAS FLUIDAS EM LINHA - SEM BORDAS PESADAS DE CARD (LINEAR/STRIPE PATTERN) */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-8 py-2 border-b border-[#253745] pb-8">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#9BA8AB] block">
               Saldo de Auditorias
             </span>
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-3xl font-black font-mono text-slate-900">
+            <div className="flex items-baseline gap-2 mt-2">
+              <span className="text-3xl font-bold font-mono text-white">
                 {user?.analysesLimit || 5}
               </span>
               <button
@@ -115,186 +115,129 @@ export default function DashboardHome() {
                     description: "5 auditorias de editais com veredito, cálculo de PL e citação de páginas.",
                   })
                 }
-                className="text-xs font-mono font-bold text-[#2740F0] hover:underline cursor-pointer"
+                className="text-xs font-mono font-medium text-[#CCD0CF] hover:underline cursor-pointer"
               >
                 + Comprar
               </button>
             </div>
-            <span className="text-xs text-slate-500 block mt-0.5">Plano {user?.plan || "Starter"}</span>
+            <span className="text-xs text-[#4A5C6A] block mt-1">Plano {user?.plan || "Starter"}</span>
           </div>
 
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#9BA8AB] block">
               Editais Auditados
             </span>
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-3xl font-black font-mono text-slate-900">
+            <div className="flex items-baseline gap-2 mt-2">
+              <span className="text-3xl font-bold font-mono text-white">
                 {auditList.length}
               </span>
-              <span className="text-xs text-slate-500 font-mono">no histórico</span>
+              <span className="text-xs text-[#9BA8AB] font-mono">no histórico</span>
             </div>
-            <span className="text-xs text-slate-500 block mt-0.5">Criptografia AES-256</span>
+            <span className="text-xs text-[#4A5C6A] block mt-1">Criptografia AES-256</span>
           </div>
 
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#9BA8AB] block">
               Cláusulas Restritivas
             </span>
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className={`text-3xl font-black font-mono ${armadilhasTotal > 0 ? "text-rose-600" : "text-slate-900"}`}>
+            <div className="flex items-baseline gap-2 mt-2">
+              <span className={`text-3xl font-bold font-mono ${armadilhasTotal > 0 ? "text-[#F59E0B]" : "text-white"}`}>
                 {armadilhasTotal}
               </span>
-              <span className="text-xs text-slate-500 font-mono">apontadas</span>
+              <span className="text-xs text-[#9BA8AB] font-mono">apontadas</span>
             </div>
-            <span className="text-xs text-slate-500 block mt-0.5">Mapeadas para Art. 164</span>
+            <span className="text-xs text-[#4A5C6A] block mt-1">Mapeadas para Art. 164</span>
           </div>
 
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#9BA8AB] block">
               Cofre Documental
             </span>
-            <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-3xl font-black font-mono text-emerald-600">
+            <div className="flex items-baseline gap-2 mt-2">
+              <span className="text-3xl font-bold font-mono text-[#10B981]">
                 {auditList.length > 0 ? 4 : 0}
               </span>
-              <span className="text-xs text-emerald-700 font-mono font-semibold">vigentes</span>
+              <span className="text-xs text-[#10B981] font-mono">vigentes</span>
             </div>
-            <span className="text-xs text-slate-500 block mt-0.5">Cruzamento Art. 62</span>
+            <span className="text-xs text-[#4A5C6A] block mt-1">Cruzamento Art. 62</span>
           </div>
         </section>
 
-        {/* GUIA INICIAL (SE AINDA NÃO HOUVER ANÁLISES) */}
-        {auditList.length === 0 && (
-          <section className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-              <div>
-                <h3 className="text-base font-bold text-slate-900 font-display">
-                  Comece por aqui: Ativação rápida em 3 passos
-                </h3>
-                <p className="text-xs text-slate-600 mt-0.5">
-                  Complete as etapas abaixo para auditar com precisão máxima do seu CNPJ.
-                </p>
-              </div>
-              <Link
-                href="/dashboard/configuracoes"
-                className="text-xs font-mono font-bold text-[#2740F0] hover:underline"
-              >
-                Gerenciar Perfil →
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-5">
-              <div className="space-y-1.5">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">01. Empresa & Vertical</span>
-                <h4 className="text-sm font-bold text-slate-900">Confirmar CNPJ</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Defina sua vertical dominante para calibrar o semáforo de acervos técnicos.
-                </p>
-                <Link href="/dashboard/configuracoes" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
-                  Configurar agora →
-                </Link>
-              </div>
-
-              <div className="space-y-1.5">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">02. Cofre (Art. 62)</span>
-                <h4 className="text-sm font-bold text-slate-900">Upload de Balanço e CNDs</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Guarde suas certidões e balanço para cálculo automático de PL e índices.
-                </p>
-                <Link href="/dashboard/cofre" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
-                  Acessar cofre →
-                </Link>
-              </div>
-
-              <div className="space-y-1.5">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">03. Primeiro Edital</span>
-                <h4 className="text-sm font-bold text-slate-900">Auditar com 1 Clique</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Suba o PDF do certame e receba o parecer de risco e minutas administrativas.
-                </p>
-                <Link href="/dashboard/nova-analise" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
-                  Submeter edital →
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* NAVEGAÇÃO LIMPA DE PILARES OPERACIONAIS */}
+        {/* NAVEGAÇÃO LIMPA DE AÇÕES E MÓDULOS - DIVISORES SUTIS */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-slate-700">
-              Módulos do Sistema
+          <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+              Ações Rápidas & Módulos
             </h2>
-            <span className="text-xs font-mono text-slate-400">Lei Federal 14.133/2021</span>
+            <span className="text-xs font-mono text-[#4A5C6A]">Lei 14.133/2021</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/dashboard/nova-analise?tab=pncp"
-              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
+              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">01. PNCP</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
+                <span className="text-xs font-mono text-[#9BA8AB]">01. RADAR</span>
+                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 font-display">Radar de Editais</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Busca de certames abertos diretamente na base do governo.
+              <h3 className="text-sm font-medium text-white font-display">Busca PNCP</h3>
+              <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                Localize editais abertos no Portal Nacional de Contratações Públicas.
               </p>
             </Link>
 
             <Link
               href="/dashboard/cofre"
-              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
+              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">02. Documentos</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
+                <span className="text-xs font-mono text-[#9BA8AB]">02. COFRE</span>
+                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 font-display">Cofre Art. 62</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Custódia de CNDs, balanços e acervos técnicos (CATs).
+              <h3 className="text-sm font-medium text-white font-display">Documentos Art. 62</h3>
+              <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                Custódia de CNDs, balanço patrimonial e atestados de acervo técnico.
               </p>
             </Link>
 
             <Link
               href="/dashboard/calendario"
-              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
+              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">03. Prazos</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
+                <span className="text-xs font-mono text-[#9BA8AB]">03. PRAZOS</span>
+                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 font-display">Calendário de Abertura</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Cruzamento da validade das certidões com a data de disputa.
+              <h3 className="text-sm font-medium text-white font-display">Calendário do Certame</h3>
+              <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                Validade das certidões cruzada com a data de sessão pública.
               </p>
             </Link>
 
             <Link
-              href="/dashboard/nova-analise"
-              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
+              href="/dashboard/acervo"
+              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-[#2740F0]">04. Auditoria</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
+                <span className="text-xs font-mono text-[#9BA8AB]">04. ACERVO</span>
+                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 font-display">Semáforo de Risco</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Parecer de habilitação com prova de página e minutas prontas.
+              <h3 className="text-sm font-medium text-white font-display">Súmula 263/TCU</h3>
+              <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                Portfólio de atestados quantitativos e somatório de parcelas.
               </p>
             </Link>
           </div>
         </section>
 
-        {/* HISTÓRICO DE AUDITORIAS */}
+        {/* HISTÓRICO DE AUDITORIAS - TABELA LIMPA */}
         <section className="space-y-4 pt-2">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-            <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-slate-700">
+          <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
               Histórico de Editais Auditados
             </h2>
-            <span className="text-xs font-mono text-slate-400">Total: {auditList.length}</span>
+            <span className="text-xs font-mono text-[#4A5C6A]">Registros: {auditList.length}</span>
           </div>
 
           <AuditHistoryTable

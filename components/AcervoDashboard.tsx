@@ -10,10 +10,10 @@ import {
   AlertCircle,
   FileText,
   Info,
-  FolderOpen,
 } from "lucide-react";
 import { CompanyDocumentVaultItem } from "@/lib/types";
-import { BrandIcon } from "@/components/brand-icons";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 
 export interface AcervoItemAggregation {
   verticalCode: "OBR" | "CMP" | "SRV" | "SAU" | "TIC";
@@ -33,7 +33,6 @@ interface AcervoDashboardProps {
 }
 
 export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) => {
-  // Filtrar se o usuário possui documentos de acervo / atestados / CATs
   const technicalDocs = docs.filter(
     (d) =>
       d.tipo.toLowerCase().includes("técnico") ||
@@ -42,8 +41,6 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
       d.tipo.toLowerCase().includes("atestado")
   );
 
-  // Modelagem analítica de acervos técnicos por vertical (Obras, Serviços, Compras, Saúde, TI)
-  // Baseada nos documentos do acervo e benchmark de editais Lei 14.133
   const [acervos] = useState<AcervoItemAggregation[]>([
     {
       verticalCode: "OBR",
@@ -98,126 +95,97 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
       categoria: "Tecnologia da Informação & Comunicação",
       subcategoria: "Desenvolvimento e Sustentação de Sistemas em Nuvem",
       volumeAcumulado: 1200,
-      unidade: "UST (Unid. Serviço Técnico)",
-      mediaEditalMercado: 2500,
-      atestadosCount: 1,
-      atestadoMaximoIndividual: 1200,
-      statusCompetitividade: "INSUFICIENTE",
-      recomendacao: "Requer somatório de atestados de complexidade similar para licitações de grande porte.",
+      unidade: "UST (Unidade de Serviço Técnico)",
+      mediaEditalMercado: 1500,
+      atestadosCount: 2,
+      atestadoMaximoIndividual: 800,
+      statusCompetitividade: "MODERADO",
+      recomendacao: "Requer atenção para editais de órgãos federais que exigem comprovação mínima de 1.000 UST em atestado único.",
     },
   ]);
 
-  const hasNoDocs = docs.length > 0 && technicalDocs.length === 0;
-
   return (
-    <div className="bg-[var(--surface)] border border-[var(--line)] rounded-xl p-5 sm:p-6 space-y-6 shadow-sm">
-      {/* Topo do Dashboard */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[var(--line)]">
+    <div className="space-y-8">
+      {/* Resumo Topo Sem Cards Pesados */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#253745]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--brand)]/10 text-[var(--brand)] text-[11px] font-mono font-bold mb-1">
-            <BrandIcon name="garantia" size="s16" accentCobalt={true} />
-            <span>Portfólio de Acervo Técnico (Art. 67 / Súmula 263 TCU)</span>
-          </div>
-          <h2 className="text-base sm:text-lg font-bold text-[var(--ink)] font-display">
-            Mapeamento de Capacidade Técnico-Operacional
+          <h2 className="text-base font-semibold text-white font-display">
+            Portfólio de Acervo Técnico & Capacidade Operacional
           </h2>
-          <p className="text-xs text-[var(--ink-2)]">
-            Volume cumulativo comprovado por CATs e atestados registrados no cofre vs. limiares típicos de editais.
+          <p className="text-xs text-[#9BA8AB] mt-0.5">
+            Análise consolidada conforme o Art. 67 da Lei 14.133/2021 e jurisprudência pacífica da Súmula 263 do TCU.
           </p>
         </div>
-
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-[var(--bg)] border border-[var(--line)] text-[var(--ink-2)]">
-            <strong>{acervos.length}</strong> Especialidades Monitoradas
-          </span>
+        <div className="flex items-center gap-2">
+          <Badge variant="neutral">
+            SÚMULA 263/TCU
+          </Badge>
+          <Badge variant="pass">
+            REGRA DO SOMATÓRIO ATIVA
+          </Badge>
         </div>
       </div>
 
-      {/* Empty State Prompt se o usuário não possuir atestados no cofre */}
-      {hasNoDocs && (
-        <div className="p-4 rounded-lg bg-[var(--bg)] border border-dashed border-[var(--line)] flex items-center gap-3 text-xs text-[var(--ink-2)] font-mono">
-          <FolderOpen className="w-5 h-5 text-[var(--brand)] shrink-0" strokeWidth={1.75} />
-          <span>Adicione atestados ao cofre para visualizar seu acervo competitivo.</span>
-        </div>
-      )}
-
-      {/* Grid de Barras Horizontais de Progresso e Competitividade */}
-      <div className="space-y-4">
+      {/* Lista de Acervos com Linhas Divisórias Sutis (Linear Pattern) */}
+      <div className="space-y-6">
         {acervos.map((item, idx) => {
-          const ratio = Math.min(Math.round((item.volumeAcumulado / item.mediaEditalMercado) * 100), 250);
+          const ratio = Math.round((item.volumeAcumulado / item.mediaEditalMercado) * 100);
           const isCompetitive = item.statusCompetitividade === "COMPETITIVO";
           const isModerate = item.statusCompetitividade === "MODERADO";
 
           return (
             <div
               key={idx}
-              className="p-4 rounded-lg bg-[var(--bg)] border border-[var(--line)] hover:border-[var(--brand-tint)] transition-all space-y-3"
+              className="py-4 border-b border-[#253745] space-y-3"
             >
-              {/* Header da Linha com Sector Badge Identity v1.1 */}
+              {/* Header da Linha */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-start gap-2.5">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[var(--brand)]/10 text-[var(--brand)] border border-[var(--brand)]/30 shrink-0 mt-0.5">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#11212D] text-[#CCD0CF] border border-[#253745] shrink-0 mt-0.5">
                     {item.verticalCode}
                   </span>
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[var(--ink-2)] tracking-wide block">
+                    <span className="text-[10px] font-mono uppercase text-[#9BA8AB] tracking-wide block">
                       {item.categoria}
                     </span>
-                    <h3 className="text-xs sm:text-sm font-bold text-[var(--ink)] font-display">
+                    <h3 className="text-sm font-medium text-white font-display">
                       {item.subcategoria}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 self-start sm:self-auto">
-                  <span
-                    className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${
-                      isCompetitive
-                        ? "bg-[var(--ok-bg)] text-[var(--ok-fg)] border-[var(--ok)]/40"
-                        : isModerate
-                        ? "bg-[var(--warn-bg)] text-[var(--warn-fg)] border-[var(--warn)]/40"
-                        : "bg-[var(--bad-bg)] text-[var(--bad-fg)] border-[var(--bad)]/40"
-                    }`}
-                  >
+                  <Badge variant={isCompetitive ? "pass" : isModerate ? "warning" : "danger"}>
                     {item.statusCompetitividade} ({ratio}%)
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Barra de Progresso Fina e Limpa (h-1.5) */}
+              <div className="space-y-1.5 pt-1">
+                <Progress
+                  value={Math.min(ratio / 2.5, 100)}
+                  indicatorColor={isCompetitive ? "bg-[#10B981]" : isModerate ? "bg-[#F59E0B]" : "bg-[#EF4444]"}
+                />
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-[#9BA8AB] gap-1">
+                  <span>
+                    Acervo Comprovado: <strong className="text-white">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
+                  </span>
+                  <span>
+                    Média de Edital: <strong className="text-white">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
                   </span>
                 </div>
               </div>
 
-              {/* Barra de Progresso Comparativa Semântica */}
-              <div className="space-y-1">
-                <div className="w-full h-2.5 bg-[var(--line)] rounded-full overflow-hidden flex">
-                  <div
-                    className={`h-full transition-all duration-500 ${
-                      isCompetitive
-                        ? "bg-[var(--ok)]"
-                        : isModerate
-                        ? "bg-[var(--warn)]"
-                        : "bg-[var(--bad)]"
-                    }`}
-                    style={{ width: `${Math.min(ratio / 2.5, 100)}%` }}
-                  />
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] font-mono text-[var(--ink-2)] gap-1">
-                  <span>
-                    Acervo Comprovado: <strong className="text-[var(--ink)]">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
-                  </span>
-                  <span>
-                    Média de Edital: <strong className="text-[var(--ink)]">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
-                  </span>
-                </div>
-              </div>
-
-              {/* Detalhes de Acervo e Recomendação Operacional */}
-              <div className="pt-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs border-t border-[var(--line)] text-[var(--ink-2)]">
-                <div className="flex items-center gap-3 text-[11px] font-mono">
-                  <span>Atestados Válidos: <strong>{item.atestadosCount}</strong></span>
+              {/* Detalhes de Acervo e Recomendação */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#9BA8AB]">
+                <div className="flex items-center gap-3 font-mono">
+                  <span>Atestados Válidos: <strong className="text-white">{item.atestadosCount}</strong></span>
                   <span>•</span>
-                  <span>Maior Individual: <strong>{item.atestadoMaximoIndividual.toLocaleString("pt-BR")} {item.unidade}</strong></span>
+                  <span>Maior Individual: <strong className="text-white">{item.atestadoMaximoIndividual.toLocaleString("pt-BR")} {item.unidade}</strong></span>
                 </div>
-                <div className="text-[11px] text-[var(--ink)] flex items-center gap-1.5">
-                  <BrandIcon name="alerta" size="s16" accentCobalt={true} />
+                <div className="text-xs text-[#CCD0CF]">
                   <span>{item.recomendacao}</span>
                 </div>
               </div>

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/prepare-pages.js",
+    "sync:legislation": "tsx scripts/sync-legislation.ts",
     "start": "next start",
     "lint": "eslint"
   },

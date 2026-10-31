@@ -12,7 +12,7 @@ export function generateImpugnation(
 EXCELENTÍSSIMO SENHOR AGENTE DE CONTRATAÇÃO / PREGOEIRO DA [ÓRGÃO CONVOCANTE]
 
 Ref.: Impugnação ao Instrumento Convocatório (Edital de Licitação)
-Fundamentação: Art. 164 da Lei Federal nº 14.133/2021
+Fundamentação: Art. 164 da Lei Federal nº 14.133/2021 (Fonte Oficial: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art164)
 
 ${companyName.toUpperCase()}, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº ${cnpj}, por intermédio de seu representante legal infra-assinado, ${gestorName}, vem respeitosamente à presença de Vossa Senhoria apresentar:
 
@@ -21,13 +21,13 @@ IMPUGNAÇÃO ADMINISTRATIVA AO EDITAL
 pelos fatos, fundamentos jurídicos e precedentes do Tribunal de Contas da União a seguir expostos:
 
 1. DA TEMPESTIVIDADE (ART. 164 DA LEI 14.133/2021)
-A presente manifestação é tempestiva, protocolada dentro do prazo legal de até 3 (três) dias úteis anteriores à data fixada para abertura do certame, conforme prescreve o caput do Art. 164 da Nova Lei de Licitações.
+A presente manifestação é tempestiva, protocolada dentro do prazo legal de até 3 (três) dias úteis anteriores à data fixada para abertura do certame, conforme prescreve o caput do [Art. 164 da Lei 14.133/2021](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art164).
 
 2. DA CLÁUSULA EDITALÍCIA RESTRITIVA:
 "${clauseText}"
 
 3. DA ILEGALIDADE E DO PREJUÍZO À COMPETITIVIDADE:
-A exigência impugnada ultrapassa o limite da razoabilidade e da proporcionalidade garantidos pelo Art. 5º e Art. 62 da Lei 14.133/2021, configurando cláusula restritiva que frustra o caráter concorrencial da contratação pública.
+A exigência impugnada ultrapassa o limite da razoabilidade e da proporcionalidade garantidos pelos [Art. 5º](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art5) e [Art. 62](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art62) da Lei 14.133/2021, configurando cláusula restritiva que frustra o caráter concorrencial da contratação pública.
 ${reason ? `Apontamento Pericial: ${reason}` : ""}
 
 A jurisprudência pacífica do TCU veda exigências formais ou documentais que desbordem da garantia mínima indispensável à execução do objeto:

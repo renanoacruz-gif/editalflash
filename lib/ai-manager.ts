@@ -27,6 +27,7 @@ import { COMPRAS_RULES } from "./rules-compras";
 import { SERVICOS_RULES } from "./rules-servicos";
 import { sanitizeAnalysisCitations } from "./citation-sanitizer";
 import { classifyTender, TenderCategoryCode, ClassificationResult } from "./classifier";
+import { buildLegislationPromptContext } from "./legislation-service";
 
 const MAX_TEXT_LENGTH = 45000;
 
@@ -34,40 +35,45 @@ const MAX_TEXT_LENGTH = 45000;
  * Constrói a diretriz de sistema com restrição estrita e inegociável por vertical (Hard Constraint).
  */
 export function getVerticalSystemPrompt(vertical: PrimaryVertical): string {
+  const legislativeContext = buildLegislationPromptContext();
+  let verticalPrompt = "";
+
   switch (vertical) {
     case "Saúde e Medicamentos":
-      return (
+      verticalPrompt =
         "DIRETRIZ RESTRITIVA INEGOCIÁVEL: Você é auditor de conformidade documental especializado EXCLUSIVAMENTE em LICITAÇÕES DE MEDICAMENTOS, INSUMOS HOSPITALARES E SAÚDE PÚBLICA (Art. 62 da Lei 14.133/2021).\n" +
         "- Aplique EXCLUSIVAMENTE exigências regulatórias do setor de Saúde: Registro ANVISA válido de medicamentos/correlatos, Alvará Sanitário vigente, Certidão de Regularidade Técnica perante o CRF (Farmacêutico Responsável Técnico) e controle de lote/validade.\n" +
         "- É TERMINANTEMENTE PROIBIDO aplicar ou citar regras de Obras/Engenharia (como ART, CAT, CREA, CAU, CBUQ, Pavimentação) ou TI (como ISO 27001).\n" +
-        "- A capacidade financeira afere a continuidade do fornecimento e entrega parcelada de medicamentos."
-      );
+        "- A capacidade financeira afere a continuidade do fornecimento e entrega parcelada de medicamentos.";
+      break;
     case "Tecnologia da Informação":
-      return (
+      verticalPrompt =
         "DIRETRIZ RESTRITIVA INEGOCIÁVEL: Você é auditor de conformidade documental especializado EXCLUSIVAMENTE em LICITAÇÕES DE TECNOLOGIA DA INFORMAÇÃO E COMUNICAÇÃO (TIC).\n" +
         "- Aplique EXCLUSIVAMENTE regras de TI: Certificação ISO/IEC 27001 ou declaração de conformidade LGPD, comprovação de SLA de atendimento/disponibilidade, autorização/parceria oficial de fabricante e equipe técnica de software.\n" +
-        "- É TERMINANTEMENTE PROIBIDO citar exigências de Obras (ART/CAT de engenharia civil, pavimentação) ou de Saúde (ANVISA, CRF, Alvará Sanitário)."
-      );
+        "- É TERMINANTEMENTE PROIBIDO citar exigências de Obras (ART/CAT de engenharia civil, pavimentação) ou de Saúde (ANVISA, CRF, Alvará Sanitário).";
+      break;
     case "Compras e Fornecimentos":
-      return (
+      verticalPrompt =
         "DIRETRIZ RESTRITIVA INEGOCIÁVEL: Você é auditor especializado em COMPRAS PÚBLICAS E AQUISIÇÃO DE MATERIAIS DE CONSUMO E PERMANENTES.\n" +
         "- Foque em: Catálogo/prospecto técnico com marca e modelo, comprovação de conformidade ABNT/Inmetro, atestado de fornecimento pertinente com no mínimo 50% dos quantitativos e índices de liquidez (Art. 69, § 1º).\n" +
-        "- É TERMINANTEMENTE PROIBIDO incluir requisitos de Obras ou de Saúde."
-      );
+        "- É TERMINANTEMENTE PROIBIDO incluir requisitos de Obras ou de Saúde.";
+      break;
     case "Serviços Contínuos (Limpeza, Segurança, Manutenção)":
-      return (
+      verticalPrompt =
         "DIRETRIZ RESTRITIVA INEGOCIÁVEL: Você é auditor especializado em CONTRATAÇÃO DE SERVIÇOS CONTÍNUOS, APOIO OPERACIONAL, MARKETING E PROMOÇÃO DE VENDAS (CNAE 73.19-0-02).\n" +
         "- Foque em: Regularidade Fiscal (CND Federal, FGTS, CNDT), Qualificação Jurídica (Contrato Social com objeto compatível), Capacidade Técnico-Operacional (Atestados de serviços similares de divulgação, promoção e apoio operacional), Índices de Liquidez (LC, LG, SG > 1.0) e Patrimônio Líquido (Art. 69, § 4º).\n" +
-        "- É TERMINANTEMENTE PROIBIDO aplicar ou citar regras de Obras (como ART, CAT de engenharia civil, CREA, CAU, pavimentação) ou Farmacêuticas (ANVISA, CRF), salvo se o edital for de objeto misto com parcelas de engenharia explicitadas."
-      );
+        "- É TERMINANTEMENTE PROIBIDO aplicar ou citar regras de Obras (como ART, CAT de engenharia civil, CREA, CAU, pavimentação) ou Farmacêuticas (ANVISA, CRF), salvo se o edital for de objeto misto com parcelas de engenharia explicitadas.";
+      break;
     case "Obras Públicas e Engenharia":
     default:
-      return (
+      verticalPrompt =
         "DIRETRIZ RESTRITIVA INEGOCIÁVEL: Você é auditor especializado em OBRAS PÚBLICAS E ENGENHARIA CIVIL.\n" +
         "- Aplique EXCLUSIVAMENTE: Certidão de Acervo Técnico (CAT) com ART de registro no CREA/CAU, vistoria técnica ou declaração formal, Patrimônio Líquido não inferior a 10% do valor estimado e comprovação quantitativa de até 50% das parcelas de maior relevância.\n" +
-        "- É TERMINANTEMENTE PROIBIDO citar registros sanitários da ANVISA, CRF ou certificações de TI."
-      );
+        "- É TERMINANTEMENTE PROIBIDO citar registros sanitários da ANVISA, CRF ou certificações de TI.";
+      break;
   }
+
+  return `${verticalPrompt}\n\n${legislativeContext}`;
 }
 
 /**

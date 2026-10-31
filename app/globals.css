@@ -1,41 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #FFFFFF;
-  --surface: #FFFFFF;
-  --surface-subtle: #F8FAFC;
-  --ink: #0E1626;
-  --ink-2: #47526A;
-  --ink-3: #8C98AC;
-  --line: #E2E8F0;
-  --line-strong: #CBD5E1;
+  --bg: #06141B;
+  --surface: #11212D;
+  --surface-subtle: #162a39;
+  --ink: #CCD0CF;
+  --ink-bright: #FFFFFF;
+  --ink-2: #9BA8AB;
+  --ink-3: #4A5C6A;
+  --line: #253745;
+  --line-strong: #364d5e;
 
-  --brand: #2740F0;
-  --brand-solid: #2740F0;
-  --brand-tint: #EEF2FF;
+  --brand: #CCD0CF;
+  --brand-solid: #11212D;
+  --brand-tint: #162a39;
 
-  /* Vereditos: cor só aparece quando há resultado */
-  --ok: #1F9D6B;   --ok-bg: #DDF3E9;   --ok-fg: #0B6B49;
-  --warn: #D97706; --warn-bg: #FEF3C7; --warn-fg: #92400E;
-  --bad: #DC2626;  --bad-bg: #FEE2E2;  --bad-fg: #991B1B;
-  --rev: #6D5BE0;  --rev-bg: #E6E3FA;  --rev-fg: #4B3FB0;
+  /* Vereditos: semáforo suave pericial */
+  --ok: #10B981;   --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
+  --warn: #F59E0B; --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
+  --bad: #EF4444;  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
+  --rev: #8B5CF6;  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
 }
 
 [data-theme="dark"] {
-  --bg: #0A111F;
-  --surface: #121B2D;
-  --ink: #E8ECF5;
-  --ink-2: #A3AEC4;
-  --line: #26324A;
+  --bg: #06141B;
+  --surface: #11212D;
+  --surface-subtle: #162a39;
+  --ink: #CCD0CF;
+  --ink-bright: #FFFFFF;
+  --ink-2: #9BA8AB;
+  --ink-3: #4A5C6A;
+  --line: #253745;
+  --line-strong: #364d5e;
 
-  --brand: #8F9CFF;
-  --brand-solid: #4A5FFF;
-  --brand-tint: #1B2347;
+  --brand: #CCD0CF;
+  --brand-solid: #11212D;
+  --brand-tint: #162a39;
 
-  --ok-bg: #0F2E24;   --ok-fg: #5FD8A4;
-  --warn-bg: #33280A; --warn-fg: #F2C14E;
-  --bad-bg: #3A1514;  --bad-fg: #FF8A84;
-  --rev-bg: #1E1A45;  --rev-fg: #B3A9FF;
+  --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
+  --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
+  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
+  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
 }
 
 body {

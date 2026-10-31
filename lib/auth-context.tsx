@@ -204,8 +204,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(profile);
       setIsLoading(false);
 
-      if (profile.is_superadmin || profile.plan) {
-        router.push("/dashboard");
+      if (typeof window !== "undefined") {
+        window.location.href = "/dashboard";
       } else {
         router.push("/dashboard");
       }

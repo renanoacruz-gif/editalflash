@@ -31,7 +31,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
   children,
   activeTab = "analises",
 }) => {
-  const { user, logout, isSuperAdmin, impersonation, stopImpersonation } = useAuth();
+  const { user, isLoading, logout, isSuperAdmin, impersonation, stopImpersonation } = useAuth();
   const router = useRouter();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -58,17 +58,20 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
   // Proteção de rota
   useEffect(() => {
-    if (!user) {
-      router.push("/login");
-    } else if (!user.plan) {
-      router.push("/pricing");
+    if (!isLoading && !user) {
+      if (typeof window !== "undefined") {
+        window.location.href = "/login";
+      } else {
+        router.push("/login");
+      }
     }
-  }, [user, router]);
+  }, [user, isLoading, router]);
 
-  if (!user || !user.plan) {
+  if (isLoading || !user) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center text-slate-500 text-xs font-mono">
-        Verificando credenciais e plano ativo...
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center text-slate-500 text-xs font-mono gap-3">
+        <span className="w-5 h-5 border-2 border-[#2740F0]/30 border-t-[#2740F0] rounded-full animate-spin" />
+        <span>Carregando workspace do EditalFlash...</span>
       </div>
     );
   }

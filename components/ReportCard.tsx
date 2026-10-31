@@ -43,6 +43,8 @@ import { generateImpugnation } from "@/lib/legal-drafts";
 import { useAuth } from "@/lib/auth-context";
 import { calculateRemainingBusinessDays } from "@/lib/business-days";
 import { ParecerHeader } from "./ParecerHeader";
+import { ParecerExecutivoPDF } from "./ParecerExecutivoPDF";
+import { pdf } from "@react-pdf/renderer";
 import { RetificationRadarCard } from "./RetificationRadarCard";
 
 interface ReportCardProps {
@@ -59,24 +61,35 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
   const handleExportParecerPDF = async () => {
     try {
       setIsExportingPDF(true);
-      setDownloadToast("Gerando Parecer Técnico Executivo em PDF nativo...");
+      setDownloadToast("Compilando Parecer Técnico Executivo em PDF...");
 
-      const res = await fetch("/api/pdf/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "parecer",
+      // Geração direta no navegador (Client-Side) compatível com Cloudflare Pages
+      let blob: Blob;
+      try {
+        const docElement = React.createElement(ParecerExecutivoPDF, {
           data,
           companyName,
           companyCnpj,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Erro na resposta da geração de PDF.");
+        });
+        blob = await pdf(docElement as any).toBlob();
+      } catch (clientErr) {
+        // Fallback de contingência caso o renderizador local encontre restrição no worker
+        const res = await fetch("/api/pdf/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "parecer",
+            data,
+            companyName,
+            companyCnpj,
+          }),
+        });
+        if (!res.ok) {
+          throw clientErr || new Error("Erro na geração do PDF.");
+        }
+        blob = await res.blob();
       }
 
-      const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -88,8 +101,15 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
       setDownloadToast("Parecer executivo gerado com sucesso.");
       setTimeout(() => setDownloadToast(null), 3000);
     } catch (err: any) {
-      setDownloadToast("Falha ao gerar PDF nativo: " + (err?.message || "Erro desconhecido"));
-      setTimeout(() => setDownloadToast(null), 4000);
+      // Fallback final: diálogo nativo de impressão
+      try {
+        window.print();
+        setDownloadToast("Janela de impressão/PDF acionada.");
+        setTimeout(() => setDownloadToast(null), 3000);
+      } catch (_) {
+        setDownloadToast("Falha ao gerar PDF: " + (err?.message || "Erro desconhecido"));
+        setTimeout(() => setDownloadToast(null), 4000);
+      }
     } finally {
       setIsExportingPDF(false);
     }
@@ -409,7 +429,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
         {/* Barra de Ações Superior com Badges de Categoria */}
         <motion.div
           variants={itemVariants}
-          className="glass-card rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+          className="rounded-2xl p-4 sm:p-5 border border-slate-700/80 bg-[#0c1322] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
@@ -469,26 +489,26 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
             {/* Objeto */}
             <motion.div
               variants={itemVariants}
-              className="glass-card rounded-3xl p-6 border border-slate-800/80 shadow-xl space-y-2.5"
+              className="rounded-3xl p-6 border border-slate-700/80 bg-[#0c1322] shadow-xl space-y-2.5"
             >
               <span className="text-xs font-bold uppercase tracking-wider text-blue-400 block">
                 Objeto da Licitação
               </span>
-              <p className="text-sm font-semibold text-white leading-relaxed">
+              <p className="text-sm font-semibold text-slate-100 leading-relaxed">
                 {data.dados_gerais.objeto}
               </p>
             </motion.div>
 
             {/* Metadados do Certame */}
             <motion.div variants={itemVariants} className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block pl-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-300 block pl-1">
                 Metadados Convocatórios
               </span>
 
               {/* Valor Estimado */}
-              <div className="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-md flex items-center justify-between">
+              <div className="rounded-2xl p-4 border border-slate-700/80 bg-[#0c1322] shadow-md flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] text-slate-400 font-medium block">Valor Estimado da Contratação</span>
+                  <span className="text-[11px] text-slate-300 font-medium block">Valor Estimado da Contratação</span>
                   <span className="text-lg font-bold text-emerald-400 font-mono">
                     {data.dados_gerais.valor_estimado}
                   </span>
@@ -499,9 +519,9 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               </div>
 
               {/* Data da Sessão */}
-              <div className="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-md flex items-center justify-between">
+              <div className="rounded-2xl p-4 border border-slate-700/80 bg-[#0c1322] shadow-md flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] text-slate-400 font-medium block">Data e Hora da Sessão Pública</span>
+                  <span className="text-[11px] text-slate-300 font-medium block">Data e Hora da Sessão Pública</span>
                   <span className="text-sm font-semibold text-slate-100 font-mono">
                     {data.dados_gerais.data_sessao}
                   </span>
@@ -515,30 +535,30 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               {(() => {
                 const countdown = calculateRemainingBusinessDays(data.dados_gerais.prazo_impugnacao);
                 const bgClass = countdown.isExpired
-                  ? "bg-[var(--bad-bg)] border-[var(--bad)]/40"
+                  ? "bg-rose-950/40 border-rose-500/40"
                   : countdown.isUrgent
-                  ? "bg-[var(--warn-bg)] border-[var(--warn)]/40"
-                  : "bg-[var(--surface)] border-[var(--line)]";
+                  ? "bg-amber-950/40 border-amber-500/40"
+                  : "bg-[#0c1322] border-slate-700/80";
                 const textClass = countdown.isExpired
-                  ? "text-[var(--bad-fg)]"
+                  ? "text-rose-400"
                   : countdown.isUrgent
-                  ? "text-[var(--warn-fg)]"
-                  : "text-[var(--ink)]";
+                  ? "text-amber-400"
+                  : "text-slate-100";
 
                 return (
-                  <div className={`rounded-xl p-4 border shadow-xs flex items-center justify-between transition-colors ${bgClass}`}>
+                  <div className={`rounded-xl p-4 border shadow-sm flex items-center justify-between transition-colors ${bgClass}`}>
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[11px] text-[var(--ink-2)] font-medium block">
+                        <span className="text-[11px] text-slate-300 font-medium block">
                           Prazo Limite de Impugnação (Art. 164)
                         </span>
                         <span
                           className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
                             countdown.isExpired
-                              ? "bg-[var(--bad-bg)] text-[var(--bad-fg)] border-[var(--bad)]/50"
+                              ? "bg-rose-950/80 text-rose-300 border-rose-500/50"
                               : countdown.isUrgent
-                              ? "bg-[var(--warn-bg)] text-[var(--warn-fg)] border-[var(--warn)]/50"
-                              : "bg-[var(--bg)] text-[var(--ink-2)] border-[var(--line)]"
+                              ? "bg-amber-950/80 text-amber-300 border-amber-500/50"
+                              : "bg-slate-800 text-slate-300 border-slate-700"
                           }`}
                         >
                           {countdown.label}
@@ -548,21 +568,21 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
                         <span className={`text-sm font-bold font-mono ${textClass}`}>
                           {data.dados_gerais.prazo_impugnacao}
                         </span>
-                        <span className="text-[11px] font-mono text-[var(--ink-2)]">
+                        <span className="text-[11px] font-mono text-slate-400">
                           · {countdown.label}
                         </span>
                       </div>
-                      <span className="text-[10px] text-[var(--ink-2)] block">
+                      <span className="text-[10px] text-slate-400 block">
                         3 dias úteis antes da abertura da sessão pública (Lei 14.133/2021)
                       </span>
                     </div>
                     <div
                       className={`p-2 rounded-xl shrink-0 ${
                         countdown.isExpired
-                          ? "bg-[var(--bad-bg)] text-[var(--bad-fg)]"
+                          ? "bg-rose-500/10 text-rose-400"
                           : countdown.isUrgent
-                          ? "bg-[var(--warn-bg)] text-[var(--warn-fg)]"
-                          : "bg-[var(--bg)] text-[var(--brand)]"
+                          ? "bg-amber-500/10 text-amber-400"
+                          : "bg-blue-500/10 text-blue-400"
                       }`}
                     >
                       <Clock className="w-5 h-5" />
@@ -573,10 +593,10 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
 
               {/* Órgão Licitante */}
               {data.dados_gerais.orgao && (
-                <div className="glass-card rounded-2xl p-4 border border-slate-800/80 shadow-md flex items-center justify-between">
+                <div className="rounded-2xl p-4 border border-slate-700/80 bg-[#0c1322] shadow-md flex items-center justify-between">
                   <div>
-                    <span className="text-[11px] text-slate-400 font-medium block">Órgão Convocante</span>
-                    <span className="text-xs font-semibold text-slate-200">
+                    <span className="text-[11px] text-slate-300 font-medium block">Órgão Convocante</span>
+                    <span className="text-xs font-semibold text-slate-100">
                       {data.dados_gerais.orgao}
                     </span>
                   </div>
@@ -598,7 +618,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="rounded-2xl border border-slate-800 border-l-4 border-l-rose-500 bg-slate-900/80 p-4 sm:p-5 space-y-3"
+                  className="rounded-2xl border border-slate-700/80 border-l-4 border-l-rose-500 bg-[#0c1322] p-4 sm:p-5 space-y-3 shadow-md"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <h4 className="text-xs sm:text-sm font-bold text-white tracking-tight leading-snug">
@@ -611,11 +631,11 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
                     )}
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-200 leading-relaxed font-normal">
                     {armadilha.descricao}
                   </p>
 
-                  <div className="p-3 rounded-xl bg-[#060a14] border border-slate-800 font-mono text-[11px] text-slate-400 italic select-all leading-relaxed">
+                  <div className="p-3 rounded-xl bg-[#060a14] border border-slate-700/80 font-mono text-[11px] text-slate-300 italic select-all leading-relaxed">
                     “{armadilha.texto_original}”
                   </div>
 
@@ -663,12 +683,12 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
         {/* DISCLAIMER JURÍDICO PERSISTENTE OBRIGATÓRIO */}
         <motion.div
           variants={itemVariants}
-          className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-center text-xs text-slate-400 space-y-1"
+          className="p-4 rounded-xl bg-[#0c1322] border border-slate-700/80 text-center text-xs text-slate-300 space-y-1 shadow-sm"
         >
-          <p className="font-semibold text-slate-300">
+          <p className="font-semibold text-slate-200">
             Ferramenta de suporte à decisão. Responsabilidade jurídica permanece com a empresa licitante.
           </p>
-          <p className="text-[11px] text-slate-500">
+          <p className="text-[11px] text-slate-400">
             A auditoria preventiva de habilitação indica aderência e conformidade com base no Art. 62 da Lei 14.133/2021 e nos documentos do cofre cadastrado.
           </p>
         </motion.div>

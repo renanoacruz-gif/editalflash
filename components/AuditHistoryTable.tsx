@@ -402,18 +402,18 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
         <table className="w-full text-left border-collapse text-xs">
           <thead>
             <tr className="bg-[var(--bg)] border-b border-[var(--line)] text-[10px] font-mono uppercase tracking-wider text-[var(--ink-2)]">
-              <th className="py-2.5 px-3.5 font-bold">Data / Hora</th>
-              <th className="py-2.5 px-3.5 font-bold">Certame &amp; Órgão</th>
-              <th className="py-2.5 px-3.5 font-bold">Valor Estimado</th>
-              <th className="py-2.5 px-3.5 font-bold">Veredito Art. 62</th>
-              <th className="py-2.5 px-3.5 font-bold">Cláusulas / Prazos</th>
-              <th className="py-2.5 px-3.5 font-bold text-right">Ações</th>
+              <th className="py-3.5 px-4 font-bold">Data / Hora</th>
+              <th className="py-3.5 px-4 font-bold">Certame &amp; Órgão</th>
+              <th className="py-3.5 px-4 font-bold">Valor Estimado</th>
+              <th className="py-3.5 px-4 font-bold">Veredito Art. 62</th>
+              <th className="py-3.5 px-4 font-bold">Cláusulas / Prazos</th>
+              <th className="py-3.5 px-4 font-bold text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--line)]">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-8 text-center text-xs text-[var(--ink-2)] font-mono">
+                <td colSpan={6} className="py-12 text-center text-xs text-[var(--ink-2)] font-mono">
                   Nenhuma auditoria encontrada com os filtros selecionados.
                 </td>
               </tr>
@@ -450,13 +450,13 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     className="hover:bg-[var(--bg)]/60 transition-colors group"
                   >
                     {/* Data / Hora */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-[11px] text-[var(--ink-2)]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-[11px] text-[var(--ink-2)]">
                       <div className="text-[var(--ink)] font-semibold">{dateStr}</div>
                       <div>{timeStr}</div>
                     </td>
 
                     {/* Certame & Órgão */}
-                    <td className="py-3 px-3.5 align-top max-w-xs sm:max-w-sm">
+                    <td className="py-4 px-4 align-top max-w-xs sm:max-w-sm">
                       <div className="font-bold text-[var(--ink)] font-display text-xs group-hover:text-[var(--brand)] transition-colors">
                         {item.numeroEdital}
                       </div>
@@ -469,7 +469,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Valor Estimado + Margem de Folga de PL */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-xs font-semibold text-[var(--ink)]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-xs font-semibold text-[var(--ink)]">
                       <div>{item.valorEstimado}</div>
                       {plFolgaLabel && (
                         <div
@@ -485,7 +485,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Veredito */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap">
+                    <td className="py-4 px-4 align-top whitespace-nowrap">
                       <VerdictBadge status={item.vereditoGeral} size="sm" />
                       <div className="text-[10px] font-mono text-[var(--ink-2)] mt-1">
                         {item.passaCount}P • {item.ressalvaCount}R • {item.eliminatoriaCount}E
@@ -493,7 +493,7 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     </td>
 
                     {/* Cláusulas / Prazos de Impugnação */}
-                    <td className="py-3 px-3.5 align-top whitespace-nowrap font-mono text-[11px]">
+                    <td className="py-4 px-4 align-top whitespace-nowrap font-mono text-[11px]">
                       {item.armadilhasCount > 0 ? (
                         <div className="space-y-1">
                           <span className="text-[var(--bad-fg)] font-semibold bg-[var(--bad-bg)] px-2 py-0.5 rounded border border-[var(--bad)]/30 inline-block">

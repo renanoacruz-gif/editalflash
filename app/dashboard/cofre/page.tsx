@@ -289,7 +289,7 @@ export default function CofreDocumentosPage() {
               type="button"
               onClick={handleAutoRenewCertidoes}
               disabled={isAutoRenewing}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2740F0] hover:bg-blue-600 text-white shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#11212D] hover:bg-[#253745] text-[#CCD0CF] shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
               title="Consulta bases públicas da Receita Federal, Caixa e TST para renovar CNDs"
             >
               <ShieldCheck className="w-4 h-4 text-white" strokeWidth={1.75} />
@@ -421,7 +421,7 @@ export default function CofreDocumentosPage() {
                         ? "border-rose-300/80 bg-rose-50/30 dark:bg-rose-950/20"
                         : isExpiring
                         ? "border-amber-300/80 bg-amber-50/30 dark:bg-amber-950/20"
-                        : "border-[var(--line)] hover:border-[#2740F0]/50"
+                        : "border-[var(--line)] hover:border-[#11212D]/50"
                     }`}
                   >
                     <div className="space-y-2 min-w-0">

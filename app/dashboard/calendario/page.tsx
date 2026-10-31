@@ -122,7 +122,7 @@ export default function CalendarioPage() {
 
           <button
             onClick={handleTestAlert}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#2740F0] hover:bg-blue-600 text-white shadow-sm transition-all active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#11212D] hover:bg-[#253745] text-[#CCD0CF] shadow-sm transition-all active:scale-[0.98] cursor-pointer"
           >
             <Bell className="w-4 h-4" strokeWidth={1.5} />
             <span>Configurar Alertas 15/7/3 Dias</span>

@@ -185,10 +185,10 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
               </div>
 
               {/* Barra de Progresso Comparativa Semântica */}
-              <div className="space-y-1">
-                <div className="w-full h-2.5 bg-[var(--line)] rounded-full overflow-hidden flex">
+              <div className="space-y-1.5">
+                <div className="w-full h-2 bg-[var(--line)] rounded-full overflow-hidden flex">
                   <div
-                    className={`h-full transition-all duration-500 ${
+                    className={`h-full rounded-full transition-all duration-500 ${
                       isCompetitive
                         ? "bg-[var(--ok)]"
                         : isModerate
@@ -201,10 +201,10 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between text-[11px] font-mono text-[var(--ink-2)] gap-1">
                   <span>
-                    Acervo Comprovado: <strong className="text-[var(--ink)]">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
+                    Acervo Comprovado: <strong className="text-[var(--ink)] font-semibold">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
                   </span>
                   <span>
-                    Média de Edital: <strong className="text-[var(--ink)]">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
+                    Média de Edital: <strong className="text-[var(--ink)] font-semibold">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
                   </span>
                 </div>
               </div>

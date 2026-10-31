@@ -25,7 +25,7 @@ export class AutoCNDService {
    * Simula/Emite a renovação automática das 3 certidões obrigatórias via robô de busca
    */
   static async autoRenovarCertidoes(cnpj: string): Promise<{ success: boolean; certidoes: CertidaoRenovada[] }> {
-    const cleanCnpj = (cnpj || "12.345.678/0001-90").trim();
+    const cleanCnpj = (cnpj || "51.926.034/0001-42").trim();
     const hoje = new Date();
     
     // Data de emissão = hoje

@@ -153,7 +153,7 @@ export default function AccountSettingsPage() {
         {/* Cabeçalho */}
         <div className="pb-4 border-b border-slate-200">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono font-semibold mb-2">
-            <Building2 className="w-3.5 h-3.5 text-[#2740F0]" />
+            <Building2 className="w-3.5 h-3.5 text-[#11212D]" />
             <span>Central Gerencial do Licitante</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
@@ -171,7 +171,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab("perfil")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "perfil"
-                ? "border-[#2740F0] text-[#2740F0]"
+                ? "border-[#11212D] text-[#11212D]"
                 : "border-transparent text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -184,7 +184,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab("plano")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "plano"
-                ? "border-[#2740F0] text-[#2740F0]"
+                ? "border-[#11212D] text-[#11212D]"
                 : "border-transparent text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -197,7 +197,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab("indicacao")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "indicacao"
-                ? "border-[#2740F0] text-[#2740F0]"
+                ? "border-[#11212D] text-[#11212D]"
                 : "border-transparent text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -210,7 +210,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab("seguranca")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "seguranca"
-                ? "border-[#2740F0] text-[#2740F0]"
+                ? "border-[#11212D] text-[#11212D]"
                 : "border-transparent text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -223,7 +223,7 @@ export default function AccountSettingsPage() {
             onClick={() => setActiveTab("como-usar")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "como-usar"
-                ? "border-[#2740F0] text-[#2740F0]"
+                ? "border-[#11212D] text-[#11212D]"
                 : "border-transparent text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -260,7 +260,7 @@ export default function AccountSettingsPage() {
                     required
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D]"
                   />
                 </div>
 
@@ -273,7 +273,7 @@ export default function AccountSettingsPage() {
                     required
                     value={cnpj}
                     onChange={(e) => setCnpj(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0] font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D] font-mono"
                   />
                 </div>
 
@@ -286,7 +286,7 @@ export default function AccountSettingsPage() {
                     required
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D]"
                   />
                 </div>
 
@@ -299,7 +299,7 @@ export default function AccountSettingsPage() {
                     required
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D]"
                   />
                 </div>
               </div>
@@ -356,15 +356,15 @@ export default function AccountSettingsPage() {
                       onClick={() => setVertical(item.id as PrimaryVertical)}
                       className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
                         isSelected
-                          ? "border-[#2740F0] bg-blue-50/50 shadow-xs"
+                          ? "border-[#11212D] bg-blue-50/50 shadow-xs"
                           : "border-slate-200 hover:border-slate-300 bg-white"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className={`text-xs font-bold ${isSelected ? "text-[#2740F0]" : "text-slate-900"}`}>
+                        <span className={`text-xs font-bold ${isSelected ? "text-[#11212D]" : "text-slate-900"}`}>
                           {item.title}
                         </span>
-                        {isSelected && <Check className="w-4 h-4 text-[#2740F0]" />}
+                        {isSelected && <Check className="w-4 h-4 text-[#11212D]" />}
                       </div>
                       <p className="text-[11px] text-slate-500 leading-relaxed">{item.desc}</p>
                     </div>
@@ -376,7 +376,7 @@ export default function AccountSettingsPage() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-xl bg-[#2740F0] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-[#11212D] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
               >
                 Salvar Alterações do Perfil
               </button>
@@ -410,14 +410,14 @@ export default function AccountSettingsPage() {
                 <span className="text-[11px] font-mono uppercase text-slate-500 font-bold block">
                   Capacidade de Auditorias
                 </span>
-                <div className="text-2xl font-bold font-mono text-[#2740F0]">
+                <div className="text-2xl font-bold font-mono text-[#11212D]">
                   {user?.plan === "Pro" || user?.plan === "Enterprise" ? "Ilimitadas" : "5 / mês"}
                 </div>
                 <p className="text-xs text-slate-600">
                   Uso no ciclo vigente: <strong className="text-slate-900">{user?.analysesUsed || 0} análises</strong>
                 </p>
                 <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-3">
-                  <div className="bg-[#2740F0] h-full w-[25%]" />
+                  <div className="bg-[#11212D] h-full w-[25%]" />
                 </div>
               </div>
 
@@ -572,7 +572,7 @@ export default function AccountSettingsPage() {
                 <button
                   type="button"
                   onClick={handleCopyReferral}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#2740F0] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#11212D] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer shrink-0"
                 >
                   {copiedLink ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
                   <span>{copiedLink ? "Link Copiado!" : "Copiar Link"}</span>
@@ -600,7 +600,7 @@ export default function AccountSettingsPage() {
 
               <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
                 <span className="text-xs font-mono text-slate-500 block mb-1">Análises Bônus Conquistadas</span>
-                <span className="text-2xl font-bold font-mono text-[#2740F0]">+10</span>
+                <span className="text-2xl font-bold font-mono text-[#11212D]">+10</span>
                 <span className="text-[11px] text-blue-700 block mt-1">Créditos vitalícios</span>
               </div>
             </div>
@@ -629,7 +629,7 @@ export default function AccountSettingsPage() {
                     type="checkbox"
                     checked={alert15Days}
                     onChange={(e) => setAlert15Days(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#2740F0] accent-[#2740F0] cursor-pointer"
+                    className="w-4 h-4 rounded text-[#11212D] accent-[#11212D] cursor-pointer"
                   />
                 </label>
 
@@ -646,7 +646,7 @@ export default function AccountSettingsPage() {
                     type="checkbox"
                     checked={alert7Days}
                     onChange={(e) => setAlert7Days(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#2740F0] accent-[#2740F0] cursor-pointer"
+                    className="w-4 h-4 rounded text-[#11212D] accent-[#11212D] cursor-pointer"
                   />
                 </label>
 
@@ -663,7 +663,7 @@ export default function AccountSettingsPage() {
                     type="checkbox"
                     checked={alertRetificacoes}
                     onChange={(e) => setAlertRetificacoes(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#2740F0] accent-[#2740F0] cursor-pointer"
+                    className="w-4 h-4 rounded text-[#11212D] accent-[#11212D] cursor-pointer"
                   />
                 </label>
               </div>
@@ -691,7 +691,7 @@ export default function AccountSettingsPage() {
                     placeholder="Mínimo 6 caracteres"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D]"
                   />
                 </div>
                 <div>
@@ -703,7 +703,7 @@ export default function AccountSettingsPage() {
                     placeholder="Repita a nova senha"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#11212D]"
                   />
                 </div>
               </div>
@@ -740,7 +740,7 @@ export default function AccountSettingsPage() {
               {/* Passo 1 */}
               <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
+                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#11212D] font-bold font-mono text-sm flex items-center justify-center">
                     01
                   </span>
                   <h3 className="text-sm font-bold text-slate-900">Alimente o Cofre Documental (Art. 62)</h3>
@@ -753,7 +753,7 @@ export default function AccountSettingsPage() {
               {/* Passo 2 */}
               <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
+                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#11212D] font-bold font-mono text-sm flex items-center justify-center">
                     02
                   </span>
                   <h3 className="text-sm font-bold text-slate-900">Audite Editais em 30 Segundos</h3>
@@ -766,7 +766,7 @@ export default function AccountSettingsPage() {
               {/* Passo 3 */}
               <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
+                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#11212D] font-bold font-mono text-sm flex items-center justify-center">
                     03
                   </span>
                   <h3 className="text-sm font-bold text-slate-900">Interprete o Semáforo &amp; Súmula 263</h3>
@@ -779,7 +779,7 @@ export default function AccountSettingsPage() {
               {/* Passo 4 */}
               <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
+                  <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#11212D] font-bold font-mono text-sm flex items-center justify-center">
                     04
                   </span>
                   <h3 className="text-sm font-bold text-slate-900">Emita Parecer A4 ou Impugne com 1 Clique</h3>
@@ -808,7 +808,7 @@ export default function AccountSettingsPage() {
                 <select
                   value={cancelReason}
                   onChange={(e) => setCancelReason(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-[#2740F0]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-[#11212D]"
                 >
                   <option value="">Selecione um motivo...</option>
                   <option value="Preço / Orçamento">Preço ou orçamento reduzido</option>
@@ -824,7 +824,7 @@ export default function AccountSettingsPage() {
                     placeholder="Conte-nos brevemente o que motivou sua decisão..."
                     value={cancelOtherText}
                     onChange={(e) => setCancelOtherText(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#11212D]"
                   />
                 )}
               </div>

@@ -77,13 +77,13 @@ export default function RadarComercialPage() {
               placeholder="Digite o nome do órgão (ex: Prefeitura Municipal de Campinas, DNIT, UFRJ)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface)] text-xs text-[var(--ink)] focus:outline-none focus:border-[#2740F0]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface)] text-xs text-[var(--ink)] focus:outline-none focus:border-[#11212D]"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-2.5 rounded-xl bg-[#2740F0] hover:bg-blue-600 text-white font-bold text-xs transition-all cursor-pointer disabled:opacity-50"
+            className="px-5 py-2.5 rounded-xl bg-[#11212D] hover:bg-[#253745] text-[#CCD0CF] font-bold text-xs transition-all cursor-pointer disabled:opacity-50"
           >
             {loading ? "Consultando PNCP..." : "Consultar Órgão"}
           </button>

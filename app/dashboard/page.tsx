@@ -11,6 +11,7 @@ import { ReportCard } from "@/components/ReportCard";
 import { RoiDashboard } from "@/components/RoiDashboard";
 import { EditalAnalysisResponse, AuditedTenderHistoryItem } from "@/lib/types";
 import { getAuditHistory } from "@/lib/audit-history";
+import { ArrowUpRight, ShieldCheck, Sparkles, Plus, Clock, FileText, CheckCircle2 } from "lucide-react";
 
 export default function DashboardHome() {
   const { user } = useAuth();
@@ -34,16 +35,16 @@ export default function DashboardHome() {
   if (selectedAuditData) {
     return (
       <DashboardLayout activeTab="analises">
-        <div className="space-y-4 max-w-7xl mx-auto">
-          <div className="flex items-center justify-between pb-2 border-b border-[var(--line)]">
+        <div className="space-y-6 max-w-7xl mx-auto">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200">
             <button
               type="button"
               onClick={() => setSelectedAuditData(null)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono font-semibold bg-[var(--surface)] hover:bg-[var(--line)] text-[var(--ink)] border border-[var(--line)] transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 transition-all cursor-pointer"
             >
               ← Voltar ao Histórico
             </button>
-            <span className="text-xs font-mono text-[var(--ink-2)]">
+            <span className="text-xs font-mono text-slate-500">
               Visualizando Parecer Salvo (Sem consumo de créditos)
             </span>
           </div>
@@ -57,142 +58,49 @@ export default function DashboardHome() {
     );
   }
 
+  const armadilhasTotal = auditList.reduce((acc, item) => acc + (item.armadilhasCount || 0), 0);
+
   return (
     <DashboardLayout activeTab="analises">
-      <div className="space-y-8 max-w-6xl mx-auto">
-        {/* CHECKLIST DE ATIVAÇÃO & BOAS-VINDAS (CONTA NOVA / ZERO DADOS) */}
-        {auditList.length === 0 && (
-          <div className="bg-[var(--surface)] rounded-2xl p-6 sm:p-8 border border-[var(--line)] shadow-sm space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--line)]">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[var(--brand)] text-white flex items-center justify-center font-bold font-mono text-sm shadow-sm">
-                  1
-                </span>
-                <div>
-                  <h2 className="text-base font-bold text-[var(--ink)] font-display">
-                    Etapas Iniciais para Ativar a Auditoria da sua Empresa
-                  </h2>
-                  <p className="text-xs text-[var(--ink-2)] mt-0.5">
-                    Sua conta está limpa e pronta. Complete estas 3 ações rápidas para blindar suas disputas:
-                  </p>
-                </div>
-              </div>
-              <Link
-                href="/dashboard/configuracoes"
-                className="text-xs font-mono font-bold text-[var(--brand)] hover:underline shrink-0"
-              >
-                Gerenciar Perfil →
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-1">
-              {/* Etapa 1 */}
-              <div className="bg-[var(--bg)] p-6 rounded-xl border border-[var(--line)] shadow-xs space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--brand)] bg-[var(--surface)] px-2.5 py-0.5 rounded border border-[var(--line)]">
-                      Passo 1
-                    </span>
-                    <span className="text-xs text-[var(--ink-3)] font-mono">Pendente</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-[var(--ink)]">Completar Dados da Empresa</h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed">
-                    Confirme CNPJ e selecione a sua Vertical Dominante (Engenharia, TI, Saúde, Serviços).
-                  </p>
-                </div>
-                <Link
-                  href="/dashboard/configuracoes"
-                  className="inline-block text-xs font-bold text-[var(--brand)] hover:underline pt-2 font-mono"
-                >
-                  Configurar agora →
-                </Link>
-              </div>
-
-              {/* Etapa 2 */}
-              <div className="bg-[var(--bg)] p-6 rounded-xl border border-[var(--line)] shadow-xs space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--brand)] bg-[var(--surface)] px-2.5 py-0.5 rounded border border-[var(--line)]">
-                      Passo 2
-                    </span>
-                    <span className="text-xs text-[var(--ink-3)] font-mono">Pendente</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-[var(--ink)]">Carregar Documentos no Cofre</h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed">
-                    Faça o upload do Balanço Patrimonial e das Certidões (CND Federal, CNDT e FGTS).
-                  </p>
-                </div>
-                <Link
-                  href="/dashboard/cofre"
-                  className="inline-block text-xs font-bold text-[var(--brand)] hover:underline pt-2 font-mono"
-                >
-                  Ir para o Cofre →
-                </Link>
-              </div>
-
-              {/* Etapa 3 */}
-              <div className="bg-[var(--bg)] p-6 rounded-xl border border-[var(--line)] shadow-xs space-y-3 flex flex-col justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--brand)] bg-[var(--surface)] px-2.5 py-0.5 rounded border border-[var(--line)]">
-                      Passo 3
-                    </span>
-                    <span className="text-xs text-[var(--ink-3)] font-mono">Pronto</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-[var(--ink)]">Auditar seu Primeiro Edital</h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed">
-                    Submeta o PDF ou informe o número do certame no PNCP para gerar o parecer executivo.
-                  </p>
-                </div>
-                <Link
-                  href="/dashboard/nova-analise"
-                  className="inline-block text-xs font-bold text-[var(--brand)] hover:underline pt-2 font-mono"
-                >
-                  Submeter edital →
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Welcome Banner Institucional */}
-        <div className="bg-[var(--surface)] rounded-xl p-6 sm:p-8 border border-[var(--line)] flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--ink-3)] font-mono">
-                Painel de Auditoria Preventiva
+      <div className="space-y-10 max-w-6xl mx-auto pb-16">
+        
+        {/* CABEÇALHO LIMPO E DIRETO - SEM CARDS FECHADOS */}
+        <section className="border-b border-slate-200 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-[#2740F0] text-xs font-mono font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                {user?.primary_vertical || "Serviços Contínuos"}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--bg)] text-[var(--ink)] text-xs font-mono font-bold border border-[var(--line)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span>Vertical Ativa: {user?.primary_vertical || "Serviços Contínuos"}</span>
-              </span>
+              <span className="text-xs font-mono text-slate-400">Lei 14.133/2021</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-[var(--ink)] tracking-tight font-display">
-              Bem-vindo, {user?.name || "Gestor de Licitações"}
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight font-display">
+              Olá, {user?.name?.split(" ")[0] || "Gestor"}
             </h1>
-            <p className="text-xs sm:text-sm text-[var(--ink-2)] max-w-xl leading-relaxed">
-              Responda antes de disputar se a sua empresa passa na habilitação (Art. 62 da Lei 14.133/2021) com prova literal de página e linha do edital.
+            <p className="text-sm text-slate-600 max-w-2xl leading-relaxed">
+              Auditoria preventiva de habilitação. Descubra com prova de página e linha se sua empresa passa antes de disputar.
             </p>
           </div>
 
-          <Link
-            href="/dashboard/nova-analise"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-xs font-bold bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-white shadow-sm transition-all shrink-0 active:scale-98"
-          >
-            <BrandIcon name="upload" size="s16" accentCobalt={false} />
-            <span>Nova Análise de Edital</span>
-            <BrandIcon name="seta" size="s16" accentCobalt={false} />
-          </Link>
-        </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              href="/dashboard/nova-analise"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold bg-[#2740F0] hover:bg-blue-600 text-white shadow-md shadow-blue-500/15 transition-all active:scale-95 cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Auditar Novo Edital</span>
+            </Link>
+          </div>
+        </section>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--line)] space-y-2 shadow-xs">
-            <span className="text-[10px] font-mono text-[var(--ink-3)] uppercase tracking-wider font-bold block">
-              Créditos &amp; Análises
+        {/* MÉTRICAS FLUIDAS EM LINHA - SEM BORDAS PESADAS DE CARD */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 py-2 border-b border-slate-200 pb-8">
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+              Saldo de Auditorias
             </span>
-            <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-[var(--ink)]">
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className="text-3xl font-black font-mono text-slate-900">
                 {user?.analysesLimit || 5}
               </span>
               <button
@@ -207,160 +115,202 @@ export default function DashboardHome() {
                     description: "5 auditorias de editais com veredito, cálculo de PL e citação de páginas.",
                   })
                 }
-                className="text-[11px] text-[var(--brand)] font-mono font-bold hover:underline"
+                className="text-xs font-mono font-bold text-[#2740F0] hover:underline cursor-pointer"
               >
                 + Comprar
               </button>
             </div>
-            <p className="text-xs text-[var(--ink-2)] font-mono">
-              Plano: {user?.plan || "Starter"}
-            </p>
+            <span className="text-xs text-slate-500 block mt-0.5">Plano {user?.plan || "Starter"}</span>
           </div>
 
-          <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--line)] space-y-2 shadow-xs">
-            <span className="text-[10px] font-mono text-[var(--ink-3)] uppercase tracking-wider font-bold block">
-              Editais Salvos
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+              Editais Auditados
             </span>
-            <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-[var(--ink)]">{auditList.length}</span>
-              <span className="text-xs text-[var(--brand)] font-mono font-semibold">Base Ativa</span>
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className="text-3xl font-black font-mono text-slate-900">
+                {auditList.length}
+              </span>
+              <span className="text-xs text-slate-500 font-mono">no histórico</span>
             </div>
-            <p className="text-xs text-[var(--ink-2)] font-mono">Criptografia AES-256</p>
+            <span className="text-xs text-slate-500 block mt-0.5">Criptografia AES-256</span>
           </div>
 
-          <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--line)] space-y-2 shadow-xs">
-            <span className="text-[10px] font-mono text-[var(--ink-3)] uppercase tracking-wider font-bold block">
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
               Cláusulas Restritivas
             </span>
-            <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-rose-600">
-                {auditList.reduce((acc, item) => acc + (item.armadilhasCount || 0), 0)}
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className={`text-3xl font-black font-mono ${armadilhasTotal > 0 ? "text-rose-600" : "text-slate-900"}`}>
+                {armadilhasTotal}
               </span>
-              <span className="text-[11px] text-[var(--ink-2)] font-mono">Art. 164</span>
+              <span className="text-xs text-slate-500 font-mono">apontadas</span>
             </div>
-            <p className="text-xs text-[var(--ink-2)] font-mono">Mapeadas para impugnação</p>
+            <span className="text-xs text-slate-500 block mt-0.5">Mapeadas para Art. 164</span>
           </div>
 
-          <div className="bg-[var(--surface)] rounded-xl p-6 border border-[var(--line)] space-y-2 shadow-xs">
-            <span className="text-[10px] font-mono text-[var(--ink-3)] uppercase tracking-wider font-bold block">
-              Cofre de Documentos
+          <div>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
+              Cofre Documental
             </span>
-            <div className="flex items-baseline justify-between pt-1">
-              <span className="text-2xl font-bold font-mono text-emerald-600">
+            <div className="flex items-baseline gap-2 mt-1">
+              <span className="text-3xl font-black font-mono text-emerald-600">
                 {auditList.length > 0 ? 4 : 0}
               </span>
-              <span className="text-[11px] text-emerald-600 font-mono font-semibold">Válidos</span>
+              <span className="text-xs text-emerald-700 font-mono font-semibold">vigentes</span>
             </div>
-            <p className="text-xs text-[var(--ink-2)] font-mono">Cruzamento em tempo real</p>
+            <span className="text-xs text-slate-500 block mt-0.5">Cruzamento Art. 62</span>
           </div>
-        </div>
+        </section>
 
-        {/* Acesso aos 4 Pilares da Auditoria Preventiva */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xs font-bold text-[var(--ink)] font-mono uppercase tracking-wider">
-              Pilares da Auditoria Preventiva
+        {/* GUIA INICIAL (SE AINDA NÃO HOUVER ANÁLISES) */}
+        {auditList.length === 0 && (
+          <section className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+              <div>
+                <h3 className="text-base font-bold text-slate-900 font-display">
+                  Comece por aqui: Ativação rápida em 3 passos
+                </h3>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  Complete as etapas abaixo para auditar com precisão máxima do seu CNPJ.
+                </p>
+              </div>
+              <Link
+                href="/dashboard/configuracoes"
+                className="text-xs font-mono font-bold text-[#2740F0] hover:underline"
+              >
+                Gerenciar Perfil →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-5">
+              <div className="space-y-1.5">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">01. Empresa & Vertical</span>
+                <h4 className="text-sm font-bold text-slate-900">Confirmar CNPJ</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Defina sua vertical dominante para calibrar o semáforo de acervos técnicos.
+                </p>
+                <Link href="/dashboard/configuracoes" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
+                  Configurar agora →
+                </Link>
+              </div>
+
+              <div className="space-y-1.5">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">02. Cofre (Art. 62)</span>
+                <h4 className="text-sm font-bold text-slate-900">Upload de Balanço e CNDs</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Guarde suas certidões e balanço para cálculo automático de PL e índices.
+                </p>
+                <Link href="/dashboard/cofre" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
+                  Acessar cofre →
+                </Link>
+              </div>
+
+              <div className="space-y-1.5">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">03. Primeiro Edital</span>
+                <h4 className="text-sm font-bold text-slate-900">Auditar com 1 Clique</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Suba o PDF do certame e receba o parecer de risco e minutas administrativas.
+                </p>
+                <Link href="/dashboard/nova-analise" className="text-xs text-[#2740F0] font-bold hover:underline inline-block pt-1">
+                  Submeter edital →
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* NAVEGAÇÃO LIMPA DE PILARES OPERACIONAIS */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+            <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-slate-700">
+              Módulos do Sistema
             </h2>
-            <span className="text-xs text-[var(--ink-2)] font-mono">Lei Federal 14.133/2021</span>
+            <span className="text-xs font-mono text-slate-400">Lei Federal 14.133/2021</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/dashboard/nova-analise?tab=pncp"
-              className="bg-[var(--surface)] p-6 rounded-xl border border-[var(--line)] hover:border-[var(--brand)] transition-all flex items-center justify-between group shadow-xs hover:shadow-md"
+              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--line)] flex items-center justify-center text-[var(--ink)] shrink-0">
-                  <BrandIcon name="busca" size="s20" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[var(--ink)] font-display group-hover:text-[var(--brand)] transition-colors">
-                    Pilar 1: Radar de Editais PNCP
-                  </h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed mt-0.5">
-                    Localize certames da sua vertical diretamente na base oficial do governo.
-                  </p>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">01. PNCP</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
               </div>
-              <BrandIcon name="seta" size="s16" accentCobalt={false} className="group-hover:translate-x-1 transition-transform shrink-0" />
+              <h3 className="text-sm font-bold text-slate-900 font-display">Radar de Editais</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Busca de certames abertos diretamente na base do governo.
+              </p>
             </Link>
 
             <Link
               href="/dashboard/cofre"
-              className="bg-[var(--surface)] p-6 rounded-xl border border-[var(--line)] hover:border-[var(--brand)] transition-all flex items-center justify-between group shadow-xs hover:shadow-md"
+              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--line)] flex items-center justify-center text-[var(--ink)] shrink-0">
-                  <BrandIcon name="cofre" size="s20" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[var(--ink)] font-display group-hover:text-[var(--brand)] transition-colors">
-                    Pilar 2: Cofre de Documentos (Art. 62)
-                  </h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed mt-0.5">
-                    Custódia de certidões, balanços e acervos técnicos (CATs/ARTs).
-                  </p>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">02. Documentos</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
               </div>
-              <BrandIcon name="seta" size="s16" accentCobalt={false} className="group-hover:translate-x-1 transition-transform shrink-0" />
+              <h3 className="text-sm font-bold text-slate-900 font-display">Cofre Art. 62</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Custódia de CNDs, balanços e acervos técnicos (CATs).
+              </p>
             </Link>
 
             <Link
               href="/dashboard/calendario"
-              className="bg-[var(--surface)] p-6 rounded-xl border border-[var(--line)] hover:border-[var(--brand)] transition-all flex items-center justify-between group shadow-xs hover:shadow-md"
+              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--line)] flex items-center justify-center text-[var(--ink)] shrink-0">
-                  <BrandIcon name="calendario" size="s20" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[var(--ink)] font-display group-hover:text-[var(--brand)] transition-colors">
-                    Pilar 3: Calendário Unificado
-                  </h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed mt-0.5">
-                    Cruzamento da vigência de certidões com a data de abertura da sessão.
-                  </p>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">03. Prazos</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
               </div>
-              <BrandIcon name="seta" size="s16" accentCobalt={false} className="group-hover:translate-x-1 transition-transform shrink-0" />
+              <h3 className="text-sm font-bold text-slate-900 font-display">Calendário de Abertura</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Cruzamento da validade das certidões com a data de disputa.
+              </p>
             </Link>
 
             <Link
               href="/dashboard/nova-analise"
-              className="bg-[var(--surface)] p-6 rounded-xl border border-[var(--line)] hover:border-[var(--brand)] transition-all flex items-center justify-between group shadow-xs hover:shadow-md"
+              className="p-5 rounded-xl border border-slate-200 hover:border-[#2740F0] hover:bg-slate-50 transition-all group block space-y-2"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-lg bg-[var(--bg)] border border-[var(--line)] flex items-center justify-center text-[var(--ink)] shrink-0">
-                  <BrandIcon name="semaforo" size="s20" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[var(--ink)] font-display group-hover:text-[var(--brand)] transition-colors">
-                    Pilar 4: Semáforo de Habilitação & Minutas
-                  </h3>
-                  <p className="text-xs text-[var(--ink-2)] leading-relaxed mt-0.5">
-                    Veredito com prova de página/linha e minutas prontas do Art. 164.
-                  </p>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-[#2740F0]">04. Auditoria</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#2740F0] transition-colors" />
               </div>
-              <BrandIcon name="seta" size="s16" accentCobalt={false} className="group-hover:translate-x-1 transition-transform shrink-0" />
+              <h3 className="text-sm font-bold text-slate-900 font-display">Semáforo de Risco</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Parecer de habilitação com prova de página e minutas prontas.
+              </p>
             </Link>
           </div>
-        </div>
+        </section>
 
-        {/* DASHBOARD DE ROI PARA O GESTOR DE LICITAÇÕES */}
+        {/* HISTÓRICO DE AUDITORIAS */}
+        <section className="space-y-4 pt-2">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+            <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-slate-700">
+              Histórico de Editais Auditados
+            </h2>
+            <span className="text-xs font-mono text-slate-400">Total: {auditList.length}</span>
+          </div>
+
+          <AuditHistoryTable
+            companyName={user?.company || "51.926.034 RENAN OSCAR ARAUJO CRUZ"}
+            companyCnpj={user?.cnpj || "51.926.034/0001-42"}
+            onSelectAudit={(payload) => setSelectedAuditData(payload)}
+          />
+        </section>
+
+        {/* ROI / DESEMPENHO */}
         <RoiDashboard
           auditHistory={auditList}
           planPriceMonthly={user?.plan === "Enterprise" ? 890 : user?.plan === "Pro" ? 297 : 97}
         />
 
-        {/* Histórico Centralizado de Editais Auditados */}
-        <AuditHistoryTable
-          companyName={user?.company || "51.926.034 RENAN OSCAR ARAUJO CRUZ"}
-          companyCnpj={user?.cnpj || "51.926.034/0001-42"}
-          onSelectAudit={(payload) => setSelectedAuditData(payload)}
-        />
-
-        {/* Modal de Checkout Seguro para aquisição de créditos */}
+        {/* Modal de Checkout */}
         <CheckoutModal
           isOpen={Boolean(checkoutItem)}
           onClose={() => setCheckoutItem(null)}

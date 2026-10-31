@@ -1,46 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #CCD0CF;
+  --bg: #FFFFFF;
   --surface: #FFFFFF;
-  --surface-subtle: #E2E6E5;
-  --ink: #06141B;
-  --ink-2: #253745;
-  --ink-3: #405260;
-  --line: #9BA8AB;
-  --line-strong: #253745;
+  --surface-subtle: #F8FAFC;
+  --ink: #0E1626;
+  --ink-2: #47526A;
+  --ink-3: #8C98AC;
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
 
-  --brand: #11212D;
-  --brand-solid: #11212D;
-  --brand-tint: #E2E6E5;
-  --brand-hover: #253745;
+  --brand: #2740F0;
+  --brand-solid: #2740F0;
+  --brand-tint: #EEF2FF;
 
   /* Vereditos: cor só aparece quando há resultado */
-  --ok: #10B981;   --ok-bg: #D1FAE5;   --ok-fg: #065F46;
-  --warn: #F59E0B; --warn-bg: #FEF3C7; --warn-fg: #92400E;
-  --bad: #EF4444;  --bad-bg: #FEE2E2;  --bad-fg: #991B1B;
-  --rev: #6366F1;  --rev-bg: #EEF2FF;  --rev-fg: #3730A3;
+  --ok: #1F9D6B;   --ok-bg: #DDF3E9;   --ok-fg: #0B6B49;
+  --warn: #D97706; --warn-bg: #FEF3C7; --warn-fg: #92400E;
+  --bad: #DC2626;  --bad-bg: #FEE2E2;  --bad-fg: #991B1B;
+  --rev: #6D5BE0;  --rev-bg: #E6E3FA;  --rev-fg: #4B3FB0;
 }
 
 [data-theme="dark"] {
-  --bg: #06141B;
-  --surface: #11212D;
-  --surface-subtle: #162B3B;
-  --ink: #CCD0CF;
-  --ink-2: #9BA8AB;
-  --ink-3: #4A5C6A;
-  --line: #253745;
-  --line-strong: #4A5C6A;
+  --bg: #0A111F;
+  --surface: #121B2D;
+  --ink: #E8ECF5;
+  --ink-2: #A3AEC4;
+  --line: #26324A;
 
-  --brand: #CCD0CF;
-  --brand-solid: #CCD0CF;
-  --brand-tint: #162B3B;
-  --brand-hover: #9BA8AB;
+  --brand: #8F9CFF;
+  --brand-solid: #4A5FFF;
+  --brand-tint: #1B2347;
 
-  --ok-bg: #09261E;   --ok-fg: #34D399;
-  --warn-bg: #2B1E05; --warn-fg: #FBBF24;
-  --bad-bg: #2E0E0E;  --bad-fg: #F87171;
-  --rev-bg: #161A3D;  --rev-fg: #A5B4FC;
+  --ok-bg: #0F2E24;   --ok-fg: #5FD8A4;
+  --warn-bg: #33280A; --warn-fg: #F2C14E;
+  --bad-bg: #3A1514;  --bad-fg: #FF8A84;
+  --rev-bg: #1E1A45;  --rev-fg: #B3A9FF;
 }
 
 body {
@@ -84,13 +79,13 @@ mark.cobalt-highlight {
   background: var(--ink-2);
 }
 
-/* Functional Gradient & Hover Effects (Nova Identidade Institucional Profunda) */
+/* Functional Gradient & Hover Effects (Legal-Tech Identity v1.1) */
 .btn-primary-gradient {
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
+  background: linear-gradient(135deg, var(--brand) 0%, #1a32d0 100%);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-primary-gradient:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 4px 12px rgba(17, 33, 45, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 4px 12px rgba(39, 64, 240, 0.25);
 }
 .btn-primary-gradient:active {
   transform: scale(0.98);
@@ -101,13 +96,13 @@ mark.cobalt-highlight {
   background-color: var(--surface);
   border: 1px solid var(--line);
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(6, 20, 27, 0.05);
+  box-shadow: 0 1px 3px 0 rgba(14, 22, 38, 0.05);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 .surface-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px -2px rgba(6, 20, 27, 0.08);
-  border-color: var(--brand-hover);
+  box-shadow: 0 6px 16px -2px rgba(14, 22, 38, 0.08);
+  border-color: var(--brand-tint);
 }
 
 /* Sticky Blurred Glass Header */
@@ -117,11 +112,11 @@ mark.cobalt-highlight {
   z-index: 40;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid var(--line);
 }
 [data-theme="dark"] .header-glass {
-  background-color: rgba(17, 33, 45, 0.92);
+  background-color: rgba(18, 27, 45, 0.85);
 }
 
 /* Input Focus Ring */
@@ -142,12 +137,12 @@ input:focus, select:focus, textarea:focus {
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-card:hover {
-  border-color: rgba(37, 55, 69, 0.6);
-  box-shadow: 0 8px 30px rgba(6, 20, 27, 0.12);
+  border-color: rgba(39, 64, 240, 0.35);
+  box-shadow: 0 8px 30px rgba(14, 22, 38, 0.08);
 }
 [data-theme="dark"] .bento-card:hover {
-  border-color: rgba(204, 208, 207, 0.4);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(143, 156, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Raycast / Command Palette Keycap */

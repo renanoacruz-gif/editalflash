@@ -162,7 +162,7 @@ export default function TeamManagementPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-[#11212D]/10 text-[#11212D] border border-[#253745]/20">
+              <span className="p-2 rounded-lg bg-blue-50 text-[#2740F0] border border-blue-100">
                 <Users className="w-5 h-5" />
               </span>
               <h1 className="text-2xl font-bold font-display text-slate-900 tracking-tight">
@@ -187,7 +187,7 @@ export default function TeamManagementPage() {
               <button
                 type="button"
                 onClick={() => setIsCheckoutOpen(true)}
-                className="px-4 py-2 text-xs font-mono font-bold rounded-lg bg-[#11212D] hover:bg-[#253745] text-[#CCD0CF] flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-mono font-bold rounded-lg bg-[#2740F0] hover:bg-blue-600 text-white flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
               >
                 <CreditCard className="w-3.5 h-3.5" />
                 Contratar Assentos (R$ 29/mês)
@@ -244,7 +244,7 @@ export default function TeamManagementPage() {
               Pool de Créditos Compartilhados
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold font-mono text-[#11212D]">
+              <span className="text-3xl font-extrabold font-mono text-[#2740F0]">
                 {poolCredits}
               </span>
               <span className="text-sm font-mono text-slate-400">auditorias restantes</span>
@@ -305,7 +305,7 @@ export default function TeamManagementPage() {
               <button
                 type="submit"
                 disabled={inviting || seats.hasReachedLimit}
-                className="px-6 py-2.5 rounded-xl bg-[#11212D] hover:bg-[#253745] disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm text-[#CCD0CF] flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
+                className="px-6 py-2.5 rounded-xl bg-[#2740F0] hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm text-white flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
               >
                 {inviting ? (
                   <>

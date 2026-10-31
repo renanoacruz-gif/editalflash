@@ -10,32 +10,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: "var(--bg)",
-          base: "var(--bg)",
-          surface: "var(--surface)",
-        },
-        surface: {
-          DEFAULT: "var(--surface)",
-          subtle: "var(--surface-subtle)",
-        },
+        bg: "var(--bg)",
+        surface: "var(--surface)",
         ink: {
           DEFAULT: "var(--ink)",
-          primary: "var(--ink)",
           2: "var(--ink-2)",
-          secondary: "var(--ink-2)",
-          3: "var(--ink-3)",
-          muted: "var(--ink-3)",
         },
-        line: {
-          DEFAULT: "var(--line)",
-          strong: "var(--line-strong)",
-        },
+        line: "var(--line)",
         brand: {
           DEFAULT: "var(--brand)",
           solid: "var(--brand-solid)",
           tint: "var(--brand-tint)",
-          hover: "var(--brand-hover)",
         },
         ok: {
           DEFAULT: "var(--ok)",

@@ -67,22 +67,22 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
   return (
     <div
       data-theme="dark"
-      className="min-h-screen bg-[#06141B] text-[#CCD0CF] flex flex-col md:flex-row selection:bg-[#11212D] selection:text-[#CCD0CF] font-sans"
+      className="min-h-screen bg-[#070B14] text-[#E8ECF5] flex flex-col md:flex-row selection:bg-[#2740F0] selection:text-white font-sans"
     >
-      {/* DESKTOP ADMIN SIDEBAR — Azul Marinho Profundo (#11212D) */}
-      <aside className="hidden md:flex flex-col w-64 border-r border-[#253745] bg-[#11212D] text-[#CCD0CF] p-3 justify-between shrink-0 select-none">
+      {/* DESKTOP ADMIN SIDEBAR — Pure Solid Ink (#0E1626) sem gradientes */}
+      <aside className="hidden md:flex flex-col w-64 border-r border-[#26324A] bg-[#0E1626] text-[#E8ECF5] p-3 justify-between shrink-0 select-none">
         <div className="space-y-4">
           {/* Logo & Operational Title */}
-          <div className="pb-3 border-b border-[#253745]">
+          <div className="pb-3 border-b border-[#26324A]">
             <Link href="/admin/dashboard" className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-md bg-[#06141B] border border-[#253745] flex items-center justify-center text-[#CCD0CF] shrink-0">
+              <div className="w-7 h-7 rounded-md bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-[#E8ECF5] shrink-0">
                 <BrandIcon name="mark" size={16} />
               </div>
               <div>
                 <span className="text-xs font-bold text-white tracking-tight block font-display">
                   Centro de Operações
                 </span>
-                <span className="text-[10px] text-[#9BA8AB] font-mono block">
+                <span className="text-[10px] text-[#A3AEC4] font-mono block">
                   EditalFlash Admin · Lei 14.133
                 </span>
               </div>
@@ -90,23 +90,23 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
           </div>
 
           {/* Multi-Vertical Status Badge (Compact Solid Ink) */}
-          <div className="p-2.5 rounded-md bg-[#06141B] border border-[#253745] space-y-1">
+          <div className="p-2.5 rounded-md bg-[#121B2D] border border-[#26324A] space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[9px] font-bold text-[#CCD0CF] uppercase tracking-wider font-mono flex items-center gap-1">
+              <span className="text-[9px] font-bold text-[#8F9CFF] uppercase tracking-wider font-mono flex items-center gap-1">
                 <BrandIcon name="garantia" size="s16" accentCobalt={false} />
                 <span>Motor Multi-Vertical</span>
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4A5FFF]" />
             </div>
             <p className="text-[11px] font-bold text-white font-mono">5 Verticais Ativas</p>
-            <p className="text-[10px] text-[#9BA8AB] leading-tight">
+            <p className="text-[10px] text-[#A3AEC4] leading-tight">
               Obras, Compras, Serviços, Saúde e TI operando com rule sets autônomos.
             </p>
           </div>
 
-          {/* Navigation Items */}
+          {/* Navigation Items — Solid Ink, Left border 3px #2740F0, Background rgba(39,64,240,0.12) */}
           <nav className="space-y-1">
-            <div className="px-2 pb-1 text-[9px] font-bold uppercase tracking-wider text-[#9BA8AB] font-mono">
+            <div className="px-2 pb-1 text-[9px] font-bold uppercase tracking-wider text-[#A3AEC4] font-mono">
               Governança
             </div>
             {navItems.map((item) => {
@@ -117,8 +117,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
                   href={item.href}
                   className={`flex items-center gap-2 px-2.5 py-2 rounded-md text-[11px] font-mono transition-all ${
                     isActive
-                      ? "bg-[#253745] text-white font-bold border-l-3 border-[#CCD0CF]"
-                      : "text-[#9BA8AB] hover:text-white hover:bg-[rgba(255,255,255,0.04)]"
+                      ? "bg-[rgba(39,64,240,0.12)] text-white font-bold border-l-3 border-[#2740F0]"
+                      : "text-[#A3AEC4] hover:text-white hover:bg-[rgba(255,255,255,0.04)]"
                   }`}
                 >
                   <BrandIcon name={item.icon} size="s16" accentCobalt={isActive} />
@@ -130,14 +130,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
         </div>
 
         {/* Footer & Session Control (Compact) */}
-        <div className="pt-3 border-t border-[#253745] space-y-2">
-          <div className="p-2 rounded-md bg-[#06141B] border border-[#253745] text-[10px] font-mono space-y-0.5">
-            <div className="flex items-center justify-between text-[#9BA8AB]">
+        <div className="pt-3 border-t border-[#26324A] space-y-2">
+          <div className="p-2 rounded-md bg-[#121B2D] border border-[#26324A] text-[10px] font-mono space-y-0.5">
+            <div className="flex items-center justify-between text-[#A3AEC4]">
               <span className="font-semibold flex items-center gap-1 text-white">
                 <BrandIcon name="garantia" size="s16" accentCobalt={false} />
                 <span>SuperAdmin</span>
               </span>
-              <span className="text-[#CCD0CF]">{sessionMinutesLeft}m</span>
+              <span className="text-[#8F9CFF]">{sessionMinutesLeft}m</span>
             </div>
             <span className="text-[#A3AEC4] truncate block text-[10px]">
               renanoacruz@gmail.com
@@ -147,7 +147,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
           <div className="flex items-center gap-1.5">
             <Link
               href="/dashboard"
-              className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-bold bg-[#253745] hover:bg-[#324859] text-white border border-[#9BA8AB]/40 transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-bold bg-[#1B2347] hover:bg-[#273360] text-white border border-[var(--brand)]/40 transition-colors"
               title="Acessar Área do Cliente / Modo Demonstração"
             >
               <span>Visão Cliente</span>
@@ -156,7 +156,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
 
             <button
               onClick={handleLogout}
-              className="inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium bg-[#06141B] hover:bg-rose-950/40 text-[#9BA8AB] hover:text-rose-300 border border-[#253745] transition-colors"
+              className="inline-flex items-center justify-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium bg-[#121B2D] hover:bg-rose-950/40 text-[#A3AEC4] hover:text-rose-300 border border-[#26324A] transition-colors"
               title="Encerrar sessão"
             >
               <BrandIcon name="fechar" size="s16" accentCobalt={false} />
@@ -167,14 +167,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children, activeTab = 
       </aside>
 
       {/* MOBILE BAR */}
-      <div className="md:hidden flex items-center justify-between p-3 border-b border-[#253745] bg-[#11212D] text-white">
+      <div className="md:hidden flex items-center justify-between p-3 border-b border-[#26324A] bg-[#0E1626] text-white">
         <Link href="/admin/dashboard" className="flex items-center gap-2">
           <BrandIcon name="mark" size={18} />
           <span className="text-xs font-bold font-display">EditalFlash Ops</span>
         </Link>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-1 text-[#9BA8AB] hover:text-white"
+          className="p-1 text-[#A3AEC4] hover:text-white"
         >
           <BrandIcon name={mobileOpen ? "fechar" : "config"} size="s20" />
         </button>

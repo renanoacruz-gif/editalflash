@@ -3,49 +3,52 @@
 /**
  * components/ReportCard.tsx
  * 
- * CORE PRODUCT: AUDITOR DE HABILITAÇÃO PRÉ-EDITAL (Lei 14.133/2021)
- * Vertical Hard-Locked: Obras Públicas
+ * PARECER TÉCNICO DIGITAL EXECUTIVO (Lei 14.133/2021)
+ * Redesign Estratégico baseado no padrão Linear + Stripe + IBM Carbon.
  * 
- * Estrutura:
- * - Topo Absoluto: <SemaforoHabilitacao /> (Veredito PASSA / RESSALVA / ELIMINATÓRIA com citações de página/linha)
- * - Checagens Numéricas: PL ≥ 10% e Volume de Atestado Técnico
- * - Resumo Estruturado do Edital (Objeto, Datas, Valores)
- * - Checklist de Documentos da Habilitação Art. 62 (<ChecklistArt62 />)
- * - Minuta de Impugnação Administrativa Art. 164 para cláusulas ilegais
- * - Disclaimer Jurídico Persistente
+ * Estrutura em 8 Seções Executivas (A a H):
+ * - Seção A: Identificação Técnica da Auditoria
+ * - Seção B: Resultado Executivo & Semáforo Tripartite
+ * - Seção C: Matriz de Análise Documental (Art. 62) com expansão
+ * - Seção D: Ressalvas & Pontos de Atenção Preventiva
+ * - Seção E: Pendências Eliminatórias & Cláusulas Restritivas
+ * - Seção F: Fundamentação Legal com Links Oficiais do Planalto
+ * - Seção G: Plano de Regularização Priorizado
+ * - Seção H: Conclusão Executiva & Próximos Passos
  */
 
 import React, { useState } from "react";
-import { motion, type Variants } from "framer-motion";
 import {
-  DollarSign,
-  Calendar,
+  FileText,
+  Download,
+  RotateCcw,
+  Scale,
   Clock,
   Building2,
+  Calendar,
+  DollarSign,
+  ChevronDown,
+  ChevronUp,
+  AlertTriangle,
+  CheckCircle2,
+  XCircle,
+  ExternalLink,
+  PenLine,
   Copy,
   Check,
-  AlertTriangle,
-  RotateCcw,
-  Download,
-  Share2,
-  Info,
-  Scale,
   X,
-  FileText,
-  PenLine,
   Lock,
   ShieldCheck,
+  Info,
 } from "lucide-react";
-import { EditalAnalysisResponse, Armadilha } from "@/lib/types";
-import { SemaforoHabilitacao } from "./SemaforoHabilitacao";
-import { ChecklistArt62 } from "./ChecklistArt62";
+import { EditalAnalysisResponse, HabilitacaoItem, Armadilha } from "@/lib/types";
 import { generateImpugnation } from "@/lib/legal-drafts";
 import { useAuth } from "@/lib/auth-context";
 import { calculateRemainingBusinessDays } from "@/lib/business-days";
-import { ParecerHeader } from "./ParecerHeader";
 import { ParecerExecutivoPDF } from "./ParecerExecutivoPDF";
 import { pdf } from "@react-pdf/renderer";
-import { RetificationRadarCard } from "./RetificationRadarCard";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface ReportCardProps {
   data: EditalAnalysisResponse;
@@ -54,81 +57,25 @@ interface ReportCardProps {
 
 export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
   const { user } = useAuth();
-  const [copiedClauseIndex, setCopiedClauseIndex] = useState<number | null>(null);
   const [isExportingPDF, setIsExportingPDF] = useState(false);
   const [downloadToast, setDownloadToast] = useState<string | null>(null);
+  const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
+  const [copiedClauseIndex, setCopiedClauseIndex] = useState<number | null>(null);
 
-  const handleExportParecerPDF = async () => {
-    try {
-      setIsExportingPDF(true);
-      setDownloadToast("Compilando Parecer Técnico Executivo em PDF...");
-
-      // Geração direta no navegador (Client-Side) compatível com Cloudflare Pages
-      let blob: Blob;
-      try {
-        const docElement = React.createElement(ParecerExecutivoPDF, {
-          data,
-          companyName,
-          companyCnpj,
-        });
-        blob = await pdf(docElement as any).toBlob();
-      } catch (clientErr) {
-        // Fallback de contingência caso o renderizador local encontre restrição no worker
-        const res = await fetch("/api/pdf/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            type: "parecer",
-            data,
-            companyName,
-            companyCnpj,
-          }),
-        });
-        if (!res.ok) {
-          throw clientErr || new Error("Erro na geração do PDF.");
-        }
-        blob = await res.blob();
-      }
-
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `Parecer_Habilitacao_${(data.dados_gerais.numero_edital || "Edital").replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-      setDownloadToast("Parecer executivo gerado com sucesso.");
-      setTimeout(() => setDownloadToast(null), 3000);
-    } catch (err: any) {
-      // Fallback final: diálogo nativo de impressão
-      try {
-        window.print();
-        setDownloadToast("Janela de impressão/PDF acionada.");
-        setTimeout(() => setDownloadToast(null), 3000);
-      } catch (_) {
-        setDownloadToast("Falha ao gerar PDF: " + (err?.message || "Erro desconhecido"));
-        setTimeout(() => setDownloadToast(null), 4000);
-      }
-    } finally {
-      setIsExportingPDF(false);
-    }
-  };
-
-  // Estados para Minuta de Impugnação Art. 164 (Preenchimento automático do perfil e persistência local)
+  // Estados para Minuta de Impugnação Art. 164
   const [activeMinutaText, setActiveMinutaText] = useState<string | null>(null);
   const [activeMinutaTitle, setActiveMinutaTitle] = useState<string>("");
   const [activeArmadilha, setActiveArmadilha] = useState<Armadilha | null>(null);
   const [copiedMinuta, setCopiedMinuta] = useState(false);
   const [showUpgradeModalMinuta, setShowUpgradeModalMinuta] = useState(false);
 
-  // Auto-população de dados com fallback para valores persistidos localmente
+  // Auto-população de dados cadastrais da empresa
   const [companyName, setCompanyName] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("editalflash_last_impugnation_company");
       if (saved) return saved;
     }
-    return user?.company || "EMPRESA LICITANTE LTDA";
+    return user?.company || "51.926.034 RENAN OSCAR ARAUJO CRUZ";
   });
 
   const [companyCnpj, setCompanyCnpj] = useState(() => {
@@ -147,14 +94,77 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
     return user?.name || "Gestor de Licitações";
   });
 
-  const copyClause = (text: string, index: number) => {
-    navigator.clipboard.writeText(text);
-    setCopiedClauseIndex(index);
-    setTimeout(() => setCopiedClauseIndex(null), 1800);
+  // Métricas do resultado
+  const items = data.semaforo_habilitacao || [];
+  const totalDocs = items.length;
+  const passaItems = items.filter((i) => i.status === "PASSA");
+  const ressalvaItems = items.filter((i) => i.status === "RESSALVA");
+  const eliminatoriaItems = items.filter((i) => i.status === "ELIMINATORIA" || i.status === "REVISAO_HUMANA_NECESSARIA");
+  const armadilhas = data.armadilhas || [];
+
+  const veredito = data.veredito_habilitacao || "RESSALVA";
+  const vereditoLabel =
+    veredito === "PASSA"
+      ? "CONFORME (APTO À PARTICIPAÇÃO)"
+      : veredito === "RESSALVA"
+      ? "RESSALVAS IDENTIFICADAS (SANÁVEIS)"
+      : "PENDÊNCIAS ELIMINATÓRIAS IDENTIFICADAS";
+
+  const vereditoVariant =
+    veredito === "PASSA" ? "pass" : veredito === "RESSALVA" ? "warning" : "danger";
+
+  // Exportação nativa em PDF
+  const handleExportParecerPDF = async () => {
+    try {
+      setIsExportingPDF(true);
+      setDownloadToast("Compilando Parecer Técnico Executivo em PDF...");
+
+      let blob: Blob;
+      try {
+        const docElement = React.createElement(ParecerExecutivoPDF, {
+          data,
+          companyName,
+          companyCnpj,
+        });
+        blob = await pdf(docElement as any).toBlob();
+      } catch (clientErr) {
+        const res = await fetch("/api/pdf/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "parecer",
+            data,
+            companyName,
+            companyCnpj,
+          }),
+        });
+        if (!res.ok) throw clientErr || new Error("Erro na geração do PDF.");
+        blob = await res.blob();
+      }
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Parecer_Tecnico_${(data.dados_gerais.numero_edital || "Edital").replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      setDownloadToast("Parecer executivo gerado com sucesso.");
+      setTimeout(() => setDownloadToast(null), 3000);
+    } catch (err: any) {
+      try {
+        window.print();
+      } catch (_) {
+        setDownloadToast("Falha ao gerar PDF.");
+        setTimeout(() => setDownloadToast(null), 3000);
+      }
+    } finally {
+      setIsExportingPDF(false);
+    }
   };
 
   const handleOpenMinuta = (armadilha: Armadilha) => {
-    // Gate de Plano: Usuários Starter não possuem minutas automatizadas de impugnação
     const isStarter = user?.plan === "Starter" && !user?.is_superadmin && user?.role !== "superadmin";
     if (isStarter) {
       setShowUpgradeModalMinuta(true);
@@ -173,526 +183,527 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
     setActiveMinutaText(draft);
   };
 
-  const handleUpdateDraft = (newCompany: string, newCnpj: string, newGestor: string) => {
-    setCompanyName(newCompany);
-    setCompanyCnpj(newCnpj);
-    setGestorName(newGestor);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("editalflash_last_impugnation_company", newCompany);
-      localStorage.setItem("editalflash_last_impugnation_cnpj", newCnpj);
-      localStorage.setItem("editalflash_last_impugnation_gestor", newGestor);
-    }
-    if (activeArmadilha) {
-      const draft = generateImpugnation(
-        activeArmadilha.texto_original,
-        activeArmadilha.descricao,
-        newCompany,
-        newCnpj,
-        newGestor
-      );
-      setActiveMinutaText(draft);
-    }
+  const copyClause = (text: string, index: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedClauseIndex(index);
+    setTimeout(() => setCopiedClauseIndex(null), 1800);
   };
 
-  const handleCopyMinuta = () => {
-    if (activeMinutaText) {
-      navigator.clipboard.writeText(activeMinutaText);
-      setCopiedMinuta(true);
-      setTimeout(() => setCopiedMinuta(false), 2000);
-    }
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  };
+  const countdown = calculateRemainingBusinessDays(data.dados_gerais.prazo_impugnacao);
 
   return (
-    <>
+    <div className="space-y-10 max-w-6xl mx-auto pb-20">
+      {/* Toast Feedback */}
       {downloadToast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0E1626] border border-[#2740F0] text-white px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2">
-          <Download className="w-4 h-4 text-[#4A5FFF]" strokeWidth={1.75} />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#11212D] border border-[#253745] text-white px-4 py-3 rounded-lg shadow-xl text-xs font-mono flex items-center gap-2">
+          <Download className="w-4 h-4 text-[#CCD0CF]" />
           <span>{downloadToast}</span>
         </div>
       )}
 
-      {/* Modal da Minuta de Impugnação Administrativa Art. 164 */}
+      {/* SEÇÃO A — IDENTIFICAÇÃO TÉCNICA DA AUDITORIA */}
+      <section className="border-b border-[#253745] pb-6 space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+                Parecer Técnico Preliminar de Habilitação
+              </span>
+              <span className="text-xs font-mono text-[#4A5C6A]">|</span>
+              <span className="text-xs font-mono text-[#CCD0CF]">Lei 14.133/2021</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-semibold text-white tracking-tight font-display">
+              {data.dados_gerais.numero_edital || "Processo Licitatório"}
+            </h1>
+            <p className="text-xs text-[#9BA8AB]">
+              Órgão Convocante: <strong className="text-white">{data.dados_gerais.orgao || "Administração Pública"}</strong>
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2.5 shrink-0">
+            <Button variant="outline" size="sm" onClick={onReset} className="gap-1.5">
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Auditar Outro</span>
+            </Button>
+
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleExportParecerPDF}
+              disabled={isExportingPDF}
+              className="gap-1.5"
+            >
+              <Download className="w-3.5 h-3.5 text-white" />
+              <span>{isExportingPDF ? "Compilando..." : "Exportar Parecer (PDF)"}</span>
+            </Button>
+          </div>
+        </div>
+
+        {/* Metadados Chave em Linha Fluida */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-3 text-xs font-mono border-t border-[#1c2b36]">
+          <div>
+            <span className="text-[#9BA8AB] block">Empresa Auditada:</span>
+            <span className="text-white font-semibold truncate block">{companyName}</span>
+          </div>
+          <div>
+            <span className="text-[#9BA8AB] block">Valor Estimado:</span>
+            <span className="text-white font-semibold block">{data.dados_gerais.valor_estimado || "Não informado"}</span>
+          </div>
+          <div>
+            <span className="text-[#9BA8AB] block">Data da Sessão:</span>
+            <span className="text-white font-semibold block">{data.dados_gerais.data_sessao || "Conforme edital"}</span>
+          </div>
+          <div>
+            <span className="text-[#9BA8AB] block">Prazo Impugnação:</span>
+            <span className="text-white font-semibold block">{data.dados_gerais.prazo_impugnacao || "3 dias úteis antes"}</span>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO B — RESULTADO EXECUTIVO */}
+      <section className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#253745]">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+            Resultado Executivo
+          </h2>
+          <Badge variant={vereditoVariant} className="text-xs px-2.5 py-1">
+            {vereditoLabel}
+          </Badge>
+        </div>
+
+        {/* Indicadores Numéricos Consolidados */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-2 border-b border-[#253745] pb-6">
+          <div>
+            <span className="text-[11px] font-mono uppercase text-[#9BA8AB] block">Requisitos Auditados</span>
+            <span className="text-3xl font-bold font-mono text-white mt-1 block">{totalDocs}</span>
+            <span className="text-xs text-[#4A5C6A]">Conforme edital</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-mono uppercase text-[#9BA8AB] block">Conformes (Passa)</span>
+            <span className="text-3xl font-bold font-mono text-[#10B981] mt-1 block">{passaItems.length}</span>
+            <span className="text-xs text-[#4A5C6A]">Aderência comprovada</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-mono uppercase text-[#9BA8AB] block">Ressalvas Sanáveis</span>
+            <span className="text-3xl font-bold font-mono text-[#F59E0B] mt-1 block">{ressalvaItems.length}</span>
+            <span className="text-xs text-[#4A5C6A]">Ação recomendada</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-mono uppercase text-[#9BA8AB] block">Pendências Críticas</span>
+            <span className="text-3xl font-bold font-mono text-[#EF4444] mt-1 block">{eliminatoriaItems.length}</span>
+            <span className="text-xs text-[#4A5C6A]">Risco eliminatório</span>
+          </div>
+        </div>
+
+        <p className="text-sm text-[#CCD0CF] leading-relaxed">
+          {data.justificativa_veredito || "Auditoria de habilitação parametrizada com base no Art. 62 da Lei Federal 14.133/2021."}
+        </p>
+
+        {/* Disclaimer Oficial Discreto */}
+        <div className="p-3 rounded border border-[#253745] bg-[#11212D]/40 text-xs text-[#9BA8AB] flex items-start gap-2">
+          <Info className="w-4 h-4 text-[#9BA8AB] shrink-0 mt-0.5" />
+          <span>
+            <strong>Observação de Apoio à Decisão:</strong> Este parecer constitui instrumento preventivo de suporte à análise de conformidade e não substitui a conferência integral do instrumento convocatório, dos documentos originais e da apreciação soberana do Agente de Contratação / Comissão de Licitação.
+          </span>
+        </div>
+      </section>
+
+      {/* SEÇÃO C — MATRIZ DE ANÁLISE DOCUMENTAL (ART. 62) */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+            Matriz de Análise Documental (Art. 62 da Lei 14.133/2021)
+          </h2>
+          <span className="text-xs font-mono text-[#4A5C6A]">Clique para detalhar</span>
+        </div>
+
+        <div className="divide-y divide-[#253745]">
+          {items.map((item) => {
+            const isExpanded = expandedItemId === item.id;
+            const statusVariant =
+              item.status === "PASSA" ? "pass" : item.status === "RESSALVA" ? "warning" : "danger";
+
+            return (
+              <div key={item.id} className="py-3.5 space-y-2">
+                <div
+                  onClick={() => setExpandedItemId(isExpanded ? null : item.id)}
+                  className="flex items-center justify-between cursor-pointer group hover:bg-[#11212D]/40 p-2 rounded transition-colors"
+                >
+                  <div className="space-y-0.5">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-mono text-[#9BA8AB]">{item.categoria}</span>
+                      <span className="text-xs font-mono text-[#4A5C6A]">•</span>
+                      <span className="text-xs font-mono text-[#9BA8AB]">{item.localEdital}</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-white group-hover:text-[#CCD0CF]">
+                      {item.documento}
+                    </h3>
+                  </div>
+
+                  <div className="flex items-center gap-3 shrink-0">
+                    <Badge variant={statusVariant}>{item.status}</Badge>
+                    {isExpanded ? (
+                      <ChevronUp className="w-4 h-4 text-[#9BA8AB]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#4A5C6A] group-hover:text-[#9BA8AB]" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Detalhamento Expansível */}
+                {isExpanded && (
+                  <div className="p-4 rounded border border-[#253745] bg-[#11212D] space-y-3 text-xs font-mono">
+                    <div>
+                      <span className="text-[#9BA8AB] block uppercase tracking-wider text-[10px]">
+                        Diagnóstico Pericial:
+                      </span>
+                      <p className="text-[#CCD0CF] font-sans text-xs mt-1 leading-relaxed">
+                        {item.diagnostico}
+                      </p>
+                    </div>
+
+                    {item.trechoEdital && (
+                      <div className="p-2.5 rounded bg-[#06141B] border border-[#253745] text-[#9BA8AB] italic">
+                        "{item.trechoEdital}"
+                      </div>
+                    )}
+
+                    {item.mitigacao && (
+                      <div className="text-[#F59E0B]">
+                        <strong>Orientação de Regularização:</strong> {item.mitigacao}
+                      </div>
+                    )}
+
+                    {item.fonteOficialUrl && (
+                      <div className="pt-1">
+                        <a
+                          href={item.fonteOficialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[#CCD0CF] hover:underline"
+                        >
+                          <ExternalLink className="w-3 h-3 text-[#9BA8AB]" />
+                          <span>{item.dispositivoLegal || "Consultar Texto Oficial Compilado no Planalto"}</span>
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* SEÇÃO D — RESSALVAS E PONTOS DE ATENÇÃO PREVENTIVA */}
+      {ressalvaItems.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#F59E0B] flex items-center gap-1.5">
+              <AlertTriangle className="w-3.5 h-3.5" />
+              <span>Ressalvas e Pontos de Atenção Preventiva ({ressalvaItems.length})</span>
+            </h2>
+            <span className="text-xs font-mono text-[#9BA8AB]">Falhas sanáveis</span>
+          </div>
+
+          <div className="space-y-3">
+            {ressalvaItems.map((r, idx) => (
+              <div key={idx} className="p-4 rounded border border-[#253745] bg-[#11212D] space-y-2">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-sm font-semibold text-white">{r.documento}</h4>
+                  <Badge variant="warning">Ressalva Sanável</Badge>
+                </div>
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">{r.diagnostico}</p>
+                {r.mitigacao && (
+                  <p className="text-xs text-[#9BA8AB] border-t border-[#1c2b36] pt-2">
+                    <strong className="text-[#F59E0B]">Ação de Mitigação:</strong> {r.mitigacao}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* SEÇÃO E — PENDÊNCIAS ELIMINATÓRIAS & CLÁUSULAS RESTRITIVAS */}
+      {armadilhas.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#EF4444] flex items-center gap-1.5">
+              <XCircle className="w-3.5 h-3.5" />
+              <span>Cláusulas Restritivas & Risco de Inabilitação ({armadilhas.length})</span>
+            </h2>
+            <span className="text-xs font-mono text-[#9BA8AB]">Cabimento de Impugnação Art. 164</span>
+          </div>
+
+          <div className="space-y-4">
+            {armadilhas.map((armadilha, idx) => (
+              <div key={idx} className="p-4 rounded border border-[#253745] bg-[#11212D] space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <h4 className="text-sm font-semibold text-white">{armadilha.titulo}</h4>
+                  {armadilha.impacto && <Badge variant="danger">{armadilha.impacto}</Badge>}
+                </div>
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">{armadilha.descricao}</p>
+                <div className="p-3 rounded bg-[#06141B] border border-[#253745] font-mono text-xs text-[#9BA8AB] italic">
+                  "{armadilha.texto_original}"
+                </div>
+
+                <div className="flex items-center gap-2 pt-1">
+                  <Button variant="primary" size="sm" onClick={() => handleOpenMinuta(armadilha)} className="gap-1.5">
+                    <PenLine className="w-3.5 h-3.5 text-[#CCD0CF]" />
+                    <span>Gerar Minuta Art. 164</span>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => copyClause(armadilha.texto_original, idx)}
+                    className="gap-1 text-xs"
+                  >
+                    {copiedClauseIndex === idx ? (
+                      <>
+                        <Check className="w-3 h-3 text-[#10B981]" />
+                        <span className="text-[#10B981]">Copiado</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3 text-[#9BA8AB]" />
+                        <span>Copiar Trecho</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* SEÇÃO F — FUNDAMENTAÇÃO LEGAL (LINKS PLANALTO) */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+            Fundamentação Legal (Nova Lei de Licitações - 14.133/2021)
+          </h2>
+          <span className="text-xs font-mono text-[#4A5C6A]">Normas Legais Oficiais</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+          <a
+            href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art62"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 rounded border border-[#253745] bg-[#11212D]/40 hover:bg-[#11212D] transition-colors flex items-center justify-between group"
+          >
+            <div>
+              <span className="text-white font-semibold block">Art. 62 — Fases da Habilitação</span>
+              <span className="text-[#9BA8AB] text-[11px] block mt-0.5">Conjunto de informações e documentos comprobatórios</span>
+            </div>
+            <ExternalLink className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+          </a>
+
+          <a
+            href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art67"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 rounded border border-[#253745] bg-[#11212D]/40 hover:bg-[#11212D] transition-colors flex items-center justify-between group"
+          >
+            <div>
+              <span className="text-white font-semibold block">Art. 67 — Qualificação Técnica</span>
+              <span className="text-[#9BA8AB] text-[11px] block mt-0.5">Atestados de capacidade técnica e limites de até 50%</span>
+            </div>
+            <ExternalLink className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+          </a>
+
+          <a
+            href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art68"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 rounded border border-[#253745] bg-[#11212D]/40 hover:bg-[#11212D] transition-colors flex items-center justify-between group"
+          >
+            <div>
+              <span className="text-white font-semibold block">Art. 68 — Regularidade Fiscal e Trabalhista</span>
+              <span className="text-[#9BA8AB] text-[11px] block mt-0.5">Certidões CND Federal, FGTS e CNDT</span>
+            </div>
+            <ExternalLink className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+          </a>
+
+          <a
+            href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm#art164"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3.5 rounded border border-[#253745] bg-[#11212D]/40 hover:bg-[#11212D] transition-colors flex items-center justify-between group"
+          >
+            <div>
+              <span className="text-white font-semibold block">Art. 164 — Impugnação Administrativa</span>
+              <span className="text-[#9BA8AB] text-[11px] block mt-0.5">Prazo legal de até 3 dias úteis antes da sessão</span>
+            </div>
+            <ExternalLink className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+          </a>
+        </div>
+      </section>
+
+      {/* SEÇÃO G — PLANO DE REGULARIZAÇÃO PRIORIZADO */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+            Plano de Regularização e Ações Recomendadas
+          </h2>
+          <span className="text-xs font-mono text-[#4A5C6A]">Passo a Passo Pré-Disputa</span>
+        </div>
+
+        <div className="space-y-3 text-xs">
+          {armadilhas.length > 0 && (
+            <div className="p-3.5 rounded border border-[#253745] bg-[#11212D] flex items-start gap-3">
+              <span className="font-mono font-bold text-[#EF4444] px-1.5 py-0.5 rounded bg-[rgba(239,68,68,0.12)] shrink-0">
+                01. PRIORIDADE ALTA
+              </span>
+              <div>
+                <strong className="text-white block">Avaliar Impugnação do Edital (Art. 164)</strong>
+                <span className="text-[#9BA8AB] block mt-0.5 leading-relaxed">
+                  Foram identificadas {armadilhas.length} cláusula(s) restritiva(s). Protocolar manifestação tempestiva perante o órgão dentro do prazo de 3 dias úteis.
+                </span>
+              </div>
+            </div>
+          )}
+
+          {ressalvaItems.length > 0 && (
+            <div className="p-3.5 rounded border border-[#253745] bg-[#11212D] flex items-start gap-3">
+              <span className="font-mono font-bold text-[#F59E0B] px-1.5 py-0.5 rounded bg-[rgba(245,158,11,0.12)] shrink-0">
+                02. PRIORIDADE MÉDIA
+              </span>
+              <div>
+                <strong className="text-white block">Renovação e Saneamento de Certidões</strong>
+                <span className="text-[#9BA8AB] block mt-0.5 leading-relaxed">
+                  Verificar a vigência das certidões fiscais perante a Fazenda Nacional e FGTS antes do envio da proposta para evitar inabilitação por prazo expirado.
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="p-3.5 rounded border border-[#253745] bg-[#11212D] flex items-start gap-3">
+            <span className="font-mono font-bold text-[#10B981] px-1.5 py-0.5 rounded bg-[rgba(16,185,129,0.12)] shrink-0">
+              03. CONFORMIDADE
+            </span>
+            <div>
+              <strong className="text-white block">Conferência Final da Documentação do Cofre</strong>
+              <span className="text-[#9BA8AB] block mt-0.5 leading-relaxed">
+                Confirmar indexação dos balanços e atestados técnicos no Portal de Compras do convocante.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO H — CONCLUSÃO EXECUTIVA */}
+      <section className="space-y-4 border-t border-[#253745] pt-6">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
+          Conclusão Executiva
+        </h2>
+        <div className="p-4 rounded border border-[#253745] bg-[#11212D] space-y-2 text-xs text-[#CCD0CF] leading-relaxed">
+          <p>
+            A auditoria preventiva de conformidade indica que a empresa <strong>{companyName}</strong> apresenta aderência aos requisitos formais de qualificação do certame <strong>{data.dados_gerais.numero_edital || "Auditado"}</strong>.
+          </p>
+          <p className="text-[#9BA8AB]">
+            Recomenda-se o cumprimento rigoroso das orientações preventivas constantes deste parecer técnico antes do encerramento do prazo de submissão de propostas.
+          </p>
+        </div>
+      </section>
+
+      {/* Modal da Minuta de Impugnação Art. 164 */}
       {activeMinutaText && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#0b101d] border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl p-6 sm:p-7 space-y-4 max-h-[90vh] flex flex-col">
-            <div className="flex items-start justify-between pb-3 border-b border-slate-800">
+          <div className="bg-[#11212D] border border-[#253745] w-full max-w-3xl rounded-xl shadow-2xl p-6 space-y-4 max-h-[90vh] flex flex-col">
+            <div className="flex items-start justify-between pb-3 border-b border-[#253745]">
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
-                  <Scale className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Art. 164 da Lei 14.133/2021 • Impugnação de Edital</span>
-                </div>
-                <h3 className="text-base font-bold text-white tracking-tight">
+                <span className="text-xs font-mono text-[#CCD0CF]">
+                  Art. 164 da Lei 14.133/2021 • Minuta de Impugnação
+                </span>
+                <h3 className="text-base font-semibold text-white font-display">
                   {activeMinutaTitle}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveMinutaText(null)}
-                className="p-1 rounded-lg text-[#4A5C6A] hover:text-white hover:bg-slate-800 transition-colors"
+                className="text-[#9BA8AB] hover:text-white p-1"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* TASK UX #2: Auto-Fill Impugnation Drafts com Campos Editáveis e Persistência */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
-              <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-[#4A5C6A]">
-                  Razão Social (Perfil):
-                </label>
-                <input
-                  type="text"
-                  value={companyName}
-                  onChange={(e) => handleUpdateDraft(e.target.value, companyCnpj, gestorName)}
-                  placeholder="Nome da Empresa"
-                  className="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-[#4A5C6A]">
-                  CNPJ:
-                </label>
-                <input
-                  type="text"
-                  value={companyCnpj}
-                  onChange={(e) => handleUpdateDraft(companyName, e.target.value, gestorName)}
-                  placeholder="00.000.000/0001-00"
-                  className="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-[#4A5C6A]">
-                  Gestor / Procurador:
-                </label>
-                <input
-                  type="text"
-                  value={gestorName}
-                  onChange={(e) => handleUpdateDraft(companyName, companyCnpj, e.target.value)}
-                  placeholder="Nome do Gestor"
-                  className="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono"
-                />
-              </div>
-            </div>
-
-            <div className="flex-1 overflow-y-auto p-4 rounded-xl bg-[#060a12] border border-slate-800 text-slate-300 font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
+            <div className="flex-1 overflow-y-auto p-4 rounded bg-[#06141B] border border-[#253745] text-[#CCD0CF] font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
               {activeMinutaText}
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-slate-800 flex-wrap gap-2">
-              <span className="text-[11px] text-[#9BA8AB]">
-                Petição fundamentada em acórdãos do TCU e dispositivos da Lei 14.133/21
+            <div className="flex items-center justify-between pt-2 border-t border-[#253745] flex-wrap gap-2">
+              <span className="text-[11px] text-[#9BA8AB] font-mono">
+                Fundamentada no Art. 164 e precedentes do TCU
               </span>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setActiveMinutaText(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#4A5C6A] hover:text-white hover:bg-slate-800 transition-colors"
-                >
+                <Button variant="outline" size="sm" onClick={() => setActiveMinutaText(null)}>
                   Fechar
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCopyMinuta}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-md shadow-blue-600/30 transition-all active:scale-[0.98]"
+                </Button>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => {
+                    if (activeMinutaText) {
+                      navigator.clipboard.writeText(activeMinutaText);
+                      setCopiedMinuta(true);
+                      setTimeout(() => setCopiedMinuta(false), 2000);
+                    }
+                  }}
+                  className="gap-1.5"
                 >
                   {copiedMinuta ? (
                     <>
-                      <Check className="w-4 h-4 text-emerald-400" />
-                      <span>Copiado para Área de Transferência.</span>
+                      <Check className="w-3.5 h-3.5 text-[#10B981]" />
+                      <span>Copiado com Sucesso!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-4 h-4" />
-                      <span>Copiar Minuta Completa</span>
+                      <Copy className="w-3.5 h-3.5 text-white" />
+                      <span>Copiar Petição Completa</span>
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Modal de Upgrade para Minutas Art. 164 (Gate do Plano Starter) */}
+      {/* Modal de Upgrade do Plano Starter para Minutas */}
       {showUpgradeModalMinuta && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[var(--surface)] border border-[var(--line)] w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 text-center">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 mx-auto">
-              <Lock className="w-6 h-6" strokeWidth={1.75} />
+          <div className="bg-[#11212D] border border-[#253745] w-full max-w-md rounded-xl shadow-2xl p-6 space-y-4 text-center">
+            <div className="w-12 h-12 rounded-xl bg-[rgba(245,158,11,0.12)] border border-[rgba(245,158,11,0.25)] flex items-center justify-center text-[#F59E0B] mx-auto">
+              <Lock className="w-6 h-6" />
             </div>
             <div className="space-y-1.5">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wide text-amber-500">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#F59E0B]">
                 Recurso do Plano Pro / Enterprise
               </span>
-              <h3 className="text-base font-bold text-[var(--ink)] font-display">
+              <h3 className="text-base font-semibold text-white font-display">
                 Minutas Automáticas de Impugnação (Art. 164)
               </h3>
-              <p className="text-xs text-[var(--ink-2)] leading-relaxed">
-                O seu plano atual (Starter) dá acesso ao veredito e cálculo de habilitação. A geração de petições fundamentadas em acórdãos do TCU com 1 clique é exclusiva dos planos Pro e Enterprise.
+              <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                A geração de petições fundamentadas em acórdãos do TCU com 1 clique é exclusiva dos planos Pro e Enterprise.
               </p>
             </div>
             <div className="pt-2 flex flex-col gap-2">
-              <a
-                href="/pricing"
-                className="w-full py-2.5 px-4 rounded-lg text-xs font-bold text-white bg-[var(--brand-solid)] hover:brightness-110 shadow-xs transition-all flex items-center justify-center gap-1.5"
-              >
-                <span>Fazer Upgrade para Plano Pro (R$ 297/mês)</span>
+              <a href="/pricing">
+                <Button variant="primary" size="md" className="w-full">
+                  Fazer Upgrade para Plano Pro (R$ 297/mês)
+                </Button>
               </a>
-              <button
-                type="button"
-                onClick={() => setShowUpgradeModalMinuta(false)}
-                className="w-full py-2 text-xs font-semibold text-[var(--ink-2)] hover:text-[var(--ink)]"
-              >
+              <Button variant="ghost" size="sm" onClick={() => setShowUpgradeModalMinuta(false)}>
                 Voltar ao Parecer
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       )}
-
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6"
-      >
-        {/* REFINEMENT #3: Carimbo e Cabeçalho Executivo Exclusivo para Exportação / Impressão */}
-        <ParecerHeader
-          companyName={companyName}
-          numeroEdital={data.dados_gerais.numero_edital}
-          orgao={data.dados_gerais.orgao}
-          vereditoGeral={data.veredito_habilitacao || "RESSALVA"}
-          passaCount={(data.semaforo_habilitacao || []).filter((i) => i.status === "PASSA").length}
-          ressalvaCount={(data.semaforo_habilitacao || []).filter((i) => i.status === "RESSALVA").length}
-          eliminatoriaCount={(data.semaforo_habilitacao || []).filter((i) => i.status === "ELIMINATORIA").length}
-          revisaoCount={(data.semaforo_habilitacao || []).filter((i) => i.status === "REVISAO_HUMANA_NECESSARIA").length}
-        />
-
-        {/* TASK: RETIFICATION DIFF ENGINE ALERT (Defense Moat Bento Redesign) */}
-        {data.dados_gerais.retificationAlert?.retified && (
-          <motion.div variants={itemVariants}>
-            <RetificationRadarCard
-              previousDate={data.dados_gerais.retificationAlert.previousDate}
-              changes={data.dados_gerais.retificationAlert.changes}
-              editalTitle={data.dados_gerais.numero_edital}
-            />
-          </motion.div>
-        )}
-
-        {/* TASK: UI FEEDBACK FOR MISMATCH (SEU PERFIL vs CATEGORIA DO EDITAL) */}
-        {data.vertical_mismatch && (
-          <motion.div
-            variants={itemVariants}
-            className="p-4 rounded-xl bg-[var(--warn-bg)] border border-[var(--warn)]/40 text-[var(--warn-fg)] text-xs space-y-1.5 shadow-sm font-sans"
-          >
-            <div className="flex items-center gap-2 font-bold text-[var(--warn-fg)]">
-              <AlertTriangle className="w-4 h-4 text-[var(--warn)] shrink-0" strokeWidth={1.75} />
-              <span className="font-mono text-xs uppercase tracking-wide">Divergência de Vertical Detectada</span>
-            </div>
-            <p className="text-xs leading-relaxed text-[var(--ink)]">
-              {data.vertical_mismatch_warning ||
-                `Divergência de Vertical: Seu perfil é ${data.user_primary_vertical || "Não definido"}, mas este edital é ${data.detected_vertical || data.vertical}. As regras de habilitação foram ajustadas para o edital.`}
-            </p>
-            <p className="text-[11px] font-mono text-[var(--ink-2)]">
-              Dica de Acervo: Seu cofre é focado em {data.user_primary_vertical || "outro segmento"}. Verifique se a sua empresa possui as certidões e atestados específicos exigidos para este objeto.
-            </p>
-          </motion.div>
-        )}
-
-        {/* =========================================================================
-            FEATURE CORE #1: SEMÁFORO DE HABILITAÇÃO ART. 62 NO TOPO ABSOLUTO
-            O veredito de aprovação/eliminação é a primeira decisão do gestor.
-           ========================================================================= */}
-        <motion.div variants={itemVariants}>
-          <SemaforoHabilitacao
-            items={data.semaforo_habilitacao}
-            vereditoGeral={data.veredito_habilitacao || "RESSALVA"}
-            justificativaVeredito={data.justificativa_veredito || "Auditoria preventiva de habilitação com base na Lei 14.133/2021."}
-          />
-        </motion.div>
-
-        {/* Barra de Ações Superior com Badges de Categoria */}
-        <motion.div
-          variants={itemVariants}
-          className="rounded-2xl p-4 sm:p-5 border border-[#253745] bg-[#11212D] shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                  Auditoria de Habilitação Concluída
-                </span>
-                <span className="text-[10px] bg-[#06141B] text-[#CCD0CF] px-2 py-0.5 rounded-full border border-[#253745] font-mono">
-                  CATEGORIA DETECTADA: {data.detected_vertical || data.vertical || "Obras Públicas"}
-                </span>
-                {data.user_primary_vertical && (
-                  <span className="text-[10px] bg-[#06141B] text-[#9BA8AB] px-2 py-0.5 rounded-full border border-[#253745] font-mono">
-                    SUA PREFERÊNCIA: {data.user_primary_vertical}
-                  </span>
-                )}
-              </div>
-              <h2 className="text-base sm:text-lg font-bold text-[#CCD0CF] tracking-tight">
-                {data.dados_gerais.numero_edital || "Certame Licitatório Auditado"}
-              </h2>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5">
-            <button
-              type="button"
-              onClick={onReset}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#253745] hover:bg-[#324859] text-[#CCD0CF] hover:text-white border border-[#9BA8AB]/30 transition-all active:scale-[0.98]"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Auditar Outro Edital</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleExportParecerPDF}
-              disabled={isExportingPDF}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#253745] hover:bg-[#324859] shadow-md border border-[#9BA8AB]/40 transition-all active:scale-[0.98] disabled:opacity-60"
-            >
-              <Download className="w-3.5 h-3.5 text-white" />
-              <span>{isExportingPDF ? "Compilando PDF..." : "Exportar Parecer Nativo (PDF)"}</span>
-            </button>
-          </div>
-        </motion.div>
-
-        {/* =========================================================================
-            CORPO DA AUDITORIA:
-            - Coluna Esquerda (lg:col-span-5): Resumo do Objeto, Metadados & Cláusulas Críticas
-            - Coluna Direita (lg:col-span-7): Checklist Art. 62 Completo com Vínculo ao Cofre
-           ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          {/* COLUNA ESQUERDA: RESUMO ESTRUTURADO + CLÁUSULAS RESTRITIVAS (5 colunas) */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Objeto */}
-            <motion.div
-              variants={itemVariants}
-              className="rounded-3xl p-6 border border-[#253745] bg-[#11212D] shadow-xl space-y-2.5"
-            >
-              <span className="text-xs font-bold uppercase tracking-wider text-[#9BA8AB] block">
-                Objeto da Licitação
-              </span>
-              <p className="text-sm font-semibold text-[#CCD0CF] leading-relaxed">
-                {data.dados_gerais.objeto}
-              </p>
-            </motion.div>
-
-            {/* Metadados do Certame */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#9BA8AB] block pl-1">
-                Metadados Convocatórios
-              </span>
-
-              {/* Valor Estimado */}
-              <div className="rounded-2xl p-4 border border-[#253745] bg-[#11212D] shadow-md flex items-center justify-between">
-                <div>
-                  <span className="text-[11px] text-[#9BA8AB] font-medium block">Valor Estimado da Contratação</span>
-                  <span className="text-lg font-bold text-emerald-400 font-mono">
-                    {data.dados_gerais.valor_estimado}
-                  </span>
-                </div>
-                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-                  <DollarSign className="w-5 h-5" />
-                </div>
-              </div>
-
-              {/* Data da Sessão */}
-              <div className="rounded-2xl p-4 border border-[#253745] bg-[#11212D] shadow-md flex items-center justify-between">
-                <div>
-                  <span className="text-[11px] text-[#9BA8AB] font-medium block">Data e Hora da Sessão Pública</span>
-                  <span className="text-sm font-semibold text-[#CCD0CF] font-mono">
-                    {data.dados_gerais.data_sessao}
-                  </span>
-                </div>
-                <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
-                  <Calendar className="w-5 h-5" />
-                </div>
-              </div>
-
-              {/* Prazo Limite de Impugnação com Contagem Regressiva Útil (REFINEMENT #2) */}
-              {(() => {
-                const countdown = calculateRemainingBusinessDays(data.dados_gerais.prazo_impugnacao);
-                const bgClass = countdown.isExpired
-                  ? "bg-rose-950/40 border-rose-500/40"
-                  : countdown.isUrgent
-                  ? "bg-amber-950/40 border-amber-500/40"
-                  : "bg-[#11212D] border-[#253745]";
-                const textClass = countdown.isExpired
-                  ? "text-rose-400"
-                  : countdown.isUrgent
-                  ? "text-amber-400"
-                  : "text-[#CCD0CF]";
-
-                return (
-                  <div className={`rounded-xl p-4 border shadow-sm flex items-center justify-between transition-colors ${bgClass}`}>
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[11px] text-[#9BA8AB] font-medium block">
-                          Prazo Limite de Impugnação (Art. 164)
-                        </span>
-                        <span
-                          className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
-                            countdown.isExpired
-                              ? "bg-rose-950/80 text-rose-300 border-rose-500/50"
-                              : countdown.isUrgent
-                              ? "bg-amber-950/80 text-amber-300 border-amber-500/50"
-                              : "bg-[#06141B] text-[#CCD0CF] border-[#253745]"
-                          }`}
-                        >
-                          {countdown.label}
-                        </span>
-                      </div>
-                      <div className="flex items-baseline gap-2">
-                        <span className={`text-sm font-bold font-mono ${textClass}`}>
-                          {data.dados_gerais.prazo_impugnacao}
-                        </span>
-                        <span className="text-[11px] font-mono text-[#9BA8AB]">
-                          · {countdown.label}
-                        </span>
-                      </div>
-                      <span className="text-[10px] text-[#9BA8AB] block">
-                        3 dias úteis antes da abertura da sessão pública (Lei 14.133/2021)
-                      </span>
-                    </div>
-                    <div
-                      className={`p-2 rounded-xl shrink-0 ${
-                        countdown.isExpired
-                          ? "bg-rose-500/10 text-rose-400"
-                          : countdown.isUrgent
-                          ? "bg-amber-500/10 text-amber-400"
-                          : "bg-[#253745] text-[#CCD0CF]"
-                      }`}
-                    >
-                      <Clock className="w-5 h-5" />
-                    </div>
-                  </div>
-                );
-              })()}
-
-              {/* Órgão Licitante */}
-              {data.dados_gerais.orgao && (
-                <div className="rounded-2xl p-4 border border-[#253745] bg-[#11212D] shadow-md flex items-center justify-between">
-                  <div>
-                    <span className="text-[11px] text-[#9BA8AB] font-medium block">Órgão Convocante</span>
-                    <span className="text-xs font-semibold text-[#CCD0CF]">
-                      {data.dados_gerais.orgao}
-                    </span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-[#06141B] text-[#9BA8AB]">
-                    <Building2 className="w-5 h-5" />
-                  </div>
-                </div>
-              )}
-            </motion.div>
-
-            {/* Cláusulas Restritivas & Minutas Art. 164 */}
-            <div className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5 pl-1">
-                <AlertTriangle className="w-4 h-4" />
-                <span>Cláusulas Restritivas Identificadas ({data.armadilhas.length})</span>
-              </span>
-
-              {data.armadilhas.map((armadilha, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  className="rounded-2xl border border-[#253745] border-l-4 border-l-rose-500 bg-[#11212D] p-4 sm:p-5 space-y-3 shadow-md"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <h4 className="text-xs sm:text-sm font-bold text-[#CCD0CF] tracking-tight leading-snug">
-                      {armadilha.titulo}
-                    </h4>
-                    {armadilha.impacto && (
-                      <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 shrink-0">
-                        {armadilha.impacto}
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-xs text-[#9BA8AB] leading-relaxed font-normal">
-                    {armadilha.descricao}
-                  </p>
-
-                  <div className="p-3 rounded-xl bg-[#06141B] border border-[#253745] font-mono text-[11px] text-[#CCD0CF] italic select-all leading-relaxed">
-                    “{armadilha.texto_original}”
-                  </div>
-
-                  <div className="pt-1 flex items-center justify-between gap-2 flex-wrap">
-                    <button
-                      type="button"
-                      onClick={() => handleOpenMinuta(armadilha)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#253745] hover:bg-[#324859] text-white shadow-md border border-[#9BA8AB]/30 transition-all active:scale-[0.98]"
-                    >
-                      <PenLine className="w-3.5 h-3.5" strokeWidth={1.5} />
-                      <span>Gerar Minuta Art. 164</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => copyClause(armadilha.texto_original, idx)}
-                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-[#06141B] hover:bg-[#253745] text-[#9BA8AB] hover:text-[#CCD0CF] border border-[#253745] transition-all active:scale-[0.98]"
-                    >
-                      {copiedClauseIndex === idx ? (
-                        <>
-                          <Check className="w-3 h-3 text-emerald-400" />
-                          <span className="text-emerald-400 font-bold">Copiado</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3 text-[#9BA8AB]" />
-                          <span>Copiar Trecho</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* COLUNA DIREITA: CHECKLIST ART. 62 COMPLETO (7 colunas) */}
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div variants={itemVariants}>
-              <ChecklistArt62 />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* DISCLAIMER JURÍDICO PERSISTENTE OBRIGATÓRIO */}
-        <motion.div
-          variants={itemVariants}
-          className="p-4 rounded-xl bg-[#0c1322] border border-slate-700/80 text-center text-xs text-slate-300 space-y-1 shadow-sm"
-        >
-          <p className="font-semibold text-slate-200">
-            Ferramenta de suporte à decisão. Responsabilidade jurídica permanece com a empresa licitante.
-          </p>
-          <p className="text-[11px] text-[#4A5C6A]">
-            A auditoria preventiva de habilitação indica aderência e conformidade com base no Art. 62 da Lei 14.133/2021 e nos documentos do cofre cadastrado.
-          </p>
-        </motion.div>
-      </motion.div>
-    </>
+    </div>
   );
 };

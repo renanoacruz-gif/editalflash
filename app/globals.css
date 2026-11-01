@@ -1,4 +1,10 @@
+/* Hallmark · shape: kept · genre: modern-minimal · theme: brand · redesign: full
+ * paper: #FFFFFF · accent: #1E3A8A · display: Bricolage Grotesque · body: Inter · hero: Stage · nav: edge-aligned · footer: mast · signature: interactive-parecer
+ * axes: #FFFFFF/Bricolage Grotesque/#1E3A8A · posture: Stage · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P_ H_ E_ S_ R_ V_ · weakest: hierarchy, tightened font-mono and removed nested boxes */
 @import "tailwindcss";
+@import "./tokens.css";
+@import "./base.css" layer(base);
 
 :root {
   --bg: #FFFFFF;

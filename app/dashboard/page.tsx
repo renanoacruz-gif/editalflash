@@ -36,7 +36,7 @@ export default function DashboardHome() {
     return (
       <DashboardLayout activeTab="analises">
         <div className="space-y-6 max-w-6xl mx-auto">
-          <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-200">
             <Button
               variant="outline"
               size="sm"
@@ -45,7 +45,7 @@ export default function DashboardHome() {
             >
               ← Voltar ao Histórico
             </Button>
-            <span className="text-xs font-mono text-[#64748B]">
+            <span className="text-xs font-mono text-slate-500">
               Visualizando Parecer Salvo (Sem consumo de créditos)
             </span>
           </div>
@@ -68,10 +68,10 @@ export default function DashboardHome() {
         {/* CABEÇALHO RECOURA: MINIMALISTA COM TEXT-2XL */}
         <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-[#0F172A] tracking-tight">
+            <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
               {user?.name?.split(" ")[0] ? `Olá, ${user.name.split(" ")[0]}` : "Visão Geral"}
             </h1>
-            <p className="text-sm text-[#475569] mt-1">
+            <p className="text-sm text-slate-600 mt-1">
               Auditoria de conformidade e verificação prévia de habilitação em licitações (Lei 14.133/2021).
             </p>
           </div>
@@ -86,12 +86,12 @@ export default function DashboardHome() {
 
         {/* MÉTRICAS RECOURA: 4 CARDS BRANCOS COM BORDA SUTIL, SHADOW-SM E ROUNDED-2XL */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs uppercase tracking-wider text-[#475569] font-medium block">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs text-slate-500 font-medium block">
               Saldo de Auditorias
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-mono text-3xl font-bold text-[#0F172A]">
+              <span className="font-mono text-3xl font-bold text-slate-900">
                 {user?.analysesLimit || 5}
               </span>
               <button
@@ -106,158 +106,158 @@ export default function DashboardHome() {
                     description: "5 auditorias de editais com veredito, cálculo de PL e citação de páginas.",
                   })
                 }
-                className="text-xs font-medium text-[#1E3A8A] hover:underline cursor-pointer"
+                className="text-xs font-medium text-blue-900 hover:underline cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-900 rounded-xs"
               >
                 + Comprar
               </button>
             </div>
-            <span className="text-xs text-[#94A3B8] block mt-1">Plano {user?.plan || "Starter"}</span>
+            <span className="text-xs text-slate-400 block mt-1">Plano {user?.plan || "Starter"}</span>
           </div>
 
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs uppercase tracking-wider text-[#475569] font-medium block">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs text-slate-500 font-medium block">
               Editais Auditados
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-mono text-3xl font-bold text-[#0F172A]">
+              <span className="font-mono text-3xl font-bold text-slate-900">
                 {auditList.length}
               </span>
-              <span className="text-xs text-[#64748B]">no histórico</span>
+              <span className="text-xs text-slate-500">no histórico</span>
             </div>
-            <span className="text-xs text-[#94A3B8] block mt-1">Criptografia AES-256</span>
+            <span className="text-xs text-slate-400 block mt-1">Criptografia AES-256</span>
           </div>
 
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs uppercase tracking-wider text-[#475569] font-medium block">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs text-slate-500 font-medium block">
               Cláusulas Restritivas
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className={`font-mono text-3xl font-bold ${armadilhasTotal > 0 ? "text-[#D97706]" : "text-[#0F172A]"}`}>
+              <span className={`font-mono text-3xl font-bold ${armadilhasTotal > 0 ? "text-amber-600" : "text-slate-900"}`}>
                 {armadilhasTotal}
               </span>
-              <span className="text-xs text-[#64748B]">apontadas</span>
+              <span className="text-xs text-slate-500">apontadas</span>
             </div>
-            <span className="text-xs text-[#94A3B8] block mt-1">Mapeadas para Art. 164</span>
+            <span className="text-xs text-slate-400 block mt-1">Mapeadas para Art. 164</span>
           </div>
 
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-            <span className="text-xs uppercase tracking-wider text-[#475569] font-medium block">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <span className="text-xs text-slate-500 font-medium block">
               Cofre Documental
             </span>
             <div className="flex items-baseline gap-2 mt-2">
-              <span className="font-mono text-3xl font-bold text-[#059669]">
+              <span className="font-mono text-3xl font-bold text-emerald-600">
                 {auditList.length > 0 ? 4 : 0}
               </span>
-              <span className="text-xs text-[#059669] font-medium">vigentes</span>
+              <span className="text-xs text-emerald-600 font-medium">vigentes</span>
             </div>
-            <span className="text-xs text-[#94A3B8] block mt-1">Cruzamento Art. 62</span>
+            <span className="text-xs text-slate-400 block mt-1">Cruzamento Art. 62</span>
           </div>
         </section>
 
         {/* PILARES DA AUDITORIA: CARD ÚNICO BRANCO P-8 COM DIVIDE-Y SUBTLE */}
-        <section className="bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-sm">
-          <div className="pb-4 border-b border-[#E2E8F0] flex items-center justify-between">
+        <section className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+          <div className="pb-4 border-b border-slate-200 flex items-center justify-between">
             <div>
-              <h2 className="text-base font-semibold text-[#0F172A]">
+              <h2 className="text-base font-semibold text-slate-900">
                 Módulos e Ações Rápidas
               </h2>
-              <p className="text-xs text-[#64748B] mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Navegação direta pelas ferramentas periciais do EditalFlash.
               </p>
             </div>
-            <span className="text-xs font-mono text-[#94A3B8]">Lei 14.133/2021</span>
+            <span className="text-xs font-mono text-slate-400">Lei 14.133/2021</span>
           </div>
 
-          <div className="divide-y divide-[#E2E8F0]">
+          <div className="divide-y divide-slate-200">
             <Link
               href="/dashboard/nova-analise?tab=pncp"
-              className="py-4 flex items-center justify-between group hover:bg-[#F8FAFC] -mx-4 px-4 rounded-lg transition-colors"
+              className="py-4 flex items-center justify-between group hover:bg-slate-50 -mx-4 px-4 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-9 h-9 rounded-lg bg-[#EFF6FF] text-[#1E3A8A] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-900 flex items-center justify-center shrink-0">
                   <Database className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors">
+                  <h3 className="text-sm font-semibold text-slate-900 group-hover:text-blue-900 transition-colors">
                     Busca e Radar PNCP
                   </h3>
-                  <p className="text-xs text-[#64748B]">
+                  <p className="text-xs text-slate-500">
                     Localize certames abertos diretamente na base do Portal Nacional de Contratações Públicas.
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#1E3A8A] transition-all transform group-hover:translate-x-1 shrink-0 ml-4" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-900 transition-colors transform group-hover:translate-x-1 shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/cofre"
-              className="py-4 flex items-center justify-between group hover:bg-[#F8FAFC] -mx-4 px-4 rounded-lg transition-colors"
+              className="py-4 flex items-center justify-between group hover:bg-slate-50 -mx-4 px-4 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-9 h-9 rounded-lg bg-[#F0FDF4] text-[#059669] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors">
+                  <h3 className="text-sm font-semibold text-slate-900 group-hover:text-blue-900 transition-colors">
                     Cofre de Documentos (Art. 62)
                   </h3>
-                  <p className="text-xs text-[#64748B]">
+                  <p className="text-xs text-slate-500">
                     Custódia segura de certidões negativas, balanço patrimonial e atestados de acervo técnico.
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#1E3A8A] transition-all transform group-hover:translate-x-1 shrink-0 ml-4" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-900 transition-colors transform group-hover:translate-x-1 shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/calendario"
-              className="py-4 flex items-center justify-between group hover:bg-[#F8FAFC] -mx-4 px-4 rounded-lg transition-colors"
+              className="py-4 flex items-center justify-between group hover:bg-slate-50 -mx-4 px-4 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-9 h-9 rounded-lg bg-[#FEF3C7] text-[#D97706] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors">
+                  <h3 className="text-sm font-semibold text-slate-900 group-hover:text-blue-900 transition-colors">
                     Calendário de Sessões e Prazos
                   </h3>
-                  <p className="text-xs text-[#64748B]">
+                  <p className="text-xs text-slate-500">
                     Monitoramento de validade das certidões cruzado com as datas de disputa e prazos de impugnação.
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#1E3A8A] transition-all transform group-hover:translate-x-1 shrink-0 ml-4" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-900 transition-colors transform group-hover:translate-x-1 shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/acervo"
-              className="py-4 flex items-center justify-between group hover:bg-[#F8FAFC] -mx-4 px-4 rounded-lg transition-colors"
+              className="py-4 flex items-center justify-between group hover:bg-slate-50 -mx-4 px-4 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3.5">
-                <div className="w-9 h-9 rounded-lg bg-[#F5F3FF] text-[#7C3AED] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                   <Award className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors">
+                  <h3 className="text-sm font-semibold text-slate-900 group-hover:text-blue-900 transition-colors">
                     Portfólio de Acervo Técnico (Súmula 263/TCU)
                   </h3>
-                  <p className="text-xs text-[#64748B]">
+                  <p className="text-xs text-slate-500">
                     Análise de quantitativos comprovados e regra de somatório de parcelas de maior relevância.
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-[#94A3B8] group-hover:text-[#1E3A8A] transition-all transform group-hover:translate-x-1 shrink-0 ml-4" />
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-900 transition-colors transform group-hover:translate-x-1 shrink-0 ml-4" />
             </Link>
           </div>
         </section>
 
         {/* HISTÓRICO DE AUDITORIAS: TABELA LIMPA EM CARD BRANCO */}
-        <section className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E2E8F0]">
-            <h2 className="text-sm font-semibold text-[#0F172A]">
+        <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+            <h2 className="text-sm font-semibold text-slate-900">
               Histórico de Editais Auditados
             </h2>
-            <span className="text-xs text-[#64748B]">Total: {auditList.length}</span>
+            <span className="text-xs text-slate-500">Total: {auditList.length}</span>
           </div>
 
           <AuditHistoryTable
@@ -268,7 +268,7 @@ export default function DashboardHome() {
         </section>
 
         {/* ROI E ECONOMIA */}
-        <section className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm">
+        <section className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <RoiDashboard
             auditHistory={auditList}
             planPriceMonthly={user?.plan === "Enterprise" ? 890 : user?.plan === "Pro" ? 297 : 97}

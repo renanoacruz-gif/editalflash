@@ -376,7 +376,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#06141B] font-display tracking-tight mb-2">
-              Cadastre sua Empresa
+              Cadastre sua empresa
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 font-sans mb-6">
               Comece a auditar a habilitação jurídica e fiscal em menos de 3 minutos.

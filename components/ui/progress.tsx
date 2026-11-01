@@ -8,14 +8,14 @@ export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Progress: React.FC<ProgressProps> = ({
   value,
-  indicatorColor = "bg-[#10B981]",
+  indicatorColor = "bg-[#1E3A8A]",
   className,
   ...props
 }) => {
   const clamped = Math.min(100, Math.max(0, value));
   return (
     <div
-      className={clsx("relative h-1.5 w-full overflow-hidden rounded-full bg-[#253745]", className)}
+      className={clsx("relative h-2 w-full overflow-hidden rounded-full bg-[#E2E8F0]", className)}
       {...props}
     >
       <div

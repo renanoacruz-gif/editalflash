@@ -107,12 +107,12 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
   return (
     <div className="space-y-8">
       {/* Resumo Topo Sem Cards Pesados */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#253745]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
         <div>
-          <h2 className="text-base font-semibold text-white font-display">
+          <h2 className="text-base font-semibold text-[#0F172A] font-display">
             Portfólio de Acervo Técnico & Capacidade Operacional
           </h2>
-          <p className="text-xs text-[#9BA8AB] mt-0.5">
+          <p className="text-xs text-[#475569] mt-0.5">
             Análise consolidada conforme o Art. 67 da Lei 14.133/2021 e jurisprudência pacífica da Súmula 263 do TCU.
           </p>
         </div>
@@ -136,19 +136,19 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
           return (
             <div
               key={idx}
-              className="py-4 border-b border-[#253745] space-y-3"
+              className="p-6 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm space-y-4"
             >
               {/* Header da Linha */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-start gap-2.5">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#11212D] text-[#CCD0CF] border border-[#253745] shrink-0 mt-0.5">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F8FAFC] text-[#0F172A] border border-[#E2E8F0] shrink-0 mt-0.5">
                     {item.verticalCode}
                   </span>
                   <div>
-                    <span className="text-[10px] font-mono uppercase text-[#9BA8AB] tracking-wide block">
+                    <span className="text-[10px] font-mono uppercase text-[#475569] tracking-wide block">
                       {item.categoria}
                     </span>
-                    <h3 className="text-sm font-medium text-white font-display">
+                    <h3 className="text-sm font-medium text-[#0F172A] font-display">
                       {item.subcategoria}
                     </h3>
                   </div>
@@ -168,24 +168,24 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
                   indicatorColor={isCompetitive ? "bg-[#10B981]" : isModerate ? "bg-[#F59E0B]" : "bg-[#EF4444]"}
                 />
 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-[#9BA8AB] gap-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-[#475569] gap-1">
                   <span>
-                    Acervo Comprovado: <strong className="text-white">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
+                    Acervo Comprovado: <strong className="text-[#0F172A]">{item.volumeAcumulado.toLocaleString("pt-BR")} {item.unidade}</strong>
                   </span>
                   <span>
-                    Média de Edital: <strong className="text-white">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
+                    Média de Edital: <strong className="text-[#0F172A]">{item.mediaEditalMercado.toLocaleString("pt-BR")} {item.unidade}</strong>
                   </span>
                 </div>
               </div>
 
               {/* Detalhes de Acervo e Recomendação */}
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#9BA8AB]">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#475569]">
                 <div className="flex items-center gap-3 font-mono">
-                  <span>Atestados Válidos: <strong className="text-white">{item.atestadosCount}</strong></span>
+                  <span>Atestados Válidos: <strong className="text-[#0F172A]">{item.atestadosCount}</strong></span>
                   <span>•</span>
-                  <span>Maior Individual: <strong className="text-white">{item.atestadoMaximoIndividual.toLocaleString("pt-BR")} {item.unidade}</strong></span>
+                  <span>Maior Individual: <strong className="text-[#0F172A]">{item.atestadoMaximoIndividual.toLocaleString("pt-BR")} {item.unidade}</strong></span>
                 </div>
-                <div className="text-xs text-[#CCD0CF]">
+                <div className="text-xs text-[#0F172A]">
                   <span>{item.recomendacao}</span>
                 </div>
               </div>

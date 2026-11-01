@@ -88,8 +88,13 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Disclaimer Persistente Obrigatório */}
-        <div className="p-3.5 rounded-md border border-[var(--line)] bg-[var(--bg)] text-center text-xs text-[var(--ink-2)] font-mono leading-relaxed">
-          <strong>Aviso Institucional:</strong> O EditalFlash é uma ferramenta de suporte técnico-operacional à decisão. A responsabilidade jurídica pela análise, envio de propostas e participação nos certames permanece exclusivamente com a empresa licitante.
+        <div className="p-3.5 rounded-md border border-[var(--line)] bg-[var(--bg)] text-center text-xs text-[var(--ink-2)] font-mono leading-relaxed space-y-1">
+          <div>
+            <strong>Aviso Institucional:</strong> O EditalFlash é uma ferramenta de suporte técnico-operacional à decisão. A responsabilidade jurídica pela análise, envio de propostas e participação nos certames permanece exclusivamente com a empresa licitante.
+          </div>
+          <div className="text-[11px] text-[var(--ink-3)]">
+            51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200 · contatoeditalflash@gmail.com
+          </div>
         </div>
 
         {/* Bottom Bar */}

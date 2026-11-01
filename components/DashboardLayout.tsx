@@ -94,10 +94,10 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col md:flex-row font-sans antialiased selection:bg-[#2740F0] selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col md:flex-row font-sans antialiased selection:bg-[#2740F0] selection:text-[#0F172A]">
       {/* SIDEBAR DESKTOP — Tinta Sólida Nobre (#0E1626) com suporte a recolhimento suave */}
       <aside
-        className={`hidden md:flex flex-col border-r border-[#253745] bg-[#06141B] text-[#E8ECF5] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
+        className={`hidden md:flex flex-col border-r border-[#E2E8F0] bg-white text-[#0F172A] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
           collapsed ? "w-[72px]" : "w-64"
         }`}
       >
@@ -106,7 +106,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
           type="button"
           onClick={toggleCollapse}
           title={collapsed ? "Expandir menu lateral" : "Recolher menu lateral"}
-          className="absolute -right-4 top-5 z-40 w-8 h-8 rounded-full bg-[#2740F0] hover:bg-blue-500 text-white border-2 border-white flex items-center justify-center shadow-lg hover:shadow-blue-500/30 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
+          className="absolute -right-4 top-5 z-40 w-8 h-8 rounded-full bg-[#2740F0] hover:bg-blue-500 text-[#0F172A] border-2 border-white flex items-center justify-center shadow-lg hover:shadow-blue-500/30 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
         >
           {collapsed ? <ChevronRight className="w-4 h-4 stroke-[2.5]" /> : <ChevronLeft className="w-4 h-4 stroke-[2.5]" />}
         </button>
@@ -119,14 +119,14 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               collapsed ? "justify-center px-0" : "px-1"
             }`}
           >
-            <div className="w-8 h-8 rounded-md bg-[#11212D] border border-[#253745] flex items-center justify-center text-[#E8ECF5] shrink-0">
+            <div className="w-8 h-8 rounded-md bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-[#0F172A] shrink-0">
               <BrandIcon name="mark" size={20} />
             </div>
             {!collapsed && (
               <div className="min-w-0">
                 <span className="text-base tracking-tight block font-display leading-none">
-                  <span className="font-medium text-[#E8ECF5]">Edital</span>
-                  <span className="font-extrabold text-[#E8ECF5]">Flash</span>
+                  <span className="font-medium text-[#0F172A]">Edital</span>
+                  <span className="font-extrabold text-[#0F172A]">Flash</span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-mono block mt-1 truncate">
                   Auditoria de Habilitação
@@ -137,14 +137,14 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
           {/* Badge de Preferência Operacional Ativa */}
           {!collapsed ? (
-            <div className="p-3 rounded-lg bg-[#11212D] border border-[#253745] space-y-1">
+            <div className="p-3 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#8F9CFF] uppercase tracking-wider font-mono flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4A5FFF]" />
+                <span className="text-[10px] font-bold text-[#1E3A8A] uppercase tracking-wider font-mono flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1E3A8A]" />
                   <span>Vertical Ativa</span>
                 </span>
               </div>
-              <p className="text-xs font-bold text-[#E8ECF5] truncate" title={user.primary_vertical}>
+              <p className="text-xs font-bold text-[#0F172A] truncate" title={user.primary_vertical}>
                 {user.primary_vertical || "Obras Públicas e Engenharia"}
               </p>
             </div>
@@ -153,7 +153,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               className="flex justify-center p-2 rounded-lg bg-[#11212D] border border-[#253745]"
               title={`Vertical Ativa: ${user.primary_vertical}`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#4A5FFF]" />
+              <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" />
             </div>
           )}
 
@@ -176,11 +176,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                     collapsed ? "justify-center px-0" : ""
                   } ${
                     isActive
-                      ? "bg-[rgba(39,64,240,0.18)] text-white font-semibold border-l-4 border-[#2740F0]"
-                      : "text-slate-300 hover:text-white hover:bg-[rgba(255,255,255,0.06)]"
+                      ? "bg-[#EFF6FF] text-[#1E3A8A] font-semibold border-l-4 border-[#1E3A8A]"
+                      : "text-[#475569] hover:text-[#0F172A] hover:bg-[#F8FAFC]"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#8F9CFF]" : "text-slate-400"}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#1E3A8A]" : "text-slate-400"}`} />
                   {!collapsed && <span className="truncate">{item.label}</span>}
                 </Link>
               );
@@ -189,15 +189,15 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
 
         {/* User Card e Logout */}
-        <div className="pt-4 border-t border-[#253745] space-y-3">
+        <div className="pt-4 border-t border-[#E2E8F0] space-y-3">
           <div className={`flex items-center gap-2.5 px-1 ${collapsed ? "justify-center" : ""}`}>
-            <div className="w-8 h-8 rounded-full bg-[#11212D] border border-[#253745] flex items-center justify-center text-slate-300 font-bold font-mono text-xs shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-[#0F172A] font-bold font-mono text-xs shrink-0">
               {user.name?.charAt(0).toUpperCase() || "L"}
             </div>
             {!collapsed && (
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold text-white truncate block">{user.name}</span>
-                <span className="text-[10px] text-[#8F9CFF] font-semibold block uppercase font-mono">
+                <span className="text-xs font-bold text-[#0F172A] truncate block">{user.name}</span>
+                <span className="text-[10px] text-[#1E3A8A] font-semibold block uppercase font-mono">
                   Plano {user.plan}
                 </span>
               </div>
@@ -209,11 +209,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <Link
               href="/admin/dashboard"
               title="Acessar Centro de Gestão e Operações SaaS"
-              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-[#1B2347] hover:bg-[#273360] text-white border border-[#2740F0]/50 transition-colors shadow-sm ${
+              className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-[#1B2347] hover:bg-[#273360] text-[#0F172A] border border-[#2740F0]/50 transition-colors shadow-sm ${
                 collapsed ? "px-0" : ""
               }`}
             >
-              <Sliders className="w-4 h-4 text-[#8F9CFF]" />
+              <Sliders className="w-4 h-4 text-[#1E3A8A]" />
               {!collapsed && <span>Painel Master</span>}
             </Link>
           )}
@@ -222,7 +222,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             type="button"
             onClick={logout}
             title={collapsed ? "Sair da conta" : undefined}
-            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#11212D] hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 border border-[#253745] transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#F8FAFC] hover:bg-rose-50 text-[#475569] hover:text-rose-700 border border-[#E2E8F0] transition-colors cursor-pointer ${
               collapsed ? "px-0" : ""
             }`}
           >
@@ -233,16 +233,16 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       </aside>
 
       {/* MOBILE BAR */}
-      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-[#253745] bg-[#06141B] text-white">
+      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-[#253745] bg-[#F8FAFC] text-[#0F172A]">
         <Link href="/dashboard" className="flex items-center gap-2">
           <BrandIcon name="mark" size={20} />
           <span className="text-sm font-bold font-display">
-            Edital<span className="font-extrabold text-[#8F9CFF]">Flash</span>
+            Edital<span className="font-extrabold text-[#1E3A8A]">Flash</span>
           </span>
         </Link>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="p-1.5 text-slate-300 hover:text-white"
+          className="p-1.5 text-slate-300 hover:text-[#0F172A]"
         >
           {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -250,7 +250,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
       {/* MOBILE DROPDOWN */}
       {mobileSidebarOpen && (
-        <div className="md:hidden bg-[#06141B] border-b border-[#253745] p-3 space-y-1.5 text-white">
+        <div className="md:hidden bg-[#F8FAFC] border-b border-[#253745] p-3 space-y-1.5 text-[#0F172A]">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -269,9 +269,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <Link
               href="/admin/dashboard"
               onClick={() => setMobileSidebarOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs font-bold text-white bg-[#1B2347] border border-[#2740F0]/50"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs font-bold text-[#0F172A] bg-[#1B2347] border border-[#2740F0]/50"
             >
-              <Sliders className="w-4 h-4 text-[#8F9CFF]" />
+              <Sliders className="w-4 h-4 text-[#1E3A8A]" />
               <span>Painel do Administrador (Master)</span>
             </Link>
           )}
@@ -285,14 +285,14 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       )}
 
       {/* ÁREA DE CONTEÚDO PRINCIPAL — Fundo Branco Puro e Limpo (#FFFFFF / Slate-50) */}
-      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-[#06141B]">
+      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-[#F8FAFC]">
         {/* Sticky Header Limpo com Fundo Branco Suave */}
-        <header className="sticky top-0 z-40 backdrop-blur-md bg-[#06141B]/95 border-b border-[#253745] px-6 py-4 flex items-center justify-between">
+        <header className="sticky top-0 z-40 backdrop-blur-md bg-[#F8FAFC]/95 border-b border-[#253745] px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h2 className="text-base font-bold font-display text-white tracking-tight">
+            <h2 className="text-base font-bold font-display text-[#0F172A] tracking-tight">
               {navItems.find((n) => n.id === activeTab)?.label || "Workspace de Habilitação"}
             </h2>
-            <span className="hidden sm:inline-block text-[11px] font-mono text-[#9BA8AB] bg-[#11212D] px-2.5 py-0.5 rounded border border-[#253745]">
+            <span className="hidden sm:inline-block text-[11px] font-mono text-[#475569] bg-[#F1F5F9] px-2.5 py-0.5 rounded border border-[#E2E8F0]">
               Lei Federal 14.133/2021
             </span>
           </div>
@@ -311,8 +311,8 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               <span className="keycap">Ctrl K</span>
             </button>
 
-            <span className="text-[#9BA8AB] hidden sm:inline">
-              Empresa: <strong className="text-white">{user.company || "Licitante"}</strong>
+            <span className="text-[#64748B] hidden sm:inline">
+              Empresa: <strong className="text-[#0F172A]">{user.company || "Licitante"}</strong>
             </span>
             
           </div>

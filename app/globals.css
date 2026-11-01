@@ -1,25 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #06141B;
-  --surface: #11212D;
-  --surface-subtle: #162a39;
-  --ink: #CCD0CF;
-  --ink-bright: #FFFFFF;
-  --ink-2: #9BA8AB;
-  --ink-3: #4A5C6A;
-  --line: #253745;
-  --line-strong: #364d5e;
+  --bg: #FFFFFF;
+  --bg-surface: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-subtle: #F1F5F9;
+  --ink: #0F172A;
+  --ink-bright: #020617;
+  --ink-2: #475569;
+  --ink-3: #94A3B8;
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
 
-  --brand: #CCD0CF;
-  --brand-solid: #11212D;
-  --brand-tint: #162a39;
+  --brand: #1E3A8A;
+  --brand-solid: #1E3A8A;
+  --brand-tint: #EFF6FF;
+  --brand-accent: #3B82F6;
 
   /* Vereditos: semáforo suave pericial */
-  --ok: #10B981;   --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
-  --warn: #F59E0B; --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
-  --bad: #EF4444;  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
-  --rev: #8B5CF6;  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
+  --ok: #10B981;   --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #059669;
+  --warn: #F59E0B; --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #D97706;
+  --bad: #EF4444;  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #DC2626;
+  --rev: #8B5CF6;  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #7C3AED;
+}
+
+[data-theme="dark"] {
+  --bg: #06141B;
+  --bg-surface: #11212D;
+  --surface: #11212D;
+  --surface-subtle: #162a39;
+  --ink: #F1F5F9;
+  --ink-bright: #FFFFFF;
+  --ink-2: #94A3B8;
+  --ink-3: #4A5C6A;
+  --line: #1E293B;
+  --line-strong: #334155;
+
+  --brand: #3B82F6;
+  --brand-solid: #1E3A8A;
+  --brand-tint: #11212D;
+  --brand-accent: #60A5FA;
+
+  --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
+  --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
+  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
+  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
 }
 
 [data-theme="dark"] {

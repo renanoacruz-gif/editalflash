@@ -51,7 +51,7 @@ export default function PricingPage() {
   const enterpriseAnnualTotal = 8544;
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col py-8 px-4 sm:px-6 lg:px-8 relative selection:bg-[var(--brand)] selection:text-white font-sans">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col py-8 px-4 sm:px-6 lg:px-8 relative selection:bg-[var(--brand)] selection:text-[#0F172A] font-sans">
       {/* Header Institucional */}
       <header className="max-w-6xl mx-auto w-full flex items-center justify-between pb-6 border-b border-[var(--line)]">
         <div className="flex items-center gap-4">
@@ -96,7 +96,7 @@ export default function PricingPage() {
             </Link>
             <Link
               href="/signup"
-              className="bg-[var(--brand-solid)] hover:brightness-110 text-white px-3.5 py-1.5 rounded-md shadow-sm transition-all"
+              className="bg-[var(--brand-solid)] hover:brightness-110 text-[#0F172A] px-3.5 py-1.5 rounded-md shadow-sm transition-all"
             >
               Criar Conta
             </Link>
@@ -125,7 +125,7 @@ export default function PricingPage() {
 
             <Link
               href="/dashboard"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-[var(--brand)] hover:brightness-110 text-white font-semibold text-xs transition-all shadow-xs shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-[var(--brand)] hover:brightness-110 text-[#0F172A] font-semibold text-xs transition-all shadow-xs shrink-0"
             >
               <BrandIcon name="seta" size="s16" accentCobalt={false} className="rotate-180" />
               <span>Voltar ao Dashboard</span>
@@ -167,7 +167,7 @@ export default function PricingPage() {
                 onClick={() => setBillingCycle("monthly")}
                 className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all ${
                   billingCycle === "monthly"
-                    ? "bg-[var(--brand-solid)] text-white shadow-xs font-bold"
+                    ? "bg-[var(--brand-solid)] text-[#0F172A] shadow-xs font-bold"
                     : "text-[var(--ink-2)] hover:text-[var(--ink)]"
                 }`}
               >
@@ -178,7 +178,7 @@ export default function PricingPage() {
                 onClick={() => setBillingCycle("annual")}
                 className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 ${
                   billingCycle === "annual"
-                    ? "bg-[var(--brand-solid)] text-white shadow-xs font-bold"
+                    ? "bg-[var(--brand-solid)] text-[#0F172A] shadow-xs font-bold"
                     : "text-[var(--ink-2)] hover:text-[var(--ink)]"
                 }`}
               >
@@ -186,7 +186,7 @@ export default function PricingPage() {
                 <span
                   className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold uppercase ${
                     billingCycle === "annual"
-                      ? "bg-[#11212D] text-[var(--brand-solid)]"
+                      ? "bg-white text-[var(--brand-solid)]"
                       : "bg-[var(--ok-bg)] text-[var(--ok-fg)]"
                   }`}
                 >
@@ -272,7 +272,7 @@ export default function PricingPage() {
 
           {/* PLANO PROFISSIONAL — MAIS ESCOLHIDO */}
           <div className="bg-[var(--surface)] rounded-xl p-6 border-2 border-[var(--brand)] shadow-md relative flex flex-col justify-between space-y-6">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow flex items-center gap-1">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-[#0F172A] text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow flex items-center gap-1">
               <Award className="w-3.5 h-3.5" />
               <span>Mais Escolhido por Empresas</span>
             </div>
@@ -353,7 +353,7 @@ export default function PricingPage() {
                   description: "15 auditorias mensais, Minutas do Art. 164, Súmula 263 TCU e Diff Engine.",
                 })
               }
-              className="w-full py-3.5 px-4 rounded-lg text-xs font-bold text-white bg-[var(--brand-solid)] hover:brightness-110 shadow-sm transition-all flex items-center justify-center gap-2 active:scale-98"
+              className="w-full py-3.5 px-4 rounded-lg text-xs font-bold text-[#0F172A] bg-[var(--brand-solid)] hover:brightness-110 shadow-sm transition-all flex items-center justify-center gap-2 active:scale-98"
             >
               <span>{billingCycle === "annual" ? "Assinar Profissional Anual" : "Assinar Profissional Mensal"}</span>
               <ArrowRight className="w-4 h-4" />
@@ -481,7 +481,7 @@ export default function PricingPage() {
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="font-bold text-xs text-[var(--ink)]">Setup + 10 Créditos</span>
-                    <span className="text-[9px] font-mono font-bold bg-[var(--brand-solid)] text-white px-1.5 py-0.2 rounded">
+                    <span className="text-[9px] font-mono font-bold bg-[var(--brand-solid)] text-[#0F172A] px-1.5 py-0.2 rounded">
                       Melhor LTV
                     </span>
                   </div>
@@ -499,7 +499,7 @@ export default function PricingPage() {
                       description: "Parametrização completa do cofre de certidões + 10 análises de editais.",
                     })
                   }
-                  className="px-3 py-1.5 rounded-lg bg-[var(--brand-solid)] hover:brightness-110 text-white text-xs font-bold font-mono transition-all shadow-xs"
+                  className="px-3 py-1.5 rounded-lg bg-[var(--brand-solid)] hover:brightness-110 text-[#0F172A] text-xs font-bold font-mono transition-all shadow-xs"
                 >
                   R$ 497,00
                 </button>

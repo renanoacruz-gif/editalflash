@@ -106,23 +106,23 @@ export default function CalendarioPage() {
         )}
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#253745]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E2E8F0]">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold mb-2">
               <AlertTriangle className="w-3.5 h-3.5" strokeWidth={1.5} />
               <span>Garantia de Não-Eliminação</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight font-display">
               Calendário Unificado de Vencimentos
             </h1>
-            <p className="text-xs sm:text-sm text-[#9BA8AB] mt-1">
+            <p className="text-xs sm:text-sm text-[#475569] mt-1">
               Cruzamento automático de certidões da empresa contra as datas das sessões e prazos de impugnação.
             </p>
           </div>
 
           <button
             onClick={handleTestAlert}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#11212D] border border-[#253745] hover:bg-[#253745] text-white shadow-sm transition-all active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-xs font-bold bg-white border border-[#E2E8F0] hover:bg-[#253745] text-[#0F172A] shadow-sm transition-all active:scale-[0.98] cursor-pointer"
           >
             <Bell className="w-4 h-4" strokeWidth={1.5} />
             <span>Configurar Alertas 15/7/3 Dias</span>
@@ -131,7 +131,7 @@ export default function CalendarioPage() {
 
         {/* GATE DE PLANO: PLANO STARTER (CONSULTA AVULSA) BLOQUEADO */}
         {isStarter ? (
-          <div className="rounded-2xl p-8 sm:p-12 border border-[#253745] text-center max-w-2xl mx-auto space-y-5 bg-[#11212D] shadow-sm">
+          <div className="rounded-2xl p-8 sm:p-12 border border-[#E2E8F0] text-center max-w-2xl mx-auto space-y-5 bg-white shadow-sm">
             <div className="w-14 h-14 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 mx-auto">
               <Lock className="w-7 h-7" strokeWidth={1.5} />
             </div>
@@ -139,17 +139,17 @@ export default function CalendarioPage() {
               <span className="text-xs font-bold uppercase tracking-wider text-amber-700 font-mono">
                 Recurso Exclusivo do Plano Pro / Mensal
               </span>
-              <h2 className="text-2xl font-bold text-white tracking-tight legal-serif">
+              <h2 className="text-2xl font-bold text-[#0F172A] tracking-tight legal-serif">
                 Calendário Unificado com Alertas Automáticos
               </h2>
-              <p className="text-xs sm:text-sm text-[#9BA8AB] max-w-lg mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#475569] max-w-lg mx-auto leading-relaxed">
                 O seu plano atual (Créditos Avulsos) dá acesso à auditoria individual de editais. Para ter o monitoramento contínuo de vencimento de certidões cruzado com as datas dos pregões, faça upgrade para o Plano Mensal.
               </p>
             </div>
             <div className="pt-2">
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold text-[#0F172A] bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all active:scale-95"
               >
                 <span>Fazer Upgrade para Plano Mensal (R$ 197/mês)</span>
               </Link>
@@ -172,7 +172,7 @@ export default function CalendarioPage() {
                     href="https://solucoes.receita.fazenda.gov.br"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all active:scale-98"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-700 text-[#0F172A] shadow-sm transition-all active:scale-98"
                   >
                     <span>Renovar Certidão Agora</span>
                     <ExternalLink className="w-3.5 h-3.5" />

@@ -314,11 +314,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <span className="text-[#9BA8AB] hidden sm:inline">
               Empresa: <strong className="text-white">{user.company || "Licitante"}</strong>
             </span>
-            <span className="hidden md:inline text-[#253745]">|</span>
-            <span className="text-emerald-700 font-semibold flex items-center gap-1.5 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Sessão Conforme
-            </span>
+            
           </div>
         </header>
 

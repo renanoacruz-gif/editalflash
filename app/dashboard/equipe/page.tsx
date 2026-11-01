@@ -159,17 +159,17 @@ export default function TeamManagementPage() {
     <DashboardLayout activeTab="equipe">
       <div className="max-w-6xl mx-auto space-y-8 p-4 md:p-6 pb-20">
         {/* Cabeçalho da Seção */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#253745] pb-5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="p-2 rounded-lg bg-blue-50 text-[#2740F0] border border-blue-100">
+              <span className="p-2 rounded-lg bg-[#11212D] text-[#CCD0CF] border border-[#253745]">
                 <Users className="w-5 h-5" />
               </span>
-              <h1 className="text-2xl font-bold font-display text-slate-900 tracking-tight">
+              <h1 className="text-2xl font-bold font-display text-white tracking-tight">
                 Equipe & Assentos Multi-User
               </h1>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
+            <p className="text-sm text-[#9BA8AB] mt-1">
               Gerencie sócios, contadores e analistas com permissões segmentadas e pool de créditos unificado.
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function TeamManagementPage() {
             <button
               onClick={fetchTeamData}
               disabled={loading}
-              className="px-3 py-2 text-xs font-mono font-medium rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3 py-2 text-xs font-mono font-medium rounded-lg border border-[#253745] text-[#CCD0CF] hover:bg-[#11212D] flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
               Atualizar
@@ -187,7 +187,7 @@ export default function TeamManagementPage() {
               <button
                 type="button"
                 onClick={() => setIsCheckoutOpen(true)}
-                className="px-4 py-2 text-xs font-mono font-bold rounded-lg bg-[#2740F0] hover:bg-blue-600 text-white flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-mono font-bold rounded-lg bg-[#11212D] border border-[#253745] hover:bg-[#253745] text-white flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
               >
                 <CreditCard className="w-3.5 h-3.5" />
                 Contratar Assentos (R$ 29/mês)
@@ -199,7 +199,7 @@ export default function TeamManagementPage() {
 
         {/* Alertas Operacionais */}
         {actionError && (
-          <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] text-rose-800 text-sm flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">Atenção</p>
@@ -209,7 +209,7 @@ export default function TeamManagementPage() {
         )}
 
         {actionSuccess && (
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-start gap-3">
+          <div className="p-4 rounded-xl bg-[rgba(16,185,129,0.1)] border border-[rgba(16,185,129,0.25)] text-emerald-800 text-sm flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold">Sucesso</p>
@@ -220,17 +220,17 @@ export default function TeamManagementPage() {
 
         {/* Cards Bento de Métricas e Capacidade */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+          <div className="p-5 rounded-2xl bg-[#11212D] border border-[#253745] shadow-sm space-y-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#9BA8AB]">
               Assentos Adicionais Contratados
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold font-mono text-slate-900">
+              <span className="text-3xl font-extrabold font-mono text-white">
                 {seats.active}
               </span>
-              <span className="text-sm font-mono text-slate-400">/ {seats.max} assentos</span>
+              <span className="text-sm font-mono text-[#4A5C6A]">/ {seats.max} assentos</span>
             </div>
-            <p className="text-xs text-slate-500 pt-1">
+            <p className="text-xs text-[#9BA8AB] pt-1">
               {seats.available > 0
                 ? `${seats.available} convite(s) disponível(is) para envio imediato.`
                 : seats.max === 0
@@ -239,23 +239,23 @@ export default function TeamManagementPage() {
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+          <div className="p-5 rounded-2xl bg-[#11212D] border border-[#253745] shadow-sm space-y-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#9BA8AB]">
               Pool de Créditos Compartilhados
             </span>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold font-mono text-[#2740F0]">
+              <span className="text-3xl font-extrabold font-mono text-[#CCD0CF]">
                 {poolCredits}
               </span>
-              <span className="text-sm font-mono text-slate-400">auditorias restantes</span>
+              <span className="text-sm font-mono text-[#4A5C6A]">auditorias restantes</span>
             </div>
-            <p className="text-xs text-slate-500 pt-1">
+            <p className="text-xs text-[#9BA8AB] pt-1">
               Todos os membros consom do mesmo saldo de auditorias da organização.
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+          <div className="p-5 rounded-2xl bg-[#11212D] border border-[#253745] shadow-sm space-y-2">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#9BA8AB]">
               Seu Nível de Acesso (RBAC)
             </span>
             <div className="flex items-center gap-2 pt-1">
@@ -270,7 +270,7 @@ export default function TeamManagementPage() {
                 {currentUserRole === "ADMIN" ? "ADMIN (Titular)" : "MEMBER (Operador)"}
               </span>
             </div>
-            <p className="text-xs text-slate-500 pt-1">
+            <p className="text-xs text-[#9BA8AB] pt-1">
               {currentUserRole === "ADMIN"
                 ? "Acesso irrestrito a faturamento, convites e exclusão de contas."
                 : "Acesso a auditorias e cofre. Protegido contra cancelamento e faturamento."}
@@ -291,7 +291,7 @@ export default function TeamManagementPage() {
 
             <form onSubmit={handleSendInvite} className="flex flex-col sm:flex-row gap-3 pt-2">
               <div className="relative flex-1">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#4A5C6A] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   value={inviteEmail}
@@ -305,7 +305,7 @@ export default function TeamManagementPage() {
               <button
                 type="submit"
                 disabled={inviting || seats.hasReachedLimit}
-                className="px-6 py-2.5 rounded-xl bg-[#2740F0] hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm text-white flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
+                className="px-6 py-2.5 rounded-xl bg-[#11212D] border border-[#253745] hover:bg-[#253745] disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm text-white flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
               >
                 {inviting ? (
                   <>
@@ -335,7 +335,7 @@ export default function TeamManagementPage() {
                   />
                   <button
                     onClick={copyToClipboard}
-                    className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-xs font-medium text-white flex items-center gap-1.5 transition-colors"
+                    className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-[#11212D]0 text-xs font-medium text-white flex items-center gap-1.5 transition-colors"
                   >
                     {copied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     {copied ? "Copiado!" : "Copiar"}
@@ -347,11 +347,11 @@ export default function TeamManagementPage() {
         )}
 
         {/* Tabela de Membros Ativos */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div className="bg-[#11212D] rounded-2xl border border-[#253745] shadow-sm overflow-hidden">
+          <div className="p-5 border-b border-[#1c2b36] flex items-center justify-between">
             <div>
-              <h2 className="text-base font-bold font-display text-slate-900">Membros Ativos na Organização</h2>
-              <p className="text-xs text-slate-500">Usuários com acesso concedido ao ambiente compartilhado.</p>
+              <h2 className="text-base font-bold font-display text-white">Membros Ativos na Organização</h2>
+              <p className="text-xs text-[#9BA8AB]">Usuários com acesso concedido ao ambiente compartilhado.</p>
             </div>
             <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-mono font-bold">
               {members.length} membro(s)
@@ -360,21 +360,21 @@ export default function TeamManagementPage() {
 
           <div className="divide-y divide-slate-100">
             {members.map((member) => (
-              <div key={member.id} className="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+              <div key={member.id} className="p-4 flex items-center justify-between hover:bg-[#11212D] transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-700 font-mono text-sm">
+                  <div className="w-10 h-10 rounded-full bg-slate-100 border border-[#253745] flex items-center justify-center font-bold text-slate-700 font-mono text-sm">
                     {member.email.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-slate-900">{member.email}</span>
+                      <span className="text-sm font-semibold text-white">{member.email}</span>
                       {member.isCurrentUser && (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#11212D] text-blue-700 border border-blue-200">
                           Você
                         </span>
                       )}
                     </div>
-                    <span className="text-xs text-slate-400 font-mono">
+                    <span className="text-xs text-[#4A5C6A] font-mono">
                       {member.joinedAt ? `Ingressou em: ${new Date(member.joinedAt).toLocaleDateString("pt-BR")}` : "Conta Titular"}
                     </span>
                   </div>
@@ -394,7 +394,7 @@ export default function TeamManagementPage() {
                   {currentUserRole === "ADMIN" && !member.isCurrentUser && member.role !== "ADMIN" && (
                     <button
                       onClick={() => handleRemoveMember(member.id, member.email)}
-                      className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                      className="p-2 text-[#4A5C6A] hover:text-rose-600 hover:bg-[rgba(239,68,68,0.1)] rounded-lg transition-colors"
                       title="Revogar acesso deste membro"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -408,10 +408,10 @@ export default function TeamManagementPage() {
 
         {/* Tabela de Convites Pendentes */}
         {invitations.length > 0 && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-            <div className="p-5 border-b border-slate-100">
-              <h2 className="text-base font-bold font-display text-slate-900">Convites Pendentes</h2>
-              <p className="text-xs text-slate-500">Aguardando aceite pelo destinatário.</p>
+          <div className="bg-[#11212D] rounded-2xl border border-[#253745] shadow-sm overflow-hidden">
+            <div className="p-5 border-b border-[#1c2b36]">
+              <h2 className="text-base font-bold font-display text-white">Convites Pendentes</h2>
+              <p className="text-xs text-[#9BA8AB]">Aguardando aceite pelo destinatário.</p>
             </div>
             <div className="divide-y divide-slate-100">
               {invitations.map((inv) => (
@@ -419,8 +419,8 @@ export default function TeamManagementPage() {
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-amber-500 shrink-0" />
                     <div>
-                      <p className="text-sm font-semibold text-slate-900">{inv.invited_email}</p>
-                      <p className="text-xs text-slate-400 font-mono">
+                      <p className="text-sm font-semibold text-white">{inv.invited_email}</p>
+                      <p className="text-xs text-[#4A5C6A] font-mono">
                         Expira em: {new Date(inv.expires_at).toLocaleDateString("pt-BR")}
                       </p>
                     </div>

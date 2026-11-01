@@ -186,7 +186,7 @@ export default function PricingPage() {
                 <span
                   className={`text-[10px] font-mono px-1.5 py-0.2 rounded font-bold uppercase ${
                     billingCycle === "annual"
-                      ? "bg-white text-[var(--brand-solid)]"
+                      ? "bg-[#11212D] text-[var(--brand-solid)]"
                       : "bg-[var(--ok-bg)] text-[var(--ok-fg)]"
                   }`}
                 >

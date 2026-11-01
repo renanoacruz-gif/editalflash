@@ -151,28 +151,28 @@ export default function AccountSettingsPage() {
     <DashboardLayout activeTab="configuracoes">
       <div className="max-w-5xl mx-auto space-y-6">
         {/* Cabeçalho */}
-        <div className="pb-4 border-b border-slate-200">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-mono font-semibold mb-2">
+        <div className="pb-4 border-b border-[#253745]">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#162a39] border border-[#253745] text-[#CCD0CF] text-xs font-mono font-semibold mb-2">
             <Building2 className="w-3.5 h-3.5 text-[#2740F0]" />
             <span>Central Gerencial do Licitante</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-display">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
             Configurações da Conta &amp; Gestão
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+          <p className="text-xs sm:text-sm text-[#CCD0CF] mt-1">
             Gerencie o perfil da sua empresa, parâmetros da Lei 14.133, limites de plano e programa de parceiros.
           </p>
         </div>
 
         {/* Abas de Navegação */}
-        <div className="flex border-b border-slate-200 gap-1 overflow-x-auto text-xs font-mono">
+        <div className="flex border-b border-[#253745] gap-1 overflow-x-auto text-xs font-mono">
           <button
             type="button"
             onClick={() => setActiveTab("perfil")}
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "perfil"
                 ? "border-[#2740F0] text-[#2740F0]"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                : "border-transparent text-[#CCD0CF] hover:text-white"
             }`}
           >
             <Building2 className="w-4 h-4" />
@@ -185,7 +185,7 @@ export default function AccountSettingsPage() {
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "plano"
                 ? "border-[#2740F0] text-[#2740F0]"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                : "border-transparent text-[#CCD0CF] hover:text-white"
             }`}
           >
             <CreditCard className="w-4 h-4" />
@@ -198,7 +198,7 @@ export default function AccountSettingsPage() {
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "indicacao"
                 ? "border-[#2740F0] text-[#2740F0]"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                : "border-transparent text-[#CCD0CF] hover:text-white"
             }`}
           >
             <Share2 className="w-4 h-4" />
@@ -211,7 +211,7 @@ export default function AccountSettingsPage() {
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "seguranca"
                 ? "border-[#2740F0] text-[#2740F0]"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                : "border-transparent text-[#CCD0CF] hover:text-white"
             }`}
           >
             <Bell className="w-4 h-4" />
@@ -224,7 +224,7 @@ export default function AccountSettingsPage() {
             className={`py-3 px-4 border-b-2 font-bold flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap ${
               activeTab === "como-usar"
                 ? "border-[#2740F0] text-[#2740F0]"
-                : "border-transparent text-slate-600 hover:text-slate-900"
+                : "border-transparent text-[#CCD0CF] hover:text-white"
             }`}
           >
             <BookOpen className="w-4 h-4 text-emerald-600" />
@@ -245,14 +245,14 @@ export default function AccountSettingsPage() {
         {/* ABA 1: PERFIL CORPORATIVO */}
         {activeTab === "perfil" && (
           <form onSubmit={handleSaveProfile} className="space-y-6">
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-6 shadow-sm">
-              <h2 className="text-base font-bold text-slate-900 font-display">
+            <div className="bg-[#06141B] rounded-2xl border border-[#253745] p-6 space-y-6 shadow-sm">
+              <h2 className="text-base font-bold text-white font-display">
                 Dados Cadastrais da Empresa Licitante
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     Razão Social
                   </label>
                   <input
@@ -260,12 +260,12 @@ export default function AccountSettingsPage() {
                     required
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     CNPJ da Matriz ou Filial
                   </label>
                   <input
@@ -273,12 +273,12 @@ export default function AccountSettingsPage() {
                     required
                     value={cnpj}
                     onChange={(e) => setCnpj(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0] font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0] font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     Nome do Responsável / Gestor de Licitações
                   </label>
                   <input
@@ -286,12 +286,12 @@ export default function AccountSettingsPage() {
                     required
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     E-mail Corporativo para Envio de Pareceres
                   </label>
                   <input
@@ -299,19 +299,19 @@ export default function AccountSettingsPage() {
                     required
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
               </div>
             </div>
 
             {/* Configuração da Vertical Operacional */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-sm">
+            <div className="bg-[#06141B] rounded-2xl border border-[#253745] p-6 space-y-4 shadow-sm">
               <div>
-                <h2 className="text-base font-bold text-slate-900 font-display">
+                <h2 className="text-base font-bold text-white font-display">
                   Vertical Operacional Dominante (Calibração da Lei 14.133)
                 </h2>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-[#CCD0CF] mt-0.5">
                   Define quais regras específicas o motor de auditoria prioriza (ex: ART/CAT para Engenharia, ANVISA para Saúde, ISO 27001 para TI).
                 </p>
               </div>
@@ -357,16 +357,16 @@ export default function AccountSettingsPage() {
                       className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
                         isSelected
                           ? "border-[#2740F0] bg-blue-50/50 shadow-xs"
-                          : "border-slate-200 hover:border-slate-300 bg-white"
+                          : "border-[#253745] hover:border-slate-300 bg-[#06141B]"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className={`text-xs font-bold ${isSelected ? "text-[#2740F0]" : "text-slate-900"}`}>
+                        <span className={`text-xs font-bold ${isSelected ? "text-[#2740F0]" : "text-white"}`}>
                           {item.title}
                         </span>
                         {isSelected && <Check className="w-4 h-4 text-[#2740F0]" />}
                       </div>
-                      <p className="text-[11px] text-slate-500 leading-relaxed">{item.desc}</p>
+                      <p className="text-[11px] text-[#9BA8AB] leading-relaxed">{item.desc}</p>
                     </div>
                   );
                 })}
@@ -376,7 +376,7 @@ export default function AccountSettingsPage() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-xl bg-[#2740F0] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-[#11212D] border border-[#253745] hover:bg-[#253745] text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
               >
                 Salvar Alterações do Perfil
               </button>
@@ -388,14 +388,14 @@ export default function AccountSettingsPage() {
         {activeTab === "plano" && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-                <span className="text-[11px] font-mono uppercase text-slate-500 font-bold block">
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-2">
+                <span className="text-[11px] font-mono uppercase text-[#9BA8AB] font-bold block">
                   Plano Atual
                 </span>
-                <div className="text-2xl font-bold font-display text-slate-900">
+                <div className="text-2xl font-bold font-display text-white">
                   {user?.plan || "Plano Pro"}
                 </div>
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-[#CCD0CF]">
                   Cobrança {user?.billingCycle === "annual" ? "Anual (-20%)" : "Mensal"}
                 </p>
                 <div className="pt-2">
@@ -406,41 +406,41 @@ export default function AccountSettingsPage() {
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-                <span className="text-[11px] font-mono uppercase text-slate-500 font-bold block">
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-2">
+                <span className="text-[11px] font-mono uppercase text-[#9BA8AB] font-bold block">
                   Capacidade de Auditorias
                 </span>
                 <div className="text-2xl font-bold font-mono text-[#2740F0]">
                   {user?.plan === "Pro" || user?.plan === "Enterprise" ? "Ilimitadas" : "5 / mês"}
                 </div>
-                <p className="text-xs text-slate-600">
-                  Uso no ciclo vigente: <strong className="text-slate-900">{user?.analysesUsed || 0} análises</strong>
+                <p className="text-xs text-[#CCD0CF]">
+                  Uso no ciclo vigente: <strong className="text-white">{user?.analysesUsed || 0} análises</strong>
                 </p>
-                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden mt-3">
-                  <div className="bg-[#2740F0] h-full w-[25%]" />
+                <div className="w-full bg-[#162a39] h-2 rounded-full overflow-hidden mt-3">
+                  <div className="bg-[#11212D] border border-[#253745] h-full w-[25%]" />
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-                <span className="text-[11px] font-mono uppercase text-slate-500 font-bold block">
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-2">
+                <span className="text-[11px] font-mono uppercase text-[#9BA8AB] font-bold block">
                   Cofre Documental
                 </span>
-                <div className="text-2xl font-bold font-display text-slate-900">
+                <div className="text-2xl font-bold font-display text-white">
                   Espaço Ilimitado
                 </div>
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-[#CCD0CF]">
                   CNDs, Balanços e Acervos sob custódia criptografada AES-256.
                 </p>
               </div>
             </div>
 
             {/* Opções de Upgrade & Recarga */}
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-6 rounded-2xl bg-[#11212D] border border-[#253745] flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900 font-display">
+                <h3 className="text-base font-bold text-white font-display">
                   Deseja migrar para o Ciclo Anual ou Plano Enterprise?
                 </h3>
-                <p className="text-xs text-slate-600 mt-1">
+                <p className="text-xs text-[#CCD0CF] mt-1">
                   Obtenha 20% de desconto adicional na anuidade ou suporte multi-CNPJs para grandes consórcios.
                 </p>
               </div>
@@ -455,12 +455,12 @@ export default function AccountSettingsPage() {
 
             {/* SEÇÃO: AUTO-GESTÃO DE ASSINATURA */}
             {user?.plan && user.plan !== "Starter" && (
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-4">
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 font-display">
+                  <h3 className="text-base font-bold text-white font-display">
                     Gestão da Assinatura
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-[#9BA8AB] mt-1">
                     Pause temporariamente para preservar seus dados ou encerre a renovação automática.
                   </p>
                 </div>
@@ -503,7 +503,7 @@ export default function AccountSettingsPage() {
                     type="button"
                     disabled={accountActionLoading || subscriptionStatus === "CANCELLED"}
                     onClick={() => setShowCancelModal(true)}
-                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-[#162a39] hover:bg-slate-200 text-[#CCD0CF] border border-slate-300 font-bold text-xs transition-colors disabled:opacity-50 cursor-pointer"
                   >
                     {subscriptionStatus === "CANCELLED" ? "Assinatura Cancelada" : "Cancelar Assinatura"}
                   </button>
@@ -560,46 +560,46 @@ export default function AccountSettingsPage() {
             </div>
 
             {/* Caixa com o Link Exclusivo de Indicação */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-              <span className="text-xs font-bold text-slate-900 uppercase font-mono tracking-wider block">
+            <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-4">
+              <span className="text-xs font-bold text-white uppercase font-mono tracking-wider block">
                 Seu Link Exclusivo de Indicação
               </span>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                <div className="flex-1 px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 font-mono text-xs text-slate-800 truncate select-all">
+                <div className="flex-1 px-4 py-3 rounded-xl bg-[#11212D] border border-slate-300 font-mono text-xs text-slate-800 truncate select-all">
                   {referralLink}
                 </div>
                 <button
                   type="button"
                   onClick={handleCopyReferral}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#2740F0] hover:bg-blue-600 text-white font-bold text-xs shadow-sm transition-all cursor-pointer shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#11212D] border border-[#253745] hover:bg-[#253745] text-white font-bold text-xs shadow-sm transition-all cursor-pointer shrink-0"
                 >
                   {copiedLink ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
                   <span>{copiedLink ? "Link Copiado!" : "Copiar Link"}</span>
                 </button>
               </div>
 
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-[#9BA8AB]">
                 * As análises gratuitas são creditadas imediatamente após o convidado auditar o primeiro edital.
               </p>
             </div>
 
             {/* Placar de Indicações */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
-                <span className="text-xs font-mono text-slate-500 block mb-1">Convites Enviados</span>
-                <span className="text-2xl font-bold font-mono text-slate-900">3</span>
-                <span className="text-[11px] text-slate-400 block mt-1">Links acessados</span>
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm">
+                <span className="text-xs font-mono text-[#9BA8AB] block mb-1">Convites Enviados</span>
+                <span className="text-2xl font-bold font-mono text-white">3</span>
+                <span className="text-[11px] text-[#4A5C6A] block mt-1">Links acessados</span>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
-                <span className="text-xs font-mono text-slate-500 block mb-1">Parceiros Ativados</span>
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm">
+                <span className="text-xs font-mono text-[#9BA8AB] block mb-1">Parceiros Ativados</span>
                 <span className="text-2xl font-bold font-mono text-emerald-600">2</span>
                 <span className="text-[11px] text-emerald-700 block mt-1">Auditorias concluídas</span>
               </div>
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
-                <span className="text-xs font-mono text-slate-500 block mb-1">Análises Bônus Conquistadas</span>
+              <div className="p-5 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm">
+                <span className="text-xs font-mono text-[#9BA8AB] block mb-1">Análises Bônus Conquistadas</span>
                 <span className="text-2xl font-bold font-mono text-[#2740F0]">+10</span>
                 <span className="text-[11px] text-blue-700 block mt-1">Créditos vitalícios</span>
               </div>
@@ -610,18 +610,18 @@ export default function AccountSettingsPage() {
         {/* ABA 4: ALERTAS & SEGURANÇA */}
         {activeTab === "seguranca" && (
           <div className="space-y-6">
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-6 shadow-sm">
-              <h2 className="text-base font-bold text-slate-900 font-display">
+            <div className="bg-[#06141B] rounded-2xl border border-[#253745] p-6 space-y-6 shadow-sm">
+              <h2 className="text-base font-bold text-white font-display">
                 Alertas Preventivos de Habilitação
               </h2>
 
               <div className="space-y-4">
-                <label className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+                <label className="flex items-center justify-between p-3.5 rounded-xl border border-[#253745] hover:bg-[#11212D] cursor-pointer transition-colors">
                   <div>
-                    <span className="text-xs font-bold text-slate-900 block">
+                    <span className="text-xs font-bold text-white block">
                       Avisar com 15 dias de antecedência antes de CNDs expirarem
                     </span>
-                    <span className="text-[11px] text-slate-500">
+                    <span className="text-[11px] text-[#9BA8AB]">
                       Dispara e-mail para o setor contábil providenciar certidões renovadas.
                     </span>
                   </div>
@@ -633,12 +633,12 @@ export default function AccountSettingsPage() {
                   />
                 </label>
 
-                <label className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+                <label className="flex items-center justify-between p-3.5 rounded-xl border border-[#253745] hover:bg-[#11212D] cursor-pointer transition-colors">
                   <div>
-                    <span className="text-xs font-bold text-slate-900 block">
+                    <span className="text-xs font-bold text-white block">
                       Aviso Crítico de 7 e 3 dias antes da sessão pública
                     </span>
-                    <span className="text-[11px] text-slate-500">
+                    <span className="text-[11px] text-[#9BA8AB]">
                       Alerta se houver certidão com risco de vencimento durante o prazo recursal.
                     </span>
                   </div>
@@ -650,12 +650,12 @@ export default function AccountSettingsPage() {
                   />
                 </label>
 
-                <label className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+                <label className="flex items-center justify-between p-3.5 rounded-xl border border-[#253745] hover:bg-[#11212D] cursor-pointer transition-colors">
                   <div>
-                    <span className="text-xs font-bold text-slate-900 block">
+                    <span className="text-xs font-bold text-white block">
                       Radar de Retificações do PNCP
                     </span>
-                    <span className="text-[11px] text-slate-500">
+                    <span className="text-[11px] text-[#9BA8AB]">
                       Notificar quando o órgão convocante publicar erratas ou alterar anexos de editais salvos.
                     </span>
                   </div>
@@ -670,8 +670,8 @@ export default function AccountSettingsPage() {
             </div>
 
             {/* Troca de Senha & Segurança */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-sm">
-              <h2 className="text-base font-bold text-slate-900 font-display">
+            <div className="bg-[#06141B] rounded-2xl border border-[#253745] p-6 space-y-4 shadow-sm">
+              <h2 className="text-base font-bold text-white font-display">
                 Segurança da Conta &amp; Autenticação
               </h2>
               {passwordMsg && (
@@ -683,7 +683,7 @@ export default function AccountSettingsPage() {
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     Nova Senha
                   </label>
                   <input
@@ -691,11 +691,11 @@ export default function AccountSettingsPage() {
                     placeholder="Mínimo 6 caracteres"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     Confirmar Nova Senha
                   </label>
                   <input
@@ -703,7 +703,7 @@ export default function AccountSettingsPage() {
                     placeholder="Repita a nova senha"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-[#2740F0]"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-xs text-white focus:outline-none focus:border-[#2740F0]"
                   />
                 </div>
               </div>
@@ -738,53 +738,53 @@ export default function AccountSettingsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Passo 1 */}
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+              <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
                     01
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900">Alimente o Cofre Documental (Art. 62)</h3>
+                  <h3 className="text-sm font-bold text-white">Alimente o Cofre Documental (Art. 62)</h3>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">
                   Suba suas <strong>Certidões Negativas (CNDs)</strong>, <strong>Balanço Patrimonial</strong> e <strong>Atestados de Capacidade Técnica (CATs)</strong> uma única vez. O sistema indexa os índices contábeis (SG, LG, LC) e monitora automaticamente as datas de validade para você.
                 </p>
               </div>
 
               {/* Passo 2 */}
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+              <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
                     02
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900">Audite Editais em 30 Segundos</h3>
+                  <h3 className="text-sm font-bold text-white">Audite Editais em 30 Segundos</h3>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">
                   Em <strong>Nova Análise</strong>, arraste o PDF do edital ou busque diretamente pelo número de controle do <strong>PNCP</strong>. O motor isola os capítulos de habilitação e cruza as exigências contra os seus documentos cadastrados.
                 </p>
               </div>
 
               {/* Passo 3 */}
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+              <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
                     03
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900">Interprete o Semáforo &amp; Súmula 263</h3>
+                  <h3 className="text-sm font-bold text-white">Interprete o Semáforo &amp; Súmula 263</h3>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">
                   Os requisitos aparecem classificados em <strong>PASSA</strong>, <strong>RESSALVA</strong> ou <strong>ELIMINATÓRIA</strong> com citação exata de página e linha. Se o edital vedar o somatório de atestados de forma ilegal, o sistema alerta a afronta à Súmula 263 do TCU.
                 </p>
               </div>
 
               {/* Passo 4 */}
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+              <div className="p-6 rounded-2xl bg-[#06141B] border border-[#253745] shadow-sm space-y-3">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-xl bg-blue-100 text-[#2740F0] font-bold font-mono text-sm flex items-center justify-center">
                     04
                   </span>
-                  <h3 className="text-sm font-bold text-slate-900">Emita Parecer A4 ou Impugne com 1 Clique</h3>
+                  <h3 className="text-sm font-bold text-white">Emita Parecer A4 ou Impugne com 1 Clique</h3>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-[#CCD0CF] leading-relaxed">
                   Gere o relatório pericial formal em PDF A4 institucional para apresentar à diretoria ou clique em <strong>"Gerar Minuta de Impugnação"</strong> para copiar uma petição do Art. 164 pronta com fundamentação do TCU para protocolo.
                 </p>
               </div>
@@ -794,12 +794,12 @@ export default function AccountSettingsPage() {
         {/* POPUP SURVEY DE CANCELAMENTO */}
         {showCancelModal && (
           <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full p-6 space-y-4">
+            <div className="bg-[#06141B] rounded-2xl border border-[#253745] shadow-2xl max-w-md w-full p-6 space-y-4">
               <div className="space-y-1">
-                <h3 className="text-lg font-bold text-slate-900 font-display">
+                <h3 className="text-lg font-bold text-white font-display">
                   Confirmação de Cancelamento
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#9BA8AB]">
                   Por favor, informe o motivo principal do cancelamento para nos ajudar a melhorar o serviço:
                 </p>
               </div>
@@ -808,7 +808,7 @@ export default function AccountSettingsPage() {
                 <select
                   value={cancelReason}
                   onChange={(e) => setCancelReason(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-white focus:outline-none focus:border-[#2740F0]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-800 bg-[#06141B] focus:outline-none focus:border-[#2740F0]"
                 >
                   <option value="">Selecione um motivo...</option>
                   <option value="Preço / Orçamento">Preço ou orçamento reduzido</option>
@@ -833,7 +833,7 @@ export default function AccountSettingsPage() {
                 <button
                   type="button"
                   onClick={() => setShowCancelModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#CCD0CF] hover:text-white transition-colors"
                 >
                   Voltar
                 </button>
@@ -877,10 +877,10 @@ export default function AccountSettingsPage() {
         {/* MODAL DE CONFIRMAÇÃO DE EXCLUSÃO DE CONTA (ZONA DE PERIGO) */}
         {showDeleteModal && (
           <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl border border-red-200 shadow-2xl max-w-md w-full p-6 space-y-4">
+            <div className="bg-[#06141B] rounded-2xl border border-red-200 shadow-2xl max-w-md w-full p-6 space-y-4">
               <div className="flex items-center gap-2.5 text-red-600">
                 <AlertTriangle className="w-5 h-5" />
-                <h3 className="text-lg font-bold font-display text-slate-900">
+                <h3 className="text-lg font-bold font-display text-white">
                   Exclusão Definitiva de Conta
                 </h3>
               </div>
@@ -892,7 +892,7 @@ export default function AccountSettingsPage() {
 
               <div className="space-y-3 pt-1">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-[#CCD0CF] block mb-1">
                     Digite sua senha atual para autorizar:
                   </label>
                   <input
@@ -900,7 +900,7 @@ export default function AccountSettingsPage() {
                     placeholder="••••••••"
                     value={deletePassword}
                     onChange={(e) => setDeletePassword(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-none focus:border-red-500 font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs text-white focus:outline-none focus:border-red-500 font-mono"
                   />
                 </div>
 
@@ -911,7 +911,7 @@ export default function AccountSettingsPage() {
                     onChange={(e) => setDeleteConfirmedCheckbox(e.target.checked)}
                     className="mt-0.5 w-4 h-4 rounded border-slate-300 text-red-600 accent-red-600 focus:ring-red-500 shrink-0"
                   />
-                  <span className="text-xs text-slate-700 select-none">
+                  <span className="text-xs text-[#CCD0CF] select-none">
                     Compreendo que esta ação é irreversível e autorizo a eliminação definitiva de todos os meus dados e documentos.
                   </span>
                 </label>
@@ -921,7 +921,7 @@ export default function AccountSettingsPage() {
                 <button
                   type="button"
                   onClick={() => setShowDeleteModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#CCD0CF] hover:text-white transition-colors"
                 >
                   Voltar com Segurança
                 </button>

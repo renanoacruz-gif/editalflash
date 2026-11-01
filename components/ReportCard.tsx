@@ -241,7 +241,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               <button
                 type="button"
                 onClick={() => setActiveMinutaText(null)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-1 rounded-lg text-[#4A5C6A] hover:text-white hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -250,7 +250,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
             {/* TASK UX #2: Auto-Fill Impugnation Drafts com Campos Editáveis e Persistência */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
               <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-slate-400">
+                <label className="text-[11px] font-semibold text-[#4A5C6A]">
                   Razão Social (Perfil):
                 </label>
                 <input
@@ -263,7 +263,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-slate-400">
+                <label className="text-[11px] font-semibold text-[#4A5C6A]">
                   CNPJ:
                 </label>
                 <input
@@ -276,7 +276,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-slate-400">
+                <label className="text-[11px] font-semibold text-[#4A5C6A]">
                   Gestor / Procurador:
                 </label>
                 <input
@@ -294,14 +294,14 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
             </div>
 
             <div className="flex items-center justify-between pt-2 border-t border-slate-800 flex-wrap gap-2">
-              <span className="text-[11px] text-slate-500">
+              <span className="text-[11px] text-[#9BA8AB]">
                 Petição fundamentada em acórdãos do TCU e dispositivos da Lei 14.133/21
               </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setActiveMinutaText(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#4A5C6A] hover:text-white hover:bg-slate-800 transition-colors"
                 >
                   Fechar
                 </button>
@@ -688,7 +688,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
           <p className="font-semibold text-slate-200">
             Ferramenta de suporte à decisão. Responsabilidade jurídica permanece com a empresa licitante.
           </p>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-[#4A5C6A]">
             A auditoria preventiva de habilitação indica aderência e conformidade com base no Art. 62 da Lei 14.133/2021 e nos documentos do cofre cadastrado.
           </p>
         </motion.div>

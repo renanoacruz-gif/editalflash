@@ -97,7 +97,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
     <div className="min-h-screen bg-white text-slate-900 flex flex-col md:flex-row font-sans antialiased selection:bg-[#2740F0] selection:text-white">
       {/* SIDEBAR DESKTOP — Tinta Sólida Nobre (#0E1626) com suporte a recolhimento suave */}
       <aside
-        className={`hidden md:flex flex-col border-r border-[#26324A] bg-[#0E1626] text-[#E8ECF5] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
+        className={`hidden md:flex flex-col border-r border-[#253745] bg-[#06141B] text-[#E8ECF5] p-3 justify-between shrink-0 select-none transition-all duration-300 relative ${
           collapsed ? "w-[72px]" : "w-64"
         }`}
       >
@@ -115,11 +115,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
           {/* Logo Oficial com Wordmark */}
           <Link
             href="/dashboard"
-            className={`flex items-center gap-2.5 pb-4 border-b border-[#26324A] ${
+            className={`flex items-center gap-2.5 pb-4 border-b border-[#253745] ${
               collapsed ? "justify-center px-0" : "px-1"
             }`}
           >
-            <div className="w-8 h-8 rounded-md bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-[#E8ECF5] shrink-0">
+            <div className="w-8 h-8 rounded-md bg-[#11212D] border border-[#253745] flex items-center justify-center text-[#E8ECF5] shrink-0">
               <BrandIcon name="mark" size={20} />
             </div>
             {!collapsed && (
@@ -137,7 +137,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
           {/* Badge de Preferência Operacional Ativa */}
           {!collapsed ? (
-            <div className="p-3 rounded-lg bg-[#121B2D] border border-[#26324A] space-y-1">
+            <div className="p-3 rounded-lg bg-[#11212D] border border-[#253745] space-y-1">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-[#8F9CFF] uppercase tracking-wider font-mono flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4A5FFF]" />
@@ -150,7 +150,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             </div>
           ) : (
             <div
-              className="flex justify-center p-2 rounded-lg bg-[#121B2D] border border-[#26324A]"
+              className="flex justify-center p-2 rounded-lg bg-[#11212D] border border-[#253745]"
               title={`Vertical Ativa: ${user.primary_vertical}`}
             >
               <span className="w-2 h-2 rounded-full bg-[#4A5FFF]" />
@@ -189,9 +189,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
 
         {/* User Card e Logout */}
-        <div className="pt-4 border-t border-[#26324A] space-y-3">
+        <div className="pt-4 border-t border-[#253745] space-y-3">
           <div className={`flex items-center gap-2.5 px-1 ${collapsed ? "justify-center" : ""}`}>
-            <div className="w-8 h-8 rounded-full bg-[#121B2D] border border-[#26324A] flex items-center justify-center text-slate-300 font-bold font-mono text-xs shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#11212D] border border-[#253745] flex items-center justify-center text-slate-300 font-bold font-mono text-xs shrink-0">
               {user.name?.charAt(0).toUpperCase() || "L"}
             </div>
             {!collapsed && (
@@ -222,7 +222,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             type="button"
             onClick={logout}
             title={collapsed ? "Sair da conta" : undefined}
-            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#121B2D] hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 border border-[#26324A] transition-colors cursor-pointer ${
+            className={`w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#11212D] hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 border border-[#253745] transition-colors cursor-pointer ${
               collapsed ? "px-0" : ""
             }`}
           >
@@ -233,7 +233,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       </aside>
 
       {/* MOBILE BAR */}
-      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-slate-200 bg-[#0E1626] text-white">
+      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-[#253745] bg-[#06141B] text-white">
         <Link href="/dashboard" className="flex items-center gap-2">
           <BrandIcon name="mark" size={20} />
           <span className="text-sm font-bold font-display">
@@ -250,7 +250,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
       {/* MOBILE DROPDOWN */}
       {mobileSidebarOpen && (
-        <div className="md:hidden bg-[#0E1626] border-b border-[#26324A] p-3 space-y-1.5 text-white">
+        <div className="md:hidden bg-[#06141B] border-b border-[#253745] p-3 space-y-1.5 text-white">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -258,7 +258,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileSidebarOpen(false)}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:bg-[#121B2D]"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:bg-[#11212D]"
               >
                 <Icon className="w-4 h-4 text-slate-400" />
                 <span>{item.label}</span>
@@ -285,14 +285,14 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       )}
 
       {/* ÁREA DE CONTEÚDO PRINCIPAL — Fundo Branco Puro e Limpo (#FFFFFF / Slate-50) */}
-      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-white">
+      <main className="flex-1 overflow-y-auto flex flex-col min-w-0 bg-[#06141B]">
         {/* Sticky Header Limpo com Fundo Branco Suave */}
-        <header className="sticky top-0 z-40 backdrop-blur-md bg-white/95 border-b border-slate-200 px-6 py-4 flex items-center justify-between">
+        <header className="sticky top-0 z-40 backdrop-blur-md bg-[#06141B]/95 border-b border-[#253745] px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h2 className="text-base font-bold font-display text-slate-900 tracking-tight">
+            <h2 className="text-base font-bold font-display text-white tracking-tight">
               {navItems.find((n) => n.id === activeTab)?.label || "Workspace de Habilitação"}
             </h2>
-            <span className="hidden sm:inline-block text-[11px] font-mono text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
+            <span className="hidden sm:inline-block text-[11px] font-mono text-[#9BA8AB] bg-[#11212D] px-2.5 py-0.5 rounded border border-[#253745]">
               Lei Federal 14.133/2021
             </span>
           </div>
@@ -303,7 +303,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               onClick={() => {
                 window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }));
               }}
-              className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 text-[11px] transition-all shadow-xs cursor-pointer"
+              className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-[#253745] text-slate-600 text-[11px] transition-all shadow-xs cursor-pointer"
               title="Abrir Command Palette (Ctrl+K)"
             >
               <Search className="w-3.5 h-3.5 text-slate-400" />
@@ -311,10 +311,10 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               <span className="keycap">Ctrl K</span>
             </button>
 
-            <span className="text-slate-500 hidden sm:inline">
-              Empresa: <strong className="text-slate-800">{user.company || "Licitante"}</strong>
+            <span className="text-[#9BA8AB] hidden sm:inline">
+              Empresa: <strong className="text-white">{user.company || "Licitante"}</strong>
             </span>
-            <span className="hidden md:inline text-slate-200">|</span>
+            <span className="hidden md:inline text-[#253745]">|</span>
             <span className="text-emerald-700 font-semibold flex items-center gap-1.5 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               Sessão Conforme
@@ -331,7 +331,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               <span>
                 Visualizando como <strong>{impersonation.tenant.name}</strong> ({impersonation.tenant.email})
               </span>
-              <span className="bg-white text-slate-800 px-2 py-0.5 rounded text-[10px] font-mono border border-slate-200">
+              <span className="bg-white text-slate-800 px-2 py-0.5 rounded text-[10px] font-mono border border-[#253745]">
                 Vertical: {impersonation.tenant.primary_vertical}
               </span>
             </div>

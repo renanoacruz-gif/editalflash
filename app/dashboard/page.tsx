@@ -163,7 +163,7 @@ export default function DashboardHome() {
           </div>
         </section>
 
-        {/* NAVEGAÇÃO LIMPA DE AÇÕES E MÓDULOS - DIVISORES SUTIS */}
+        {/* NAVEGAÇÃO LIMPA DE AÇÕES E MÓDULOS - LISTA SEM CARDS PESADOS */}
         <section className="space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#253745]">
             <h2 className="text-xs font-mono uppercase tracking-wider text-[#9BA8AB]">
@@ -172,61 +172,69 @@ export default function DashboardHome() {
             <span className="text-xs font-mono text-[#4A5C6A]">Lei 14.133/2021</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="divide-y divide-[#253745]">
             <Link
               href="/dashboard/nova-analise?tab=pncp"
-              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
+              className="py-4 flex items-center justify-between group hover:bg-[#11212D]/40 px-2 rounded transition-colors"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-[#9BA8AB]">01. RADAR</span>
-                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-[#9BA8AB]">01. RADAR</span>
+                  <h3 className="text-sm font-semibold text-white group-hover:text-[#CCD0CF] transition-colors">Busca PNCP</h3>
+                </div>
+                <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                  Localize editais abertos no Portal Nacional de Contratações Públicas.
+                </p>
               </div>
-              <h3 className="text-sm font-medium text-white font-display">Busca PNCP</h3>
-              <p className="text-xs text-[#9BA8AB] leading-relaxed">
-                Localize editais abertos no Portal Nacional de Contratações Públicas.
-              </p>
+              <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/cofre"
-              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
+              className="py-4 flex items-center justify-between group hover:bg-[#11212D]/40 px-2 rounded transition-colors"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-[#9BA8AB]">02. COFRE</span>
-                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-[#9BA8AB]">02. COFRE</span>
+                  <h3 className="text-sm font-semibold text-white group-hover:text-[#CCD0CF] transition-colors">Documentos Art. 62</h3>
+                </div>
+                <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                  Custódia de CNDs, balanço patrimonial e atestados de acervo técnico.
+                </p>
               </div>
-              <h3 className="text-sm font-medium text-white font-display">Documentos Art. 62</h3>
-              <p className="text-xs text-[#9BA8AB] leading-relaxed">
-                Custódia de CNDs, balanço patrimonial e atestados de acervo técnico.
-              </p>
+              <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/calendario"
-              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
+              className="py-4 flex items-center justify-between group hover:bg-[#11212D]/40 px-2 rounded transition-colors"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-[#9BA8AB]">03. PRAZOS</span>
-                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-[#9BA8AB]">03. PRAZOS</span>
+                  <h3 className="text-sm font-semibold text-white group-hover:text-[#CCD0CF] transition-colors">Calendário do Certame</h3>
+                </div>
+                <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                  Validade das certidões cruzada com a data de sessão pública.
+                </p>
               </div>
-              <h3 className="text-sm font-medium text-white font-display">Calendário do Certame</h3>
-              <p className="text-xs text-[#9BA8AB] leading-relaxed">
-                Validade das certidões cruzada com a data de sessão pública.
-              </p>
+              <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors shrink-0 ml-4" />
             </Link>
 
             <Link
               href="/dashboard/acervo"
-              className="p-4 rounded-lg border border-[#253745] bg-[#11212D]/60 hover:bg-[#11212D] hover:border-[#4A5C6A] transition-colors group block space-y-2"
+              className="py-4 flex items-center justify-between group hover:bg-[#11212D]/40 px-2 rounded transition-colors"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-[#9BA8AB]">04. ACERVO</span>
-                <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors" />
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-[#9BA8AB]">04. ACERVO</span>
+                  <h3 className="text-sm font-semibold text-white group-hover:text-[#CCD0CF] transition-colors">Súmula 263/TCU</h3>
+                </div>
+                <p className="text-xs text-[#9BA8AB] leading-relaxed">
+                  Portfólio de atestados quantitativos e somatório de parcelas.
+                </p>
               </div>
-              <h3 className="text-sm font-medium text-white font-display">Súmula 263/TCU</h3>
-              <p className="text-xs text-[#9BA8AB] leading-relaxed">
-                Portfólio de atestados quantitativos e somatório de parcelas.
-              </p>
+              <ArrowUpRight className="w-4 h-4 text-[#4A5C6A] group-hover:text-white transition-colors shrink-0 ml-4" />
             </Link>
           </div>
         </section>

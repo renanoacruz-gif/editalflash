@@ -23,6 +23,8 @@ import {
   Lock,
   Layers,
   Sparkles,
+  Menu,
+  X,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -34,6 +36,7 @@ export default function LandingPage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHoveringHero, setIsHoveringHero] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,20 +84,26 @@ export default function LandingPage() {
       className="min-h-screen bg-white text-[#09090B] flex flex-col font-sans selection:bg-[var(--brand-tint)] selection:text-[var(--brand)]"
     >
       {/* HEADER INSTITUCIONAL COM BARRA DE PROGRESSO DE SCROLL */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/95 border-b border-[#E4E4E7] py-3.5 px-4 sm:px-8 transition-colors relative">
+      <header
+        className={`sticky top-0 z-50 transition-all duration-200 ${
+          scrollProgress > 2
+            ? "backdrop-blur-md bg-white/85 border-b border-[var(--line)] shadow-xs"
+            : "backdrop-blur-md bg-white/70 border-b border-transparent"
+        } py-3.5 px-4 sm:px-8`}
+      >
         {/* Barra de Progresso no Topo do Cabeçalho */}
         <div
           className="absolute bottom-0 left-0 h-[2.5px] bg-[var(--brand)] transition-colors duration-150 ease-out z-50"
           style={{ width: `${scrollProgress}%` }}
         />
 
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-3 group">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-3 group shrink-0">
             <BrandIcon name="mark" size="s24" color="brand" />
             <div className="font-display tracking-tight text-[19px] text-[#09090B] flex items-baseline">
               <span className="font-medium text-[#09090B]">Edital</span>
               <span className="font-extrabold text-[#09090B]">Flash</span>
-              <span className="ml-2.5 text-xs tracking-widest uppercase font-mono px-2 py-0.5 rounded bg-[var(--brand-tint)] text-[var(--brand)] border border-[var(--brand)]/20 font-semibold">
+              <span className="ml-2.5 text-xs tracking-widest uppercase font-mono px-2 py-0.5 rounded bg-[var(--brand-tint)] text-[var(--brand)] border border-[var(--brand)]/20 font-semibold hidden sm:inline-block">
                 Lei 14.133/2021
               </span>
             </div>
@@ -102,38 +111,93 @@ export default function LandingPage() {
 
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#52525B]">
             <a href="#diferencial" className="hover:text-[#09090B] transition-colors">
-              O Segundo Par de Olhos
+              Como funciona
             </a>
             <a href="#moats" className="hover:text-[#09090B] transition-colors">
-              Defesa &amp; Acervos
+              Recursos
             </a>
             <a href="#parecer" className="hover:text-[#09090B] transition-colors">
-              Parecer Executivo
+              Exemplo de parecer
             </a>
             <a href="#planos" className="hover:text-[#09090B] transition-colors">
-              Planos Corporativos
+              Planos
             </a>
             <a href="#faq" className="hover:text-[#09090B] transition-colors">
               FAQ
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="/signup"
-              className="text-sm font-medium text-[#52525B] hover:text-[#09090B] px-3 py-1.5 rounded transition-colors"
-            >
-              Criar Conta Gratuita
-            </Link>
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* CTA sempre visível (inclusive no mobile) */}
             <Link
               href="/signup?welcome=true"
-              className="inline-flex items-center gap-2 text-sm font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white px-4 py-2 rounded-md shadow-xs transition-colors active:scale-98"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bg-[var(--flash)] hover:brightness-110 active:scale-98 text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-lg shadow-sm transition-all whitespace-nowrap"
             >
-              <BrandIcon name="auditoria" size="s16" accentCobalt={false} />
-              <span>Auditar Edital Grátis</span>
+              <BrandIcon name="edital" size="s16" accentCobalt={false} />
+              <span>Auditar meu edital grátis</span>
             </Link>
+
+            {/* Botão de Menu Hambúrguer Mobile */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-[#09090B] hover:bg-[#F4F4F5] transition-colors cursor-pointer"
+              aria-label="Abrir menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Menu Hambúrguer Dropdown Mobile */}
+        {mobileMenuOpen && (
+          <div className="md:hidden pt-4 pb-3 px-2 border-t border-[var(--line)] mt-3 space-y-2 bg-white/95 backdrop-blur-xl rounded-b-xl shadow-lg">
+            <a
+              href="#diferencial"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-[#52525B] hover:text-[#09090B] hover:bg-[#F4F4F5]"
+            >
+              Como funciona
+            </a>
+            <a
+              href="#moats"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-[#52525B] hover:text-[#09090B] hover:bg-[#F4F4F5]"
+            >
+              Recursos
+            </a>
+            <a
+              href="#parecer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-[#52525B] hover:text-[#09090B] hover:bg-[#F4F4F5]"
+            >
+              Exemplo de parecer
+            </a>
+            <a
+              href="#planos"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-[#52525B] hover:text-[#09090B] hover:bg-[#F4F4F5]"
+            >
+              Planos
+            </a>
+            <a
+              href="#faq"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 rounded-lg text-sm font-medium text-[#52525B] hover:text-[#09090B] hover:bg-[#F4F4F5]"
+            >
+              FAQ
+            </a>
+            <div className="pt-2 border-t border-[#E4E4E7]">
+              <Link
+                href="/signup"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center py-2.5 rounded-lg text-sm font-bold bg-[var(--flash)] text-white hover:brightness-110"
+              >
+                Criar conta
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* HERO SECTION — POSICIONAMENTO PARA GESTORES SÊNIORES */}

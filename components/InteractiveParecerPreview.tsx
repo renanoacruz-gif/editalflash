@@ -263,10 +263,10 @@ export const InteractiveParecerPreview: React.FC = () => {
                 Gostou do rigor pericial deste parecer? Gere o relatório oficial da sua própria empresa.
               </span>
               <a
-                href="/signup"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[#18181B] hover:bg-black text-white font-bold text-xs transition-colors shadow-xs whitespace-nowrap"
+                href="/signup?welcome=true"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--flash)] hover:brightness-110 text-white font-bold text-xs transition-colors shadow-xs whitespace-nowrap"
               >
-                <span>Gere o da sua empresa → /signup</span>
+                <span>Auditar meu edital grátis</span>
               </a>
             </div>
           </div>

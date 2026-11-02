@@ -6,9 +6,6 @@ import { BrandIcon } from "@/components/brand-icons";
 import { useAuth } from "@/lib/auth-context";
 import { InteractiveHeroScanner } from "@/components/InteractiveHeroScanner";
 import { InteractiveParecerPreview } from "@/components/InteractiveParecerPreview";
-import InteractiveRoiCalculator from "@/components/InteractiveRoiCalculator";
-import SplitDiffViewer from "@/components/SplitDiffViewer";
-import LegalTimelineScrubber from "@/components/LegalTimelineScrubber";
 import { BackToTopButton } from "@/components/BackToTopButton";
 import {
   ShieldCheck,
@@ -383,10 +380,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* COMPONENTES DE DESIGN MUNDIAL (SPLIT DIFF & TIMELINE & CALCULADORA ROI) */}
-      <SplitDiffViewer />
-      <LegalTimelineScrubber />
-      <InteractiveRoiCalculator />
+
 
       {/* SEÇÃO 5: PLANOS CORPORATIVOS */}
       <section id="planos" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">

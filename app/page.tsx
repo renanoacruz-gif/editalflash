@@ -227,24 +227,29 @@ export default function LandingPage() {
               Auditoria preventiva do edital, com prova de página e linha para cada exigência e parecer pronto em PDF.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 w-full sm:w-auto">
-              <Link
-                href="/signup?welcome=true"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[var(--flash)] hover:brightness-110 active:scale-98 text-white font-semibold text-[15px] shadow-lg shadow-[var(--flash)]/25 transition-all focus-visible:ring-2 focus-visible:ring-[var(--flash-lt)]"
-              >
-                <BrandIcon name="edital" size="s20" accentCobalt={false} />
-                <span>Auditar meu edital grátis</span>
-              </Link>
-              <a
-                href="/assets/exemplo-parecer-editalflash.pdf"
-                download="exemplo-parecer-editalflash.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/10 hover:bg-white/15 active:scale-98 text-white font-medium text-[15px] border border-white/20 transition-colors focus-visible:ring-2 focus-visible:ring-white/40"
-              >
-                <Download className="w-4 h-4 text-white" />
-                <span>Ver exemplo de parecer</span>
-              </a>
+            <div className="space-y-2 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 w-full sm:w-auto">
+                <Link
+                  href="/signup?welcome=true"
+                  className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[var(--flash)] hover:brightness-110 active:scale-98 text-white font-semibold text-[15px] shadow-lg shadow-[var(--flash)]/25 transition-all focus-visible:ring-2 focus-visible:ring-[var(--flash-lt)]"
+                >
+                  <BrandIcon name="edital" size="s20" accentCobalt={false} />
+                  <span>Auditar meu edital grátis</span>
+                </Link>
+                <a
+                  href="/assets/exemplo-parecer-editalflash.pdf"
+                  download="exemplo-parecer-editalflash.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/10 hover:bg-white/15 active:scale-98 text-white font-medium text-[15px] border border-white/20 transition-colors focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <Download className="w-4 h-4 text-white" />
+                  <span>Ver exemplo de parecer</span>
+                </a>
+              </div>
+              <p className="text-[13px] text-[var(--mist)] font-mono pl-1">
+                1 auditoria pericial completa grátis · Sem cartão de crédito
+              </p>
             </div>
           </div>
 

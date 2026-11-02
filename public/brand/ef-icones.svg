@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <defs>
+    <!-- Ícone Passa -->
+    <g id="ef-ico-passa" fill="none" stroke="#0B6B49" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>
+      <path d="M8.5 12l2.5 2.5 4.5-5"/>
+    </g>
+
+    <!-- Ícone Ressalva -->
+    <g id="ef-ico-ressalva" fill="none" stroke="#6F4B00" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M12 3l10 18H2z"/>
+      <path d="M12 10v5"/>
+      <path d="M12 18v1"/>
+    </g>
+
+    <!-- Ícone Eliminatória -->
+    <g id="ef-ico-eliminado" fill="none" stroke="#A3201C" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M5 5l14 14M19 5L5 19"/>
+    </g>
+
+    <!-- Ícone Revisão Humana -->
+    <g id="ef-ico-revisao" fill="none" stroke="#4B3FB0" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <circle cx="12" cy="8" r="3.5"/>
+      <path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>
+    </g>
+
+    <!-- Ícone Auditoria Geral (com detalhe cobalto) -->
+    <g id="ef-ico-auditoria" fill="none" stroke="#0E1626" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <circle cx="10.5" cy="10.5" r="6.5"/>
+      <path d="M8 10.5l2 2 3.5-4"/>
+      <path d="M15.5 15.5L21 21" stroke="#2740F0"/>
+    </g>
+
+    <!-- Ícone Cofre / Documento -->
+    <g id="ef-ico-cofre" fill="none" stroke="#0E1626" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M3 5h18v14H3z"/>
+      <circle cx="12" cy="12" r="3.5"/>
+      <path d="M6 19v2M18 19v2"/>
+      <path d="M12 12l2-2" stroke="#2740F0"/>
+    </g>
+  </defs>
+</svg>

@@ -1,112 +1,199 @@
 @import "tailwindcss";
 
 :root {
-  /* Tokens de Marca Unificados - EditalFlash */
-  --ink: #0B1B2B;              /* Navy quase preto para títulos e superfícies executivas */
-  --ink-bright: #0B1B2B;
-  --ink-2: #475569;            /* Slate médio para apoios */
-  --ink-3: #64748B;            /* Slate suave para legendas */
-  --paper: #FAFAF8;            /* Fundo neutro/quente aprovado */
-  --mist: #F1F5F9;             /* Fundo de destaque discreto */
-  --line: #E2E8F0;             /* Borda padrão neutra 1px */
-  --line-strong: #CBD5E1;      /* Borda ativa ou selecionada */
-  
-  /* Cor de Ação Única */
-  --flash: #1E3A8A;            /* Azul-marinho executivo (Primary Action) */
-  --flash-hover: #1D4ED8;      /* Hover do azul-marinho */
-  --flash-lt: #60A5FA;         /* Destaque suave sobre fundos escuros */
-  --flash-tint: #EFF6FF;       /* Fundo de seleção leve */
+  /* ============================================================ */
+  /* TOKENS OFICIAIS EDITALFLASH v2.0 (Pranchas Claude Design)   */
+  /* ============================================================ */
+  --tinta: #0E1626;              /* Texto principal, sidebar, fundo escuro */
+  --papel: #F3F5F9;              /* Fundo base (frio, nunca creme) */
+  --branco: #FFFFFF;             /* Superfície de leitura e cartões */
+  --lacre: #2740F0;              /* Cobalto da marca (UM ponto por tela) */
+  --grafite: #47526A;            /* Texto secundário e legendas */
+  --linha: #D6DCE8;              /* Divisores e contornos finos */
 
-  /* Semântica WCAG AA (Contraste ≥ 4.5:1) */
-  --ok: #065F46;               /* Verde escuro para aprovações */
-  --ok-bg: #ECFDF5;
-  --ok-border: #A7F3D0;
-  --ok-fg: #065F46;
+  /* Vereditos Oficiais (ícone + rótulo, texto na variante escura) */
+  --passa: #1F9D6B;
+  --passa-bg: #DDF3E9;
+  --passa-text: #0B6B49;
 
-  --warn: #854D0E;             /* Âmbar escuro para ressalvas e prazos */
-  --warn-bg: #FEFCE8;
-  --warn-border: #FEF08A;
-  --warn-fg: #854D0E;
+  --ressalva: #E3A008;
+  --ressalva-bg: #FBEFC9;
+  --ressalva-text: #6F4B00;
 
-  --bad: #991B1B;              /* Vermelho escuro para inabilitações e erros */
-  --bad-bg: #FEF2F2;
-  --bad-border: #FECACA;
-  --bad-fg: #991B1B;
+  --eliminado: #D93A35;
+  --eliminado-bg: #FBE0DE;
+  --eliminado-text: #A3201C;
 
-  --rev: #5B21B6;              /* Roxo escuro para revisões de equipe */
-  --rev-bg: #F5F3FF;
-  --rev-border: #DDD6FE;
-  --rev-fg: #5B21B6;
+  --revisao: #6D5BE0;
+  --revisao-bg: #E6E3FA;
+  --revisao-text: #4B3FB0;
 
-  /* 1. Base Neutra e Superfícies */
-  --bg-base: #FAFAF8;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F5F9;
-  --bg-hover: #E2E8F0;
+  /* Aliases e Mapeamento de Compatibilidade da Aplicação */
+  --bg-base: var(--papel);
+  --bg-surface: var(--branco);
+  --bg-subtle: #E9EDF5;
+  --bg-hover: #DDE3EF;
 
-  /* 2. Tipografia e Contraste Estrito */
-  --text-primary: #0F172A;     /* Slate-900 para máxima legibilidade */
-  --text-secondary: #475569;   /* Slate-600 para textos secundários */
-  --text-muted: #64748B;       /* Slate-500 para metadados */
+  --text-primary: var(--tinta);
+  --text-secondary: var(--grafite);
+  --text-muted: #626F8A;
 
-  /* 3. Linhas Divisórias e Bordas Leves */
-  --border-subtle: #E2E8F0;
-  --border-strong: #CBD5E1;
+  --border-subtle: var(--linha);
+  --border-strong: #BDC7DA;
 
-  /* 4. Cor Institucional */
-  --brand: #1E3A8A;
-  --brand-solid: #1E3A8A;
-  --brand-accent: #2563EB;
-  --brand-tint: #EFF6FF;
+  --brand: var(--lacre);
+  --brand-solid: var(--lacre);
+  --brand-accent: #3F57FF;
+  --brand-tint: #EFF2FE;
 
-  /* Compatibilidade com tokens legados */
-  --bg: var(--bg-base);
-  --surface: var(--bg-surface);
-  --surface-subtle: var(--bg-subtle);
+  /* Aliases Legados Mapeados */
+  --ink: var(--tinta);
+  --ink-bright: var(--tinta);
+  --ink-2: var(--grafite);
+  --ink-3: var(--text-muted);
+  --paper: var(--papel);
+  --line: var(--linha);
+  --line-strong: var(--border-strong);
+  --flash: var(--lacre);
+  --flash-hover: #1E34D9;
+  --flash-lt: #7C8CFF;
+  --flash-tint: var(--brand-tint);
 
-  /* Aliases de Compatibilidade shadcn / Tweakcn */
-  --background: var(--bg-base);
-  --foreground: var(--text-primary);
-  --card: var(--bg-surface);
-  --card-foreground: var(--text-primary);
-  --primary: var(--brand);
+  --ok: var(--passa);
+  --ok-bg: var(--passa-bg);
+  --ok-border: #B7E6D0;
+  --ok-fg: var(--passa-text);
+
+  --warn: var(--ressalva);
+  --warn-bg: var(--ressalva-bg);
+  --warn-border: #F6E29B;
+  --warn-fg: var(--ressalva-text);
+
+  --bad: var(--eliminado);
+  --bad-bg: var(--eliminado-bg);
+  --bad-border: #F7BFBD;
+  --bad-fg: var(--eliminado-text);
+
+  --rev: var(--revisao);
+  --rev-bg: var(--revisao-bg);
+  --rev-border: #D1CCF5;
+  --rev-fg: var(--revisao-text);
+
+  --background: var(--papel);
+  --foreground: var(--tinta);
+  --card: var(--branco);
+  --card-foreground: var(--tinta);
+  --primary: var(--lacre);
   --primary-foreground: #FFFFFF;
   --muted: var(--bg-subtle);
-  --muted-foreground: var(--text-secondary);
-  --border: var(--border-subtle);
+  --muted-foreground: var(--grafite);
+  --border: var(--linha);
   --input: var(--border-strong);
-  --ring: var(--brand);
+  --ring: var(--lacre);
 }
 
-/* Forçamos o Light Mode garantindo contraste perfeito em qualquer sistema operacional */
+/* Tema Escuro Oficial v2.0 (se ativado) */
+.dark {
+  --tinta: #0A111F;              /* Fundo escuro oficial */
+  --papel: #0A111F;
+  --branco: #121B2D;             /* Superfície escura oficial */
+  --lacre: #4A5FFF;              /* Botão cobalto no tema escuro */
+  --grafite: #A3AEC4;            /* Texto 2 oficial */
+  --linha: #26324A;              /* Linha escura oficial */
+
+  --text-primary: #E8ECF5;       /* Texto claro oficial */
+  --text-secondary: #A3AEC4;
+  --text-muted: #7E8DA8;
+
+  --bg-base: #0A111F;
+  --bg-surface: #121B2D;
+  --bg-subtle: #18233A;
+  --bg-hover: #1F2E4C;
+
+  --border-subtle: #26324A;
+  --border-strong: #374665;
+
+  --brand: #4A5FFF;
+  --brand-solid: #4A5FFF;
+  --brand-accent: #7C8CFF;
+  --brand-tint: #141F38;
+
+  --flash: #4A5FFF;
+  --flash-hover: #6375FF;
+  --flash-lt: #8F9CFF;
+
+  --background: #0A111F;
+  --foreground: #E8ECF5;
+  --card: #121B2D;
+  --card-foreground: #E8ECF5;
+  --primary: #4A5FFF;
+  --border: #26324A;
+  --input: #374665;
+  --ring: #4A5FFF;
+}
+
+/* Tipografia Oficial EditalFlash v2.0 */
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, .landing-h1 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
+/* Escala Tipográfica Oficial:
+   Display: 64/1.0 -3.5%
+   Título 1: 44/1.05 -3.5%
+   Título 2: 30/1.1 -2%
+   Título 3: 22/1.2 -1%
+   Corpo: 16/1.6
+   Etiqueta: 13 Plex Mono 500 +8% caixa alta
+*/
+.text-display {
+  font-family: var(--font-bricolage), sans-serif;
   font-size: clamp(40px, 5.5vw, 64px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+h1, .landing-h1 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 700;
 }
 
 h2, .landing-h2 {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: clamp(28px, 4vw, 40px);
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(24px, 3vw, 30px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h3 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(18px, 2.5vw, 22px);
   line-height: 1.2;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
+  font-weight: 700;
 }
 
 h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-weight: 700;
+  font-family: var(--font-bricolage), sans-serif;
   color: inherit;
+}
+
+.text-etiqueta {
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 code, pre, .font-mono {

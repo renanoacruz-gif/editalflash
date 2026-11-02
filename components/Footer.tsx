@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand-icons";
+import { Logo } from "@/components/brand/Logo";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -15,12 +16,11 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-[var(--line)]">
           {/* Col 1: Brand & Positioning */}
           <div className="space-y-3 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <BrandIcon name="mark" size={22} />
-              <span className="text-base font-bold text-[var(--ink)] tracking-tight font-display">
-                Edital<span className="text-[var(--brand)] font-extrabold">Flash</span>
-              </span>
-            </Link>
+            <Logo variant="cor" size="md" href="/" />
+
+            <p className="text-xs font-medium text-[#2740F0] font-mono">
+              Confira antes de lacrar.
+            </p>
 
             <p className="text-xs text-[var(--ink-2)] leading-relaxed">
               Auditoria preventiva de habilitação documental para licitações públicas sob a Lei Federal nº 14.133/2021.
@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
         {/* Disclaimer Persistente Obrigatório */}
         <div className="p-3.5 rounded-md border border-[var(--line)] bg-[var(--bg)] text-center text-xs text-[var(--ink-2)] font-mono leading-relaxed space-y-1">
           <div>
-            <strong>Aviso Institucional:</strong> O EditalFlash é uma ferramenta de suporte técnico-operacional à decisão. A responsabilidade jurídica pela análise, envio de propostas e participação nos certames permanece exclusivamente com a empresa licitante.
+            <strong>Aviso Legal:</strong> Ferramenta de suporte à decisão. Responsabilidade jurídica permanece com a empresa licitante.
           </div>
           <div className="text-[11px] text-[var(--ink-3)]">
             51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200 · contato@editalflash.com.br

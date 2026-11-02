@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import Script from "next/script";
 
-const inter = Inter({
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-bricolage",
+  weight: ["500", "700", "800"],
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["600", "700"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -40,9 +40,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/brand/ef-favicon-32.svg", sizes: "32x32", type: "image/svg+xml" },
+      { url: "/brand/ef-favicon-16.svg", sizes: "16x16", type: "image/svg+xml" },
       { url: "/favicon.ico" },
-      { url: "/icon-light.svg" },
     ],
+    apple: "/brand/ef-icone-app.svg",
   },
 };
 
@@ -54,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} scroll-smooth`}
+      className={`${bricolageGrotesque.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} scroll-smooth`}
     >
       <head>
         {process.env.NODE_ENV === "development" && (
@@ -65,7 +67,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="min-h-screen bg-[var(--paper)] text-[var(--ink)] antialiased selection:bg-[var(--flash-lt)]/30 selection:text-[var(--ink)] font-sans">
+      <body className="min-h-screen bg-[var(--paper)] text-[var(--ink)] antialiased selection:bg-[#2740F0]/15 selection:text-[var(--ink)] font-sans">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

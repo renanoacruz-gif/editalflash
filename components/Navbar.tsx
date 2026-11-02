@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { FileSearch, Sparkles, ShieldCheck, ArrowRight, Menu, X } from "lucide-react";
+import { Sparkles, ShieldCheck, ArrowRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "@/components/brand/Logo";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,34 +29,17 @@ export const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#090d16]/85 backdrop-blur-xl border-b border-slate-800/80 shadow-lg shadow-black/30 py-3"
+          ? "bg-[#0E1626]/95 backdrop-blur-xl border-b border-[#26324A] shadow-lg shadow-black/30 py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
+        {/* Brand Logo Oficial */}
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-[#2740F0] to-blue-400 p-[1px] shadow-lg shadow-blue-500/20">
-            <div className="w-full h-full bg-[#090d16] rounded-xl flex items-center justify-center">
-              <FileSearch className="w-5 h-5 text-[#8F9CFF]" />
-            </div>
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2740F0]"></span>
-            </span>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-white font-display">
-                Edital<span className="text-[#8F9CFF]">Flash</span>
-              </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wide uppercase bg-blue-500/10 text-[#8F9CFF] border border-blue-500/30">
-                <Sparkles className="w-2.5 h-2.5" /> IA Jurídica
-              </span>
-            </div>
-            <span className="text-[11px] text-slate-400 hidden sm:inline font-mono">Lei 14.133/21 Compliance</span>
-          </div>
+          <Logo variant="fundo-escuro" size="md" href="" />
+          <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium tracking-wide bg-[#2740F0]/15 text-[#8F9CFF] border border-[#2740F0]/30 ml-1">
+            Lei 14.133/2021
+          </span>
         </div>
 
         {/* Desktop Nav Items */}

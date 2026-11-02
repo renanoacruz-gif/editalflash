@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { BrandIcon } from "@/components/brand-icons";
 import { useAuth } from "@/lib/auth-context";
+import { Logo } from "@/components/brand/Logo";
 import { CommandBar } from "@/components/CommandBar";
 import { BackToTopButton } from "@/components/BackToTopButton";
 import {
@@ -103,16 +105,20 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         <div className="space-y-4">
           {/* Logo e Botão de Recolher */}
           <div className="flex items-center justify-between px-1.5 py-1">
-            <Link href="/dashboard" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-[0_2px_8px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-blue-400/30">
-                EF
-              </div>
-              {!collapsed && (
+            <Link href="/dashboard" className="flex items-center gap-2 group">
+              {collapsed ? (
+                <div className="w-8 h-8 rounded-lg bg-[#0E1626] border border-[#26324A] flex items-center justify-center p-1 shadow-md">
+                  <Image
+                    src="/brand/ef-simbolo-fundo-escuro.svg"
+                    alt="EditalFlash"
+                    width={22}
+                    height={22}
+                  />
+                </div>
+              ) : (
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold tracking-tight text-white font-sans drop-shadow-xs">
-                    EditalFlash
-                  </span>
-                  <span className="text-[10px] text-blue-300 font-mono leading-none tracking-wide">
+                  <Logo variant="fundo-escuro" size="sm" href="" />
+                  <span className="text-[10px] text-blue-300 font-mono leading-none tracking-wide mt-1 pl-0.5">
                     Auditoria Lei 14.133
                   </span>
                 </div>
@@ -241,12 +247,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
       {/* BARRA SUPERIOR MOBILE 3D AZUL */}
       <div className="md:hidden flex items-center justify-between p-3.5 bg-gradient-to-r from-[#0B1528] via-[#0F1E36] to-[#0A1324] border-b border-blue-900/40 text-white shadow-md">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] text-white flex items-center justify-center font-bold text-xs shadow-xs border border-blue-400/30">
-            EF
-          </div>
-          <span className="text-sm font-bold tracking-tight text-white font-sans">
-            EditalFlash
-          </span>
+          <Logo variant="fundo-escuro" size="sm" href="" />
         </Link>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}

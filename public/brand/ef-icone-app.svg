@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" role="img" aria-label="EditalFlash App">
+  <rect width="72" height="72" rx="15.84" fill="#0E1626"/>
+  <g transform="translate(12, 12)">
+    <path d="M6 4H42V44H6ZM6 4L24 23L42 4" stroke="#E8ECF5" stroke-width="3" stroke-linejoin="miter"/>
+    <circle cx="24" cy="23" r="8.7" fill="#0E1626"/>
+    <circle cx="24" cy="23" r="7.2" fill="#7C8CFF"/>
+    <circle cx="24" cy="23" r="3.6" stroke="#0E1626" stroke-width="1.2" fill="none"/>
+  </g>
+</svg>

@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { PrimaryVertical } from "@/lib/types";
+import { Logo } from "@/components/brand/Logo";
 
 interface AuthSlidingCardProps {
   initialMode?: "login" | "signup";
@@ -206,17 +207,10 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
           <div>
             {/* Header: Logo & Alternador Mobile */}
             <div className="flex items-center justify-between mb-8">
-              <Link href="/" className="inline-flex items-center gap-2.5 group">
-                <div className="w-9 h-9 rounded-xl bg-[#1E3A8A] flex items-center justify-center text-white shadow-sm">
-                  <Scale className="w-5 h-5" />
-                </div>
-                <span className="text-lg font-bold tracking-tight text-[#0F172A] font-sans">
-                  EditalFlash
-                </span>
-              </Link>
+              <Logo variant="cor" size="md" href="/" />
 
               {/* Alternador em abas para telas estreitas / mobile */}
-              <div className="flex items-center bg-[#F1F5F9] p-1 rounded-lg border border-[#E2E8F0] md:hidden">
+              <div className="flex items-center bg-[#F1F5F9] p-1 rounded-lg border border-[#D6DCE8] md:hidden">
                 <button
                   type="button"
                   onClick={() => switchMode("login")}
@@ -323,7 +317,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                   <button
                     type="submit"
                     disabled={loginLoading}
-                    className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] active:bg-[#1E3A8A] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
+                    className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#2740F0] hover:bg-[#1E34D9] active:bg-[#2740F0] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
                   >
                     {loginLoading ? (
                       <div className="flex items-center gap-2">
@@ -498,7 +492,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                       <button
                         type="submit"
                         disabled={signupLoading}
-                        className="w-full h-10 rounded-lg text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] active:bg-[#1E3A8A] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
+                        className="w-full h-10 rounded-lg text-sm font-semibold text-white bg-[#2740F0] hover:bg-[#1E34D9] active:bg-[#2740F0] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
                       >
                         {signupLoading ? (
                           <div className="flex items-center gap-2">
@@ -667,7 +661,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
 
                       <button
                         type="submit"
-                        className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] shadow-xs flex items-center justify-center gap-2 transition-colors cursor-pointer mt-2"
+                        className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#2740F0] hover:bg-[#1E34D9] shadow-xs flex items-center justify-center gap-2 transition-colors cursor-pointer mt-2"
                       >
                         <span>Continuar para Vertical</span>
                         <ArrowRight className="w-4 h-4" />
@@ -701,7 +695,7 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
                       <button
                         type="submit"
                         disabled={signupLoading}
-                        className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] active:bg-[#1E3A8A] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
+                        className="w-full h-11 rounded-lg text-sm font-semibold text-white bg-[#2740F0] hover:bg-[#1E34D9] active:bg-[#2740F0] shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-60 cursor-pointer mt-3"
                       >
                         {signupLoading ? (
                           <div className="flex items-center gap-2">

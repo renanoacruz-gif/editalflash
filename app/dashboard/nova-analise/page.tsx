@@ -77,7 +77,7 @@ function NovaAnaliseContent() {
   // Alerta de Mismatch Pré-Análise
   const [mismatchWarningItem, setMismatchWarningItem] = useState<ValidatedTenderItem | null>(null);
 
-  // FIX #2: Persistência de Sessão de Análise durante Processamento
+  // Sessão em memória durante processamento (sem persistir em localStorage)
   const [activeSession, setActiveSession] = useState<{
     id: string;
     fileName: string;
@@ -85,23 +85,6 @@ function NovaAnaliseContent() {
     status: "PROCESSING" | "FAILED" | "COMPLETED";
     errorMessage?: string;
   } | null>(null);
-
-  useEffect(() => {
-    // Checa se há uma análise pendente salva no localStorage
-    try {
-      const stored = localStorage.getItem("editalflash_active_analysis");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.status === "PROCESSING") {
-          setActiveSession(parsed);
-          setCurrentFileName(parsed.fileName);
-          setAppState("loading");
-        } else if (parsed.status === "FAILED") {
-          setActiveSession(parsed);
-        }
-      }
-    } catch (_) {}
-  }, []);
 
   // Estados da Busca Multi-Fontes
   const [searchUf, setSearchUf] = useState("");
@@ -160,7 +143,7 @@ function NovaAnaliseContent() {
     setCurrentFileName(fileName);
     setAppState("loading");
     
-    // FIX #2: Cria registro draft no localStorage com status PROCESSING
+    // Cria registro de sessão em memória
     const sessionObj = {
       id: "anls_" + Math.random().toString(36).substring(2, 9),
       fileName: fileName,
@@ -168,13 +151,11 @@ function NovaAnaliseContent() {
       status: "PROCESSING" as const,
     };
     setActiveSession(sessionObj);
-    localStorage.setItem("editalflash_active_analysis", JSON.stringify(sessionObj));
   };
 
   const handleAnalysisSuccess = (data: EditalAnalysisResponse) => {
-    // FIX #2: Dedução estrita de créditos apenas no sucesso completo
+    // Dedução de créditos apenas no sucesso completo
     consumeCredit();
-    localStorage.removeItem("editalflash_active_analysis");
     setActiveSession(null);
 
     // Grava no histórico de auditorias (com suporte a sincronização no Supabase Cloud via user?.id)
@@ -188,7 +169,7 @@ function NovaAnaliseContent() {
   };
 
   const handleAnalysisError = (errorMessage?: string) => {
-    // FIX #2: Em caso de falha, atualiza para status FAILED e retém arquivo para retry sem queima de créditos
+    // Em caso de falha, atualiza para status FAILED e retém arquivo para retry sem queima de créditos
     const failedSession = {
       id: activeSession?.id || "anls_" + Math.random().toString(36).substring(2, 9),
       fileName: currentFileName,
@@ -197,7 +178,6 @@ function NovaAnaliseContent() {
       errorMessage: errorMessage || "Falha temporária no processamento do OCR ou API de inferência jurídica.",
     };
     setActiveSession(failedSession);
-    localStorage.setItem("editalflash_active_analysis", JSON.stringify(failedSession));
     setAppState("upload");
   };
 
@@ -206,11 +186,9 @@ function NovaAnaliseContent() {
     setAppState("loading");
     const renewed = { ...activeSession, status: "PROCESSING" as const };
     setActiveSession(renewed);
-    localStorage.setItem("editalflash_active_analysis", JSON.stringify(renewed));
   };
 
   const handleDismissFailedSession = () => {
-    localStorage.removeItem("editalflash_active_analysis");
     setActiveSession(null);
   };
 

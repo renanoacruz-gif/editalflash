@@ -283,7 +283,7 @@ export default function LandingPage() {
               <ul className="space-y-4 text-xs font-sans text-slate-900 leading-relaxed">
                 <li className="flex items-start gap-2.5">
                   <span className="font-mono text-emerald-500 font-bold">✓</span>
-                  <span><strong>Varredura Pericial Exaustiva:</strong> 100% das páginas auditadas em 40 segundos, confrontando PL $\ge$ 10%, LC $\ge$ 1.0 e certidões com prova literal de página e linha.</span>
+                  <span><strong>Varredura Pericial Exaustiva:</strong> 100% das páginas auditadas em 40 segundos, confrontando PL maior ou igual a 10%, LC maior ou igual a 1.0 e certidões com prova literal de página e linha.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="font-mono text-emerald-500 font-bold">✓</span>

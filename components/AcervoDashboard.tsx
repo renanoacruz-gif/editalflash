@@ -41,68 +41,33 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
       d.tipo.toLowerCase().includes("atestado")
   );
 
-  const [acervos] = useState<AcervoItemAggregation[]>([
-    {
-      verticalCode: "OBR",
-      categoria: "Obras Públicas / Pavimentação",
-      subcategoria: "Pavimentação Asfáltica em CBUQ / Recapeamento",
-      volumeAcumulado: 48500,
-      unidade: "m²",
-      mediaEditalMercado: 20000,
-      atestadosCount: 3,
-      atestadoMaximoIndividual: 22000,
-      statusCompetitividade: "COMPETITIVO",
-      recomendacao: "Volume acumulado cobre 242% da média licitada. Apto para certames de grande porte.",
-    },
-    {
-      verticalCode: "OBR",
-      categoria: "Obras Civis / Edificações",
-      subcategoria: "Construção e Reforma de Prédios Públicos",
-      volumeAcumulado: 3400,
-      unidade: "m²",
-      mediaEditalMercado: 5000,
-      atestadosCount: 2,
-      atestadoMaximoIndividual: 2100,
-      statusCompetitividade: "MODERADO",
-      recomendacao: "Apto para lotes médios. Para editais acima de R$ 5M, recomenda-se somatório com novo acervo ou consórcio.",
-    },
-    {
-      verticalCode: "SRV",
-      categoria: "Serviços Terceirizados / Contínuos",
-      subcategoria: "Postos Efetivos de Vigilância Armada e Limpeza",
-      volumeAcumulado: 35,
-      unidade: "postos/mês",
-      mediaEditalMercado: 50,
-      atestadosCount: 1,
-      atestadoMaximoIndividual: 35,
-      statusCompetitividade: "MODERADO",
-      recomendacao: "Atende editais de pequeno e médio porte. Recomenda-se registrar atestados adicionais para certames estaduais.",
-    },
-    {
-      verticalCode: "SAU",
-      categoria: "Saúde Pública & Medicamentos",
-      subcategoria: "Fornecimento de Insumos Hospitalares & Medicamentos Éticos",
-      volumeAcumulado: 120000,
-      unidade: "unidades",
-      mediaEditalMercado: 80000,
-      atestadosCount: 4,
-      atestadoMaximoIndividual: 60000,
-      statusCompetitividade: "COMPETITIVO",
-      recomendacao: "Capacidade de fornecimento cobre 150% do lote médio de registro de preços municipal.",
-    },
-    {
-      verticalCode: "TIC",
-      categoria: "Tecnologia da Informação & Comunicação",
-      subcategoria: "Desenvolvimento e Sustentação de Sistemas em Nuvem",
-      volumeAcumulado: 1200,
-      unidade: "UST (Unidade de Serviço Técnico)",
-      mediaEditalMercado: 1500,
-      atestadosCount: 2,
-      atestadoMaximoIndividual: 800,
-      statusCompetitividade: "MODERADO",
-      recomendacao: "Requer atenção para editais de órgãos federais que exigem comprovação mínima de 1.000 UST em atestado único.",
-    },
-  ]);
+  // Calcula acervos dinamicamente a partir dos documentos de qualificação técnica
+  const acervos: AcervoItemAggregation[] = React.useMemo(() => {
+    if (technicalDocs.length === 0) return [];
+
+    // Agrupa ou mapeia documentos técnicos reais cadastrados
+    return technicalDocs.map((doc, idx) => {
+      const isObras = doc.nome.toLowerCase().includes("obra") || doc.nome.toLowerCase().includes("paviment");
+      const isServ = doc.nome.toLowerCase().includes("serviço") || doc.nome.toLowerCase().includes("apoio") || doc.nome.toLowerCase().includes("comercial");
+      const isTI = doc.nome.toLowerCase().includes("tecnologia") || doc.nome.toLowerCase().includes("software");
+
+      const verticalCode = isObras ? "OBR" : isTI ? "TIC" : "SRV";
+      const categoria = isObras ? "Obras e Engenharia" : isTI ? "Tecnologia da Informação" : "Serviços Especializados";
+      
+      return {
+        verticalCode: verticalCode as any,
+        categoria,
+        subcategoria: doc.nome,
+        volumeAcumulado: 1,
+        unidade: "atestado operacional",
+        mediaEditalMercado: 1,
+        atestadosCount: 1,
+        atestadoMaximoIndividual: 1,
+        statusCompetitividade: "COMPETITIVO" as const,
+        recomendacao: `Documento emitido por ${doc.emissor}. Válido para comprovação técnica (Art. 67).`,
+      };
+    });
+  }, [technicalDocs]);
 
   return (
     <div className="space-y-8">
@@ -127,6 +92,17 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
       </div>
 
       {/* Lista de Acervos com Linhas Divisórias Sutis (Linear Pattern) */}
+      {acervos.length === 0 ? (
+        <div className="p-8 rounded-2xl bg-slate-50 border border-dashed border-[#E2E8F0] text-center space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-slate-200 text-[#475569] flex items-center justify-center mx-auto">
+            <Award className="w-5 h-5" />
+          </div>
+          <h3 className="text-sm font-semibold text-[#0F172A]">Nenhum atestado de capacidade técnica cadastrado</h3>
+          <p className="text-xs text-[#475569] max-w-md mx-auto">
+            Faça o upload dos seus atestados (CAT ou Atestados B2B/B2G) no Cofre para calcular o somatório de capacidade operacional da Súmula 263 do TCU.
+          </p>
+        </div>
+      ) : (
       <div className="space-y-6">
         {acervos.map((item, idx) => {
           const ratio = Math.round((item.volumeAcumulado / item.mediaEditalMercado) * 100);
@@ -193,6 +169,7 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
           );
         })}
       </div>
+      )}
     </div>
   );
 };

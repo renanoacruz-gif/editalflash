@@ -23,6 +23,7 @@ import { CompanyDocumentVaultItem } from "@/lib/types";
 import { useAuth } from "@/lib/auth-context";
 import { AcervoDashboard } from "@/components/AcervoDashboard";
 import { VaultUploader } from "@/components/VaultUploader";
+import { getVaultDocuments } from "@/lib/vault-service";
 
 export default function CofreDocumentosPage() {
   const { user } = useAuth();
@@ -78,27 +79,39 @@ export default function CofreDocumentosPage() {
       ]
     : [];
 
-  const [docs, setDocs] = useState<CompanyDocumentVaultItem[]>(() => {
-    if (typeof window !== "undefined") {
+  const [docs, setDocs] = useState<CompanyDocumentVaultItem[]>(defaultDocs);
+  const [isLoadingDocs, setIsLoadingDocs] = useState(true);
+
+  // Carrega documentos reais do Supabase (sem fallback para localStorage)
+  useEffect(() => {
+    let isMounted = true;
+    async function loadDocs() {
+      setIsLoadingDocs(true);
       try {
-        const stored = localStorage.getItem("editalflash_vault_docs");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && (parsed.length > 0 || !isAdmin)) {
-            return parsed;
+        const fetched = await getVaultDocuments(user?.id);
+        if (isMounted) {
+          if (fetched && fetched.length > 0) {
+            setDocs(fetched);
+          } else if (isAdmin) {
+            setDocs(defaultDocs);
+          } else {
+            setDocs([]);
           }
         }
-      } catch (_) {}
+      } catch (err) {
+        console.warn("Falha ao carregar cofre:", err);
+        if (isMounted) {
+          setDocs(isAdmin ? defaultDocs : []);
+        }
+      } finally {
+        if (isMounted) setIsLoadingDocs(false);
+      }
     }
-    return defaultDocs;
-  });
-
-  // Salva no localStorage sempre que houver modificação
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("editalflash_vault_docs", JSON.stringify(docs));
-    }
-  }, [docs]);
+    loadDocs();
+    return () => {
+      isMounted = false;
+    };
+  }, [user?.id, isAdmin]);
 
   // Contagens para os smart filters
   const expiringCount = docs.filter((d) => d.status === "EXPIRANDO" || (d.diasParaVencer >= 0 && d.diasParaVencer <= 30)).length;

@@ -842,6 +842,49 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* SEÇÃO CTA FINAL ANTES DO RODAPÉ */}
+      <section className="py-20 px-4 sm:px-8 bg-[var(--ink)] text-white border-t border-[var(--ink)] relative overflow-hidden text-center">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            background: "radial-gradient(circle at 50% 50%, var(--flash) 0%, transparent 65%)",
+          }}
+        />
+        <div className="max-w-4xl mx-auto space-y-6 relative z-10">
+          <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--flash-lt)] px-3 py-1 rounded-full bg-white/10 border border-white/20">
+            Comece em Segundos
+          </span>
+          <h2 className="font-display font-bold text-[clamp(28px,4vw,44px)] tracking-tight text-white">
+            Audite seu primeiro edital antes de protocolar a proposta
+          </h2>
+          <p className="text-[16px] sm:text-[18px] text-[var(--mist)] max-w-2xl mx-auto leading-relaxed font-sans">
+            Evite a inabilitação surpresa. Tenha prova de página e linha para cada exigência e o parecer técnico em PDF pronto.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+            <Link
+              href="/signup?welcome=true"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-[var(--flash)] hover:brightness-110 active:scale-98 text-white font-bold text-[15px] shadow-lg shadow-[var(--flash)]/25 transition-all"
+            >
+              <BrandIcon name="edital" size="s20" accentCobalt={false} />
+              <span>Auditar meu edital grátis</span>
+            </Link>
+            <a
+              href="/assets/exemplo-parecer-editalflash.pdf"
+              download="exemplo-parecer-editalflash.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-[15px] border border-white/20 transition-colors"
+            >
+              <Download className="w-4 h-4 text-white" />
+              <span>Ver exemplo de parecer</span>
+            </a>
+          </div>
+          <p className="text-xs font-mono text-[var(--mist)]/70">
+            1 auditoria técnica preventiva completa grátis · Sem cartão de crédito
+          </p>
+        </div>
+      </section>
+
       {/* FOOTER INSTITUCIONAL */}
       <footer className="py-16 px-4 sm:px-8 bg-white border-t border-[#E4E4E7] text-sm text-[#52525B]">
         <div className="max-w-7xl mx-auto space-y-8">
@@ -865,7 +908,7 @@ export default function LandingPage() {
               <span>EditalFlash, 51.926.034 RENAN OSCAR ARAUJO CRUZ, CNPJ: 51.926.034/0001-42, AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200</span>
             </div>
             <div>
-              <span>Contato Oficial: <a href="mailto:contatoeditalflash@gmail.com" className="text-[#09090B] hover:underline">contatoeditalflash@gmail.com</a></span>
+              <span>Contato Oficial: <a href="mailto:contato@editalflash.com.br" className="text-[#09090B] hover:underline font-semibold">contato@editalflash.com.br</a></span>
             </div>
           </div>
         </div>
@@ -885,7 +928,7 @@ export default function LandingPage() {
                 "operatingSystem": "Web",
                 "offers": {
                   "@type": "Offer",
-                  "price": "197.00",
+                  "price": "97.00",
                   "priceCurrency": "BRL",
                   "priceValidUntil": "2027-12-31"
                 },
@@ -896,7 +939,7 @@ export default function LandingPage() {
                 "name": "EditalFlash",
                 "legalName": "51.926.034 RENAN OSCAR ARAUJO CRUZ",
                 "taxID": "51.926.034/0001-42",
-                "email": "contatoeditalflash@gmail.com",
+                "email": "contato@editalflash.com.br",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "AV SANTA BERNADETHE, 310",

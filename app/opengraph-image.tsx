@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "EditalFlash | Auditoria Preventiva de Habilitação";
+export const alt = "EditalFlash | Auditoria Preventiva de Editais e Habilitação";
 export const size = {
   width: 1200,
   height: 630,
@@ -17,31 +17,45 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0A111F",
-          padding: "60px 80px",
+          backgroundColor: "#0B1B2B",
+          padding: "70px 80px",
+          position: "relative",
         }}
       >
+        {/* Brilho sutil no fundo */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-150px",
+            right: "-150px",
+            width: "500px",
+            height: "500px",
+            borderRadius: "999px",
+            backgroundColor: "#2F5BFF",
+            opacity: 0.18,
+          }}
+        />
+
         {/* Topo: Logo & Badge */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", position: "relative" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             <div
               style={{
                 width: "48px",
                 height: "48px",
                 borderRadius: "12px",
-                backgroundColor: "#121B2D",
-                border: "1px solid #26324A",
+                backgroundColor: "#2F5BFF",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#8F9CFF",
+                color: "#FFFFFF",
                 fontSize: "24px",
                 fontWeight: "bold",
               }}
             >
               EF
             </div>
-            <div style={{ display: "flex", fontSize: "28px", fontWeight: "800", color: "#FFFFFF" }}>
+            <div style={{ display: "flex", fontSize: "30px", fontWeight: "800", color: "#FFFFFF", letterSpacing: "-0.5px" }}>
               EditalFlash
             </div>
           </div>
@@ -50,54 +64,56 @@ export default function Image() {
               display: "flex",
               padding: "8px 20px",
               borderRadius: "999px",
-              backgroundColor: "#1B2347",
-              border: "1px solid rgba(74, 95, 255, 0.4)",
-              color: "#8F9CFF",
+              backgroundColor: "rgba(47, 91, 255, 0.15)",
+              border: "1px solid rgba(138, 162, 255, 0.35)",
+              color: "#8AA2FF",
               fontSize: "14px",
-              fontWeight: "bold",
-              textTransform: "uppercase",
+              fontWeight: "600",
+              letterSpacing: "0.5px",
             }}
           >
-            Lei 14.133/2021 • Art. 62
+            Lei 14.133/2021 · Habilitação
           </div>
         </div>
 
         {/* Centro: Título e Descrição */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "900px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "980px", position: "relative" }}>
           <div
             style={{
               display: "flex",
-              fontSize: "54px",
-              fontWeight: "900",
+              fontSize: "52px",
+              fontWeight: "800",
               color: "#FFFFFF",
               lineHeight: 1.15,
+              letterSpacing: "-1px",
             }}
           >
-            Auditoria Preventiva de Habilitação em Licitações
+            Descubra antes da sessão se sua empresa pode ser inabilitada.
           </div>
-          <div style={{ display: "flex", fontSize: "22px", color: "#A3AEC4", lineHeight: 1.5 }}>
-            Cruzamos seu cofre documental com o edital e emitimos o veredito determinístico (Passa ou Eliminatória) com prova de página e linha.
+          <div style={{ display: "flex", fontSize: "22px", color: "#E6EAF2", lineHeight: 1.5, opacity: 0.9 }}>
+            Auditoria preventiva do edital com prova de página e linha para cada exigência e parecer pronto em PDF.
           </div>
         </div>
 
-        {/* Rodapé: Veredito e Tríade */}
+        {/* Rodapé: Pilares e Domínio Oficial */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: "1px solid #26324A",
+            borderTop: "1px solid rgba(217, 222, 232, 0.2)",
             paddingTop: "24px",
             width: "100%",
+            position: "relative",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "24px", fontSize: "16px", color: "#A3AEC4" }}>
-            <span style={{ display: "flex", color: "#10B981", fontWeight: "bold" }}>● Semáforo Tripartite</span>
-            <span style={{ display: "flex" }}>● Tríade de Liquidez</span>
-            <span style={{ display: "flex" }}>● Súmula 263 TCU</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "28px", fontSize: "16px", color: "#E6EAF2" }}>
+            <span style={{ display: "flex", color: "#12A150", fontWeight: "bold" }}>● Parecer Técnico Pronto</span>
+            <span style={{ display: "flex" }}>● Balanço Patrimonial &amp; PL</span>
+            <span style={{ display: "flex" }}>● Acervo (Súmula 263 TCU)</span>
           </div>
-          <div style={{ display: "flex", fontSize: "15px", color: "#64748B", fontWeight: "500" }}>
-            51.926.034 RENAN OSCAR ARAUJO CRUZ
+          <div style={{ display: "flex", fontSize: "16px", color: "#8AA2FF", fontWeight: "600" }}>
+            editalflash.com.br
           </div>
         </div>
       </div>

@@ -1,9 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_APP_URL ||
-    (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : "https://editalflash.pages.dev");
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://editalflash.com.br";
 
   const lastModified = new Date();
 

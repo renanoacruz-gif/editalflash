@@ -25,15 +25,14 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 const rawBaseUrl =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : "https://editalflash.pages.dev");
+  process.env.NEXT_PUBLIC_APP_URL || "https://editalflash.com.br";
 
 const appBaseUrl = rawBaseUrl.replace(/^https?:\/\/(https?:\/\/)?/i, "https://");
 
 export const metadata: Metadata = {
-  title: "EditalFlash | Auditoria Preventiva de Habilitação (Lei 14.133/21)",
+  title: "EditalFlash | Auditoria Preventiva de Editais e Habilitação",
   description:
-    "Auditoria técnica preventiva de certidões, balanço patrimonial e atestados operacionais com prova literal de página e linha do edital.",
+    "Auditoria preventiva de editais, verificação de balanço patrimonial, certidões e atestados com prova literal de página e linha perante a Lei 14.133/2021.",
   metadataBase: new URL(appBaseUrl),
   alternates: {
     canonical: "/",

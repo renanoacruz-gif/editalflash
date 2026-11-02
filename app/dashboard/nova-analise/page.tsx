@@ -333,7 +333,7 @@ function NovaAnaliseContent() {
 
                   {/* Founder / Demo Mode Switcher: Impersonação e Teste Rápido de Verticais */}
                   {user?.is_superadmin && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-xs font-mono text-white">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#18181B] border border-slate-700 text-xs font-mono text-white">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span className="text-[10px] text-slate-400">Demo Mode:</span>
                       <select
@@ -341,11 +341,11 @@ function NovaAnaliseContent() {
                         onChange={(e) => setTempVertical(e.target.value)}
                         className="bg-transparent text-white font-mono text-[11px] outline-none cursor-pointer border-none"
                       >
-                        <option value="Serviços Contínuos (Limpeza, Segurança, Manutenção)" className="bg-slate-900 text-white">Serviços Contínuos</option>
-                        <option value="Obras Públicas e Engenharia" className="bg-slate-900 text-white">Obras e Engenharia</option>
-                        <option value="Saúde e Medicamentos" className="bg-slate-900 text-white">Saúde e Medicamentos</option>
-                        <option value="Tecnologia da Informação" className="bg-slate-900 text-white">Tecnologia da Informação</option>
-                        <option value="Compras e Fornecimentos" className="bg-slate-900 text-white">Compras e Fornecimentos</option>
+                        <option value="Serviços Contínuos (Limpeza, Segurança, Manutenção)" className="bg-[#18181B] text-white">Serviços Contínuos</option>
+                        <option value="Obras Públicas e Engenharia" className="bg-[#18181B] text-white">Obras e Engenharia</option>
+                        <option value="Saúde e Medicamentos" className="bg-[#18181B] text-white">Saúde e Medicamentos</option>
+                        <option value="Tecnologia da Informação" className="bg-[#18181B] text-white">Tecnologia da Informação</option>
+                        <option value="Compras e Fornecimentos" className="bg-[#18181B] text-white">Compras e Fornecimentos</option>
                       </select>
                     </div>
                   )}
@@ -817,7 +817,7 @@ function NovaAnaliseContent() {
                       setIsDemoMode(false);
                       handleReset();
                     }}
-                    className="px-3.5 py-1.5 rounded-lg bg-white text-slate-900 font-bold text-xs hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-lg bg-white text-[#09090B] font-bold text-xs hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
                   >
                     Auditar Edital Real
                   </button>

@@ -99,7 +99,7 @@ export default function CalendarioPage() {
     <DashboardLayout activeTab="calendario">
       <div className="max-w-6xl mx-auto space-y-6">
         {toastMessage && (
-          <div className="fixed bottom-6 right-6 z-50 bg-slate-900 border border-emerald-500/50 text-emerald-300 px-4 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-fadeIn">
+          <div className="fixed bottom-6 right-6 z-50 bg-[#18181B] border border-emerald-500/50 text-emerald-300 px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-fadeIn">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" strokeWidth={1.5} />
             <span>{toastMessage}</span>
           </div>
@@ -122,7 +122,7 @@ export default function CalendarioPage() {
 
           <button
             onClick={handleTestAlert}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-xs font-bold bg-white border border-[#E2E8F0] hover:bg-[#253745] text-[#0F172A] shadow-sm transition-all active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-white border border-[#E2E8F0] hover:bg-[#E4E4E7] text-[#0F172A] shadow-sm transition-all active:scale-[0.98] cursor-pointer"
           >
             <Bell className="w-4 h-4" strokeWidth={1.5} />
             <span>Configurar Alertas 15/7/3 Dias</span>
@@ -131,8 +131,8 @@ export default function CalendarioPage() {
 
         {/* GATE DE PLANO: PLANO STARTER (CONSULTA AVULSA) BLOQUEADO */}
         {isStarter ? (
-          <div className="rounded-2xl p-8 sm:p-12 border border-[#E2E8F0] text-center max-w-2xl mx-auto space-y-5 bg-white shadow-sm">
-            <div className="w-14 h-14 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 mx-auto">
+          <div className="rounded-xl p-8 sm:p-12 border border-[#E2E8F0] text-center max-w-2xl mx-auto space-y-5 bg-white shadow-sm">
+            <div className="w-14 h-14 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 mx-auto">
               <Lock className="w-7 h-7" strokeWidth={1.5} />
             </div>
             <div className="space-y-2">
@@ -149,7 +149,7 @@ export default function CalendarioPage() {
             <div className="pt-2">
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold text-[#0F172A] bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-[#0F172A] bg-emerald-600 hover:bg-emerald-500 shadow-sm transition-all active:scale-95"
               >
                 <span>Fazer Upgrade para Plano Mensal (R$ 197/mês)</span>
               </Link>
@@ -159,7 +159,7 @@ export default function CalendarioPage() {
           <>
             {/* ALERTA CRÍTICO SE HOUVER VENCIMENTO CRUZADO (LEGIBILIDADE PERFEITA COM CONTRASTE WCAG AAA) */}
             {items.some((i) => i.alertaRisco) && (
-              <div className="p-6 rounded-2xl bg-rose-50 border-2 border-rose-300 shadow-sm space-y-3">
+              <div className="p-6 rounded-xl bg-rose-50 border-2 border-rose-300 shadow-sm space-y-3">
                 <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
                   <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" strokeWidth={2} />
                   <span>Risco Grave de Desclassificação Identificado Pelo Sistema</span>

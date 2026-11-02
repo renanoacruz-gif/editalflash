@@ -432,7 +432,7 @@ export default function PricingPage() {
 
         {/* SEÇÃO: CRÉDITOS AVULSOS COM NUDGE DE SETUP RECOMENDADO (R$ 497) */}
         <div className="max-w-4xl mx-auto w-full pt-8 pb-4">
-          <div className="bg-[var(--surface)] p-6 rounded-2xl border border-[var(--line)] shadow-sm space-y-4">
+          <div className="bg-[var(--surface)] p-6 rounded-xl border border-[var(--line)] shadow-sm space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <span className="text-xs font-mono font-bold uppercase text-[var(--ink-2)] block">

@@ -94,7 +94,7 @@ export default function RadarComercialPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Card 1: Deságio Médio Geral */}
-              <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
+              <div className="p-5 rounded-xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono text-[var(--ink-2)]">
                   <span>Deságio Médio das Propostas</span>
                   <TrendingDown className="w-4 h-4 text-emerald-600" />
@@ -108,7 +108,7 @@ export default function RadarComercialPage() {
               </div>
 
               {/* Card 2: Pontualidade de Pagamento */}
-              <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
+              <div className="p-5 rounded-xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono text-[var(--ink-2)]">
                   <span>Pontualidade Estimada</span>
                   <Clock className="w-4 h-4 text-blue-600" />
@@ -122,7 +122,7 @@ export default function RadarComercialPage() {
               </div>
 
               {/* Card 3: Volume de Certames Analisados */}
-              <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
+              <div className="p-5 rounded-xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono text-[var(--ink-2)]">
                   <span>Amostragem no PNCP</span>
                   <Building2 className="w-4 h-4 text-indigo-600" />
@@ -137,7 +137,7 @@ export default function RadarComercialPage() {
             </div>
 
             {/* Tabela dos Concorrentes Mais Vencedores no Órgão */}
-            <div className="p-6 rounded-2xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-4">
+            <div className="p-6 rounded-xl bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-bold text-[var(--ink)] font-display">
@@ -147,7 +147,7 @@ export default function RadarComercialPage() {
                     Empresas que mais arremataram lotes em certames anteriores e o desconto médio praticado por elas.
                   </p>
                 </div>
-                <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-bold border border-slate-200">
+                <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-[#F4F4F5] text-[#09090B] font-bold border border-[#E4E4E7]">
                   Dados Abertos PNCP
                 </span>
               </div>
@@ -165,7 +165,7 @@ export default function RadarComercialPage() {
                   </thead>
                   <tbody className="divide-y divide-[var(--line)]">
                     {stats.concorrentesTop3.map((c, i) => (
-                      <tr key={i} className="hover:bg-slate-50 transition-colors">
+                      <tr key={i} className="hover:bg-[#F4F4F5] transition-colors">
                         <td className="py-3 px-3">
                           <div className="font-bold text-[var(--ink)]">{c.razaoSocial}</div>
                           <div className="text-[10px] text-[var(--ink-2)] font-mono">{c.cnpjParcial}</div>
@@ -173,7 +173,7 @@ export default function RadarComercialPage() {
                         <td className="py-3 px-3 text-center font-mono font-bold text-slate-800">
                           {c.vitoriasNoOrgao}x
                         </td>
-                        <td className="py-3 px-3 font-mono font-bold text-slate-900">
+                        <td className="py-3 px-3 font-mono font-bold text-[#09090B]">
                           {c.valorTotalHomologado.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
@@ -182,7 +182,7 @@ export default function RadarComercialPage() {
                         <td className="py-3 px-3 text-center font-mono font-bold text-emerald-600">
                           -{c.desagioMedioPercentual}%
                         </td>
-                        <td className="py-3 px-3 text-[11px] text-slate-600">
+                        <td className="py-3 px-3 text-[11px] text-[#52525B]">
                           {c.ultimoLoteGanho}
                         </td>
                       </tr>

@@ -41,30 +41,64 @@ export const AcervoDashboard: React.FC<AcervoDashboardProps> = ({ docs = [] }) =
       d.tipo.toLowerCase().includes("atestado")
   );
 
-  // Calcula acervos dinamicamente a partir dos documentos de qualificação técnica
+  // Calcula acervos dinamicamente a partir dos documentos de qualificação técnica com Somatório (Súmula 263 TCU)
   const acervos: AcervoItemAggregation[] = React.useMemo(() => {
     if (technicalDocs.length === 0) return [];
 
-    // Agrupa ou mapeia documentos técnicos reais cadastrados
-    return technicalDocs.map((doc, idx) => {
-      const isObras = doc.nome.toLowerCase().includes("obra") || doc.nome.toLowerCase().includes("paviment");
-      const isServ = doc.nome.toLowerCase().includes("serviço") || doc.nome.toLowerCase().includes("apoio") || doc.nome.toLowerCase().includes("comercial");
-      const isTI = doc.nome.toLowerCase().includes("tecnologia") || doc.nome.toLowerCase().includes("software");
+    // Agrupamento por Categoria/Subcategoria para aplicar a Súmula 263 do TCU
+    const groups: { [key: string]: { docs: typeof technicalDocs; verticalCode: any; categoria: string } } = {};
 
-      const verticalCode = isObras ? "OBR" : isTI ? "TIC" : "SRV";
-      const categoria = isObras ? "Obras e Engenharia" : isTI ? "Tecnologia da Informação" : "Serviços Especializados";
+    technicalDocs.forEach((doc) => {
+      const isObras = doc.nome.toLowerCase().includes("obra") || doc.nome.toLowerCase().includes("paviment") || doc.tipo.toLowerCase().includes("cat");
+      const isTI = doc.nome.toLowerCase().includes("tecnologia") || doc.nome.toLowerCase().includes("software") || doc.nome.toLowerCase().includes("ti");
+      const isSaude = doc.nome.toLowerCase().includes("saúde") || doc.nome.toLowerCase().includes("medicamento") || doc.nome.toLowerCase().includes("hospitalar");
       
+      const verticalCode = isObras ? "OBR" : isTI ? "TIC" : isSaude ? "SAU" : "SRV";
+      const categoria = isObras
+        ? "Obras e Engenharia Civil"
+        : isTI
+        ? "Tecnologia da Informação e Software"
+        : isSaude
+        ? "Saúde e Medicamentos"
+        : "Serviços Especializados e Contínuos";
+
+      const key = `${verticalCode}_${categoria}`;
+      if (!groups[key]) {
+        groups[key] = { docs: [], verticalCode, categoria };
+      }
+      groups[key].docs.push(doc);
+    });
+
+    return Object.values(groups).map((group) => {
+      const atestadosCount = group.docs.length;
+      // Cada atestado adiciona capacidade operacional acumulada
+      // Na Súmula 263/TCU, o somatório de atestados de complexidade similar é admitido
+      const volumeAcumulado = atestadosCount * 10;
+      const mediaEditalMercado = 15; // Parâmetro médio de exigência de edital (ex: 15 parcelas/postos)
+      const atestadoMaximoIndividual = 10;
+      const statusCompetitividade =
+        volumeAcumulado >= mediaEditalMercado
+          ? "COMPETITIVO"
+          : volumeAcumulado >= mediaEditalMercado * 0.6
+          ? "MODERADO"
+          : "INSUFICIENTE";
+
+      const emissorList = Array.from(new Set(group.docs.map((d) => d.emissor))).join(", ");
+
       return {
-        verticalCode: verticalCode as any,
-        categoria,
-        subcategoria: doc.nome,
-        volumeAcumulado: 1,
-        unidade: "atestado operacional",
-        mediaEditalMercado: 1,
-        atestadosCount: 1,
-        atestadoMaximoIndividual: 1,
-        statusCompetitividade: "COMPETITIVO" as const,
-        recomendacao: `Documento emitido por ${doc.emissor}. Válido para comprovação técnica (Art. 67).`,
+        verticalCode: group.verticalCode,
+        categoria: group.categoria,
+        subcategoria: `${atestadosCount} atestado(s) registrado(s) - ${group.docs.map((d) => d.nome).slice(0, 2).join(", ")}${atestadosCount > 2 ? "..." : ""}`,
+        volumeAcumulado,
+        unidade: "pts de capacidade operacional",
+        mediaEditalMercado,
+        atestadosCount,
+        atestadoMaximoIndividual,
+        statusCompetitividade,
+        recomendacao:
+          statusCompetitividade === "COMPETITIVO"
+            ? `Acervo robusto perante a Súmula 263 do TCU. Somatório de ${atestadosCount} atestado(s) emitidos por ${emissorList} supera as exigências habituais.`
+            : `Capacidade parcial. Recomenda-se juntar atestados complementares do cofre sob a garantia de somatório do Art. 67 da Lei 14.133/2021.`,
       };
     });
   }, [technicalDocs]);

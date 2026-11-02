@@ -7,10 +7,10 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Badge: React.FC<BadgeProps> = ({ className, variant = "neutral", children, ...props }) => {
   const variants = {
-    pass: "bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]",
-    warning: "bg-[#FEFCE8] text-[#854D0E] border border-[#FEF08A]",
-    danger: "bg-[#FEF2F2] text-[#991B1B] border border-[#FECACA]",
-    neutral: "bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1]",
+    pass: "bg-[#DDF3E9] text-[#0B6B49] border border-[#B7E6D0]",
+    warning: "bg-[#FBEFC9] text-[#6F4B00] border border-[#F6E29B]",
+    danger: "bg-[#FBE0DE] text-[#A3201C] border border-[#F7BFBD]",
+    neutral: "bg-[#F3F5F9] text-[#0E1626] border border-[#D6DCE8]",
   };
 
   return (

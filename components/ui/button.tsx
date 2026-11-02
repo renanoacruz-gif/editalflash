@@ -9,14 +9,14 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
     const base =
-      "inline-flex items-center justify-center font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E3A8A] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-lg";
+      "inline-flex items-center justify-center font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2740F0] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-lg cursor-pointer";
 
     const variants = {
-      primary: "bg-[#1E3A8A] text-white hover:bg-[#1E40AF] active:bg-[#1E3A8A] shadow-xs",
-      secondary: "bg-[#F1F5F9] text-[#0F172A] hover:bg-[#E2E8F0] border border-[#E2E8F0]",
-      outline: "bg-white text-[#0F172A] border border-[#CBD5E1] hover:bg-[#F8FAFC]",
-      ghost: "bg-transparent text-[#475569] hover:text-[#0F172A] hover:bg-[#F1F5F9]",
-      danger: "bg-[#FEF2F2] text-[#991B1B] border border-[#FECACA] hover:bg-[#FEE2E2]",
+      primary: "bg-[#2740F0] text-white hover:bg-[#1E34D9] active:bg-[#2740F0] shadow-xs",
+      secondary: "bg-[#F3F5F9] text-[#0E1626] hover:bg-[#E5E9F2] border border-[#D6DCE8]",
+      outline: "bg-white text-[#0E1626] border border-[#D6DCE8] hover:bg-[#F3F5F9]",
+      ghost: "bg-transparent text-[#47526A] hover:text-[#0E1626] hover:bg-[#F3F5F9]",
+      danger: "bg-[#FBE0DE] text-[#A3201C] border border-[#F7BFBD] hover:bg-[#F8D2D0]",
     };
 
     const sizes = {

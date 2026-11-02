@@ -82,7 +82,8 @@ export const Footer: React.FC = () => {
             </p>
             <div className="font-mono text-xs text-[var(--brand)] space-y-1">
               <div>privacidade@editalflash.com.br</div>
-              <div>dpo@editalflash.com.br</div>
+              <div>contatoeditalflash@gmail.com</div>
+              <div>renanoacruz@gmail.com</div>
             </div>
           </div>
         </div>
@@ -93,7 +94,7 @@ export const Footer: React.FC = () => {
             <strong>Aviso Legal:</strong> Ferramenta de suporte à decisão. Responsabilidade jurídica permanece com a empresa licitante.
           </div>
           <div className="text-[11px] text-[var(--ink-3)]">
-            51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200 · contato@editalflash.com.br
+            51.926.034 RENAN OSCAR ARAUJO CRUZ · CNPJ: 51.926.034/0001-42 · AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200 · contatoeditalflash@gmail.com
           </div>
         </div>
 

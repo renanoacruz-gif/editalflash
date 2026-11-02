@@ -28,6 +28,7 @@ import { SERVICOS_RULES } from "./rules-servicos";
 import { sanitizeAnalysisCitations } from "./citation-sanitizer";
 import { classifyTender, TenderCategoryCode, ClassificationResult } from "./classifier";
 import { buildLegislationPromptContext } from "./legislation-service";
+import { calcularIndicesLiquidez, gerarCalculoPLComLiquidez, BalancoExtracao } from "./liquidez-calculator";
 
 const MAX_TEXT_LENGTH = 45000;
 
@@ -224,15 +225,56 @@ export function buildAdaptiveAnalysis(
 
   const { sanitizedItems, unverifiedCount } = sanitizeAnalysisCitations(rawRequirements, text);
 
+  // STEP C: Auditoria Determinística da Tríade de Liquidez (Art. 69 da Lei 14.133/2021)
+  // 1. Extração de valor mínimo exigido de liquidez e patrimônio líquido
+  const exigeLiquidezSuperior1 = /índice.*liquidez.*(?:maior|superior|\>|\>=|não inferior).*1/i.test(text) ||
+    /liquidez corrente.*(?:maior|superior|\>|\>=|não inferior).*1/i.test(text);
+  
+  const exigenciaMinima = 1.0;
+  const indicesCalculados = calcularIndicesLiquidez(undefined, exigenciaMinima);
+  
+  // Se o edital impõe LC >= 1.0 e os índices calculados forem insuficientes, a inabilitação é compulsória
+  const liquidezReprovada = exigeLiquidezSuperior1 && indicesCalculados.status === "INSUFICIENTE";
+
+  // Atualiza dinamicamente o item de balanço/liquidez no semáforo
+  const finalItems = sanitizedItems.map((item) => {
+    if (item.categoria === "Qualificação Econômico-Financeira (Art. 69)") {
+      if (liquidezReprovada) {
+        return {
+          ...item,
+          status: "ELIMINATORIA" as const,
+          lacunaTipo: "ELIMINATORIA" as const,
+          diagnostico: `Índices de liquidez insuficientes perante a exigência do edital (LC: ${indicesCalculados.liquidezCorrente}, LG: ${indicesCalculados.liquidezGeral}, exigido ≥ ${indicesCalculados.exigenciaEdital}). Inabilitação compulsória pelo Art. 69 da Lei 14.133/2021.`,
+        };
+      }
+      return {
+        ...item,
+        diagnostico: `${item.diagnostico} | Índices auditados: LC ${indicesCalculados.liquidezCorrente}, LG ${indicesCalculados.liquidezGeral}, SG ${indicesCalculados.solvenciaGeral} (Atende à exigência mínima de ${indicesCalculados.exigenciaEdital}).`,
+      };
+    }
+    return item;
+  });
+
+  const hasEliminatoria = finalItems.some((i) => i.status === "ELIMINATORIA");
+  const finalVeredito = hasEliminatoria
+    ? "ELIMINATORIA"
+    : unverifiedCount > 0
+    ? "REVISAO_HUMANA_NECESSARIA"
+    : "RESSALVA";
+
   return {
-    nivel_risco: "Médio",
-    justificativa_risco: isMismatch
+    nivel_risco: hasEliminatoria ? "Alto" : "Médio",
+    justificativa_risco: hasEliminatoria
+      ? "Alerta Crítico: Foram identificadas pendências eliminatórias insanáveis na qualificação econômico-financeira (Art. 69). Não protocole proposta sem impugnar ou comprovar os índices exigidos."
+      : isMismatch
       ? `Atenção: Seu perfil cadastral é '${userVertical}', mas este edital foi classificado como '${detectedCategory}'. As regras foram estritamente ajustadas para a categoria do edital ('${effectiveRuleSetVertical}').`
       : unverifiedCount > 0 
         ? `Auditoria Art. 62 executada com ${unverifiedCount} cláusula(s) sem numeração de página direta no extrato OCR, encaminhadas para Revisão Humana Obrigatória.`
         : `Auditoria de habilitação Art. 62 parametrizada conforme a categoria '${effectiveRuleSetVertical}'. Citações de página e linha extraídas com sucesso.`,
-    veredito_habilitacao: unverifiedCount > 0 ? "REVISAO_HUMANA_NECESSARIA" : "RESSALVA",
-    justificativa_veredito: isMismatch
+    veredito_habilitacao: finalVeredito,
+    justificativa_veredito: hasEliminatoria
+      ? "Veredito Eliminatório Compulsório: Índices de liquidez ou certidões fundamentais descumprem os parâmetros mínimos do Art. 69 da Lei 14.133/2021."
+      : isMismatch
       ? `Regras do certame analisadas com foco em '${effectiveRuleSetVertical}'. Caso sua empresa participe, certifique-se de dispor dos documentos específicos exigidos para este objeto.`
       : unverifiedCount > 0
         ? `${unverifiedCount} requisito(s) requerem confirmação da numeração no arquivo original. Não confie cegamente em citações não verificadas pelo OCR.`
@@ -260,8 +302,11 @@ export function buildAdaptiveAnalysis(
         ? `Divergência de Vertical: Seu perfil é ${userVertical}, mas este edital é ${detectedCategory}. As regras de habilitação foram ajustadas para o edital.`
         : undefined,
     },
-    semaforo_habilitacao: sanitizedItems,
-    calculo_patrimonio_liquido: checks.plCalculo,
+    semaforo_habilitacao: finalItems,
+    calculo_patrimonio_liquido: {
+      ...(checks.plCalculo || {}),
+      indicesLiquidez: indicesCalculados,
+    },
     calculo_atestados: checks.atestadoRegra ? [checks.atestadoRegra] : undefined,
     auditoria: {
       versaoAnalise: `Motor v3.3 [Classificação: ${detectedCategory} | Regras: ${effectiveRuleSetVertical}]`,

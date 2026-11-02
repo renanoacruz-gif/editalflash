@@ -219,7 +219,7 @@ export default function LandingPage() {
               <span>Lei 14.133/2021 · Habilitação</span>
             </div>
 
-            <h1 className="font-display font-bold text-[clamp(34px,4.5vw,56px)] text-white tracking-tight leading-[1.12]">
+            <h1 className="font-display font-bold text-[clamp(34px,4.5vw,56px)] text-white! tracking-tight leading-[1.12]">
               Descubra antes da sessão se sua empresa pode ser <em className="italic text-[var(--flash-lt)] not-italic font-bold">inabilitada</em>.
             </h1>
 
@@ -854,7 +854,7 @@ export default function LandingPage() {
           <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--flash-lt)] px-3 py-1 rounded-full bg-white/10 border border-white/20">
             Comece em Segundos
           </span>
-          <h2 className="font-display font-bold text-[clamp(28px,4vw,44px)] tracking-tight text-white">
+          <h2 className="font-display font-bold text-[clamp(28px,4vw,44px)] tracking-tight text-white!">
             Audite seu primeiro edital antes de protocolar a proposta
           </h2>
           <p className="text-[16px] sm:text-[18px] text-[var(--mist)] max-w-2xl mx-auto leading-relaxed font-sans">

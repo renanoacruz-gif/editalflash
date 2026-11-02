@@ -106,7 +106,7 @@ h2, .landing-h2 {
 h1, h2, h3, h4, h5, h6, .font-display {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 700;
-  color: var(--text-primary);
+  color: inherit;
 }
 
 code, pre, .font-mono {

@@ -562,13 +562,14 @@ export default function LandingPage() {
 
             {/* Toggle Anual/Mensal */}
             <div className="flex items-center justify-center gap-3.5 mt-8">
-              <span className={`text-sm font-medium ${billingCycle === "monthly" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
+              <span className={`text-sm ${billingCycle === "monthly" ? "text-[var(--ink)] font-bold" : "text-[var(--ink)]/60 font-medium"}`}>
                 Cobrança Mensal
               </span>
               <button
                 type="button"
                 onClick={() => setBillingCycle(billingCycle === "monthly" ? "annual" : "monthly")}
-                className="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-[var(--brand)]"
+                className="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-[var(--flash)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--flash-lt)]"
+                aria-label="Alternar ciclo de faturamento"
               >
                 <span
                   className={`inline-block h-5 w-5 transform rounded-full bg-white shadow motion-safe:transition motion-safe:duration-200 ease-in-out ${
@@ -577,10 +578,10 @@ export default function LandingPage() {
                 />
               </button>
               <div className="flex items-center gap-2">
-                <span className={`text-sm font-medium ${billingCycle === "annual" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
+                <span className={`text-sm ${billingCycle === "annual" ? "text-[var(--ink)] font-bold" : "text-[var(--ink)]/60 font-medium"}`}>
                   Cobrança Anual
                 </span>
-                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[var(--ok-bg)] text-[var(--ok-fg)] border border-[var(--ok)]/30">
+                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300">
                   -20% de desconto
                 </span>
               </div>
@@ -589,138 +590,165 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {/* PLANO STARTER */}
-            <div className="bg-white border border-[#E4E4E7] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
-              <div>
-                <div className="text-sm font-semibold text-[#52525B] mb-1.5">
+            <div className="bg-white border border-[var(--line)] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
+              <div className="flex-1 flex flex-col">
+                <div className="text-sm font-semibold text-[var(--ink)]/70 mb-1.5 font-mono">
                   Plano Starter
                 </div>
-                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
+                <p className="text-[15px] text-[var(--ink)]/80 mb-5 leading-relaxed font-sans">
                   Para licitantes que disputam até 5 certames por mês.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-4xl font-extrabold text-[#09090B]">
-                    R$ {billingCycle === "monthly" ? "97" : "78"}
-                  </span>
-                  <span className="text-sm text-[#52525B]">/mês</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold text-[var(--ink)] font-display">
+                      R$ {billingCycle === "monthly" ? "97" : "77,60"}
+                    </span>
+                    <span className="text-sm text-[var(--ink)]/60">/mês</span>
+                  </div>
+                  {billingCycle === "annual" && (
+                    <span className="text-xs text-[var(--ink)]/60 font-sans block mt-1">
+                      cobrado anualmente
+                    </span>
+                  )}
                 </div>
 
-                <ul className="space-y-3.5 text-[15px] text-[#52525B]">
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-[var(--ink)]/85">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>5 auditorias completas de editais/mês</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Semáforo de Vereditos do Art. 62</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Parecer Executivo em PDF nativo</span>
                   </li>
                 </ul>
               </div>
 
-              <Link
-                href="/signup?plan=Starter"
-                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors shadow-xs"
-              >
-                Assinar Starter
-              </Link>
+              <div className="mt-8 pt-4 border-t border-[var(--line)]">
+                <Link
+                  href="/signup?plan=Starter"
+                  className="w-full py-3.5 rounded-xl text-sm font-bold bg-white hover:bg-[var(--mist)]/40 text-[var(--ink)] border border-[var(--line)] text-center transition-colors shadow-xs block"
+                >
+                  Assinar Starter
+                </Link>
+              </div>
             </div>
 
-            {/* PLANO PRO — MAIS POPULAR */}
-            <div className="bg-white border-2 border-[var(--brand)] rounded-2xl p-7 sm:p-8 flex flex-col justify-between relative shadow-lg">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[var(--brand)] text-white text-xs font-semibold tracking-wide whitespace-nowrap shadow-sm">
+            {/* PLANO PRO — ELEVADO (Fundo Ink, Texto Branco, Borda Flash, Selo Mais Escolhido) */}
+            <div className="bg-[var(--ink)] text-white border-2 border-[var(--flash)] rounded-2xl p-7 sm:p-8 flex flex-col justify-between relative shadow-2xl">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[var(--flash)] text-white text-xs font-semibold tracking-wide whitespace-nowrap shadow-md">
                 Mais escolhido
               </div>
-              <div>
-                <div className="text-sm font-semibold text-blue-950 mb-1.5">
+              <div className="flex-1 flex flex-col">
+                <div className="text-sm font-semibold text-[var(--flash-lt)] mb-1.5 font-mono">
                   Plano Profissional
                 </div>
-                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
+                <p className="text-[15px] text-[var(--mist)] mb-5 leading-relaxed font-sans">
                   Para equipes que necessitam de agilidade e minutas do Art. 164.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-4xl font-extrabold text-[#09090B]">
-                    R$ {billingCycle === "monthly" ? "297" : "237"}
-                  </span>
-                  <span className="text-sm text-[#52525B]">/mês</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold text-white font-display">
+                      R$ {billingCycle === "monthly" ? "297" : "237,60"}
+                    </span>
+                    <span className="text-sm text-[var(--mist)]">/mês</span>
+                  </div>
+                  {billingCycle === "annual" && (
+                    <span className="text-xs text-[var(--flash-lt)] font-sans block mt-1">
+                      cobrado anualmente
+                    </span>
+                  )}
                 </div>
 
-                <ul className="space-y-3.5 text-[15px] text-[#09090B]">
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-white">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span><strong>15 auditorias de editais/mês</strong></span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span><strong>Minutas Automáticas de Impugnação (Art. 164)</strong></span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Portfólio de Acervo &amp; Súmula 263 TCU</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Radar de Retificações (Diff Engine)</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Exportação de Histórico em CSV/Excel</span>
                   </li>
                 </ul>
               </div>
 
-              <Link
-                href="/signup?plan=Pro"
-                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white text-center shadow-md transition-colors"
-              >
-                Assinar Plano Profissional
-              </Link>
+              <div className="mt-8 pt-4 border-t border-white/15">
+                <Link
+                  href="/signup?plan=Pro"
+                  className="w-full py-3.5 rounded-xl text-sm font-bold bg-[var(--flash)] hover:brightness-110 active:scale-98 text-white text-center shadow-lg shadow-[var(--flash)]/30 transition-all block"
+                >
+                  Assinar Plano Profissional
+                </Link>
+              </div>
             </div>
 
             {/* PLANO ENTERPRISE */}
-            <div className="bg-white border border-[#E4E4E7] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
-              <div>
-                <div className="text-sm font-semibold text-[#52525B] mb-1.5">
+            <div className="bg-white border border-[var(--line)] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
+              <div className="flex-1 flex flex-col">
+                <div className="text-sm font-semibold text-[var(--ink)]/70 mb-1.5 font-mono">
                   Plano Enterprise
                 </div>
-                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
+                <p className="text-[15px] text-[var(--ink)]/80 mb-5 leading-relaxed font-sans">
                   Multi-CNPJ para construtoras e grandes distribuidoras.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-4xl font-extrabold text-[#09090B]">
-                    R$ {billingCycle === "monthly" ? "890" : "712"}
-                  </span>
-                  <span className="text-sm text-[#52525B]">/mês</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-extrabold text-[var(--ink)] font-display">
+                      R$ {billingCycle === "monthly" ? "890" : "712,00"}
+                    </span>
+                    <span className="text-sm text-[var(--ink)]/60">/mês</span>
+                  </div>
+                  {billingCycle === "annual" && (
+                    <span className="text-xs text-[var(--ink)]/60 font-sans block mt-1">
+                      cobrado anualmente
+                    </span>
+                  )}
                 </div>
 
-                <ul className="space-y-3.5 text-[15px] text-[#52525B]">
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-[var(--ink)]/85">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Auditorias Ilimitadas de Editais</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Múltiplos CNPJs e Usuários simultâneos</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Dashboard de ROI &amp; Cockpit de Performance</span>
                   </li>
-                  <li className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--ok)] shrink-0 mt-0.5" />
                     <span>Suporte Jurídico Prioritário via WhatsApp</span>
                   </li>
                 </ul>
               </div>
 
-              <Link
-                href="/signup?plan=Enterprise"
-                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors shadow-xs"
-              >
-                Contratar Enterprise
-              </Link>
+              <div className="mt-8 pt-4 border-t border-[var(--line)]">
+                <a
+                  href="mailto:contatoeditalflash@gmail.com?subject=Interesse%20no%20Plano%20Enterprise%20EditalFlash"
+                  className="w-full py-3.5 rounded-xl text-sm font-bold bg-white hover:bg-[var(--mist)]/40 text-[var(--ink)] border border-[var(--line)] text-center transition-colors shadow-xs block"
+                >
+                  Falar com especialista
+                </a>
+              </div>
             </div>
           </div>
         </div>

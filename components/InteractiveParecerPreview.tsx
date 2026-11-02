@@ -44,7 +44,7 @@ export const InteractiveParecerPreview: React.FC = () => {
               <FileText className="w-3.5 h-3.5 text-[var(--flash)]" />
               <span>Parecer_Preliminar_Concorrencia_042_2026.pdf</span>
             </span>
-            <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
+            <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
               Exemplo ilustrativo
             </span>
           </div>
@@ -315,14 +315,14 @@ export const InteractiveParecerPreview: React.FC = () => {
                 {/* Assinatura Digital & Hash pericial */}
                 <div className="pt-6 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-[var(--ink)]/70">
                   <div className="p-3 rounded-lg bg-[var(--paper)] border border-[var(--line)]">
-                    <div className="text-[11px] uppercase text-[var(--ink)]/60 font-bold mb-1">Assinatura do Laudo</div>
+                    <div className="text-xs uppercase text-[var(--ink)]/60 font-bold mb-1">Assinatura do Laudo</div>
                     <div className="text-[var(--ink)] font-semibold">Motor Pericial EditalFlash</div>
-                    <div className="text-[var(--ink)]/60 text-[11px]">Conformidade Lei 14.133/2021</div>
+                    <div className="text-[var(--ink)]/60 text-xs">Conformidade Lei 14.133/2021</div>
                   </div>
                   <div className="p-3 rounded-lg bg-[var(--paper)] border border-[var(--line)]">
-                    <div className="text-[11px] uppercase text-[var(--ink)]/60 font-bold mb-1">Integridade do Laudo</div>
+                    <div className="text-xs uppercase text-[var(--ink)]/60 font-bold mb-1">Integridade do Laudo</div>
                     <div className="text-[var(--ink)] font-semibold truncate">{cenarioExemplo.edital.hashDocumento}</div>
-                    <div className="text-[var(--ink)]/60 text-[11px]">Timestamp ICP-Brasil 2026</div>
+                    <div className="text-[var(--ink)]/60 text-xs">Timestamp ICP-Brasil 2026</div>
                   </div>
                 </div>
 

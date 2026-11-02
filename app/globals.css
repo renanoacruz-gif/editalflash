@@ -134,3 +134,25 @@ code, pre, .font-mono {
   background-color: var(--border-subtle);
   width: 100%;
 }
+
+/* Acessibilidade: foco visível global por teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--flash);
+  outline-offset: 2px;
+}
+
+/* Acessibilidade: prefers-reduced-motion respeitado */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

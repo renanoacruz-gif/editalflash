@@ -69,7 +69,7 @@ export const InteractiveHeroScanner: React.FC = () => {
             <span className="ml-2.5 text-xs font-mono text-[#71717A] hidden sm:inline tracking-tight">
               {cenarioExemplo.edital.arquivoNome}
             </span>
-            <span className="ml-2 text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
+            <span className="ml-2 text-xs font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
               Exemplo ilustrativo
             </span>
           </div>

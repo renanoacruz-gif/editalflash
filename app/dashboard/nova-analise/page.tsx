@@ -323,17 +323,17 @@ function NovaAnaliseContent() {
               <div className="text-center max-w-3xl mx-auto space-y-3">
                 {/* 🔒 BADGE PROEMINENTE: MODO ATIVO VERTICAL */}
                 <div className="flex flex-wrap items-center justify-center gap-2">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--surface)] text-[var(--ink)] text-xs font-mono font-bold border border-[var(--brand)]/40 shadow-xs">
-                    <Lock className="w-3.5 h-3.5 text-[var(--brand)]" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-[#0F172A] text-xs font-mono font-medium border border-[#CBD5E1] shadow-xs">
+                    <Lock className="w-3.5 h-3.5 text-[#1E3A8A]" />
                     <span>MODO ATIVO: {activeVertical.toUpperCase()}</span>
-                    <span className="text-[10px] text-[var(--brand)] font-normal border-l border-[var(--line)] pl-2">
+                    <span className="text-[10px] text-[#64748B] font-normal border-l border-[#E2E8F0] pl-2">
                       Regras Específicas Aplicadas
                     </span>
                   </div>
 
                   {/* Founder / Demo Mode Switcher: Impersonação e Teste Rápido de Verticais */}
                   {user?.is_superadmin && (
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#18181B] border border-slate-700 text-xs font-mono text-white">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F172A] border border-slate-700 text-xs font-mono text-white">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span className="text-[10px] text-slate-400">Demo Mode:</span>
                       <select
@@ -354,7 +354,7 @@ function NovaAnaliseContent() {
                     <button
                       type="button"
                       onClick={() => setTempVertical(null)}
-                      className="text-[11px] font-mono text-[var(--warn-fg)] bg-[var(--warn-bg)] px-2 py-0.5 rounded border border-[var(--warn)]/40 hover:underline"
+                      className="text-[11px] font-mono text-[#854D0E] bg-[#FEFCE8] px-2 py-0.5 rounded border border-[#854D0E]/30 hover:underline"
                     >
                       Restaurar padrão ({user?.primary_vertical})
                     </button>
@@ -363,19 +363,19 @@ function NovaAnaliseContent() {
 
                 {/* MODAL / BANNER DE AVISO DE CONFLITO VERTICAL PRÉ-ANÁLISE */}
                 {mismatchWarningItem && (
-                  <div className="p-4 rounded-lg bg-[var(--warn-bg)] border border-[var(--warn)]/50 text-left space-y-3 shadow-sm">
+                  <div className="p-4 rounded-lg bg-[#FEFCE8] border border-[#FE0]/40 text-left space-y-3 shadow-xs">
                     <div className="flex items-start gap-2.5">
-                      <AlertTriangle className="w-5 h-5 text-[var(--warn)] shrink-0 mt-0.5" />
+                      <AlertTriangle className="w-5 h-5 text-[#854D0E] shrink-0 mt-0.5" />
                       <div>
-                        <div className="text-xs font-bold text-[var(--ink)]">
+                        <div className="text-xs font-bold text-[#0F172A]">
                           Alerta de Categoria: Divergência Detectada no Objeto
                         </div>
-                        <div className="text-[11px] text-[var(--ink-2)] mt-1">
+                        <div className="text-[11px] text-[#475569] mt-1">
                           Este edital parece ser de categoria diferente da sua preferência cadastrada ({activeVertical}). A análise aplicará suas regras prioritárias, mas pode haver divergências regulatórias.
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 pt-1 border-t border-[var(--warn)]/20 justify-end">
+                    <div className="flex items-center gap-2 pt-1 border-t border-[#854D0E]/15 justify-end">
                       <button
                         type="button"
                         onClick={() => {
@@ -389,9 +389,9 @@ function NovaAnaliseContent() {
                           setTempVertical(detected);
                           setMismatchWarningItem(null);
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-[var(--surface)] text-[var(--ink)] text-xs font-semibold border border-[var(--line)] hover:bg-[var(--line)]/50 transition-all"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-white text-[#0F172A] text-xs font-semibold border border-[#CBD5E1] hover:bg-[#F8FAFC] transition-colors"
                       >
-                        <Sliders className="w-3.5 h-3.5 text-[var(--brand)]" />
+                        <Sliders className="w-3.5 h-3.5 text-[#1E3A8A]" />
                         <span>Alterar Vertical Temporariamente</span>
                       </button>
                       <button
@@ -401,7 +401,7 @@ function NovaAnaliseContent() {
                           setMismatchWarningItem(null);
                           handleSelectTender(item);
                         }}
-                        className="px-3 py-1.5 rounded bg-[var(--brand)] text-white text-xs font-bold hover:brightness-110 shadow-xs transition-all"
+                        className="px-3.5 py-1.5 rounded bg-[#1E3A8A] text-white text-xs font-bold hover:bg-[#1E40AF] shadow-xs transition-colors"
                       >
                         Confirmar com {activeVertical}
                       </button>
@@ -411,14 +411,14 @@ function NovaAnaliseContent() {
 
                 {/* FIX #2: Banner de Recuperação se houver falha prévia recuperável sem queima de créditos */}
                 {activeSession?.status === "FAILED" && (
-                  <div className="mb-4 p-3.5 rounded-lg bg-[var(--warn-bg)] border border-[var(--warn)]/40 text-left flex items-start justify-between gap-3 shadow-xs">
+                  <div className="mb-4 p-3.5 rounded-lg bg-[#FEFCE8] border border-[#854D0E]/30 text-left flex items-start justify-between gap-3 shadow-xs">
                     <div className="flex items-start gap-2.5">
-                      <AlertTriangle className="w-4 h-4 text-[var(--warn)] shrink-0 mt-0.5" />
+                      <AlertTriangle className="w-4 h-4 text-[#854D0E] shrink-0 mt-0.5" />
                       <div>
-                        <div className="text-xs font-bold text-[var(--ink)]">
+                        <div className="text-xs font-bold text-[#0F172A]">
                           Sessão Anterior Interrompida ({activeSession.fileName})
                         </div>
-                        <div className="text-[11px] text-[var(--ink-2)] mt-0.5">
+                        <div className="text-[11px] text-[#475569] mt-0.5">
                           {activeSession.errorMessage || "A análise anterior não foi concluída. Seus créditos foram preservados integralmente."}
                         </div>
                       </div>
@@ -427,7 +427,7 @@ function NovaAnaliseContent() {
                       <button
                         type="button"
                         onClick={handleRetryFailedAnalysis}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[var(--brand)] text-white text-[11px] font-bold hover:brightness-110 shadow-xs transition-all"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#1E3A8A] text-white text-[11px] font-bold hover:bg-[#1E40AF] shadow-xs transition-colors"
                       >
                         <RefreshCw className="w-3 h-3" />
                         <span>Tentar Novamente</span>
@@ -435,7 +435,7 @@ function NovaAnaliseContent() {
                       <button
                         type="button"
                         onClick={handleDismissFailedSession}
-                        className="p-1 rounded text-[var(--ink-2)] hover:text-[var(--ink)] hover:bg-[var(--line)]"
+                        className="p-1 rounded text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9]"
                         title="Descartar aviso"
                       >
                         <XCircle className="w-4 h-4" />
@@ -444,27 +444,27 @@ function NovaAnaliseContent() {
                   </div>
                 )}
 
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--brand-tint)] text-[var(--ink)] text-xs font-mono font-semibold border border-[var(--brand)]/20">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EFF6FF] text-[#1E3A8A] text-xs font-mono font-semibold border border-[#BFDBFE]">
                   <BrandIcon name="garantia" size="s16" accentCobalt />
                   <span>Auditoria Preventiva de Habilitação (Art. 62 Lei 14.133)</span>
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink)] tracking-tight font-display">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight font-display">
                   Nova Auditoria Preventiva de Edital
                 </h1>
-                <p className="text-xs sm:text-sm text-[var(--ink-2)]">
+                <p className="text-xs sm:text-sm text-[#475569] font-sans">
                   Analise o arquivo PDF local da sua empresa ou consulte o Agregador Multi-Fontes Oficial com validação cruzada.
                 </p>
 
                 {/* Segmented Control Arredondado */}
                 <div className="pt-4 flex justify-center">
-                  <div className="relative p-1 rounded-lg bg-[var(--surface)] border border-[var(--line)] shadow-sm flex items-center">
+                  <div className="relative p-1 rounded-lg bg-[#F1F5F9] border border-[#CBD5E1] shadow-xs flex items-center">
                     <button
                       type="button"
                       onClick={() => setActiveUploadTab("pdf")}
                       className={`relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-md text-xs font-bold transition-all ${
                         activeUploadTab === "pdf"
-                          ? "bg-[var(--brand)] text-white shadow-xs"
-                          : "text-[var(--ink-2)] hover:text-[var(--ink)]"
+                          ? "bg-[#1E3A8A] text-white shadow-xs"
+                          : "text-[#475569] hover:text-[#0F172A]"
                       }`}
                     >
                       <FileText className="w-4 h-4" />
@@ -476,8 +476,8 @@ function NovaAnaliseContent() {
                       onClick={() => setActiveUploadTab("aggregator")}
                       className={`relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-md text-xs font-bold transition-all ${
                         activeUploadTab === "aggregator"
-                          ? "bg-[var(--brand)] text-white shadow-xs"
-                          : "text-[var(--ink-2)] hover:text-[var(--ink)]"
+                          ? "bg-[#1E3A8A] text-white shadow-xs"
+                          : "text-[#475569] hover:text-[#0F172A]"
                       }`}
                     >
                       <Search className="w-4 h-4" />
@@ -502,19 +502,19 @@ function NovaAnaliseContent() {
 
               {/* ABA 2: Agregador Multi-Fontes */}
               {activeUploadTab === "aggregator" && (
-                <div className="w-full max-w-4xl mx-auto bg-[var(--surface)] rounded-lg p-6 sm:p-8 border border-[var(--line)] shadow-sm text-left space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--line)] gap-3">
+                <div className="w-full max-w-4xl mx-auto bg-white rounded-xl p-6 sm:p-8 border border-[#E2E8F0] shadow-xs text-left space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E2E8F0] gap-3">
                     <div>
-                      <h3 className="text-sm font-bold text-[var(--ink)] flex items-center gap-2 font-display">
-                        <Building2 className="w-4 h-4 text-[var(--brand)]" />
+                      <h3 className="text-sm font-bold text-[#0F172A] flex items-center gap-2 font-display">
+                        <Building2 className="w-4 h-4 text-[#1E3A8A]" />
                         <span>Agregador Oficial de Compras Públicas</span>
                       </h3>
-                      <p className="text-xs text-[var(--ink-2)] mt-0.5">
+                      <p className="text-xs text-[#64748B] mt-0.5 font-sans">
                         Conexão direta com 6 portais oficiais e motor de validação contra o PDF original.
                       </p>
                     </div>
                     <div className="flex items-center gap-2 text-[10px] font-mono">
-                      <span className="px-2 py-0.5 rounded bg-[var(--ok-bg)] text-[var(--ok-fg)] font-bold border border-[var(--ok)]/30">
+                      <span className="px-2.5 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] font-bold border border-[#A7F3D0]">
                         Validação Cruzada Ativa
                       </span>
                     </div>
@@ -523,13 +523,13 @@ function NovaAnaliseContent() {
                   {/* Seleção de Fontes Homologadas */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-semibold text-[var(--ink)]">
+                      <label className="text-xs font-semibold text-[#0F172A]">
                         Fontes Oficiais Verificadas
                       </label>
                       <button
                         type="button"
                         onClick={selectAllSources}
-                        className="text-[11px] font-mono text-[var(--brand)] hover:underline"
+                        className="text-[11px] font-mono text-[#1E3A8A] hover:underline"
                       >
                         Selecionar todas
                       </button>
@@ -544,22 +544,22 @@ function NovaAnaliseContent() {
                             key={source.key}
                             type="button"
                             onClick={() => toggleSourceSelection(source.key)}
-                            className={`p-2.5 rounded-md border text-left transition-all flex flex-col justify-between ${
+                            className={`p-2.5 rounded-lg border text-left transition-colors flex flex-col justify-between ${
                               isChecked
-                                ? "bg-[var(--brand-tint)]/40 border-[var(--brand)] text-[var(--ink)] shadow-xs"
-                                : "bg-[var(--bg)] border-[var(--line)] text-[var(--ink-2)] hover:border-[var(--line)]"
+                                ? "bg-[#EFF6FF] border-[#1E3A8A] text-[#1E3A8A] shadow-xs"
+                                : "bg-white border-[#CBD5E1] text-[#64748B] hover:border-[#94A3B8]"
                             }`}
                           >
                             <div className="flex items-center justify-between">
                               <span className="text-[11px] font-bold font-mono">
                                 {source.label}
                               </span>
-                              {isChecked && <CheckCircle className="w-3.5 h-3.5 text-[var(--brand)]" />}
+                              {isChecked && <CheckCircle className="w-3.5 h-3.5 text-[#1E3A8A]" />}
                             </div>
-                            <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-[var(--ink-2)]">
-                              <span>Prioridade {ALL_SOURCES.findIndex((s) => s.key === source.key) + 1}</span>
+                            <div className="mt-1 flex items-center justify-between text-[10px] font-mono text-[#64748B]">
+                              <span>P{ALL_SOURCES.findIndex((s) => s.key === source.key) + 1}</span>
                               {count !== undefined && (
-                                <span className="px-1.5 py-0.2 rounded bg-[var(--surface)] border border-[var(--line)] font-bold text-[var(--ink)]">
+                                <span className="px-1.5 py-0.2 rounded bg-white border border-[#CBD5E1] font-bold text-[#0F172A]">
                                   {count}
                                 </span>
                               )}
@@ -574,7 +574,7 @@ function NovaAnaliseContent() {
                   <form onSubmit={handleAggregatorSearch} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
                       <div className="sm:col-span-8">
-                        <label className="text-xs font-semibold text-[var(--ink)] block mb-1">
+                        <label className="text-xs font-semibold text-[#0F172A] block mb-1">
                           Objeto da Compra ou Palavra-Chave
                         </label>
                         <input
@@ -582,18 +582,18 @@ function NovaAnaliseContent() {
                           value={searchObjeto}
                           onChange={(e) => setSearchObjeto(e.target.value)}
                           placeholder="Ex: notebooks, pavimentação, medicamentos, vigilância..."
-                          className="w-full px-3 py-2 text-xs rounded-md bg-[var(--bg)] border border-[var(--line)] text-[var(--ink)] placeholder:text-[var(--ink-2)] focus:outline-none focus:border-[var(--brand)]"
+                          className="w-full px-3 py-2 text-xs rounded-lg bg-white border border-[#CBD5E1] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]"
                         />
                       </div>
 
                       <div className="sm:col-span-4">
-                        <label className="text-xs font-semibold text-[var(--ink)] block mb-1">
+                        <label className="text-xs font-semibold text-[#0F172A] block mb-1">
                           UF (Estado)
                         </label>
                         <select
                           value={searchUf}
                           onChange={(e) => setSearchUf(e.target.value)}
-                          className="w-full px-3 py-2 text-xs rounded-md bg-[var(--bg)] border border-[var(--line)] text-[var(--ink)] focus:outline-none focus:border-[var(--brand)]"
+                          className="w-full px-3 py-2 text-xs rounded-lg bg-white border border-[#CBD5E1] text-[#0F172A] focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]"
                         >
                           <option value="">Todas as UFs</option>
                           {estados.map((sigla) => (
@@ -606,15 +606,15 @@ function NovaAnaliseContent() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pt-1 gap-3">
-                      <div className="text-[11px] text-[var(--ink-2)] font-mono flex items-center gap-1.5">
-                        <ShieldCheck className="w-3.5 h-3.5 text-[var(--brand)]" />
+                      <div className="text-[11px] text-[#64748B] font-mono flex items-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#065F46]" />
                         <span>Filtro de segurança: apenas certames com PDF verificável</span>
                       </div>
 
                       <button
                         type="submit"
                         disabled={searchLoading}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-md bg-[var(--brand)] hover:brightness-110 text-white shadow-xs transition-all disabled:opacity-50"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-white shadow-xs transition-colors disabled:opacity-50"
                       >
                         {searchLoading ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -628,24 +628,24 @@ function NovaAnaliseContent() {
 
                   {/* Resultados Agregados e Deduplicados */}
                   {hasSearched && (
-                    <div className="pt-6 border-t border-[var(--line)] space-y-4">
+                    <div className="pt-6 border-t border-[#E2E8F0] space-y-4">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-[var(--ink)] font-mono">
+                          <span className="text-xs font-bold text-[#0F172A] font-mono">
                             Editais Validados ({sortedResults.length})
                           </span>
-                          <span className="text-[11px] text-[var(--ink-2)] font-mono">
+                          <span className="text-[11px] text-[#64748B] font-mono">
                             • Deduplicação e checagem de integridade concluídas
                           </span>
                         </div>
 
                         {/* Ordenação */}
                         <div className="flex items-center gap-2 text-xs">
-                          <span className="text-[var(--ink-2)] font-mono text-[11px]">Ordenar por:</span>
+                          <span className="text-[#64748B] font-mono text-[11px]">Ordenar por:</span>
                           <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value as any)}
-                            className="px-2 py-1 text-xs rounded bg-[var(--bg)] border border-[var(--line)] text-[var(--ink)] focus:outline-none"
+                            className="px-2.5 py-1 text-xs rounded-lg bg-white border border-[#CBD5E1] text-[#0F172A] focus:outline-none focus:border-[#1E3A8A]"
                           >
                             <option value="relevancia">Relevância (Validados primeiro)</option>
                             <option value="data">Data de Publicação</option>
@@ -655,7 +655,7 @@ function NovaAnaliseContent() {
                       </div>
 
                       {sortedResults.length === 0 && !searchLoading && (
-                        <div className="p-6 text-center rounded-lg bg-[var(--bg)] border border-[var(--line)] text-xs text-[var(--ink-2)]">
+                        <div className="p-6 text-center rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs text-[#64748B]">
                           Nenhum certame localizado para os parâmetros informados. Tente alterar os termos ou selecionar mais fontes.
                         </div>
                       )}
@@ -664,18 +664,18 @@ function NovaAnaliseContent() {
                         {sortedResults.map((item) => (
                           <div
                             key={item.id}
-                            className="bento-card p-5 rounded-xl border border-[var(--line)] bg-[var(--surface)] hover:border-[var(--brand)]/50 transition-all flex flex-col gap-3.5 group shadow-xs"
+                            className="p-5 rounded-xl border border-[#E2E8F0] bg-white hover:border-[#1E3A8A]/50 transition-colors flex flex-col gap-3 group shadow-xs"
                           >
                             <div className="flex flex-wrap items-center justify-between gap-2">
                               <div className="flex items-center gap-2">
-                                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--brand-tint)]/60 text-[var(--brand)] font-bold border border-[var(--brand)]/30">
+                                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF6FF] text-[#1E3A8A] font-bold border border-[#BFDBFE]">
                                   {item.source}
                                 </span>
-                                <span className="text-[10px] font-mono text-[var(--ink-2)] bg-[var(--bg)] px-2 py-0.5 rounded border border-[var(--line)]">
+                                <span className="text-[10px] font-mono text-[#64748B] bg-[#F8FAFC] px-2 py-0.5 rounded border border-[#E2E8F0]">
                                   {item.id}
                                 </span>
                                 {item.availableAlsoInPNCP && (
-                                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--ok-bg)] text-[var(--ok-fg)] font-semibold border border-[var(--ok)]/30">
+                                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] font-semibold border border-[#A7F3D0]">
                                     Disponível também no PNCP
                                   </span>
                                 )}
@@ -683,49 +683,49 @@ function NovaAnaliseContent() {
 
                               <div className="flex items-center gap-2">
                                 {item.validationStatus === "validado" && (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-[var(--ok-fg)] font-semibold bg-[var(--ok-bg)] px-2.5 py-0.5 rounded border border-[var(--ok)]/30">
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-[#065F46] font-semibold bg-[#ECFDF5] px-2.5 py-0.5 rounded border border-[#A7F3D0]">
                                     <CheckCircle className="w-3 h-3" />
                                     <span>Validação Cruzada OK</span>
                                   </span>
                                 )}
                                 {item.validationStatus === "inconsistente" && (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-[var(--warn-fg)] font-semibold bg-[var(--warn-bg)] px-2.5 py-0.5 rounded border border-[var(--warn)]/30">
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-[#854D0E] font-semibold bg-[#FEFCE8] px-2.5 py-0.5 rounded border border-[#FEF08A]">
                                     <AlertTriangle className="w-3 h-3" />
                                     <span>Inconsistência Detectada</span>
                                   </span>
                                 )}
-                                <span className="text-[11px] font-mono font-bold text-[var(--ink)] bg-[var(--bg)] px-2 py-0.5 rounded border border-[var(--line)]">
+                                <span className="text-[11px] font-mono font-bold text-[#0F172A] bg-[#F8FAFC] px-2 py-0.5 rounded border border-[#E2E8F0]">
                                   UF: {item.uf}
                                 </span>
                               </div>
                             </div>
 
                             <div>
-                              <div className="text-[11px] font-mono text-[var(--ink-2)] mb-1 font-semibold truncate">
-                                Órgão Licitante: <strong className="text-[var(--ink)]">{item.orgao}</strong>
+                              <div className="text-[11px] font-mono text-[#64748B] mb-1 font-semibold truncate">
+                                Órgão Licitante: <strong className="text-[#0F172A]">{item.orgao}</strong>
                               </div>
-                              <h4 className="text-xs sm:text-sm font-bold text-[var(--ink)] font-display group-hover:text-[var(--brand)] transition-colors leading-relaxed">
+                              <h4 className="text-xs sm:text-sm font-bold text-[#0F172A] font-display group-hover:text-[#1E3A8A] transition-colors leading-relaxed">
                                 {item.objeto}
                               </h4>
                               {item.divergenceWarning && (
-                                <div className="mt-2.5 text-[11px] font-mono text-[var(--warn-fg)] bg-[var(--warn-bg)]/60 px-3 py-1.5 rounded-lg border border-[var(--warn)]/30 flex items-center gap-1.5">
+                                <div className="mt-2.5 text-[11px] font-mono text-[#854D0E] bg-[#FEFCE8] px-3 py-1.5 rounded-lg border border-[#FEF08A] flex items-center gap-1.5">
                                   <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                                   <span>{item.divergenceWarning}</span>
                                 </div>
                               )}
                             </div>
 
-                            <div className="flex flex-wrap items-center justify-between pt-3 border-t border-[var(--line)] text-xs text-[var(--ink-2)] gap-2">
+                            <div className="flex flex-wrap items-center justify-between pt-3 border-t border-[#E2E8F0] text-xs text-[#64748B] gap-2">
                               <div className="flex items-center gap-4 font-mono text-[11px]">
                                 {item.valorEstimado ? (
                                   <span>
-                                    Estimativa: <strong className="text-[var(--ink)]">R$ {item.valorEstimado.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong>
+                                    Estimativa: <strong className="text-[#0F172A]">R$ {item.valorEstimado.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong>
                                   </span>
                                 ) : (
                                   <span className="italic">Valor sob cotação</span>
                                 )}
                                 <span>•</span>
-                                <span>Sessão: <strong className="text-[var(--ink)]">{new Date(item.dataAbertura).toLocaleDateString("pt-BR")}</strong></span>
+                                <span>Sessão: <strong className="text-[#0F172A]">{new Date(item.dataAbertura).toLocaleDateString("pt-BR")}</strong></span>
                               </div>
 
                               <div className="flex items-center gap-2">
@@ -734,7 +734,7 @@ function NovaAnaliseContent() {
                                     href={item.linkPdf}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono font-medium text-[var(--ink)] hover:text-[var(--brand)] bg-[var(--bg)] border border-[var(--line)] transition-colors"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono font-medium text-[#0F172A] hover:text-[#1E3A8A] bg-white border border-[#CBD5E1] transition-colors"
                                   >
                                     <ExternalLink className="w-3.5 h-3.5" />
                                     <span>Edital PDF</span>
@@ -744,7 +744,7 @@ function NovaAnaliseContent() {
                                 <button
                                   type="button"
                                   onClick={() => handleSelectTender(item)}
-                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-[var(--brand-solid)] hover:brightness-110 shadow-xs transition-all active:scale-98"
+                                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] shadow-xs transition-colors active:scale-98"
                                 >
                                   <span>Auditar Habilitação</span>
                                   <ArrowRight className="w-3.5 h-3.5" />
@@ -757,7 +757,7 @@ function NovaAnaliseContent() {
                     </div>
                   )}
 
-                  <div className="pt-2 text-[11px] text-[var(--ink-2)] italic border-t border-[var(--line)]">
+                  <div className="pt-2 text-[11px] text-[#64748B] italic border-t border-[#E2E8F0]">
                     Fontes externas são validadas automaticamente contra o acervo digital, mas podem conter divergências de publicação. Confirme sempre no edital original antes de disputar.
                   </div>
                 </div>
@@ -776,14 +776,14 @@ function NovaAnaliseContent() {
               className="space-y-4"
             >
               {/* FIX #2: Indicador Persistente de Processamento Ativo */}
-              <div className="max-w-xl mx-auto p-3 bg-[var(--surface)] border border-[var(--brand)]/30 rounded-lg text-center shadow-xs">
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[var(--brand)]">
-                  <Clock className="w-4 h-4 animate-spin" />
+              <div className="max-w-xl mx-auto p-3.5 bg-white border border-[#CBD5E1] rounded-xl text-center shadow-xs">
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-[#1E3A8A]">
+                  <Clock className="w-4 h-4 animate-spin text-[#1E3A8A]" />
                   <span>
                     Análise em andamento desde {activeSession?.startTime || new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}. Não feche esta aba.
                   </span>
                 </div>
-                <div className="text-[11px] text-[var(--ink-2)] mt-1">
+                <div className="text-[11px] text-[#64748B] mt-1 font-sans">
                   Seus créditos serão debitados apenas após a conclusão e validação do parecer de habilitação.
                 </div>
               </div>
@@ -802,12 +802,12 @@ function NovaAnaliseContent() {
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
               {isDemoMode && (
-                <div className="mb-4 p-4 rounded-xl bg-red-950/80 border-2 border-red-500 text-red-200 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+                <div className="mb-4 p-4 rounded-xl bg-[#FEF2F2] border border-[#991B1B]/30 text-[#991B1B] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
                   <div className="flex items-center gap-2.5">
-                    <span className="px-2.5 py-1 rounded-md bg-red-600 text-white font-mono font-black text-xs tracking-wider animate-pulse uppercase">
-                      MODO DEMONSTRAÇÃO - DADOS FICTÍCIOS
+                    <span className="px-2.5 py-0.5 rounded bg-[#991B1B] text-white font-mono font-bold text-[11px] tracking-wider uppercase">
+                      MODO DEMONSTRAÇÃO
                     </span>
-                    <span className="text-xs font-sans">
+                    <span className="text-xs font-sans text-[#7F1D1D]">
                       Este parecer foi gerado com edital demonstrativo para teste. Nenhuma informação foi gravada no histórico real do seu banco.
                     </span>
                   </div>
@@ -817,7 +817,7 @@ function NovaAnaliseContent() {
                       setIsDemoMode(false);
                       handleReset();
                     }}
-                    className="px-3.5 py-1.5 rounded-lg bg-white text-[#09090B] font-bold text-xs hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-lg bg-white border border-[#CBD5E1] text-[#0F172A] font-bold text-xs hover:bg-[#F8FAFC] transition-colors shrink-0 cursor-pointer shadow-xs"
                   >
                     Auditar Edital Real
                   </button>

@@ -300,8 +300,8 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
         </p>
 
         {/* Disclaimer Oficial Discreto */}
-        <div className="p-3 rounded border border-[#E4E4E7] bg-[#F4F4F5]/40 text-xs text-[#71717A] flex items-start gap-2">
-          <Info className="w-4 h-4 text-[#71717A] shrink-0 mt-0.5" />
+        <div className="p-3 rounded-lg border border-[#CBD5E1] bg-[#F8FAFC] text-xs text-[#64748B] flex items-start gap-2">
+          <Info className="w-4 h-4 text-[#1E3A8A] shrink-0 mt-0.5" />
           <span>
             <strong>Observação de Apoio à Decisão:</strong> Este parecer constitui instrumento preventivo de suporte à análise de conformidade e não substitui a conferência integral do instrumento convocatório, dos documentos originais e da apreciação soberana do Agente de Contratação / Comissão de Licitação.
           </span>
@@ -310,14 +310,14 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
 
       {/* SEÇÃO C — MATRIZ DE ANÁLISE DOCUMENTAL (ART. 62) */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-[#E4E4E7]">
-          <h2 className="text-xs font-mono uppercase tracking-wider text-[#71717A]">
+        <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0]">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-[#64748B]">
             Matriz de Análise Documental (Art. 62 da Lei 14.133/2021)
           </h2>
-          <span className="text-xs font-mono text-[#A1A1AA]">Clique para detalhar</span>
+          <span className="text-xs font-mono text-[#94A3B8]">Clique para detalhar</span>
         </div>
 
-        <div className="divide-y divide-[#253745]">
+        <div className="divide-y divide-[#E2E8F0]">
           {items.map((item) => {
             const isExpanded = expandedItemId === item.id;
             const statusVariant =
@@ -327,15 +327,15 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
               <div key={item.id} className="py-3.5 space-y-2">
                 <div
                   onClick={() => setExpandedItemId(isExpanded ? null : item.id)}
-                  className="flex items-center justify-between cursor-pointer group hover:bg-[#F4F4F5]/40 p-2 rounded transition-colors"
+                  className="flex items-center justify-between cursor-pointer group hover:bg-[#F8FAFC] p-2.5 rounded-lg transition-colors"
                 >
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs font-mono text-[#71717A]">{item.categoria}</span>
-                      <span className="text-xs font-mono text-[#A1A1AA]">•</span>
-                      <span className="text-xs font-mono text-[#71717A]">{item.localEdital}</span>
+                      <span className="text-xs font-mono text-[#64748B]">{item.categoria}</span>
+                      <span className="text-xs font-mono text-[#CBD5E1]">•</span>
+                      <span className="text-xs font-mono text-[#64748B]">{item.localEdital}</span>
                     </div>
-                    <h3 className="text-sm font-semibold text-[#09090B] group-hover:text-[#09090B]">
+                    <h3 className="text-sm font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors">
                       {item.documento}
                     </h3>
                   </div>
@@ -343,33 +343,33 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
                   <div className="flex items-center gap-3 shrink-0">
                     <Badge variant={statusVariant}>{item.status}</Badge>
                     {isExpanded ? (
-                      <ChevronUp className="w-4 h-4 text-[#71717A]" />
+                      <ChevronUp className="w-4 h-4 text-[#64748B]" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 text-[#A1A1AA] group-hover:text-[#71717A]" />
+                      <ChevronDown className="w-4 h-4 text-[#94A3B8] group-hover:text-[#64748B]" />
                     )}
                   </div>
                 </div>
 
                 {/* Detalhamento Expansível */}
                 {isExpanded && (
-                  <div className="p-4 rounded border border-[#E4E4E7] bg-[#F4F4F5] space-y-3 text-xs font-mono">
+                  <div className="p-4 rounded-xl border border-[#CBD5E1] bg-[#F8FAFC] space-y-3 text-xs font-mono">
                     <div>
-                      <span className="text-[#71717A] block uppercase tracking-wider text-[10px]">
+                      <span className="text-[#64748B] block uppercase tracking-wider text-[10px]">
                         Diagnóstico Pericial:
                       </span>
-                      <p className="text-[#09090B] font-sans text-xs mt-1 leading-relaxed">
+                      <p className="text-[#0F172A] font-sans text-xs mt-1 leading-relaxed">
                         {item.diagnostico}
                       </p>
                     </div>
 
                     {item.trechoEdital && (
-                      <div className="p-2.5 rounded bg-white border border-[#E4E4E7] text-[#71717A] italic">
+                      <div className="p-2.5 rounded bg-white border border-[#CBD5E1] text-[#475569] italic">
                         "{item.trechoEdital}"
                       </div>
                     )}
 
                     {item.mitigacao && (
-                      <div className="text-[#F59E0B]">
+                      <div className="text-[#854D0E] bg-[#FEFCE8] p-2.5 rounded border border-[#FEF08A]">
                         <strong>Orientação de Regularização:</strong> {item.mitigacao}
                       </div>
                     )}
@@ -380,9 +380,9 @@ export const ReportCard: React.FC<ReportCardProps> = ({ data, onReset }) => {
                           href={item.fonteOficialUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[#09090B] hover:underline"
+                          className="inline-flex items-center gap-1 text-[#1E3A8A] hover:underline font-semibold"
                         >
-                          <ExternalLink className="w-3 h-3 text-[#71717A]" />
+                          <ExternalLink className="w-3 h-3 text-[#1E3A8A]" />
                           <span>{item.dispositivoLegal || "Consultar Texto Oficial Compilado no Planalto"}</span>
                         </a>
                       </div>

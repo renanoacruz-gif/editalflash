@@ -221,20 +221,20 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
   return (
     <div className="bg-[var(--surface)] border border-[var(--line)] rounded-xl p-5 sm:p-6 space-y-5 shadow-sm">
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0E1626] border border-[#2740F0] text-[#0F172A] px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-[#4A5FFF]" strokeWidth={1.75} />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0F172A] border border-[#1E3A8A] text-white px-4 py-3 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#1E3A8A]" strokeWidth={1.75} />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Modal de Minuta Rápida Art. 164 */}
       {activeMinutaItem && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#0b101d] border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl p-6 sm:p-7 space-y-4 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#CBD5E1] w-full max-w-3xl rounded-2xl shadow-2xl p-6 sm:p-7 space-y-4 max-h-[90vh] flex flex-col">
             <div className="flex items-start justify-between pb-3 border-b border-[#E2E8F0]">
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-semibold">
-                  <Scale className="w-3.5 h-3.5 text-blue-400" />
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EFF6FF] border border-[#BFDBFE] text-[#1E3A8A] text-xs font-semibold">
+                  <Scale className="w-3.5 h-3.5 text-[#1E3A8A]" />
                   <span>Art. 164 da Lei 14.133/2021 • Minuta Administrativa</span>
                 </div>
                 <h3 className="text-base font-bold text-[#0F172A] font-display">
@@ -244,25 +244,25 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveMinutaItem(null)}
-                className="text-slate-400 hover:text-[#0F172A] p-1 rounded-lg hover:bg-slate-800"
+                className="text-[#64748B] hover:text-[#0F172A] p-1 rounded-lg hover:bg-[#F1F5F9] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-slate-300 font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
+            <div className="flex-1 overflow-y-auto p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] font-mono text-xs leading-relaxed whitespace-pre-wrap select-all">
               {activeMinutaItem.draft}
             </div>
 
             <div className="flex items-center justify-between pt-2 border-t border-[#E2E8F0] flex-wrap gap-2">
-              <span className="text-[11px] text-slate-500 font-mono">
+              <span className="text-[11px] text-[#64748B] font-mono">
                 Petição fundamentada em acórdãos do TCU e dispositivos da Lei 14.133/21
               </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setActiveMinutaItem(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-[#0F172A] hover:bg-slate-800 transition-colors"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
                 >
                   Fechar
                 </button>
@@ -273,11 +273,11 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
                     setCopiedMinuta(true);
                     setTimeout(() => setCopiedMinuta(false), 2000);
                   }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#0F172A] bg-white hover:bg-[#253745] shadow-md shadow-blue-600/30 transition-all active:scale-98"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-[#1E3A8A] hover:bg-[#1E40AF] shadow-xs transition-colors active:scale-98"
                 >
                   {copiedMinuta ? (
                     <>
-                      <Check className="w-4 h-4 text-emerald-400" />
+                      <Check className="w-4 h-4 text-[#065F46]" />
                       <span>Copiado com Sucesso!</span>
                     </>
                   ) : (
@@ -294,38 +294,38 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
       )}
 
       {/* Header do Histórico */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--line)]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--brand)]/10 text-[var(--brand)] text-[11px] font-mono font-bold mb-1">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EFF6FF] text-[#1E3A8A] text-[11px] font-mono font-bold mb-1 border border-[#BFDBFE]">
             <ShieldCheck className="w-3.5 h-3.5" strokeWidth={1.75} />
-            <span>Rastreabilidade & Registro de Decisão Pré-Edital</span>
+            <span>Rastreabilidade &amp; Registro de Decisão Pré-Edital</span>
           </div>
-          <h2 className="text-base sm:text-lg font-bold text-[var(--ink)] font-display">
+          <h2 className="text-base sm:text-lg font-bold text-[#0F172A] font-display">
             Histórico de Editais Auditados
           </h2>
-          <p className="text-xs text-[var(--ink-2)]">
+          <p className="text-xs text-[#64748B]">
             Acesse pareceres anteriores, relatórios executivos em PDF e cláusulas restritivas sem consumir novos créditos.
           </p>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono">
-          <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[var(--line)] bg-[var(--bg)] text-[11px] text-[var(--ink-2)]">
-            <span className={`w-2 h-2 rounded-full ${dataSource === "cloud" ? "bg-[var(--pass-fg)]" : "bg-[var(--warn-fg)]"}`} />
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] text-[11px] text-[#64748B]">
+            <span className={`w-2 h-2 rounded-full ${dataSource === "cloud" ? "bg-[#065F46]" : "bg-[#854D0E]"}`} />
             <span>{dataSource === "cloud" ? "Nuvem Sincronizada" : "Modo Cache / Offline"}</span>
-            {isLoadingCloud && <RefreshCw className="w-3 h-3 animate-spin text-[var(--brand)] ml-1" />}
+            {isLoadingCloud && <RefreshCw className="w-3 h-3 animate-spin text-[#1E3A8A] ml-1" />}
           </div>
 
           <button
             type="button"
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-[var(--surface)] hover:bg-[var(--line)] text-[var(--ink)] border border-[var(--line)] transition-all active:scale-98 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#CBD5E1] transition-colors active:scale-98 shadow-xs"
             title="Exportar dados para Excel/Planilha"
           >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-[var(--brand)]" />
+            <FileSpreadsheet className="w-3.5 h-3.5 text-[#1E3A8A]" />
             <span>Exportar CSV</span>
           </button>
 
-          <span className="px-2.5 py-1 rounded bg-[var(--bg)] border border-[var(--line)] text-[var(--ink)] font-semibold">
+          <span className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] font-semibold">
             {history.length} Auditorias
           </span>
         </div>
@@ -338,10 +338,10 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
           <button
             type="button"
             onClick={() => setStatusFilter("ALL")}
-            className={`min-h-[36px] px-3 py-1.5 rounded-md text-xs font-mono font-semibold transition-all border ${
+            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-colors border ${
               statusFilter === "ALL"
-                ? "bg-[var(--brand)] text-[#0F172A] border-[var(--brand)]"
-                : "bg-[var(--surface)] text-[var(--ink-2)] border-[var(--line)] hover:border-[var(--ink)]"
+                ? "bg-[#1E3A8A] text-white border-[#1E3A8A]"
+                : "bg-white text-[#64748B] border-[#CBD5E1] hover:border-[#0F172A] hover:text-[#0F172A]"
             }`}
           >
             Todos ({history.length})
@@ -350,10 +350,10 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
           <button
             type="button"
             onClick={() => setStatusFilter("PASSA")}
-            className={`min-h-[36px] px-3 py-1.5 rounded-md text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 ${
+            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-colors border flex items-center gap-1.5 ${
               statusFilter === "PASSA"
-                ? "bg-[var(--ok-bg)] text-[var(--ok-fg)] border-[var(--ok)] font-bold"
-                : "bg-[var(--surface)] text-[var(--ok-fg)] border-[var(--ok)]/40 hover:bg-[var(--ok-bg)]/40"
+                ? "bg-[#ECFDF5] text-[#065F46] border-[#065F46] font-bold"
+                : "bg-white text-[#065F46] border-[#A7F3D0] hover:bg-[#ECFDF5]"
             }`}
           >
             <span>Passa ({passaTotal})</span>
@@ -362,10 +362,10 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
           <button
             type="button"
             onClick={() => setStatusFilter("RESSALVA")}
-            className={`min-h-[36px] px-3 py-1.5 rounded-md text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 ${
+            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-colors border flex items-center gap-1.5 ${
               statusFilter === "RESSALVA"
-                ? "bg-[var(--warn-bg)] text-[var(--warn-fg)] border-[var(--warn)] font-bold"
-                : "bg-[var(--surface)] text-[var(--warn-fg)] border-[var(--warn)]/40 hover:bg-[var(--warn-bg)]/40"
+                ? "bg-[#FEFCE8] text-[#854D0E] border-[#854D0E] font-bold"
+                : "bg-white text-[#854D0E] border-[#FEF08A] hover:bg-[#FEFCE8]"
             }`}
           >
             <span>Ressalva ({ressalvaTotal})</span>
@@ -374,10 +374,10 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
           <button
             type="button"
             onClick={() => setStatusFilter("ELIMINATORIA")}
-            className={`min-h-[36px] px-3 py-1.5 rounded-md text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 ${
+            className={`min-h-[36px] px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-colors border flex items-center gap-1.5 ${
               statusFilter === "ELIMINATORIA"
-                ? "bg-[var(--bad-bg)] text-[var(--bad-fg)] border-[var(--bad)] font-bold"
-                : "bg-[var(--surface)] text-[var(--bad-fg)] border-[var(--bad)]/40 hover:bg-[var(--bad-bg)]/40"
+                ? "bg-[#FEF2F2] text-[#991B1B] border-[#991B1B] font-bold"
+                : "bg-white text-[#991B1B] border-[#FECACA] hover:bg-[#FEF2F2]"
             }`}
           >
             <span>Eliminatória ({eliminatoriaTotal})</span>
@@ -386,13 +386,13 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
 
         {/* Input de Busca */}
         <div className="relative w-full sm:w-72">
-          <Search className="w-3.5 h-3.5 text-[var(--ink-2)] absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por edital, órgão ou termo..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-md bg-[var(--bg)] border border-[var(--line)] text-[var(--ink)] placeholder-[var(--ink-2)] focus:outline-none focus:border-[var(--brand)] font-sans"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-white border border-[#CBD5E1] text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#1E3A8A] font-sans"
           />
         </div>
       </div>

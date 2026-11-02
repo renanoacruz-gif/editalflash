@@ -118,22 +118,22 @@ export const PncpModal: React.FC<PncpModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-3xl glass-card rounded-3xl border border-slate-700 shadow-2xl overflow-hidden bg-[#0c1322] flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+      <div className="relative w-full max-w-3xl rounded-2xl border border-[#CBD5E1] shadow-2xl overflow-hidden bg-white flex flex-col max-h-[90vh]">
         {/* Header do Modal */}
-        <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#F8FAFC]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
+            <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E3A8A]">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-[#0F172A] flex items-center gap-2 font-display">
                 <span>Buscar no Portal Nacional (PNCP)</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF6FF] text-[#1E3A8A] border border-[#BFDBFE]">
                   API Oficial v1
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#64748B] font-sans">
                 Selecione um edital público em andamento para auditar sem precisar fazer upload de PDF
               </p>
             </div>
@@ -141,41 +141,41 @@ export const PncpModal: React.FC<PncpModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Filtros de Busca */}
-        <form onSubmit={handleSearch} className="p-6 border-b border-slate-800/80 bg-slate-900/30 space-y-4">
+        <form onSubmit={handleSearch} className="p-5 border-b border-[#E2E8F0] bg-white space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
             {/* Campo Objeto */}
             <div className="sm:col-span-8">
-              <label className="text-xs font-semibold text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-[#0F172A] block mb-1">
                 Termo do Objeto / Palavra-Chave
               </label>
               <div className="relative">
-                <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={termo}
                   onChange={(e) => setTermo(e.target.value)}
                   placeholder="Ex: notebooks, nuvem, limpeza, software..."
-                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                  className="w-full pl-9 pr-3 py-2 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]"
                 />
               </div>
             </div>
 
             {/* Filtro UF */}
             <div className="sm:col-span-4">
-              <label className="text-xs font-semibold text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-[#0F172A] block mb-1">
                 Estado (UF)
               </label>
               <select
                 value={uf}
                 onChange={(e) => setUf(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#0F172A] focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]"
               >
                 <option value="">Todas as UFs</option>
                 {estadosBrasil.map((sigla) => (
@@ -188,15 +188,15 @@ export const PncpModal: React.FC<PncpModalProps> = ({
           </div>
 
           <div className="flex items-center justify-between pt-1">
-            <span className="text-[11px] text-slate-500 flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-[11px] text-[#64748B] flex items-center gap-1 font-sans">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#065F46]" />
               Cache inteligente de 5 minutos respeitando limites do PNCP
             </span>
 
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-2 px-5 py-2 text-xs font-bold rounded-xl bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-white shadow-xs transition-colors disabled:opacity-50"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
               <span>Consultar Editais</span>
@@ -205,21 +205,21 @@ export const PncpModal: React.FC<PncpModalProps> = ({
         </form>
 
         {/* Resultados da Busca */}
-        <div className="p-6 overflow-y-auto space-y-3.5 flex-1 divide-y divide-slate-800/60">
+        <div className="p-5 overflow-y-auto space-y-3.5 flex-1 divide-y divide-[#E2E8F0]">
           {errorMsg && (
-            <div className="p-4 rounded-xl bg-rose-950/50 border border-rose-500/50 text-xs text-rose-300 text-center">
+            <div className="p-3.5 rounded-lg bg-[#FEF2F2] border border-[#991B1B]/30 text-xs text-[#991B1B] text-center font-medium">
               {errorMsg}
             </div>
           )}
 
           {!loading && results.length === 0 && hasSearched && !errorMsg && (
-            <div className="py-12 text-center text-xs text-slate-500">
+            <div className="py-10 text-center text-xs text-[#64748B]">
               Nenhum edital encontrado com estes filtros no momento. Tente buscar com termos mais amplos.
             </div>
           )}
 
           {!hasSearched && !loading && (
-            <div className="py-10 text-center text-xs text-slate-500">
+            <div className="py-8 text-center text-xs text-[#64748B]">
               Clique em <strong>Consultar Editais</strong> para visualizar certames em tempo real no banco oficial.
             </div>
           )}
@@ -229,32 +229,32 @@ export const PncpModal: React.FC<PncpModalProps> = ({
               key={idx}
               className="pt-3.5 first:pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
             >
-              <div className="space-y-1.5 flex-1 min-w-0">
+              <div className="space-y-1 flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-blue-300 border border-slate-700">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F1F5F9] text-[#1E3A8A] border border-[#CBD5E1]">
                     PNCP: {item.numeroControlePNCP}
                   </span>
-                  <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
+                  <span className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]">
                     {item.unidadeOrgao?.ufSigla || "BR"}
                   </span>
-                  <span className="text-[10px] text-slate-400 truncate max-w-[200px]">
+                  <span className="text-[10px] text-[#64748B] truncate max-w-[200px]">
                     {item.orgaoEntidade.razaoSocial}
                   </span>
                 </div>
 
-                <p className="text-xs font-semibold text-white group-hover:text-blue-300 transition-colors line-clamp-2">
+                <p className="text-xs font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors line-clamp-2">
                   {item.objetoCompra}
                 </p>
 
-                <div className="flex items-center gap-4 text-[11px] text-slate-400">
-                  <span className="flex items-center gap-1 text-emerald-400 font-semibold">
+                <div className="flex items-center gap-4 text-[11px] text-[#64748B] font-mono">
+                  <span className="flex items-center gap-1 text-[#065F46] font-semibold">
                     <DollarSign className="w-3.5 h-3.5" />
                     {new Intl.NumberFormat("pt-BR", {
                       style: "currency",
                       currency: "BRL",
                     }).format(item.valorTotalEstimado ?? 0)}
                   </span>
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1 text-[#64748B]">
                     <Calendar className="w-3.5 h-3.5" />
                     Sessão: {new Date(item.dataAberturaProposta).toLocaleDateString("pt-BR")}
                   </span>
@@ -265,7 +265,7 @@ export const PncpModal: React.FC<PncpModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleSelect(item)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-blue-600 text-slate-200 hover:text-white border border-slate-700 hover:border-blue-500 transition-all shrink-0"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-white hover:bg-[#1E3A8A] text-[#0F172A] hover:text-white border border-[#CBD5E1] hover:border-[#1E3A8A] shadow-xs transition-colors shrink-0"
               >
                 <span>Analisar Este Edital</span>
                 <ArrowRight className="w-3.5 h-3.5" />

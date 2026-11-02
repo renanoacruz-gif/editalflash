@@ -6,14 +6,14 @@
   --ink-bright: #0B1B2B;
   --ink-2: #475569;            /* Slate médio para apoios */
   --ink-3: #64748B;            /* Slate suave para legendas */
-  --paper: #F8FAFC;            /* Slate sutil para canvas e seções de apoio */
+  --paper: #FAFAF8;            /* Fundo neutro/quente aprovado */
   --mist: #F1F5F9;             /* Fundo de destaque discreto */
   --line: #E2E8F0;             /* Borda padrão neutra 1px */
   --line-strong: #CBD5E1;      /* Borda ativa ou selecionada */
   
   /* Cor de Ação Única */
   --flash: #1E3A8A;            /* Azul-marinho executivo (Primary Action) */
-  --flash-hover: #1E40AF;      /* Hover do azul-marinho */
+  --flash-hover: #1D4ED8;      /* Hover do azul-marinho */
   --flash-lt: #60A5FA;         /* Destaque suave sobre fundos escuros */
   --flash-tint: #EFF6FF;       /* Fundo de seleção leve */
 
@@ -39,7 +39,7 @@
   --rev-fg: #5B21B6;
 
   /* 1. Base Neutra e Superfícies */
-  --bg-base: #F8FAFC;
+  --bg-base: #FAFAF8;
   --bg-surface: #FFFFFF;
   --bg-subtle: #F1F5F9;
   --bg-hover: #E2E8F0;
@@ -63,6 +63,19 @@
   --bg: var(--bg-base);
   --surface: var(--bg-surface);
   --surface-subtle: var(--bg-subtle);
+
+  /* Aliases de Compatibilidade shadcn / Tweakcn */
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --primary: var(--brand);
+  --primary-foreground: #FFFFFF;
+  --muted: var(--bg-subtle);
+  --muted-foreground: var(--text-secondary);
+  --border: var(--border-subtle);
+  --input: var(--border-strong);
+  --ring: var(--brand);
 }
 
 /* Forçamos o Light Mode garantindo contraste perfeito em qualquer sistema operacional */

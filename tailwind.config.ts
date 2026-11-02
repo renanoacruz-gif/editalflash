@@ -9,6 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: "var(--bg-base)",
+        foreground: "var(--text-primary)",
+        card: {
+          DEFAULT: "var(--bg-surface)",
+          foreground: "var(--text-primary)",
+        },
+        ring: "var(--brand)",
         bg: {
           DEFAULT: "var(--bg-base)",
           surface: "var(--bg-surface)",

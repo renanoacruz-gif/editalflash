@@ -90,11 +90,11 @@ export const ScanningLoader: React.FC<ScanningLoaderProps> = ({
         </div>
 
         {/* Data Stream Box (Simulação de Análise Analítica de Precisão) */}
-        <div className="p-4 rounded bg-[#0A111F] border border-[#26324A] font-mono text-xs space-y-2 overflow-hidden shadow-inner">
+        <div className="p-4 rounded-xl bg-[#0F172A] border border-[#1E293B] font-mono text-xs space-y-2 overflow-hidden shadow-xs">
           <div className="flex items-center justify-between text-[10px] text-slate-400 pb-2 border-b border-slate-800">
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              MOTOR_COMPLIANCE_V1.1
+              MOTOR_COMPLIANCE_LEI_14133
             </span>
             <span>RITO_PROBATORIO</span>
           </div>

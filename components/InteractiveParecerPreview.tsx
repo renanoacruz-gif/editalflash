@@ -95,7 +95,7 @@ export const InteractiveParecerPreview: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] bg-[#121B2D] px-2.5 py-0.5 rounded border border-[#26324A] text-white font-mono">
+            <span className="text-xs bg-[#121B2D] px-2.5 py-1 rounded border border-[#26324A] text-white font-mono">
               Visualização Interativa A4 • Pág. 1 de 2
             </span>
             <a
@@ -103,9 +103,9 @@ export const InteractiveParecerPreview: React.FC = () => {
               download="exemplo-parecer-editalflash.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#18181B] hover:bg-black text-white font-bold text-xs transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-[#18181B] hover:bg-black text-white font-bold text-xs transition-colors shadow-xs"
             >
-              <Download className="w-3 h-3" />
+              <Download className="w-3.5 h-3.5" />
               <span>Baixar Parecer em PDF</span>
             </a>
           </div>
@@ -118,10 +118,10 @@ export const InteractiveParecerPreview: React.FC = () => {
             {/* Cabeçalho Oficial do Parecer */}
             <div className="border-b-2 border-[#0E1626] pb-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#2740F0]">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#2740F0]">
                   PARECER TÉCNICO DE HABILITAÇÃO PRELIMINAR (LEI 14.133/2021)
                 </span>
-                <span className="text-[10px] font-mono text-gray-500">
+                <span className="text-xs font-mono text-gray-500">
                   Emissão: 29/10/2026 às 06:45 BRT
                 </span>
               </div>
@@ -140,19 +140,19 @@ export const InteractiveParecerPreview: React.FC = () => {
             <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="grid grid-cols-4 gap-3 w-full sm:w-auto text-center font-mono">
                 <div className="border-r border-gray-200 pr-2">
-                  <div className="text-[9px] uppercase text-gray-500 font-bold">Conformes</div>
+                  <div className="text-xs uppercase text-gray-500 font-bold">Conformes</div>
                   <div className="text-xl font-bold text-emerald-700">11</div>
                 </div>
                 <div className="border-r border-gray-200 pr-2">
-                  <div className="text-[9px] uppercase text-gray-500 font-bold">Ressalvas</div>
+                  <div className="text-xs uppercase text-gray-500 font-bold">Ressalvas</div>
                   <div className="text-xl font-bold text-amber-700">1</div>
                 </div>
                 <div className="border-r border-gray-200 pr-2">
-                  <div className="text-[9px] uppercase text-gray-500 font-bold">Eliminatórias</div>
+                  <div className="text-xs uppercase text-gray-500 font-bold">Eliminatórias</div>
                   <div className="text-xl font-bold text-rose-700">0</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase text-gray-500 font-bold">Revisões</div>
+                  <div className="text-xs uppercase text-gray-500 font-bold">Revisões</div>
                   <div className="text-xl font-bold text-gray-700">0</div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                 <span className="inline-block px-3.5 py-1.5 rounded bg-emerald-600 text-white font-mono text-xs font-bold uppercase shadow-xs">
                   HABILITAÇÃO PROVÁVEL (PASSA)
                 </span>
-                <span className="block text-[10px] text-gray-500 font-mono mt-1">
+                <span className="block text-xs text-gray-500 font-mono mt-1">
                   Sem riscos impeditivos de inabilitação
                 </span>
               </div>
@@ -205,14 +205,14 @@ export const InteractiveParecerPreview: React.FC = () => {
                 </button>
               </div>
 
-              <span className="text-[11px] font-mono text-gray-500">
+              <span className="text-xs font-mono text-gray-500">
                 Interativo: role para ver mais
               </span>
             </div>
 
             {/* Tabela Pericial de Verificação Art. 62 */}
             <div className="border border-gray-200 rounded-lg overflow-hidden text-xs">
-              <div className="bg-gray-100 text-gray-700 p-2.5 font-bold font-mono text-[10px] grid grid-cols-12 gap-2 border-b border-gray-200 uppercase">
+              <div className="bg-gray-100 text-gray-700 p-2.5 font-bold font-mono text-xs grid grid-cols-12 gap-2 border-b border-gray-200 uppercase">
                 <span className="col-span-3">Requisito &amp; Artigo</span>
                 <span className="col-span-3">Local no Edital</span>
                 <span className="col-span-4">Diagnóstico Pericial</span>
@@ -223,22 +223,22 @@ export const InteractiveParecerPreview: React.FC = () => {
                 {filtered.map((item, idx) => (
                   <div key={idx} className="p-3 grid grid-cols-12 gap-2 items-center hover:bg-gray-50/80 transition-colors">
                     <div className="col-span-3">
-                      <span className="text-[10px] font-mono text-[#2740F0] font-bold block">
+                      <span className="text-xs font-mono text-[#2740F0] font-bold block">
                         {item.artigo}
                       </span>
-                      <strong className="text-xs text-black block leading-snug">{item.exigencia}</strong>
+                      <strong className="text-xs sm:text-sm text-black block leading-snug">{item.exigencia}</strong>
                     </div>
 
-                    <div className="col-span-3 font-mono text-[11px] text-gray-600">
+                    <div className="col-span-3 font-mono text-xs text-gray-600">
                       {item.localEdital}
                     </div>
 
-                    <div className="col-span-4 text-[11px] text-gray-700 leading-relaxed font-sans">
+                    <div className="col-span-4 text-xs sm:text-sm text-gray-700 leading-relaxed font-sans">
                       {item.diagnostico}
                     </div>
 
                     <div className="col-span-2 text-right">
-                      <span className={`inline-block px-2 py-0.5 rounded border text-[10px] font-mono font-bold ${item.badgeBg}`}>
+                      <span className={`inline-block px-2 py-0.5 rounded border text-xs font-mono font-bold ${item.badgeBg}`}>
                         {item.statusLabel}
                       </span>
                     </div>
@@ -248,7 +248,7 @@ export const InteractiveParecerPreview: React.FC = () => {
             </div>
 
             {/* Conclusão e Rodapé Institucional */}
-            <div className="pt-4 border-t border-gray-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-gray-500 font-mono">
+            <div className="pt-4 border-t border-gray-300 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500 font-mono">
               <p>
                 Documento de suporte técnico à decisão emitido pelo EditalFlash. Responsabilidade jurídica com a licitante.
               </p>

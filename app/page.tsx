@@ -94,13 +94,13 @@ export default function LandingPage() {
             <div className="font-display tracking-tight text-[19px] text-[#09090B] flex items-baseline">
               <span className="font-medium text-[#09090B]">Edital</span>
               <span className="font-extrabold text-[#09090B]">Flash</span>
-              <span className="ml-2.5 text-[10px] tracking-widest uppercase font-mono px-1.5 py-0.5 rounded bg-[var(--brand-tint)] text-[var(--brand)] border border-[var(--brand)]/20 font-semibold">
+              <span className="ml-2.5 text-xs tracking-widest uppercase font-mono px-2 py-0.5 rounded bg-[var(--brand-tint)] text-[var(--brand)] border border-[var(--brand)]/20 font-semibold">
                 Lei 14.133/2021
               </span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-7 text-[13px] font-medium text-[#52525B]">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#52525B]">
             <a href="#diferencial" className="hover:text-[#09090B] transition-colors">
               O Segundo Par de Olhos
             </a>
@@ -121,13 +121,13 @@ export default function LandingPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/signup"
-              className="text-xs font-medium text-[#52525B] hover:text-[#09090B] px-3 py-1.5 rounded transition-colors"
+              className="text-sm font-medium text-[#52525B] hover:text-[#09090B] px-3 py-1.5 rounded transition-colors"
             >
               Criar Conta Gratuita
             </Link>
             <Link
               href="/signup?welcome=true"
-              className="inline-flex items-center gap-2 text-[13px] font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white px-4 py-2 rounded-md shadow-xs transition-colors active:scale-98"
+              className="inline-flex items-center gap-2 text-sm font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white px-4 py-2 rounded-md shadow-xs transition-colors active:scale-98"
             >
               <BrandIcon name="auditoria" size="s16" accentCobalt={false} />
               <span>Auditar Edital Grátis</span>
@@ -141,7 +141,7 @@ export default function LandingPage() {
         onMouseMove={handleHeroMouseMove}
         onMouseEnter={() => setIsHoveringHero(true)}
         onMouseLeave={() => setIsHoveringHero(false)}
-        className="relative pt-24 pb-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white overflow-hidden"
+        className="relative pt-28 pb-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white overflow-hidden"
       >
         {/* Grid de Precisão Arquitetural */}
         <div
@@ -172,23 +172,23 @@ export default function LandingPage() {
         )}
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E4E4E7] text-xs text-[#09090B] mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#E4E4E7] text-sm text-[#09090B] mb-6 shadow-sm">
             <ShieldCheck className="w-4 h-4 text-[#09090B]" />
             <span className="font-medium">O segundo par de olhos contra inabilitações surpresa</span>
           </div>
 
-          <h1 className="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#09090B] tracking-tight leading-[1.12] max-w-4xl mx-auto mb-6">
+          <h1 className="font-display font-extrabold text-[clamp(40px,5.5vw,64px)] text-[#09090B] tracking-tight leading-[1.12] max-w-4xl mx-auto mb-6">
             Auditoria preventiva de editais para licitantes
           </h1>
 
-          <p className="text-[16px] sm:text-[18px] text-[#52525B] max-w-3xl mx-auto mb-10 leading-relaxed font-sans">
+          <p className="text-[17px] sm:text-[19px] text-[#52525B] max-w-3xl mx-auto mb-10 leading-[1.6] font-sans">
             Elimine o risco de desclassificação por falhas documentais, calcule índices e gere minutas antes da sessão.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <Link
               href="/signup?welcome=true"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#18181B] hover:bg-black active:scale-98 text-white font-medium text-[15px] shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-lg bg-[#18181B] hover:bg-black active:scale-98 text-white font-medium text-base shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
             >
               <BrandIcon name="edital" size="s20" accentCobalt={false} />
               <span>Começar Análise Gratuita</span>
@@ -198,14 +198,14 @@ export default function LandingPage() {
               download="exemplo-parecer-editalflash.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white hover:bg-white active:scale-98 text-[#09090B] font-medium text-[15px] border border-[#E4E4E7] transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-lg bg-white hover:bg-white active:scale-98 text-[#09090B] font-medium text-base border border-[#E4E4E7] transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
             >
               <Download className="w-4 h-4 text-[#09090B]" />
               <span>Ver Modelo de Parecer</span>
             </a>
           </div>
 
-          <div className="flex items-center justify-center gap-6 text-xs text-[#52525B] flex-wrap">
+          <div className="flex items-center justify-center gap-6 text-sm text-[#52525B] flex-wrap">
             <span className="inline-flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
               Redução Drástica do Risco de Inabilitação por Falhas Documentais
@@ -228,70 +228,70 @@ export default function LandingPage() {
       </section>
 
       {/* SEÇÃO 2: POR QUE OS PROFISSIONAIS EXPERIENTES UTILIZAM (O CONTRAPONTO) */}
-      <section id="diferencial" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
+      <section id="diferencial" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
               Eficiência e Segurança Corporativa
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#09090B] mt-2">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
               Você não precisa de quem te ensine a lei. Precisa de quem zere o erro humano.
             </h2>
-            <p className="text-[15px] text-[#52525B] mt-2 max-w-2xl mx-auto">
+            <p className="text-[17px] text-[#52525B] mt-3 max-w-2xl mx-auto leading-relaxed">
               Veja a diferença entre a conferência manual estressante e a blindagem pericial do EditalFlash:
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {/* O Método Manual Antigo */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E4E4E7] space-y-5">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-rose-500/20 text-rose-600 dark:text-rose-400">
+            <div className="bg-white p-7 sm:p-9 rounded-2xl border border-[#E4E4E7] space-y-6 shadow-xs">
+              <div className="flex items-center gap-2.5 pb-4 border-b border-rose-500/20 text-rose-700">
                 <AlertTriangle className="w-5 h-5" />
-                <h3 className="font-display font-bold text-lg">O Risco da Rotina Manual</h3>
+                <h3 className="font-display font-bold text-xl">O Risco da Rotina Manual</h3>
               </div>
 
-              <ul className="space-y-4 text-xs font-sans text-[#52525B] leading-relaxed">
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-rose-500 font-bold">✕</span>
+              <ul className="space-y-4 text-[15px] sm:text-[16px] font-sans text-[#52525B] leading-relaxed">
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
                   <span><strong>Fadiga Visual:</strong> Após ler 100 páginas, uma linha oculta exigindo um índice ou certidão atípica passa despercebida e derruba a empresa na sessão.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-rose-500 font-bold">✕</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
                   <span><strong>Corrida contra o Art. 164:</strong> Redigir uma impugnação de 4 páginas consome de 2 a 4 horas ou exige honorários caros de advogados externos.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-rose-500 font-bold">✕</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
                   <span><strong>Desistência Falsa por Atestado:</strong> Dúvida manual se os atestados dispersos podem ser somados ou se a exigência é ilegal perante o TCU.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-rose-500 font-bold">✕</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
                   <span><strong>Culpa Solitária:</strong> Se a empresa for inabilitada, a responsabilidade recai inteiramente sobre a equipe de licitações perante os sócios.</span>
                 </li>
               </ul>
             </div>
 
             {/* O Método com EditalFlash */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#09090B] space-y-5 shadow-sm">
+            <div className="bg-white p-7 sm:p-9 rounded-2xl border-2 border-[#09090B] space-y-6 shadow-md">
               <div className="flex items-center gap-2.5 pb-4 border-b border-[var(--brand)]/20 text-[var(--brand)]">
                 <ShieldCheck className="w-5 h-5" />
-                <h3 className="font-display font-bold text-lg">Com o EditalFlash v1.2</h3>
+                <h3 className="font-display font-bold text-xl">Com o EditalFlash v1.2</h3>
               </div>
 
-              <ul className="space-y-4 text-xs font-sans text-[#09090B] leading-relaxed">
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-emerald-500 font-bold">✓</span>
+              <ul className="space-y-4 text-[15px] sm:text-[16px] font-sans text-[#09090B] leading-relaxed">
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
                   <span><strong>Varredura Pericial Exaustiva:</strong> 100% das páginas auditadas em 40 segundos, confrontando PL maior ou igual a 10%, LC maior ou igual a 1.0 e certidões com prova literal de página e linha.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-emerald-500 font-bold">✓</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
                   <span><strong>Minuta Pronta em 3 Segundos:</strong> Detectou cláusula restritiva? O sistema gera a petição formal com Razão Social, CNPJ e acórdãos do TCU pronta para protocolo.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-emerald-500 font-bold">✓</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
                   <span><strong>Soma de Acervo Automática:</strong> Aplica a Súmula 263 do TCU no cofre de documentos e avisa se a empresa é competitiva para disputar o lote.</span>
                 </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-emerald-500 font-bold">✓</span>
+                <li className="flex items-start gap-3">
+                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
                   <span><strong>Parecer Executivo em PDF:</strong> Relatório em formato A4 institucional que blinda sua decisão e comprova a conformidade perante a diretoria.</span>
                 </li>
               </ul>
@@ -301,58 +301,58 @@ export default function LandingPage() {
       </section>
 
       {/* SEÇÃO 3: OS 4 MOATS DE DEFENSABILIDADE & SÚMULA 263 TCU */}
-      <section id="moats" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-6xl mx-auto space-y-12">
+      <section id="moats" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
+        <div className="max-w-6xl mx-auto space-y-14">
           <div className="text-center">
-            <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
               Recursos Construídos para Grandes Licitantes
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#09090B] mt-2">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
               Tecnologia Calibrada para o Mundo Real das Licitações
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1: Súmula 263 TCU */}
-            <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                <Award className="w-4 h-4" />
+            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-emerald-700 flex items-center justify-center">
+                <Award className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-sm font-display text-[#09090B]">Regra do Somatório (Súmula 263)</h3>
-              <p className="text-xs text-[#52525B] leading-relaxed">
+              <h3 className="font-bold text-base font-display text-[#09090B]">Regra do Somatório (Súmula 263)</h3>
+              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
                 Calcula o somatório de atestados do seu cofre para cobrir os 50% de relevância técnica. Alerta na hora se o edital vedar o somatório ilegalmente.
               </p>
             </div>
 
             {/* Card 2: Tríade de Liquidez */}
-            <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-blue-500 flex items-center justify-center">
-                <TrendingUp className="w-4 h-4" />
+            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-blue-600 flex items-center justify-center">
+                <TrendingUp className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-sm font-display text-[#09090B]">Tríade de Liquidez &amp; PL 10%</h3>
-              <p className="text-xs text-[#52525B] leading-relaxed">
+              <h3 className="font-bold text-base font-display text-[#09090B]">Tríade de Liquidez &amp; PL 10%</h3>
+              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
                 Checagem matemática estrita de Liquidez Corrente (LC), Geral (LG) e Solvência (SG). Se LC &lt; 1.0, o veredito é ELIMINATÓRIA automático.
               </p>
             </div>
 
             {/* Card 3: Janela Útil do Art. 164 */}
-            <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-amber-500 flex items-center justify-center">
-                <Clock className="w-4 h-4" />
+            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-amber-700 flex items-center justify-center">
+                <Clock className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-sm font-display text-[#09090B]">Contagem Regressiva Útil</h3>
-              <p className="text-xs text-[#52525B] leading-relaxed">
+              <h3 className="font-bold text-base font-display text-[#09090B]">Contagem Regressiva Útil</h3>
+              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
                 Calcula exatamente quantos dias úteis restam para protocolar sua impugnação (excluindo fins de semana e feriados nacionais brasileiros).
               </p>
             </div>
 
             {/* Card 4: Radar de Retificações */}
-            <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-[#09090B] flex items-center justify-center">
-                <Layers className="w-4 h-4" />
+            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-[#09090B] flex items-center justify-center">
+                <Layers className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-sm font-display text-[#09090B]">Diff Engine de Retificações</h3>
-              <p className="text-xs text-[#52525B] leading-relaxed">
+              <h3 className="font-bold text-base font-display text-[#09090B]">Diff Engine de Retificações</h3>
+              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
                 Monitora o PNCP e avisa se o órgão lançou retificação ou errata que alterou prazos ou exigências após a sua primeira auditoria.
               </p>
             </div>
@@ -361,16 +361,16 @@ export default function LandingPage() {
       </section>
 
       {/* SEÇÃO 4: DEMONSTRAÇÃO DO PARECER EXECUTIVO EM PDF (INTERATIVO COM SCROLL) */}
-      <section id="parecer" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-5xl mx-auto space-y-10">
+      <section id="parecer" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
+        <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center">
-            <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
               Entregável de Nível Diretoria
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#09090B] mt-2">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
               Parecer Técnico Preliminar de Habilitação
             </h2>
-            <p className="text-xs sm:text-sm text-[#52525B] mt-2 max-w-xl mx-auto">
+            <p className="text-[16px] sm:text-[17px] text-[#52525B] mt-3 max-w-xl mx-auto leading-relaxed">
               Chega de capturas de tela desorganizadas. O EditalFlash gera na hora um documento formal em PDF nativo para anexar em atas ou enviar no WhatsApp de sócios.
             </p>
           </div>
@@ -380,25 +380,23 @@ export default function LandingPage() {
         </div>
       </section>
 
-
-
       {/* SEÇÃO 5: PLANOS CORPORATIVOS */}
-      <section id="planos" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
+      <section id="planos" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
               Retorno Imediato Sobre o Investimento
             </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#09090B] mt-2">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
               Planos Dimensionados para a Sua Operação
             </h2>
-            <p className="text-[15px] text-[#52525B] mt-2">
+            <p className="text-[17px] text-[#52525B] mt-3 leading-relaxed">
               Um único edital vencido ou inabilitação evitada paga múltiplos anos de assinatura.
             </p>
 
             {/* Toggle Anual/Mensal */}
-            <div className="flex items-center justify-center gap-3 mt-8">
-              <span className={`text-[13px] font-medium ${billingCycle === "monthly" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
+            <div className="flex items-center justify-center gap-3.5 mt-8">
+              <span className={`text-sm font-medium ${billingCycle === "monthly" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
                 Cobrança Mensal
               </span>
               <button
@@ -413,10 +411,10 @@ export default function LandingPage() {
                 />
               </button>
               <div className="flex items-center gap-2">
-                <span className={`text-[13px] font-medium ${billingCycle === "annual" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
+                <span className={`text-sm font-medium ${billingCycle === "annual" ? "text-[#09090B] font-bold" : "text-[#52525B]"}`}>
                   Cobrança Anual
                 </span>
-                <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-[var(--ok-bg)] text-[var(--ok-fg)] border border-[var(--ok)]/30">
+                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[var(--ok-bg)] text-[var(--ok-fg)] border border-[var(--ok)]/30">
                   -20% de desconto
                 </span>
               </div>
@@ -425,32 +423,32 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
             {/* PLANO STARTER */}
-            <div className="bg-white border border-[#E4E4E7] rounded-xl p-6 flex flex-col justify-between">
+            <div className="bg-white border border-[#E4E4E7] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
               <div>
-                <div className="text-xs font-semibold text-[#52525B] mb-1">
+                <div className="text-sm font-semibold text-[#52525B] mb-1.5">
                   Plano Starter
                 </div>
-                <p className="text-xs text-[#52525B] mb-4">
+                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
                   Para licitantes que disputam até 5 certames por mês.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-3xl font-extrabold text-[#09090B]">
+                  <span className="text-4xl font-extrabold text-[#09090B]">
                     R$ {billingCycle === "monthly" ? "97" : "78"}
                   </span>
-                  <span className="text-xs text-[#52525B]">/mês</span>
+                  <span className="text-sm text-[#52525B]">/mês</span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-[#52525B]">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-[#52525B]">
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>5 auditorias completas de editais/mês</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Semáforo de Vereditos do Art. 62</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Parecer Executivo em PDF nativo</span>
                   </li>
                 </ul>
@@ -458,50 +456,50 @@ export default function LandingPage() {
 
               <Link
                 href="/signup?plan=Starter"
-                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
+                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors shadow-xs"
               >
                 Assinar Starter
               </Link>
             </div>
 
             {/* PLANO PRO — MAIS POPULAR */}
-            <div className="bg-white border-2 border-[var(--brand)] rounded-xl p-6 flex flex-col justify-between relative shadow-md">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[var(--brand)] text-white text-[10px] font-semibold tracking-wide whitespace-nowrap shadow-sm">
+            <div className="bg-white border-2 border-[var(--brand)] rounded-2xl p-7 sm:p-8 flex flex-col justify-between relative shadow-lg">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[var(--brand)] text-white text-xs font-semibold tracking-wide whitespace-nowrap shadow-sm">
                 Mais escolhido
               </div>
               <div>
-                <div className="text-xs font-semibold text-blue-950 mb-1">
+                <div className="text-sm font-semibold text-blue-950 mb-1.5">
                   Plano Profissional
                 </div>
-                <p className="text-xs text-[#52525B] mb-4">
+                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
                   Para equipes que necessitam de agilidade e minutas do Art. 164.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-3xl font-extrabold text-[#09090B]">
+                  <span className="text-4xl font-extrabold text-[#09090B]">
                     R$ {billingCycle === "monthly" ? "297" : "237"}
                   </span>
-                  <span className="text-xs text-[#52525B]">/mês</span>
+                  <span className="text-sm text-[#52525B]">/mês</span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-[#09090B]">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[var(--brand)] shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-[#09090B]">
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
                     <span><strong>15 auditorias de editais/mês</strong></span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
                     <span><strong>Minutas Automáticas de Impugnação (Art. 164)</strong></span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
                     <span>Portfólio de Acervo &amp; Súmula 263 TCU</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
                     <span>Radar de Retificações (Diff Engine)</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[var(--brand)] shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--brand)] shrink-0" />
                     <span>Exportação de Histórico em CSV/Excel</span>
                   </li>
                 </ul>
@@ -509,43 +507,43 @@ export default function LandingPage() {
 
               <Link
                 href="/signup?plan=Pro"
-                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white text-center shadow-xs transition-colors"
+                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-[var(--brand-solid)] hover:brightness-110 text-white text-center shadow-md transition-colors"
               >
                 Assinar Plano Profissional
               </Link>
             </div>
 
             {/* PLANO ENTERPRISE */}
-            <div className="bg-white border border-[#E4E4E7] rounded-xl p-6 flex flex-col justify-between">
+            <div className="bg-white border border-[#E4E4E7] rounded-2xl p-7 sm:p-8 flex flex-col justify-between shadow-xs">
               <div>
-                <div className="text-xs font-semibold text-[#52525B] mb-1">
+                <div className="text-sm font-semibold text-[#52525B] mb-1.5">
                   Plano Enterprise
                 </div>
-                <p className="text-xs text-[#52525B] mb-4">
+                <p className="text-[15px] text-[#52525B] mb-5 leading-relaxed">
                   Multi-CNPJ para construtoras e grandes distribuidoras.
                 </p>
                 <div className="mb-6 font-mono">
-                  <span className="text-3xl font-extrabold text-[#09090B]">
+                  <span className="text-4xl font-extrabold text-[#09090B]">
                     R$ {billingCycle === "monthly" ? "890" : "712"}
                   </span>
-                  <span className="text-xs text-[#52525B]">/mês</span>
+                  <span className="text-sm text-[#52525B]">/mês</span>
                 </div>
 
-                <ul className="space-y-3 text-xs text-[#52525B]">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <ul className="space-y-3.5 text-[15px] text-[#52525B]">
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Auditorias Ilimitadas de Editais</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Múltiplos CNPJs e Usuários simultâneos</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Dashboard de ROI &amp; Cockpit de Performance</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <li className="flex items-center gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <span>Suporte Jurídico Prioritário via WhatsApp</span>
                   </li>
                 </ul>
@@ -553,7 +551,7 @@ export default function LandingPage() {
 
               <Link
                 href="/signup?plan=Enterprise"
-                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
+                className="mt-8 w-full py-3.5 rounded-lg text-sm font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors shadow-xs"
               >
                 Contratar Enterprise
               </Link>
@@ -563,35 +561,35 @@ export default function LandingPage() {
       </section>
 
       {/* SEÇÃO 6: FAQ TÉCNICO */}
-      <section id="faq" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-3xl mx-auto space-y-8">
+      <section id="faq" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
+        <div className="max-w-3xl mx-auto space-y-10">
           <div className="text-center">
-            <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
               Perguntas e Respostas
             </span>
-            <h2 className="font-display font-bold text-3xl text-[#09090B] mt-2">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
               Dúvidas Frequentes de Licitantes
             </h2>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="border border-[#E4E4E7] rounded-xl overflow-hidden bg-white transition-colors"
+                className="border border-[#E4E4E7] rounded-xl overflow-hidden bg-white transition-colors shadow-xs"
               >
                 <button
                   type="button"
                   onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                  className="w-full text-left px-5 py-4 font-semibold text-xs sm:text-sm text-[#09090B] flex items-center justify-between hover:bg-white/50 transition-colors"
+                  className="w-full text-left px-6 py-5 font-semibold text-[15px] sm:text-base text-[#09090B] flex items-center justify-between hover:bg-[#FAFAFA] transition-colors"
                 >
                   <span>{faq.q}</span>
-                  <span className="font-mono text-xs text-[#52525B] font-bold">
+                  <span className="font-mono text-base text-[#52525B] font-bold">
                     {activeFaq === idx ? "−" : "+"}
                   </span>
                 </button>
                 {activeFaq === idx && (
-                  <div className="px-5 pb-5 pt-1 text-xs text-[#52525B] leading-relaxed border-t border-[#E4E4E7]/50 bg-white/40 font-sans">
+                  <div className="px-6 pb-6 pt-2 text-[15px] sm:text-[16px] text-[#52525B] leading-relaxed border-t border-[#E4E4E7]/60 bg-white/40 font-sans">
                     {faq.a}
                   </div>
                 )}
@@ -602,16 +600,16 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER INSTITUCIONAL */}
-      <footer className="py-12 px-4 sm:px-8 bg-white border-t border-[#E4E4E7] text-xs text-[#52525B]">
-        <div className="max-w-7xl mx-auto space-y-6">
+      <footer className="py-16 px-4 sm:px-8 bg-white border-t border-[#E4E4E7] text-sm text-[#52525B]">
+        <div className="max-w-7xl mx-auto space-y-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2.5">
-              <BrandIcon name="mark" size="s20" color="brand" />
-              <span className="font-display font-bold text-sm text-[#09090B]">EditalFlash</span>
-              <span className="text-[11px] font-mono text-[#52525B]">· Auditoria Preventiva de Habilitação (Lei 14.133/2021)</span>
+              <BrandIcon name="mark" size="s24" color="brand" />
+              <span className="font-display font-bold text-base text-[#09090B]">EditalFlash</span>
+              <span className="text-xs font-mono text-[#52525B]">· Auditoria Preventiva de Habilitação (Lei 14.133/2021)</span>
             </div>
 
-            <div className="flex items-center gap-6 font-mono text-[11px]">
+            <div className="flex items-center gap-6 font-mono text-xs sm:text-sm">
               <Link href="/termos" className="hover:text-[#09090B] transition-colors">Termos de Uso</Link>
               <Link href="/privacidade" className="hover:text-[#09090B] transition-colors">Privacidade &amp; LGPD</Link>
               <Link href="/seguranca" className="hover:text-[#09090B] transition-colors">Segurança da Informação</Link>
@@ -619,7 +617,7 @@ export default function LandingPage() {
           </div>
 
           {/* Dados Legais e Fiscais Obrigatórios (Decreto 7.962/2013 - E-Commerce) */}
-          <div className="pt-6 border-t border-[#E4E4E7] flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] font-mono text-[#52525B] text-center md:text-left">
+          <div className="pt-6 border-t border-[#E4E4E7] flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-mono text-[#52525B] text-center md:text-left leading-relaxed">
             <div>
               <span>EditalFlash, 51.926.034 RENAN OSCAR ARAUJO CRUZ, CNPJ: 51.926.034/0001-42, AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200</span>
             </div>

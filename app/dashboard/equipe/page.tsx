@@ -280,32 +280,32 @@ export default function TeamManagementPage() {
 
         {/* Formulário de Envio de Convite (Apenas para ADMIN) */}
         {currentUserRole === "ADMIN" && (
-          <div className="p-6 rounded-xl bg-[#18181B] text-[#0F172A] shadow-md border border-slate-800 space-y-4">
+          <div className="p-6 rounded-xl bg-white text-[#0F172A] shadow-xs border border-[#CBD5E1] space-y-4">
             <div className="flex items-center gap-2">
-              <UserPlus className="w-5 h-5 text-blue-400" />
-              <h2 className="text-lg font-bold font-display">Convidar Novo Membro da Equipe</h2>
+              <UserPlus className="w-5 h-5 text-[#1E3A8A]" />
+              <h2 className="text-lg font-bold font-display text-[#0F172A]">Convidar Novo Membro da Equipe</h2>
             </div>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-[#475569] font-sans">
               Adicione o e-mail do seu contador, sócio ou analista. Ele terá acesso para auditar editais e consultar documentos do cofre.
             </p>
 
             <form onSubmit={handleSendInvite} className="flex flex-col sm:flex-row gap-3 pt-2">
               <div className="relative flex-1">
-                <Mail className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}
                   placeholder="exemplo@contabilidade.com.br"
                   required
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-blue-500"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-[#CBD5E1] text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#1E3A8A] focus:ring-1 focus:ring-[#1E3A8A]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={inviting || seats.hasReachedLimit}
-                className="px-6 py-2.5 rounded-xl bg-white border border-[#E2E8F0] hover:bg-[#E4E4E7] disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm text-[#0F172A] flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
+                className="px-6 py-2.5 rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] disabled:opacity-50 disabled:cursor-not-allowed font-bold text-xs text-white flex items-center justify-center gap-2 transition-colors whitespace-nowrap shadow-xs"
               >
                 {inviting ? (
                   <>
@@ -322,22 +322,22 @@ export default function TeamManagementPage() {
             </form>
 
             {generatedInviteLink && (
-              <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700 space-y-2 mt-3">
-                <span className="text-xs font-mono text-blue-300 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" /> Link de Convite Gerado (Validade: 7 dias)
+              <div className="p-4 rounded-lg bg-[#F8FAFC] border border-[#CBD5E1] space-y-2 mt-3">
+                <span className="text-xs font-mono text-[#1E3A8A] flex items-center gap-1 font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#1E3A8A]" /> Link de Convite Gerado (Validade: 7 dias)
                 </span>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     readOnly
                     value={generatedInviteLink}
-                    className="flex-1 px-3 py-1.5 rounded-lg bg-[#18181B] border border-slate-700 text-xs font-mono text-slate-200"
+                    className="flex-1 px-3 py-1.5 rounded-lg bg-white border border-[#CBD5E1] text-xs font-mono text-[#0F172A]"
                   />
                   <button
                     onClick={copyToClipboard}
-                    className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-white0 text-xs font-medium text-[#0F172A] flex items-center gap-1.5 transition-colors"
+                    className="px-3 py-1.5 rounded-lg bg-[#1E3A8A] hover:bg-[#1E40AF] text-xs font-bold text-white flex items-center gap-1.5 transition-colors shadow-xs"
                   >
-                    {copied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5" />}
                     {copied ? "Copiado!" : "Copiar"}
                   </button>
                 </div>

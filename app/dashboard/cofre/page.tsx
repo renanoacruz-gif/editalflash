@@ -271,23 +271,23 @@ export default function CofreDocumentosPage() {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Toast Notificação */}
         {toastMessage && (
-          <div className="fixed bottom-6 right-6 z-50 bg-[var(--surface)] border border-emerald-500/50 text-[var(--ok-fg)] px-4 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-fadeIn font-mono">
+          <div className="fixed bottom-6 right-6 z-50 bg-[var(--bg-surface)] border border-emerald-500/50 text-[var(--ok-fg)] px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 animate-fadeIn font-mono">
             <CheckCircle2 className="w-4 h-4 text-emerald-500" strokeWidth={2} />
             <span>{toastMessage}</span>
           </div>
         )}
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--line)]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/30 text-[var(--brand)] text-xs font-semibold mb-2 font-mono">
               <ShieldCheck className="w-3.5 h-3.5" strokeWidth={1.5} />
               <span>Cofre Digital de Documentos • Art. 62</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink)] tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-primary)] tracking-tight">
               Cofre de Certidões &amp; Acervo Técnico
             </h1>
-            <p className="text-xs sm:text-sm text-[var(--ink-2)] mt-1">
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-1">
               Gerencie o ciclo completo de validade das suas CNDs, Balanço Patrimonial e Atestados Técnicos.
             </p>
             {user?.plan === "Starter" && !isAdmin && (
@@ -302,7 +302,7 @@ export default function CofreDocumentosPage() {
               type="button"
               onClick={handleAutoRenewCertidoes}
               disabled={isAutoRenewing}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold bg-white border border-[#E2E8F0] hover:bg-[#253745] text-[#0F172A] shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-white border border-[#E2E8F0] hover:bg-[#253745] text-[#0F172A] shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
               title="Consulta bases públicas da Receita Federal, Caixa e TST para renovar CNDs"
             >
               <ShieldCheck className="w-4 h-4 text-[#0F172A]" strokeWidth={1.75} />
@@ -313,7 +313,7 @@ export default function CofreDocumentosPage() {
               type="button"
               onClick={handleExportChecklistPDF}
               disabled={isExportingPDF}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold bg-[var(--surface)] hover:bg-[var(--line)] text-[var(--ink)] border border-[var(--line)] shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[var(--bg-surface)] hover:bg-[var(--border-subtle)] text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-xs transition-all active:scale-[0.98] disabled:opacity-60 cursor-pointer"
             >
               <Download className="w-4 h-4 text-[var(--brand)]" strokeWidth={1.75} />
               <span>{isExportingPDF ? "Exportando..." : "Exportar Checklist Contábil"}</span>
@@ -321,7 +321,7 @@ export default function CofreDocumentosPage() {
 
             <Link
               href="/dashboard/acervo"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold bg-[var(--surface)] hover:bg-[var(--line)] text-[var(--ink)] border border-[var(--line)] shadow-xs transition-all active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[var(--bg-surface)] hover:bg-[var(--border-subtle)] text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-xs transition-all active:scale-[0.98]"
             >
               <Award className="w-4 h-4 text-[var(--brand)]" strokeWidth={1.75} />
               <span>Ver Portfólio de Acervo</span>
@@ -341,10 +341,10 @@ export default function CofreDocumentosPage() {
           <button
             type="button"
             onClick={() => setFilterType("ALL")}
-            className={`min-h-[42px] px-3.5 py-2 rounded-2xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
+            className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
               filterType === "ALL"
                 ? "bg-[var(--brand)] text-[#0F172A] border-[var(--brand)] shadow-xs"
-                : "bg-[var(--surface)] text-[var(--ink-2)] border-[var(--line)] hover:border-[var(--brand)]"
+                : "bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--brand)]"
             }`}
           >
             <span>Todos</span>
@@ -357,10 +357,10 @@ export default function CofreDocumentosPage() {
           <button
             type="button"
             onClick={() => setFilterType("EXPIRING")}
-            className={`min-h-[42px] px-3.5 py-2 rounded-2xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
+            className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
               filterType === "EXPIRING"
                 ? "bg-[var(--warn-bg)] text-[var(--warn-fg)] border-[var(--warn)] shadow-xs font-bold"
-                : "bg-[var(--surface)] text-[var(--warn-fg)] border-[var(--warn)]/40 hover:bg-[var(--warn-bg)]/40"
+                : "bg-[var(--bg-surface)] text-[var(--warn-fg)] border-[var(--warn)]/40 hover:bg-[var(--warn-bg)]/40"
             }`}
           >
             <Clock className="w-3.5 h-3.5 text-[var(--warn)] shrink-0" strokeWidth={2} />
@@ -374,10 +374,10 @@ export default function CofreDocumentosPage() {
           <button
             type="button"
             onClick={() => setFilterType("EXPIRED")}
-            className={`min-h-[42px] px-3.5 py-2 rounded-2xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
+            className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
               filterType === "EXPIRED"
                 ? "bg-[var(--bad-bg)] text-[var(--bad-fg)] border-[var(--bad)] shadow-xs font-bold"
-                : "bg-[var(--surface)] text-[var(--bad-fg)] border-[var(--bad)]/40 hover:bg-[var(--bad-bg)]/40"
+                : "bg-[var(--bg-surface)] text-[var(--bad-fg)] border-[var(--bad)]/40 hover:bg-[var(--bad-bg)]/40"
             }`}
           >
             <AlertTriangle className="w-3.5 h-3.5 text-[var(--bad)] shrink-0" strokeWidth={2} />
@@ -391,10 +391,10 @@ export default function CofreDocumentosPage() {
           <button
             type="button"
             onClick={() => setFilterType("TECHNICAL")}
-            className={`min-h-[42px] px-3.5 py-2 rounded-2xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
+            className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all border flex items-center gap-1.5 cursor-pointer active:scale-98 ${
               filterType === "TECHNICAL"
                 ? "bg-[var(--brand)] text-[#0F172A] border-[var(--brand)] shadow-xs font-bold"
-                : "bg-[var(--surface)] text-[var(--ink-2)] border-[var(--line)] hover:border-[var(--brand)]"
+                : "bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--brand)]"
             }`}
           >
             <FileText className="w-3.5 h-3.5 text-[var(--brand)] shrink-0" strokeWidth={2} />
@@ -407,16 +407,16 @@ export default function CofreDocumentosPage() {
 
         {/* SECTION 2 & 3: DOCUMENT LIST TABLE / BENTO ROWS */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs text-[var(--ink-2)] pl-1 font-mono">
+          <div className="flex items-center justify-between text-xs text-[var(--text-secondary)] pl-1 font-mono">
             <span>Documentos Indexados para Verificação Automática (Art. 62)</span>
             <span>{filteredDocs.length} certificados listados</span>
           </div>
 
           {filteredDocs.length === 0 ? (
-            <div className="bg-[var(--surface)] border border-[var(--line)] rounded-2xl p-10 text-center space-y-2">
-              <FileCheck2 className="w-8 h-8 text-[var(--ink-2)] mx-auto opacity-50" />
-              <p className="text-xs font-mono text-[var(--ink)] font-bold">Nenhum documento encontrado neste filtro</p>
-              <p className="text-[11px] text-[var(--ink-2)]">
+            <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-10 text-center space-y-2">
+              <FileCheck2 className="w-8 h-8 text-[var(--text-secondary)] mx-auto opacity-50" />
+              <p className="text-xs font-mono text-[var(--text-primary)] font-bold">Nenhum documento encontrado neste filtro</p>
+              <p className="text-[11px] text-[var(--text-secondary)]">
                 Utilize a área de upload acima para adicionar novas certidões ou selecione &quot;Todos&quot;.
               </p>
             </div>
@@ -429,26 +429,26 @@ export default function CofreDocumentosPage() {
                 return (
                   <div
                     key={doc.id}
-                    className={`bento-card bg-[var(--surface)] rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between gap-4 group hover:-translate-y-0.5 shadow-sm hover:shadow-md ${
+                    className={`bento-card bg-[var(--bg-surface)] rounded-xl p-5 border transition-all duration-200 flex flex-col justify-between gap-4 group hover:-translate-y-0.5 shadow-sm hover:shadow-md ${
                       isExpired
                         ? "border-rose-300/80 bg-rose-50/30 dark:bg-rose-950/20"
                         : isExpiring
                         ? "border-amber-300/80 bg-amber-50/30 dark:bg-amber-950/20"
-                        : "border-[var(--line)] hover:border-[#2740F0]/50"
+                        : "border-[var(--border-subtle)] hover:border-[#2740F0]/50"
                     }`}
                   >
                     <div className="space-y-2 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[var(--bg)] text-[var(--ink)] border border-[var(--line)] shrink-0">
+                        <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[var(--bg-base)] text-[var(--text-primary)] border border-[var(--border-subtle)] shrink-0">
                           {doc.tipo}
                         </span>
-                        <h3 className="text-sm sm:text-base font-bold text-[var(--ink)] font-display tracking-tight truncate max-w-xl" title={doc.nome}>
+                        <h3 className="text-sm sm:text-base font-bold text-[var(--text-primary)] font-display tracking-tight truncate max-w-xl" title={doc.nome}>
                           {doc.nome}
                         </h3>
                       </div>
 
-                      <p className="text-xs text-[var(--ink-2)] font-sans">
-                        Órgão Emissor: <strong className="text-[var(--ink)]">{doc.emissor}</strong> • Emissão:{" "}
+                      <p className="text-xs text-[var(--text-secondary)] font-sans">
+                        Órgão Emissor: <strong className="text-[var(--text-primary)]">{doc.emissor}</strong> • Emissão:{" "}
                         <span className="font-mono">{new Date(doc.dataEmissao).toLocaleDateString("pt-BR")}</span>
                       </p>
 
@@ -469,7 +469,7 @@ export default function CofreDocumentosPage() {
 
                     <div className="flex items-center gap-4 self-end md:self-center shrink-0">
                       <div className="text-right">
-                        <span className="text-xs font-mono font-bold text-[var(--ink)] block">
+                        <span className="text-xs font-mono font-bold text-[var(--text-primary)] block">
                           Validade:{" "}
                           <span
                             className={
@@ -507,7 +507,7 @@ export default function CofreDocumentosPage() {
                         <button
                           type="button"
                           onClick={() => setPreviewDoc(doc)}
-                          className="p-2.5 rounded-lg bg-[var(--bg)] hover:bg-[var(--line)] text-[var(--ink-2)] hover:text-[var(--ink)] border border-[var(--line)] transition-colors active:scale-95 cursor-pointer"
+                          className="p-2.5 rounded-lg bg-[var(--bg-base)] hover:bg-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] transition-colors active:scale-95 cursor-pointer"
                           title="Visualizar Certidão"
                         >
                           <Eye className="w-4 h-4 text-[var(--brand)]" strokeWidth={1.75} />
@@ -516,7 +516,7 @@ export default function CofreDocumentosPage() {
                         <button
                           type="button"
                           onClick={() => setDeleteCandidate(doc)}
-                          className="p-2.5 rounded-lg bg-[var(--bg)] hover:bg-rose-950/20 text-[var(--ink-2)] hover:text-rose-600 border border-[var(--line)] hover:border-rose-300 transition-colors active:scale-95 cursor-pointer"
+                          className="p-2.5 rounded-lg bg-[var(--bg-base)] hover:bg-rose-950/20 text-[var(--text-secondary)] hover:text-rose-600 border border-[var(--border-subtle)] hover:border-rose-300 transition-colors active:scale-95 cursor-pointer"
                           title="Excluir Permanentemente"
                         >
                           <Trash2 className="w-4 h-4" strokeWidth={1.75} />
@@ -533,53 +533,53 @@ export default function CofreDocumentosPage() {
         {/* MODAL 1: PREVIEW DO DOCUMENTO (EYE) */}
         {previewDoc && (
           <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-[var(--surface)] border border-[var(--line)] rounded-2xl max-w-2xl w-full p-6 space-y-5 shadow-2xl animate-scaleUp">
-              <div className="flex items-center justify-between pb-3 border-b border-[var(--line)]">
+            <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl max-w-2xl w-full p-6 space-y-5 shadow-2xl animate-scaleUp">
+              <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[var(--bg)] text-[var(--ink)] border border-[var(--line)]">
+                    <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-[var(--bg-base)] text-[var(--text-primary)] border border-[var(--border-subtle)]">
                       {previewDoc.tipo}
                     </span>
-                    <h3 className="text-base font-bold text-[var(--ink)] font-display">{previewDoc.nome}</h3>
+                    <h3 className="text-base font-bold text-[var(--text-primary)] font-display">{previewDoc.nome}</h3>
                   </div>
-                  <p className="text-xs text-[var(--ink-2)] font-mono">Emissor: {previewDoc.emissor}</p>
+                  <p className="text-xs text-[var(--text-secondary)] font-mono">Emissor: {previewDoc.emissor}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setPreviewDoc(null)}
-                  className="p-1 rounded-lg text-[var(--ink-2)] hover:text-[var(--ink)] hover:bg-[var(--line)] cursor-pointer"
+                  className="p-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--border-subtle)] cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Simulação Segura do Visualizador de PDF */}
-              <div className="bg-[var(--bg)] rounded-2xl border border-[var(--line)] p-6 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[var(--line)] text-xs font-mono text-[var(--ink-2)]">
+              <div className="bg-[var(--bg-base)] rounded-xl border border-[var(--border-subtle)] p-6 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)]">
                   <span>Visualizador Seguro • Acesso Criptografado</span>
                   <span className="text-[var(--ok-fg)] font-bold">Autenticidade Verificada</span>
                 </div>
 
                 <div className="py-6 text-center space-y-3">
-                  <div className="w-14 h-14 rounded-2xl bg-[var(--brand-tint)] text-[var(--brand)] flex items-center justify-center mx-auto border border-[var(--brand)]/30">
+                  <div className="w-14 h-14 rounded-xl bg-[var(--brand-tint)] text-[var(--brand)] flex items-center justify-center mx-auto border border-[var(--brand)]/30">
                     <FileText className="w-7 h-7" />
                   </div>
-                  <h4 className="text-sm font-bold text-[var(--ink)]">{previewDoc.nome}.pdf</h4>
-                  <p className="text-xs text-[var(--ink-2)] max-w-md mx-auto">
+                  <h4 className="text-sm font-bold text-[var(--text-primary)]">{previewDoc.nome}.pdf</h4>
+                  <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto">
                     Certidão digitalmente vinculada ao seu CNPJ para conferência no Semáforo da Lei 14.133/2021.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pt-2 text-xs font-mono">
-                  <div className="p-3 rounded-lg bg-[var(--surface)] border border-[var(--line)]">
-                    <span className="text-[10px] text-[var(--ink-2)] block uppercase">Data de Emissão</span>
-                    <strong className="text-[var(--ink)]">
+                  <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+                    <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Data de Emissão</span>
+                    <strong className="text-[var(--text-primary)]">
                       {new Date(previewDoc.dataEmissao).toLocaleDateString("pt-BR")}
                     </strong>
                   </div>
-                  <div className="p-3 rounded-lg bg-[var(--surface)] border border-[var(--line)]">
-                    <span className="text-[10px] text-[var(--ink-2)] block uppercase">Data de Validade</span>
-                    <strong className="text-[var(--ink)]">
+                  <div className="p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+                    <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Data de Validade</span>
+                    <strong className="text-[var(--text-primary)]">
                       {previewDoc.diasParaVencer > 1000
                         ? "Indeterminada (Acervo)"
                         : new Date(previewDoc.dataValidade).toLocaleDateString("pt-BR")}
@@ -592,7 +592,7 @@ export default function CofreDocumentosPage() {
                 <button
                   type="button"
                   onClick={() => setPreviewDoc(null)}
-                  className="px-4 py-2 rounded-2xl text-xs font-mono font-semibold bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] hover:bg-[var(--line)] cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:bg-[var(--border-subtle)] cursor-pointer"
                 >
                   Fechar
                 </button>
@@ -602,7 +602,7 @@ export default function CofreDocumentosPage() {
                     showToast("Download da certidão autenticada concluído.");
                     setPreviewDoc(null);
                   }}
-                  className="px-4 py-2 rounded-2xl text-xs font-mono font-bold bg-[var(--brand)] text-[#0F172A] hover:brightness-110 shadow-xs cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-[var(--brand)] text-[#0F172A] hover:brightness-110 shadow-xs cursor-pointer"
                 >
                   Baixar PDF Original
                 </button>
@@ -614,25 +614,25 @@ export default function CofreDocumentosPage() {
         {/* MODAL 2: CONFIRMAÇÃO DE EXCLUSÃO PERMANENTE (LGPD COMPLIANT) */}
         {deleteCandidate && (
           <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-[var(--surface)] border border-rose-500/40 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl animate-scaleUp">
+            <div className="bg-[var(--bg-surface)] border border-rose-500/40 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl animate-scaleUp">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-rose-500/10 text-rose-600 flex items-center justify-center shrink-0 border border-rose-500/30">
+                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 flex items-center justify-center shrink-0 border border-rose-500/30">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[var(--ink)] font-display">
+                  <h3 className="text-base font-bold text-[var(--text-primary)] font-display">
                     Excluir Documento Permanentemente?
                   </h3>
-                  <p className="text-xs text-[var(--ink-2)] mt-1 leading-relaxed">
+                  <p className="text-xs text-[var(--text-secondary)] mt-1 leading-relaxed">
                     Esta ação não pode ser desfeita. O documento será removido do nosso servidor e das análises futuras,
                     em estrito cumprimento aos seus direitos sob a LGPD.
                   </p>
                 </div>
               </div>
 
-              <div className="p-3 rounded-lg bg-[var(--bg)] border border-[var(--line)] text-xs font-mono space-y-1">
-                <span className="text-[10px] text-[var(--ink-2)] uppercase block">Arquivo a ser eliminado:</span>
-                <p className="font-bold text-[var(--ink)] truncate">{deleteCandidate.nome}</p>
+              <div className="p-3 rounded-lg bg-[var(--bg-base)] border border-[var(--border-subtle)] text-xs font-mono space-y-1">
+                <span className="text-[10px] text-[var(--text-secondary)] uppercase block">Arquivo a ser eliminado:</span>
+                <p className="font-bold text-[var(--text-primary)] truncate">{deleteCandidate.nome}</p>
               </div>
 
               <div className="flex items-center justify-end gap-2.5 pt-2">
@@ -640,7 +640,7 @@ export default function CofreDocumentosPage() {
                   type="button"
                   disabled={isDeleting}
                   onClick={() => setDeleteCandidate(null)}
-                  className="px-4 py-2 rounded-2xl text-xs font-mono font-semibold bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] hover:bg-[var(--line)] disabled:opacity-50 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:bg-[var(--border-subtle)] disabled:opacity-50 cursor-pointer"
                 >
                   Cancelar
                 </button>
@@ -648,7 +648,7 @@ export default function CofreDocumentosPage() {
                   type="button"
                   disabled={isDeleting}
                   onClick={handleConfirmDelete}
-                  className="px-4 py-2 rounded-2xl text-xs font-mono font-bold bg-rose-600 hover:bg-rose-500 text-[#0F172A] shadow-md shadow-rose-600/30 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-rose-600 hover:bg-rose-500 text-[#0F172A] shadow-md shadow-rose-600/30 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
                 >
                   {isDeleting ? "Excluindo..." : "Confirmar Exclusão"}
                 </button>

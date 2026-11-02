@@ -1,212 +1,111 @@
-/* Hallmark · shape: kept · genre: modern-minimal · theme: brand · redesign: full
- * paper: #FFFFFF · accent: #1E3A8A · display: Bricolage Grotesque · body: Inter · hero: Stage · nav: edge-aligned · footer: mast · signature: interactive-parecer
- * axes: #FFFFFF/Bricolage Grotesque/#1E3A8A · posture: Stage · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P_ H_ E_ S_ R_ V_ · weakest: hierarchy, tightened font-mono and removed nested boxes */
 @import "tailwindcss";
-@import "./tokens.css";
-@import "./base.css" layer(base);
 
 :root {
-  --bg: #FFFFFF;
-  --bg-surface: #F8FAFC;
-  --surface: #FFFFFF;
-  --surface-subtle: #F1F5F9;
-  --ink: #0F172A;
-  --ink-bright: #020617;
-  --ink-2: #475569;
-  --ink-3: #94A3B8;
-  --line: #E2E8F0;
-  --line-strong: #CBD5E1;
+  /* 1. Base Neutra e Superfícies (Clean Light Mode Exclusivo) */
+  --bg-base: #FAFAFA;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F4F4F5;
+  --bg-hover: #ECECEE;
 
-  --brand: #1E3A8A;
-  --brand-solid: #1E3A8A;
+  /* 2. Tipografia e Contraste Estrito (Preto sobre Branco Real) */
+  --text-primary: #09090B;     /* Títulos, números, dados periciais */
+  --text-secondary: #52525B;   /* Textos explicativos e descrições */
+  --text-muted: #71717A;       /* Legendas, metadados secundários e placeholders */
+
+  /* 3. Linhas Divisórias e Bordas Leves */
+  --border-subtle: #E4E4E7;
+  --border-strong: #D4D4D8;
+
+  /* 4. Cor Institucional (Sóbria e Executiva) */
+  --brand: #18181B;            /* Preto corporativo elegante para CTAs principais */
+  --brand-accent: #2563EB;     /* Azul institucional para links e seleções */
   --brand-tint: #EFF6FF;
-  --brand-accent: #3B82F6;
 
-  /* Vereditos: semáforo suave pericial */
-  --ok: #10B981;   --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #059669;
-  --warn: #F59E0B; --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #D97706;
-  --bad: #EF4444;  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #DC2626;
-  --rev: #8B5CF6;  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #7C3AED;
+  /* 5. Vereditos de Habilitação (Semáforo Pericial Art. 62) */
+  --status-pass: #059669;
+  --status-pass-bg: #ECFDF5;
+  --status-pass-border: #A7F3D0;
+
+  --status-warn: #D97706;
+  --status-warn-bg: #FFFBEB;
+  --status-warn-border: #FDE68A;
+
+  --status-danger: #DC2626;
+  --status-danger-bg: #FEF2F2;
+  --status-danger-border: #FECACA;
+
+  --status-review: #7C3AED;
+  --status-review-bg: #F5F3FF;
+  --status-review-border: #DDD6FE;
+
+  /* Compatibilidade com tokens legados */
+  --bg: var(--bg-base);
+  --surface: var(--bg-surface);
+  --surface-subtle: var(--bg-subtle);
+  --ink: var(--text-primary);
+  --ink-bright: var(--text-primary);
+  --ink-2: var(--text-secondary);
+  --ink-3: var(--text-muted);
+  --line: var(--border-subtle);
+  --line-strong: var(--border-strong);
+  --ok: var(--status-pass);
+  --ok-bg: var(--status-pass-bg);
+  --ok-fg: var(--status-pass);
+  --warn: var(--status-warn);
+  --warn-bg: var(--status-warn-bg);
+  --warn-fg: var(--status-warn);
+  --bad: var(--status-danger);
+  --bad-bg: var(--status-danger-bg);
+  --bad-fg: var(--status-danger);
+  --rev: var(--status-review);
+  --rev-bg: var(--status-review-bg);
+  --rev-fg: var(--status-review);
 }
 
-[data-theme="dark"] {
-  --bg: #06141B;
-  --bg-surface: #11212D;
-  --surface: #11212D;
-  --surface-subtle: #162a39;
-  --ink: #F1F5F9;
-  --ink-bright: #FFFFFF;
-  --ink-2: #94A3B8;
-  --ink-3: #4A5C6A;
-  --line: #1E293B;
-  --line-strong: #334155;
-
-  --brand: #3B82F6;
-  --brand-solid: #1E3A8A;
-  --brand-tint: #11212D;
-  --brand-accent: #60A5FA;
-
-  --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
-  --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
-  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
-  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
-}
-
-[data-theme="dark"] {
-  --bg: #06141B;
-  --surface: #11212D;
-  --surface-subtle: #162a39;
-  --ink: #CCD0CF;
-  --ink-bright: #FFFFFF;
-  --ink-2: #9BA8AB;
-  --ink-3: #4A5C6A;
-  --line: #253745;
-  --line-strong: #364d5e;
-
-  --brand: #CCD0CF;
-  --brand-solid: #11212D;
-  --brand-tint: #162a39;
-
-  --ok-bg: rgba(16, 185, 129, 0.12);   --ok-fg: #10B981;
-  --warn-bg: rgba(245, 158, 11, 0.12); --warn-fg: #F59E0B;
-  --bad-bg: rgba(239, 68, 68, 0.12);  --bad-fg: #EF4444;
-  --rev-bg: rgba(139, 92, 246, 0.12);  --rev-fg: #A78BFA;
-}
-
+/* Forçamos o Light Mode garantindo contraste perfeito em qualquer sistema operacional */
 body {
-  background-color: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body), "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, .font-display, .legal-serif {
-  font-family: var(--font-display), "Bricolage Grotesque", -apple-system, sans-serif;
-  letter-spacing: -0.025em;
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 code, pre, .font-mono {
-  font-family: var(--font-mono), "IBM Plex Mono", monospace;
-}
-
-/* Marca-texto cobalto */
-mark.cobalt-highlight {
-  background-color: var(--brand-tint);
-  color: var(--ink);
-  padding: 1px 4px;
-  box-shadow: inset 0 -2px 0 var(--brand);
-}
-
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--line);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-2);
-}
-
-/* Functional Gradient & Hover Effects (Legal-Tech Identity v1.1) */
-.btn-primary-gradient {
-  background: linear-gradient(135deg, var(--brand) 0%, #1a32d0 100%);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-primary-gradient:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 0 4px 12px rgba(39, 64, 240, 0.25);
-}
-.btn-primary-gradient:active {
-  transform: scale(0.98);
-}
-
-/* Floating Paper Surface Card with Spring Hover */
-.surface-card {
-  background-color: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(14, 22, 38, 0.05);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-}
-.surface-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px -2px rgba(14, 22, 38, 0.08);
-  border-color: var(--brand-tint);
-}
-
-/* Sticky Blurred Glass Header */
-.header-glass {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid var(--line);
-}
-[data-theme="dark"] .header-glass {
-  background-color: rgba(18, 27, 45, 0.85);
-}
-
-/* Input Focus Ring */
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--brand);
-  border-color: var(--brand) !important;
-  transition: box-shadow 0.15s ease-out, border-color 0.15s ease-out;
-}
-
-/* Linear/Raycast Style Glow & Bento Card Elements */
-.bento-card {
-  position: relative;
-  background-color: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.bento-card:hover {
-  border-color: rgba(39, 64, 240, 0.35);
-  box-shadow: 0 8px 30px rgba(14, 22, 38, 0.08);
-}
-[data-theme="dark"] .bento-card:hover {
-  border-color: rgba(143, 156, 255, 0.3);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Raycast / Command Palette Keycap */
-.keycap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.25rem;
-  height: 1.25rem;
-  padding: 0 0.25rem;
   font-family: var(--font-mono), monospace;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 4px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  color: var(--ink-2);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+  font-feature-settings: "tnum" 1, "cv05" 1;
 }
 
-/* Radar Scan Line Animation (Harvey / Linear style) */
-@keyframes radarSweep {
-  0% { transform: translateY(-100%); opacity: 0; }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { transform: translateY(320px); opacity: 0; }
+/* Utilitários Globais de Limpeza */
+.clean-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.radar-scanner-line {
-  animation: radarSweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.clean-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.clean-card:hover {
+  border-color: var(--border-strong);
+}
+
+.clean-divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  width: 100%;
 }

@@ -50,7 +50,7 @@ export const RetificationRadarCard: React.FC<RetificationRadarCardProps> = ({
                 Radar de Retificações Ativo
               </span>
               <span className="text-[10px] font-mono text-[var(--ink-2)]">
-                Diff Engine v1.2
+                Diff Engine
               </span>
             </div>
             <h3 className="text-base font-bold text-[var(--ink)] font-display mt-0.5">

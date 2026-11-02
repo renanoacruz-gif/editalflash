@@ -358,36 +358,65 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FAIXA DE 3 ÍCONES / BENEFÍCIOS LOGO ABAIXO DO HERO */}
-      <section className="bg-[var(--paper)] border-b border-[var(--line)] py-6 px-4 sm:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-[var(--ink)]">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
-              <CheckCircle2 className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-sm text-[var(--ink)]">Auditoria em 40 segundos</h4>
-              <p className="text-xs text-[var(--text-secondary)]">Conferência completa de balanço e certidões sem risco de erro humano.</p>
-            </div>
+      {/* SEÇÃO 1: COMO FUNCIONA (3 CARTÕES NUMERADOS) */}
+      <section id="como-funciona" className="py-20 px-4 sm:px-8 border-b border-[var(--line)] bg-white text-[var(--ink)]">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--flash)] px-3 py-1 rounded-full bg-[var(--mist)] border border-[var(--flash-lt)]/30">
+              Processo Simples e Direto
+            </span>
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,38px)] text-[var(--ink)] tracking-tight">
+              Como funciona
+            </h2>
+            <p className="text-[16px] text-[var(--ink)]/70 font-sans leading-relaxed">
+              Auditoria técnica preventiva sem complexidade operacional para a sua empresa.
+            </p>
           </div>
 
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-[var(--flash)] flex items-center justify-center shrink-0">
-              <Clock className="w-5 h-5" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <div className="p-7 sm:p-8 rounded-2xl border border-[var(--line)] bg-[var(--paper)] flex flex-col justify-between space-y-5 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="space-y-3">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--ink)] text-white font-mono font-bold text-base shadow-sm">
+                  01
+                </span>
+                <h3 className="font-display font-bold text-lg text-[var(--ink)]">
+                  Envie o edital
+                </h3>
+                <p className="text-[15px] text-[var(--ink)]/80 leading-relaxed font-sans">
+                  Faça o upload do arquivo em PDF ou informe o link oficial do certame no PNCP.
+                </p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-display font-bold text-sm text-[var(--ink)]">Impugnação em 1 clique</h4>
-              <p className="text-xs text-[var(--text-secondary)]">Minuta jurídica automática pronta para envio antes do prazo fatal.</p>
-            </div>
-          </div>
 
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 text-[var(--ink)] flex items-center justify-center shrink-0">
-              <Scale className="w-5 h-5" />
+            {/* Card 2 */}
+            <div className="p-7 sm:p-8 rounded-2xl border border-[var(--line)] bg-[var(--paper)] flex flex-col justify-between space-y-5 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="space-y-3">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--flash)] text-white font-mono font-bold text-base shadow-sm">
+                  02
+                </span>
+                <h3 className="font-display font-bold text-lg text-[var(--ink)]">
+                  Revisamos 100% das páginas
+                </h3>
+                <p className="text-[15px] text-[var(--ink)]/80 leading-relaxed font-sans">
+                  O sistema confere todas as exigências de habilitação jurídica, fiscal e técnica em segundos.
+                </p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-display font-bold text-sm text-[var(--ink)]">Soma de atestados segura</h4>
-              <p className="text-xs text-[var(--text-secondary)]">Validação automática do seu acervo contra exigências restritivas.</p>
+
+            {/* Card 3 */}
+            <div className="p-7 sm:p-8 rounded-2xl border border-[var(--line)] bg-[var(--paper)] flex flex-col justify-between space-y-5 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="space-y-3">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--ok)] text-white font-mono font-bold text-base shadow-sm">
+                  03
+                </span>
+                <h3 className="font-display font-bold text-lg text-[var(--ink)]">
+                  Receba o parecer com prova de página e linha
+                </h3>
+                <p className="text-[15px] text-[var(--ink)]/80 leading-relaxed font-sans">
+                  Acesse o relatório executivo pronto para download em PDF com cada exigência fundamentada.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -395,132 +424,152 @@ export default function LandingPage() {
 
       {/* SEÇÃO 2: POR QUE OS PROFISSIONAIS EXPERIENTES UTILIZAM (O CONTRAPONTO) */}
       <section id="diferencial" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
-              Eficiência e Segurança Corporativa
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--flash)] px-3 py-1 rounded-full bg-[var(--mist)] border border-[var(--flash-lt)]/30">
+              Conferência Preventiva
             </span>
-            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
-              Você não precisa de quem te ensine a lei. Precisa de quem zere o erro humano.
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] tracking-tight">
+              Manual × EditalFlash
             </h2>
-            <p className="text-[17px] text-[#52525B] mt-3 max-w-2xl mx-auto leading-relaxed">
-              Veja a diferença entre a conferência manual estressante e a blindagem pericial do EditalFlash:
+            <p className="text-[16px] sm:text-[17px] text-[#52525B] max-w-2xl mx-auto leading-relaxed">
+              Compare o risco da rotina manual com a segurança da auditoria preventiva automatizada:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* O Método Manual Antigo */}
-            <div className="bg-white p-7 sm:p-9 rounded-2xl border border-[#E4E4E7] space-y-6 shadow-xs">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-rose-500/20 text-rose-700">
-                <AlertTriangle className="w-5 h-5" />
-                <h3 className="font-display font-bold text-xl">O Risco da Rotina Manual</h3>
+          {/* Tabela Comparativa de 2 Colunas */}
+          <div className="border border-[var(--line)] rounded-2xl overflow-hidden shadow-xs">
+            <div className="grid grid-cols-1 md:grid-cols-2 font-display font-bold text-sm sm:text-base border-b border-[var(--line)]">
+              <div className="p-4 sm:p-5 bg-[var(--paper)] text-[#71717A] flex items-center gap-2 border-b md:border-b-0 md:border-r border-[var(--line)]">
+                <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+                <span>Conferência Manual</span>
               </div>
-
-              <ul className="space-y-4 text-[15px] sm:text-[16px] font-sans text-[#52525B] leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
-                  <span><strong>Fadiga Visual:</strong> Após ler 100 páginas, uma linha oculta exigindo um índice ou certidão atípica passa despercebida e derruba a empresa na sessão.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
-                  <span><strong>Corrida contra o Art. 164:</strong> Redigir uma impugnação de 4 páginas consome de 2 a 4 horas ou exige honorários caros de advogados externos.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
-                  <span><strong>Desistência Falsa por Atestado:</strong> Dúvida manual se os atestados dispersos podem ser somados ou se a exigência é ilegal perante o TCU.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-rose-600 font-bold text-base">✕</span>
-                  <span><strong>Culpa Solitária:</strong> Se a empresa for inabilitada, a responsabilidade recai inteiramente sobre a equipe de licitações perante os sócios.</span>
-                </li>
-              </ul>
+              <div className="p-4 sm:p-5 bg-[var(--mist)] text-[var(--ink)] flex items-center gap-2 border-l-2 md:border-l-0 border-[var(--flash)]">
+                <ShieldCheck className="w-4 h-4 text-[var(--flash)] shrink-0" />
+                <span>Com o EditalFlash</span>
+              </div>
             </div>
 
-            {/* O Método com EditalFlash */}
-            <div className="bg-white p-7 sm:p-9 rounded-2xl border-2 border-[#09090B] space-y-6 shadow-md">
-              <div className="flex items-center gap-2.5 pb-4 border-b border-[var(--brand)]/20 text-[var(--brand)]">
-                <ShieldCheck className="w-5 h-5" />
-                <h3 className="font-display font-bold text-xl">Com o EditalFlash v1.2</h3>
+            <div className="divide-y divide-[var(--line)] text-[15px] font-sans">
+              {/* Linha 1 */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="p-4 sm:p-5 bg-white text-[#52525B] md:border-r border-[var(--line)] leading-relaxed">
+                  Leitura exaustiva de mais de 100 páginas com risco real de deixar passar índices ou certidões atípicas.
+                </div>
+                <div className="p-4 sm:p-5 bg-[var(--mist)]/40 text-[var(--ink)] font-medium leading-relaxed border-l-2 md:border-l-0 border-[var(--flash)]">
+                  Varredura integral de 100% das páginas em 40 segundos, com citação exata de página e linha.
+                </div>
               </div>
 
-              <ul className="space-y-4 text-[15px] sm:text-[16px] font-sans text-[#09090B] leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
-                  <span><strong>Varredura Pericial Exaustiva:</strong> 100% das páginas auditadas em 40 segundos, confrontando PL maior ou igual a 10%, LC maior ou igual a 1.0 e certidões com prova literal de página e linha.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
-                  <span><strong>Minuta Pronta em 3 Segundos:</strong> Detectou cláusula restritiva? O sistema gera a petição formal com Razão Social, CNPJ e acórdãos do TCU pronta para protocolo.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
-                  <span><strong>Soma de Acervo Automática:</strong> Aplica a Súmula 263 do TCU no cofre de documentos e avisa se a empresa é competitiva para disputar o lote.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="font-mono text-emerald-600 font-bold text-base">✓</span>
-                  <span><strong>Parecer Executivo em PDF:</strong> Relatório em formato A4 institucional que blinda sua decisão e comprova a conformidade perante a diretoria.</span>
-                </li>
-              </ul>
+              {/* Linha 2 */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="p-4 sm:p-5 bg-white text-[#52525B] md:border-r border-[var(--line)] leading-relaxed">
+                  Horas gastas redigindo petições do zero ou contratação emergencial de parecer externo para impugnar.
+                </div>
+                <div className="p-4 sm:p-5 bg-[var(--mist)]/40 text-[var(--ink)] font-medium leading-relaxed border-l-2 md:border-l-0 border-[var(--flash)]">
+                  Minuta jurídica fundamentada gerada na hora, pronta para envio antes do prazo fatal do Art. 164.
+                </div>
+              </div>
+
+              {/* Linha 3 */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="p-4 sm:p-5 bg-white text-[#52525B] md:border-r border-[var(--line)] leading-relaxed">
+                  Incerteza manual sobre regras de atestados técnicos e risco de desistir de lotes viáveis.
+                </div>
+                <div className="p-4 sm:p-5 bg-[var(--mist)]/40 text-[var(--ink)] font-medium leading-relaxed border-l-2 md:border-l-0 border-[var(--flash)]">
+                  Cálculo automático de soma de acervo conforme a Súmula 263 do TCU para proteger sua participação.
+                </div>
+              </div>
+
+              {/* Linha 4 */}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="p-4 sm:p-5 bg-white text-[#52525B] md:border-r border-[var(--line)] leading-relaxed">
+                  Anotações soltas e prints desorganizados que não blindam a equipe perante os sócios.
+                </div>
+                <div className="p-4 sm:p-5 bg-[var(--mist)]/40 text-[var(--ink)] font-medium leading-relaxed border-l-2 md:border-l-0 border-[var(--flash)]">
+                  Parecer técnico executivo em PDF institucional para arquivamento e comprovação de conformidade.
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SEÇÃO 3: OS 4 MOATS DE DEFENSABILIDADE & SÚMULA 263 TCU */}
+      {/* SEÇÃO 3: RECURSOS (GRADE 2X2) */}
       <section id="moats" className="py-24 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
-        <div className="max-w-6xl mx-auto space-y-14">
-          <div className="text-center">
-            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--brand)] px-3 py-1 rounded-full bg-[var(--brand-tint)] border border-[var(--brand)]/20">
-              Recursos Construídos para Grandes Licitantes
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-xs uppercase tracking-wider font-mono font-bold text-[var(--flash)] px-3 py-1 rounded-full bg-[var(--mist)] border border-[var(--flash-lt)]/30">
+              Recursos
             </span>
-            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B] mt-4">
-              Tecnologia Calibrada para o Mundo Real das Licitações
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,40px)] text-[#09090B]">
+              Proteção contra inabilitação em todas as etapas
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Súmula 263 TCU */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-emerald-700 flex items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Recurso 1 */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E4E4E7] space-y-3 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[var(--mist)] text-emerald-700 flex items-center justify-center">
                 <Award className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-base font-display text-[#09090B]">Regra do Somatório (Súmula 263)</h3>
-              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
-                Calcula o somatório de atestados do seu cofre para cobrir os 50% de relevância técnica. Alerta na hora se o edital vedar o somatório ilegalmente.
+              <h3 className="font-bold text-lg font-display text-[#09090B]">
+                Soma automática de atestados técnicos
+              </h3>
+              <p className="text-[15px] text-[#52525B] leading-relaxed">
+                Calcula se os atestados do seu acervo atendem ao quantitativo exigido e acusa exigências restritivas.
               </p>
+              <div className="pt-2 text-xs font-mono text-[var(--flash)] font-semibold border-t border-[var(--line)]">
+                Fundamentado na Súmula 263 do TCU
+              </div>
             </div>
 
-            {/* Card 2: Tríade de Liquidez */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-blue-600 flex items-center justify-center">
+            {/* Recurso 2 */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E4E4E7] space-y-3 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[var(--mist)] text-[var(--flash)] flex items-center justify-center">
                 <TrendingUp className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-base font-display text-[#09090B]">Tríade de Liquidez &amp; PL 10%</h3>
-              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
-                Checagem matemática estrita de Liquidez Corrente (LC), Geral (LG) e Solvência (SG). Se LC &lt; 1.0, o veredito é ELIMINATÓRIA automático.
+              <h3 className="font-bold text-lg font-display text-[#09090B]">
+                Validação contábil e patrimônio líquido
+              </h3>
+              <p className="text-[15px] text-[#52525B] leading-relaxed">
+                Verifica automaticamente índices de liquidez e limite de 10% do valor estimado.
               </p>
+              <div className="pt-2 text-xs font-mono text-[var(--flash)] font-semibold border-t border-[var(--line)]">
+                Conformidade com a Tríade de Liquidez e Art. 69 da Lei 14.133
+              </div>
             </div>
 
-            {/* Card 3: Janela Útil do Art. 164 */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-amber-700 flex items-center justify-center">
+            {/* Recurso 3 */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E4E4E7] space-y-3 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[var(--mist)] text-amber-700 flex items-center justify-center">
                 <Clock className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-base font-display text-[#09090B]">Contagem Regressiva Útil</h3>
-              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
-                Calcula exatamente quantos dias úteis restam para protocolar sua impugnação (excluindo fins de semana e feriados nacionais brasileiros).
+              <h3 className="font-bold text-lg font-display text-[#09090B]">
+                Contagem regressiva de prazos recursais
+              </h3>
+              <p className="text-[15px] text-[#52525B] leading-relaxed">
+                Calcula os dias úteis restantes para protocolar pedidos de esclarecimento e impugnações.
               </p>
+              <div className="pt-2 text-xs font-mono text-[var(--flash)] font-semibold border-t border-[var(--line)]">
+                Regra de contagem de dias úteis do Art. 164
+              </div>
             </div>
 
-            {/* Card 4: Radar de Retificações */}
-            <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E4E4E7] space-y-3.5 shadow-xs hover:border-[#CBD5E1] transition-colors">
-              <div className="w-10 h-10 rounded-xl bg-[#F4F4F5] text-[#09090B] flex items-center justify-center">
+            {/* Recurso 4 */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E4E4E7] space-y-3 shadow-xs hover:border-[var(--flash-lt)] transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[var(--mist)] text-[#09090B] flex items-center justify-center">
                 <Layers className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-base font-display text-[#09090B]">Diff Engine de Retificações</h3>
-              <p className="text-[14px] sm:text-[15px] text-[#52525B] leading-relaxed">
-                Monitora o PNCP e avisa se o órgão lançou retificação ou errata que alterou prazos ou exigências após a sua primeira auditoria.
+              <h3 className="font-bold text-lg font-display text-[#09090B]">
+                Monitoramento de erratas e alterações
+              </h3>
+              <p className="text-[15px] text-[#52525B] leading-relaxed">
+                Acompanha atualizações no PNCP e avisa se o órgão alterou prazos ou cláusulas do edital.
               </p>
+              <div className="pt-2 text-xs font-mono text-[var(--flash)] font-semibold border-t border-[var(--line)]">
+                Mecanismo inteligente de comparação de versões (Diff Engine)
+              </div>
             </div>
           </div>
         </div>

@@ -77,7 +77,7 @@ export const InteractiveHeroScanner: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F4F4F5] border border-[#E4E4E7] text-[#09090B] text-xs font-mono font-bold shadow-sm">
               <Cpu className="w-3.5 h-3.5 text-[#18181B] animate-pulse" />
-              <span>Simulador Pericial 60fps</span>
+              <span>Simulador Pericial</span>
             </span>
           </div>
         </div>
@@ -164,7 +164,7 @@ export const InteractiveHeroScanner: React.FC = () => {
             <div className="pt-3.5 border-t border-[#D9DEE8] flex items-center justify-between">
               <span className="text-xs font-mono text-[#18181B] flex items-center gap-1.5 font-medium">
                 <ShieldCheck className="w-4 h-4 text-[#18181B]" />
-                <span>Auditoria Pericial</span>
+                <span>Auditoria técnica preventiva</span>
               </span>
               <span className="text-xs font-mono text-[#71717A]">
                 Tempo de cálculo: 1.2s

@@ -316,7 +316,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                 <div className="pt-6 border-t border-[var(--line)] grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-[var(--ink)]/70">
                   <div className="p-3 rounded-lg bg-[var(--paper)] border border-[var(--line)]">
                     <div className="text-[11px] uppercase text-[var(--ink)]/60 font-bold mb-1">Assinatura do Laudo</div>
-                    <div className="text-[var(--ink)] font-semibold">Motor Pericial EditalFlash v1.2</div>
+                    <div className="text-[var(--ink)] font-semibold">Motor Pericial EditalFlash</div>
                     <div className="text-[var(--ink)]/60 text-[11px]">Conformidade Lei 14.133/2021</div>
                   </div>
                   <div className="p-3 rounded-lg bg-[var(--paper)] border border-[var(--line)]">

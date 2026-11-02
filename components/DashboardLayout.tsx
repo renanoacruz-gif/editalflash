@@ -94,25 +94,25 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-[#FAFAFA] text-[#09090B]">
-      {/* SIDEBAR DESKTOP */}
+      {/* SIDEBAR DESKTOP 3D AZUL */}
       <aside
-        className={`hidden md:flex flex-col justify-between p-3 border-r border-[#E2E8F0] bg-white transition-all duration-200 select-none ${
+        className={`hidden md:flex flex-col justify-between p-3 bg-gradient-to-b from-[#0B1528] via-[#0F1E36] to-[#0A1324] text-white border-r border-[#1E3A8A]/40 shadow-[4px_0_24px_-2px_rgba(15,23,42,0.25)] transition-all duration-200 select-none relative z-20 ${
           collapsed ? "w-18" : "w-64"
         }`}
       >
-        <div className="space-y-5">
+        <div className="space-y-4">
           {/* Logo e Botão de Recolher */}
           <div className="flex items-center justify-between px-1.5 py-1">
-            <Link href="/dashboard" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#1E3A8A] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+            <Link href="/dashboard" className="flex items-center gap-2.5 group">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-[0_2px_8px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] border border-blue-400/30">
                 EF
               </div>
               {!collapsed && (
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold tracking-tight text-[#0F172A] font-sans">
+                  <span className="text-sm font-bold tracking-tight text-white font-sans drop-shadow-xs">
                     EditalFlash
                   </span>
-                  <span className="text-[11px] text-[#64748B] font-mono leading-none">
+                  <span className="text-[10px] text-blue-300 font-mono leading-none tracking-wide">
                     Auditoria Lei 14.133
                   </span>
                 </div>
@@ -123,7 +123,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
               type="button"
               onClick={toggleCollapse}
               title={collapsed ? "Expandir barra" : "Recolher barra"}
-              className="p-1 rounded-md text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors"
+              className="p-1.5 rounded-lg text-blue-300 hover:text-white hover:bg-white/10 active:bg-white/15 transition-all shadow-xs cursor-pointer border border-transparent hover:border-blue-400/20"
             >
               {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
@@ -131,42 +131,42 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
 
           {/* Banner Impersonação se ativo */}
           {impersonation && !collapsed && (
-            <div className="p-2.5 rounded-lg bg-[#FEFCE8] border border-[#FEF08A] text-[#854D0E] text-xs space-y-1">
-              <span className="font-semibold block">Visão de Usuário</span>
-              <p className="text-xs text-[#854D0E] truncate">{user.email}</p>
+            <div className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-200 text-xs space-y-1 shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)]">
+              <span className="font-semibold block text-amber-300">Visão de Usuário</span>
+              <p className="text-xs text-amber-200 truncate">{user.email}</p>
               <button
                 type="button"
                 onClick={stopImpersonation}
-                className="text-xs font-semibold underline text-[#854D0E] hover:text-black"
+                className="text-xs font-semibold underline text-amber-300 hover:text-white cursor-pointer"
               >
                 Voltar ao Admin
               </button>
             </div>
           )}
 
-          {/* Vertical Ativa do Usuário */}
+          {/* Vertical Ativa do Usuário (Card 3D com baixo-relevo) */}
           {!collapsed ? (
-            <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] space-y-0.5">
-              <span className="text-xs font-medium text-[#64748B] uppercase tracking-wider font-mono">
+            <div className="p-2.5 rounded-xl bg-white/[0.04] border border-blue-400/20 space-y-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35),0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-xs">
+              <span className="text-[10px] font-semibold text-blue-300 uppercase tracking-wider font-mono">
                 Segmento Ativo
               </span>
-              <p className="text-xs font-semibold text-[#0F172A] truncate" title={user.primary_vertical}>
+              <p className="text-xs font-semibold text-white truncate drop-shadow-xs" title={user.primary_vertical}>
                 {user.primary_vertical || "Obras e Serviços"}
               </p>
             </div>
           ) : (
             <div
-              className="flex justify-center p-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]"
+              className="flex justify-center p-2 rounded-xl bg-white/[0.04] border border-blue-400/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)]"
               title={`Segmento: ${user.primary_vertical}`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#1E3A8A]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
             </div>
           )}
 
-          {/* Links de Navegação */}
-          <nav className="space-y-0.5">
+          {/* Links de Navegação (Módulos 3D) */}
+          <nav className="space-y-1">
             {!collapsed && (
-              <div className="px-2 pb-1.5 text-xs font-medium uppercase tracking-wider text-[#64748B] font-mono">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-blue-300/80 font-mono">
                 Módulos
               </div>
             )}
@@ -178,15 +178,17 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                   key={item.id}
                   href={item.href}
                   title={collapsed ? item.label : undefined}
-                  className={`flex items-center gap-3 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                  className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 relative ${
                     collapsed ? "justify-center px-0" : ""
                   } ${
                     isActive
-                      ? "bg-[#EFF6FF] text-[#1E3A8A] border-l-3 border-[#1E3A8A] font-semibold"
-                      : "text-[#475569] hover:text-[#0F172A] hover:bg-[#F1F5F9]"
+                      ? "bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-semibold shadow-[0_4px_12px_rgba(29,78,216,0.45),inset_0_1px_1px_rgba(255,255,255,0.35)] border-l-4 border-cyan-300 -translate-y-0.5"
+                      : "text-slate-300 hover:text-white hover:bg-white/[0.08] hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.1)] active:translate-y-0 active:shadow-xs"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-[#1E3A8A]" : "text-[#64748B]"}`} />
+                  <Icon className={`w-4 h-4 shrink-0 transition-transform duration-150 ${
+                    isActive ? "text-cyan-200 drop-shadow-xs" : "text-blue-300/80 group-hover:scale-110"
+                  }`} />
                   {!collapsed && <span className="truncate">{item.label}</span>}
                 </Link>
               );
@@ -195,15 +197,15 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
 
         {/* Rodapé da Sidebar: Usuário e Sair */}
-        <div className="pt-4 border-t border-[#E2E8F0] space-y-2">
+        <div className="pt-3 border-t border-blue-900/40 space-y-2">
           <div className={`flex items-center gap-2.5 px-1 ${collapsed ? "justify-center" : ""}`}>
-            <div className="w-7 h-7 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-bold text-xs shrink-0">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-[0_2px_6px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] border border-blue-300/30">
               {user.name?.charAt(0).toUpperCase() || "U"}
             </div>
             {!collapsed && (
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-semibold text-[#0F172A] truncate block">{user.name}</span>
-                <span className="text-xs text-[#64748B] block font-mono">
+                <span className="text-xs font-semibold text-white truncate block drop-shadow-xs">{user.name}</span>
+                <span className="text-[11px] text-blue-300 block font-mono">
                   Plano {user.plan}
                 </span>
               </div>
@@ -213,11 +215,11 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
           {isAdmin && (
             <Link
               href="/admin/dashboard"
-              className={`w-full flex items-center justify-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#0F172A] border border-[#CBD5E1] transition-colors ${
+              className={`w-full flex items-center justify-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-medium bg-white/[0.07] hover:bg-white/12 active:bg-white/5 text-blue-100 border border-blue-400/20 shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all hover:-translate-y-0.5 ${
                 collapsed ? "px-0" : ""
               }`}
             >
-              <Sliders className="w-3.5 h-3.5 text-[#0F172A]" />
+              <Sliders className="w-3.5 h-3.5 text-cyan-300" />
               {!collapsed && <span>Painel Master</span>}
             </Link>
           )}
@@ -226,7 +228,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             type="button"
             onClick={logout}
             title={collapsed ? "Sair da conta" : undefined}
-            className={`w-full flex items-center justify-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[#64748B] hover:text-[#991B1B] hover:bg-[#FEF2F2] transition-colors ${
+            className={`w-full flex items-center justify-center gap-2 px-2.5 py-1.5 rounded-xl text-xs font-medium text-slate-300 hover:text-rose-200 hover:bg-rose-500/15 hover:border-rose-400/30 border border-transparent transition-all cursor-pointer ${
               collapsed ? "px-0" : ""
             }`}
           >
@@ -236,28 +238,28 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
         </div>
       </aside>
 
-      {/* BARRA SUPERIOR MOBILE */}
-      <div className="md:hidden flex items-center justify-between p-3.5 border-b border-[#E2E8F0] bg-white text-[#0F172A]">
+      {/* BARRA SUPERIOR MOBILE 3D AZUL */}
+      <div className="md:hidden flex items-center justify-between p-3.5 bg-gradient-to-r from-[#0B1528] via-[#0F1E36] to-[#0A1324] border-b border-blue-900/40 text-white shadow-md">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#1E3A8A] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] text-white flex items-center justify-center font-bold text-xs shadow-xs border border-blue-400/30">
             EF
           </div>
-          <span className="text-sm font-semibold tracking-tight text-[#0F172A]">
+          <span className="text-sm font-bold tracking-tight text-white font-sans">
             EditalFlash
           </span>
         </Link>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="p-1.5 text-[#475569] hover:text-[#0F172A] rounded-md hover:bg-[#F1F5F9] transition-colors"
+          className="p-1.5 text-blue-200 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
           aria-label={mobileSidebarOpen ? "Fechar menu" : "Abrir menu"}
         >
           {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* DROPDOWN MENU MOBILE */}
+      {/* DROPDOWN MENU MOBILE 3D AZUL */}
       {mobileSidebarOpen && (
-        <div className="md:hidden bg-white border-b border-[#E2E8F0] p-3 space-y-1 shadow-md">
+        <div className="md:hidden bg-gradient-to-b from-[#0F1E36] to-[#0A1324] border-b border-blue-900/40 p-3 space-y-1.5 shadow-xl text-white">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -266,13 +268,13 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
                 key={item.id}
                 href={item.href}
                 onClick={() => setMobileSidebarOpen(false)}
-                className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                   isActive
-                    ? "bg-[#EFF6FF] text-[#1E3A8A] font-semibold"
-                    : "text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                    ? "bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-semibold border-l-4 border-cyan-300 shadow-md"
+                    : "text-slate-300 hover:bg-white/10 hover:text-white"
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-[#1E3A8A]" : "text-[#64748B]"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-cyan-200" : "text-blue-300"}`} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -281,15 +283,15 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode; activeTab?: 
             <Link
               href="/admin/dashboard"
               onClick={() => setMobileSidebarOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-[#0F172A] bg-[#F1F5F9]"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-blue-100 bg-white/10 border border-blue-400/20"
             >
-              <Sliders className="w-4 h-4" />
+              <Sliders className="w-4 h-4 text-cyan-300" />
               <span>Painel Master</span>
             </Link>
           )}
           <button
             onClick={logout}
-            className="w-full text-left px-3 py-2 text-xs text-[#991B1B] font-medium hover:bg-[#FEF2F2] rounded-lg transition-colors"
+            className="w-full text-left px-3 py-2 text-xs text-rose-300 font-medium hover:bg-rose-500/15 rounded-xl transition-colors cursor-pointer"
           >
             Encerrar Sessão
           </button>

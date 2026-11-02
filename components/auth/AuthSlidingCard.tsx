@@ -739,7 +739,6 @@ export function AuthSlidingCard({ initialMode = "login" }: AuthSlidingCardProps)
       {/* Cobre exatamente 50% da viewport e desliza com translateX  */}
       {/* ========================================================= */}
       <div
-        aria-hidden="true"
         className={`hidden md:block absolute top-0 bottom-0 w-1/2 z-20 pointer-events-none transition-transform duration-700 ease-in-out ${
           mode === "login"
             ? "left-0 translate-x-full"

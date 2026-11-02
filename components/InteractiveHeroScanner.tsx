@@ -23,8 +23,8 @@ export const InteractiveHeroScanner: React.FC = () => {
       page: "Pág. 38, Linhas 14-18",
       verdict: "PASSA",
       statusText: "PL da sua empresa: R$ 420.000 (14,0%) vs Exigido: R$ 300.000 (10%). Conforme Art. 69.",
-      statusColor: "text-emerald-500",
-      badgeBg: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400",
+      statusColor: "text-emerald-700",
+      badgeBg: "bg-emerald-50 border-emerald-200 text-emerald-800",
     },
     {
       title: "2. Verificação de Atestados",
@@ -32,8 +32,8 @@ export const InteractiveHeroScanner: React.FC = () => {
       page: "Pág. 44, Linhas 2-6",
       verdict: "RESSALVA / IMPUGNAÇÃO",
       statusText: "Vedação de somatório ilegal (Súmula 263 TCU). Seu cofre possui 48.500 m² em 3 CATs. Minuta gerada.",
-      statusColor: "text-amber-500",
-      badgeBg: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+      statusColor: "text-amber-800",
+      badgeBg: "bg-amber-50 border-amber-200 text-amber-900",
     },
     {
       title: "3. Validação de Certidões",
@@ -41,8 +41,8 @@ export const InteractiveHeroScanner: React.FC = () => {
       page: "Pág. 29, Linhas 9-11",
       verdict: "PASSA",
       statusText: "Certidão Estadual emitida em 10/10/2026. Validade restante: 42 dias. Conforme Art. 68.",
-      statusColor: "text-emerald-500",
-      badgeBg: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400",
+      statusColor: "text-emerald-700",
+      badgeBg: "bg-emerald-50 border-emerald-200 text-emerald-800",
     },
   ];
 
@@ -105,7 +105,7 @@ export const InteractiveHeroScanner: React.FC = () => {
               <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#18181B]" />
               <div className="text-[10px] text-[#18181B] font-bold mb-1.5 flex items-center justify-between">
                 <span className="font-mono tracking-tight">{current.page}</span>
-                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-[#18181B] font-mono font-semibold">
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-white font-mono font-semibold">
                   Extração Conforme
                 </span>
               </div>
@@ -148,7 +148,7 @@ export const InteractiveHeroScanner: React.FC = () => {
                 </span>
               </div>
 
-              <h4 className="text-sm font-bold text-white font-display mb-2 tracking-tight">
+              <h4 className="text-sm font-bold text-[#09090B] font-display mb-2 tracking-tight">
                 {current.title}
               </h4>
 

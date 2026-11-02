@@ -466,8 +466,8 @@ export default function LandingPage() {
 
             {/* PLANO PRO — MAIS POPULAR */}
             <div className="bg-white border-2 border-[var(--brand)] rounded-xl p-6 flex flex-col justify-between relative shadow-md">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#18181B] text-white text-[10px] font-medium tracking-wide">
-                Mais Escolhido por Empresas
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[var(--brand)] text-white text-[10px] font-semibold tracking-wide whitespace-nowrap shadow-sm">
+                Mais escolhido
               </div>
               <div>
                 <div className="text-xs font-semibold text-blue-950 mb-1">

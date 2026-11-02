@@ -95,7 +95,7 @@ export const InteractiveParecerPreview: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] bg-[#121B2D] px-2.5 py-0.5 rounded border border-[#E4E4E7] text-[#09090B]">
+            <span className="text-[11px] bg-[#121B2D] px-2.5 py-0.5 rounded border border-[#26324A] text-white font-mono">
               Visualização Interativa A4 • Pág. 1 de 2
             </span>
             <a

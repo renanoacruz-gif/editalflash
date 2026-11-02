@@ -272,9 +272,9 @@ export default function PricingPage() {
 
           {/* PLANO PROFISSIONAL — MAIS ESCOLHIDO */}
           <div className="bg-[var(--surface)] rounded-xl p-6 border-2 border-[var(--brand)] shadow-md relative flex flex-col justify-between space-y-6">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-[#0F172A] text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow flex items-center gap-1">
-              <Award className="w-3.5 h-3.5" />
-              <span>Mais Escolhido por Empresas</span>
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow flex items-center gap-1 whitespace-nowrap">
+              <Award className="w-3.5 h-3.5 text-white" />
+              <span>Mais escolhido</span>
             </div>
 
             <div className="space-y-4 pt-1">
@@ -447,7 +447,7 @@ export default function PricingPage() {
               </div>
 
               {/* Selo Setup Recomendado para alavancar LTV */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold shrink-0 self-start sm:self-auto">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 text-xs font-mono font-bold shrink-0 self-start sm:self-auto">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Setup Assistido Recomendado (R$ 497)</span>
               </div>

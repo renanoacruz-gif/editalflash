@@ -1,6 +1,17 @@
 @import "tailwindcss";
 
 :root {
+  /* Tokens de Marca Oficiais */
+  --ink: #0B1B2B;
+  --paper: #F7F5F0;
+  --mist: #E6EAF2;
+  --line: #D9DEE8;
+  --flash: #2F5BFF;
+  --flash-lt: #8AA2FF;
+  --ok: #12A150;
+  --warn: #E0A100;
+  --bad: #D92D20;
+
   /* 1. Base Neutra e Superfícies (Clean Light Mode Exclusivo) */
   --bg-base: #FAFAFA;
   --bg-surface: #FFFFFF;
@@ -8,33 +19,33 @@
   --bg-hover: #ECECEE;
 
   /* 2. Tipografia e Contraste Estrito (Preto sobre Branco Real) */
-  --text-primary: #09090B;     /* Títulos, números, dados periciais */
+  --text-primary: #0B1B2B;     /* Títulos, números, dados periciais */
   --text-secondary: #52525B;   /* Textos explicativos e descrições */
   --text-muted: #71717A;       /* Legendas, metadados secundários e placeholders */
 
   /* 3. Linhas Divisórias e Bordas Leves */
-  --border-subtle: #E4E4E7;
-  --border-strong: #D4D4D8;
+  --border-subtle: #D9DEE8;
+  --border-strong: #CBD5E1;
 
   /* 4. Cor Institucional (Sóbria e Executiva) */
-  --brand: #18181B;            /* Preto corporativo elegante para CTAs principais */
-  --brand-accent: #2563EB;     /* Azul institucional para links e seleções */
+  --brand: #0B1B2B;            /* Preto corporativo elegante para CTAs principais */
+  --brand-accent: #2F5BFF;     /* Azul institucional para links e seleções */
   --brand-tint: #EFF6FF;
 
   /* 5. Vereditos de Habilitação (Semáforo Pericial Art. 62) */
-  --status-pass: #059669;
+  --status-pass: #065F46;
   --status-pass-bg: #ECFDF5;
   --status-pass-border: #A7F3D0;
 
-  --status-warn: #D97706;
+  --status-warn: #78350F;
   --status-warn-bg: #FFFBEB;
   --status-warn-border: #FDE68A;
 
-  --status-danger: #DC2626;
-  --status-danger-bg: #FEF2F2;
+  --status-danger: #9F1239;
+  --status-danger-bg: #FFF1F2;
   --status-danger-border: #FECACA;
 
-  --status-review: #7C3AED;
+  --status-review: #5B21B6;
   --status-review-bg: #F5F3FF;
   --status-review-border: #DDD6FE;
 

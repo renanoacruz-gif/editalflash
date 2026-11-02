@@ -1,76 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  /* Tokens de Marca Oficiais */
-  --ink: #0B1B2B;
-  --paper: #F7F5F0;
-  --mist: #E6EAF2;
-  --line: #D9DEE8;
-  --flash: #2F5BFF;
-  --flash-lt: #8AA2FF;
-  --ok: #12A150;
-  --warn: #E0A100;
-  --bad: #D92D20;
+  /* Tokens de Marca Unificados - EditalFlash */
+  --ink: #0B1B2B;              /* Navy quase preto para títulos e superfícies executivas */
+  --ink-bright: #0B1B2B;
+  --ink-2: #475569;            /* Slate médio para apoios */
+  --ink-3: #64748B;            /* Slate suave para legendas */
+  --paper: #F8FAFC;            /* Slate sutil para canvas e seções de apoio */
+  --mist: #F1F5F9;             /* Fundo de destaque discreto */
+  --line: #E2E8F0;             /* Borda padrão neutra 1px */
+  --line-strong: #CBD5E1;      /* Borda ativa ou selecionada */
+  
+  /* Cor de Ação Única */
+  --flash: #1E3A8A;            /* Azul-marinho executivo (Primary Action) */
+  --flash-hover: #1E40AF;      /* Hover do azul-marinho */
+  --flash-lt: #60A5FA;         /* Destaque suave sobre fundos escuros */
+  --flash-tint: #EFF6FF;       /* Fundo de seleção leve */
 
-  /* 1. Base Neutra e Superfícies (Clean Light Mode Exclusivo) */
-  --bg-base: #FAFAFA;
+  /* Semântica WCAG AA (Contraste ≥ 4.5:1) */
+  --ok: #065F46;               /* Verde escuro para aprovações */
+  --ok-bg: #ECFDF5;
+  --ok-border: #A7F3D0;
+  --ok-fg: #065F46;
+
+  --warn: #854D0E;             /* Âmbar escuro para ressalvas e prazos */
+  --warn-bg: #FEFCE8;
+  --warn-border: #FEF08A;
+  --warn-fg: #854D0E;
+
+  --bad: #991B1B;              /* Vermelho escuro para inabilitações e erros */
+  --bad-bg: #FEF2F2;
+  --bad-border: #FECACA;
+  --bad-fg: #991B1B;
+
+  --rev: #5B21B6;              /* Roxo escuro para revisões de equipe */
+  --rev-bg: #F5F3FF;
+  --rev-border: #DDD6FE;
+  --rev-fg: #5B21B6;
+
+  /* 1. Base Neutra e Superfícies */
+  --bg-base: #F8FAFC;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #F4F4F5;
-  --bg-hover: #ECECEE;
+  --bg-subtle: #F1F5F9;
+  --bg-hover: #E2E8F0;
 
-  /* 2. Tipografia e Contraste Estrito (Preto sobre Branco Real) */
-  --text-primary: #0B1B2B;     /* Títulos, números, dados periciais */
-  --text-secondary: #52525B;   /* Textos explicativos e descrições */
-  --text-muted: #71717A;       /* Legendas, metadados secundários e placeholders */
+  /* 2. Tipografia e Contraste Estrito */
+  --text-primary: #0F172A;     /* Slate-900 para máxima legibilidade */
+  --text-secondary: #475569;   /* Slate-600 para textos secundários */
+  --text-muted: #64748B;       /* Slate-500 para metadados */
 
   /* 3. Linhas Divisórias e Bordas Leves */
-  --border-subtle: #D9DEE8;
+  --border-subtle: #E2E8F0;
   --border-strong: #CBD5E1;
 
-  /* 4. Cor Institucional (Sóbria e Executiva) */
-  --brand: #0B1B2B;            /* Preto corporativo elegante para CTAs principais */
-  --brand-accent: #2F5BFF;     /* Azul institucional para links e seleções */
+  /* 4. Cor Institucional */
+  --brand: #1E3A8A;
+  --brand-solid: #1E3A8A;
+  --brand-accent: #2563EB;
   --brand-tint: #EFF6FF;
-
-  /* 5. Vereditos de Habilitação (Semáforo Pericial Art. 62) */
-  --status-pass: #065F46;
-  --status-pass-bg: #ECFDF5;
-  --status-pass-border: #A7F3D0;
-
-  --status-warn: #78350F;
-  --status-warn-bg: #FFFBEB;
-  --status-warn-border: #FDE68A;
-
-  --status-danger: #9F1239;
-  --status-danger-bg: #FFF1F2;
-  --status-danger-border: #FECACA;
-
-  --status-review: #5B21B6;
-  --status-review-bg: #F5F3FF;
-  --status-review-border: #DDD6FE;
 
   /* Compatibilidade com tokens legados */
   --bg: var(--bg-base);
   --surface: var(--bg-surface);
   --surface-subtle: var(--bg-subtle);
-  --ink: var(--text-primary);
-  --ink-bright: var(--text-primary);
-  --ink-2: var(--text-secondary);
-  --ink-3: var(--text-muted);
-  --line: var(--border-subtle);
-  --line-strong: var(--border-strong);
-  --ok: var(--status-pass);
-  --ok-bg: var(--status-pass-bg);
-  --ok-fg: var(--status-pass);
-  --warn: var(--status-warn);
-  --warn-bg: var(--status-warn-bg);
-  --warn-fg: var(--status-warn);
-  --bad: var(--status-danger);
-  --bad-bg: var(--status-danger-bg);
-  --bad-fg: var(--status-danger);
-  --rev: var(--status-review);
-  --rev-bg: var(--status-review-bg);
-  --rev-fg: var(--status-review);
 }
 
 /* Forçamos o Light Mode garantindo contraste perfeito em qualquer sistema operacional */

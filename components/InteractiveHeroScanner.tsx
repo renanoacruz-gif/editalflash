@@ -58,21 +58,21 @@ export const InteractiveHeroScanner: React.FC = () => {
   return (
     <div className="w-full max-w-4xl mx-auto mt-12 text-left">
       {/* Container Bento Estilo Linear/Stripe */}
-      <div className="bento-card border border-[var(--line)] bg-[#0A111F] text-[#E8ECF5] shadow-2xl rounded-2xl overflow-hidden relative">
+      <div className="bento-card border border-[var(--line)] bg-white text-[#09090B] shadow-2xl rounded-2xl overflow-hidden relative">
         {/* Topo do Arquivo Simulado */}
-        <div className="px-4 py-3 border-b border-[#26324A] bg-[#121B2D]/90 flex items-center justify-between backdrop-blur-md">
+        <div className="px-4 py-3 border-b border-[#E4E4E7] bg-[#FAFAFA] flex items-center justify-between backdrop-blur-md">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block transition-transform hover:scale-125" />
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block transition-transform hover:scale-125" />
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block transition-transform hover:scale-125" />
-            <span className="ml-2.5 text-[11px] font-mono text-[#A3AEC4] hidden sm:inline tracking-tight">
+            <span className="ml-2.5 text-[11px] font-mono text-[#71717A] hidden sm:inline tracking-tight">
               Edital_Pregao_Eletronico_14133_Obras.pdf
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1B2347] border border-[#4A5FFF]/40 text-[#8F9CFF] text-[10px] font-mono font-bold shadow-sm">
-              <Cpu className="w-3 h-3 text-[#4A5FFF] animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F4F4F5] border border-[#E4E4E7] text-[#09090B] text-[10px] font-mono font-bold shadow-sm">
+              <Cpu className="w-3 h-3 text-[#18181B] animate-pulse" />
               <span>Simulador Pericial 60fps</span>
             </span>
           </div>
@@ -91,25 +91,25 @@ export const InteractiveHeroScanner: React.FC = () => {
           />
 
           {/* Coluna 1: O Texto Bruto do Edital com Marca-Texto Dinâmico */}
-          <div className="md:col-span-7 space-y-4 font-mono text-xs text-[#A3AEC4] leading-relaxed relative">
-            <div className="text-[10px] uppercase text-[#6B7A99] tracking-wider font-bold flex items-center justify-between">
+          <div className="md:col-span-7 space-y-4 font-mono text-xs text-[#71717A] leading-relaxed relative">
+            <div className="text-[10px] uppercase text-[#71717A] tracking-wider font-bold flex items-center justify-between">
               <span>Varredura de Conformidade • Lei 14.133/2021</span>
-              <span className="text-[#8F9CFF] font-mono text-[10px]">Passo {activeStep + 1} de {steps.length}</span>
+              <span className="text-[#18181B] font-mono text-[10px]">Passo {activeStep + 1} de {steps.length}</span>
             </div>
 
             <p className="opacity-50 text-[11px] leading-relaxed select-none">
               "O MUNICÍPIO, por meio de sua Comissão de Contratação, torna público que realizará licitação na modalidade PREGÃO ELETRÔNICO..."
             </p>
 
-            <div className="p-4 rounded-xl bg-[#121B2D] border border-[#4A5FFF]/40 text-[#E8ECF5] shadow-lg relative overflow-hidden transition-all duration-300 transform translate-y-0">
-              <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#4A5FFF]" />
-              <div className="text-[10px] text-[#8F9CFF] font-bold mb-1.5 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-[#FAFAFA] border border-[#E4E4E7] text-[#09090B] shadow-lg relative overflow-hidden transition-all duration-300 transform translate-y-0">
+              <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#18181B]" />
+              <div className="text-[10px] text-[#18181B] font-bold mb-1.5 flex items-center justify-between">
                 <span className="font-mono tracking-tight">{current.page}</span>
-                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-[#8F9CFF] font-mono font-semibold">
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#1B2347] border border-[#4A5FFF]/30 text-[#18181B] font-mono font-semibold">
                   Extração Conforme
                 </span>
               </div>
-              <p className="font-semibold text-xs text-white leading-snug">
+              <p className="font-semibold text-xs text-[#09090B] leading-snug">
                 "{current.highlightLine}"
               </p>
             </div>
@@ -127,8 +127,8 @@ export const InteractiveHeroScanner: React.FC = () => {
                   onClick={() => setActiveStep(idx)}
                   className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                     activeStep === idx
-                      ? "w-8 bg-[#4A5FFF] shadow-[0_0_8px_rgba(74,95,255,0.6)]"
-                      : "w-2 bg-[#26324A] hover:bg-[#4A5FFF]/50"
+                      ? "w-8 bg-[#18181B] shadow-[0_0_8px_rgba(74,95,255,0.6)]"
+                      : "w-2 bg-[#E4E4E7] hover:bg-[#18181B]/50"
                   }`}
                   aria-label={`Ir para etapa ${idx + 1}`}
                 />
@@ -137,10 +137,10 @@ export const InteractiveHeroScanner: React.FC = () => {
           </div>
 
           {/* Coluna 2: Card de Veredito Imediato (Estilo Linear / GetLayers) */}
-          <div className="md:col-span-5 flex flex-col justify-between p-5 rounded-2xl bg-[#121B2D]/90 border border-[#26324A] backdrop-blur-md relative z-10 space-y-4 shadow-xl transition-all duration-300 hover:border-[#4A5FFF]/40">
+          <div className="md:col-span-5 flex flex-col justify-between p-5 rounded-2xl bg-[#FAFAFA] border border-[#E4E4E7] backdrop-blur-md relative z-10 space-y-4 shadow-xl transition-all duration-300 hover:border-[#4A5FFF]/40">
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#A3AEC4] font-semibold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#71717A] font-semibold">
                   Diagnóstico Automático
                 </span>
                 <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border shadow-sm ${current.badgeBg}`}>
@@ -152,17 +152,17 @@ export const InteractiveHeroScanner: React.FC = () => {
                 {current.title}
               </h4>
 
-              <p className="text-xs text-[#A3AEC4] leading-relaxed font-sans">
+              <p className="text-xs text-[#71717A] leading-relaxed font-sans">
                 {current.statusText}
               </p>
             </div>
 
             <div className="pt-3.5 border-t border-[#26324A] flex items-center justify-between">
-              <span className="text-[11px] font-mono text-[#8F9CFF] flex items-center gap-1.5 font-medium">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#4A5FFF]" />
+              <span className="text-[11px] font-mono text-[#18181B] flex items-center gap-1.5 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#18181B]" />
                 <span>Auditoria Pericial</span>
               </span>
-              <span className="text-[10px] font-mono text-[#6B7A99]">
+              <span className="text-[10px] font-mono text-[#71717A]">
                 Tempo de cálculo: 1.2s
               </span>
             </div>

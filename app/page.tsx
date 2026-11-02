@@ -84,7 +84,7 @@ export default function LandingPage() {
       className="min-h-screen bg-white text-[#09090B] flex flex-col font-sans selection:bg-[var(--brand-tint)] selection:text-[var(--brand)]"
     >
       {/* HEADER INSTITUCIONAL COM BARRA DE PROGRESSO DE SCROLL */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#F4F4F5]/90 border-b border-[#E4E4E7] py-3.5 px-4 sm:px-8 transition-colors relative">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/95 border-b border-[#E4E4E7] py-3.5 px-4 sm:px-8 transition-colors relative">
         {/* Barra de Progresso no Topo do Cabeçalho */}
         <div
           className="absolute bottom-0 left-0 h-[2.5px] bg-[var(--brand)] transition-colors duration-150 ease-out z-50"
@@ -144,7 +144,7 @@ export default function LandingPage() {
         onMouseMove={handleHeroMouseMove}
         onMouseEnter={() => setIsHoveringHero(true)}
         onMouseLeave={() => setIsHoveringHero(false)}
-        className="relative pt-16 pb-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-[#F4F4F5] overflow-hidden"
+        className="relative pt-24 pb-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white overflow-hidden"
       >
         {/* Grid de Precisão Arquitetural */}
         <div
@@ -175,8 +175,8 @@ export default function LandingPage() {
         )}
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4F4F5] border border-[#E4E4E7] text-xs text-[#09090B] mb-6">
-            <ShieldCheck className="w-4 h-4 text-blue-900" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E4E4E7] text-xs text-[#09090B] mb-6">
+            <ShieldCheck className="w-4 h-4 text-[#09090B]" />
             <span className="font-medium">O segundo par de olhos contra inabilitações surpresa</span>
           </div>
 
@@ -201,9 +201,9 @@ export default function LandingPage() {
               download="exemplo-parecer-editalflash.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white hover:bg-[#F4F4F5] active:scale-98 text-[#09090B] font-medium text-[15px] border border-[#E4E4E7] transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white hover:bg-white active:scale-98 text-[#09090B] font-medium text-[15px] border border-[#E4E4E7] transition-colors focus-visible:ring-2 focus-visible:ring-blue-950"
             >
-              <Download className="w-4 h-4 text-blue-900" />
+              <Download className="w-4 h-4 text-[#09090B]" />
               <span>Ver Modelo de Parecer</span>
             </a>
           </div>
@@ -215,12 +215,12 @@ export default function LandingPage() {
             </span>
             <span className="hidden sm:inline text-slate-300">|</span>
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-blue-900" />
+              <Clock className="w-4 h-4 text-[#09090B]" />
               Petição Art. 164 Pronta com 1 Clique
             </span>
             <span className="hidden sm:inline text-[var(--line)]">|</span>
             <span className="inline-flex items-center gap-1.5">
-              <Scale className="w-4 h-4 text-indigo-500" />
+              <Scale className="w-4 h-4 text-[#09090B]" />
               Súmula 263 TCU &amp; Tríade de Liquidez
             </span>
           </div>
@@ -247,7 +247,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {/* O Método Manual Antigo */}
-            <div className="bg-[#F4F4F5] p-6 sm:p-8 rounded-xl border border-rose-500/30 space-y-5">
+            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#E4E4E7] space-y-5">
               <div className="flex items-center gap-2.5 pb-4 border-b border-rose-500/20 text-rose-600 dark:text-rose-400">
                 <AlertTriangle className="w-5 h-5" />
                 <h3 className="font-display font-bold text-lg">O Risco da Rotina Manual</h3>
@@ -274,7 +274,7 @@ export default function LandingPage() {
             </div>
 
             {/* O Método com EditalFlash */}
-            <div className="bg-[#F4F4F5] p-6 sm:p-8 rounded-xl border-2 border-[var(--brand)] space-y-5 shadow-sm">
+            <div className="bg-white p-6 sm:p-8 rounded-xl border border-[#09090B] space-y-5 shadow-sm">
               <div className="flex items-center gap-2.5 pb-4 border-b border-[var(--brand)]/20 text-[var(--brand)]">
                 <ShieldCheck className="w-5 h-5" />
                 <h3 className="font-display font-bold text-lg">Com o EditalFlash v1.2</h3>
@@ -304,7 +304,7 @@ export default function LandingPage() {
       </section>
 
       {/* SEÇÃO 3: OS 4 MOATS DE DEFENSABILIDADE & SÚMULA 263 TCU */}
-      <section id="moats" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-[#F4F4F5]">
+      <section id="moats" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center">
             <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
@@ -318,7 +318,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1: Súmula 263 TCU */}
             <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <Award className="w-4 h-4" />
               </div>
               <h3 className="font-bold text-sm font-display text-[#09090B]">Regra do Somatório (Súmula 263)</h3>
@@ -329,7 +329,7 @@ export default function LandingPage() {
 
             {/* Card 2: Tríade de Liquidez */}
             <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-blue-500/10 text-blue-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-blue-500 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <h3 className="font-bold text-sm font-display text-[#09090B]">Tríade de Liquidez &amp; PL 10%</h3>
@@ -340,7 +340,7 @@ export default function LandingPage() {
 
             {/* Card 3: Janela Útil do Art. 164 */}
             <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-amber-500/10 text-amber-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-amber-500 flex items-center justify-center">
                 <Clock className="w-4 h-4" />
               </div>
               <h3 className="font-bold text-sm font-display text-[#09090B]">Contagem Regressiva Útil</h3>
@@ -351,7 +351,7 @@ export default function LandingPage() {
 
             {/* Card 4: Radar de Retificações */}
             <div className="p-5 rounded-lg bg-white border border-[#E4E4E7] space-y-3">
-              <div className="w-8 h-8 rounded bg-indigo-500/10 text-indigo-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-[#F4F4F5] text-[#09090B] flex items-center justify-center">
                 <Layers className="w-4 h-4" />
               </div>
               <h3 className="font-bold text-sm font-display text-[#09090B]">Diff Engine de Retificações</h3>
@@ -389,7 +389,7 @@ export default function LandingPage() {
       <InteractiveRoiCalculator />
 
       {/* SEÇÃO 5: PLANOS CORPORATIVOS */}
-      <section id="planos" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-[#F4F4F5]">
+      <section id="planos" className="py-20 px-4 sm:px-8 border-b border-[#E4E4E7] bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[11px] font-sans font-medium font-bold text-[var(--brand)]">
@@ -464,14 +464,14 @@ export default function LandingPage() {
 
               <Link
                 href="/signup?plan=Starter"
-                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-[#F4F4F5] hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
+                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
               >
                 Assinar Starter
               </Link>
             </div>
 
             {/* PLANO PRO — MAIS POPULAR */}
-            <div className="bg-[#F4F4F5] border-2 border-[var(--brand)] rounded-xl p-6 flex flex-col justify-between relative shadow-md">
+            <div className="bg-white border-2 border-[var(--brand)] rounded-xl p-6 flex flex-col justify-between relative shadow-md">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#18181B] text-white text-[10px] font-medium tracking-wide">
                 Mais Escolhido por Empresas
               </div>
@@ -559,7 +559,7 @@ export default function LandingPage() {
 
               <Link
                 href="/signup?plan=Enterprise"
-                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-[#F4F4F5] hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
+                className="mt-8 w-full py-2.5 rounded-lg text-xs font-bold bg-white hover:bg-[var(--line)] text-[#09090B] border border-[#E4E4E7] text-center transition-colors"
               >
                 Contratar Enterprise
               </Link>
@@ -584,7 +584,7 @@ export default function LandingPage() {
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="border border-[#E4E4E7] rounded-xl overflow-hidden bg-[#F4F4F5] transition-colors"
+                className="border border-[#E4E4E7] rounded-xl overflow-hidden bg-white transition-colors"
               >
                 <button
                   type="button"
@@ -608,7 +608,7 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER INSTITUCIONAL */}
-      <footer className="py-12 px-4 sm:px-8 bg-[#F4F4F5] border-t border-[#E4E4E7] text-xs text-[#52525B]">
+      <footer className="py-12 px-4 sm:px-8 bg-white border-t border-[#E4E4E7] text-xs text-[#52525B]">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2.5">
@@ -630,7 +630,7 @@ export default function LandingPage() {
               <span>EditalFlash, 51.926.034 RENAN OSCAR ARAUJO CRUZ, CNPJ: 51.926.034/0001-42, AV SANTA BERNADETHE, 310, LINDOIA, CURITIBA - PR, CEP 81.010-200</span>
             </div>
             <div>
-              <span>Contato Oficial: <a href="mailto:contatoeditalflash@gmail.com" className="text-blue-900 hover:underline">contatoeditalflash@gmail.com</a></span>
+              <span>Contato Oficial: <a href="mailto:contatoeditalflash@gmail.com" className="text-[#09090B] hover:underline">contatoeditalflash@gmail.com</a></span>
             </div>
           </div>
         </div>

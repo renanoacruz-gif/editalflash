@@ -12,37 +12,38 @@ import {
   TrendingUp,
   Cpu,
 } from "lucide-react";
+import { cenarioExemplo } from "@/data/exemplo";
 
 export const InteractiveHeroScanner: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     {
-      title: "1. Leitura Estruturada",
-      highlightLine: "Cláusula 9.2: Exigência de Balanço Patrimonial com Patrimônio Líquido ≥ 10% do valor estimado.",
-      page: "Pág. 38, Linhas 14-18",
-      verdict: "PASSA",
-      statusText: "PL da sua empresa: R$ 420.000 (14,0%) vs Exigido: R$ 300.000 (10%). Conforme Art. 69.",
+      title: "1. Leitura Estruturada (PL)",
+      highlightLine: cenarioExemplo.requisitos[0].highlightLine,
+      page: cenarioExemplo.requisitos[0].localEdital,
+      verdict: cenarioExemplo.requisitos[0].status,
+      statusText: `PL da empresa: ${cenarioExemplo.metricas.plApuradoValorFormatado} (${cenarioExemplo.metricas.plApuradoPercentual}%) vs Exigido: ${cenarioExemplo.metricas.plMinimoValorFormatado} (${cenarioExemplo.metricas.plMinimoPercentual}%). Conforme Art. 69.`,
       statusColor: "text-emerald-700",
       badgeBg: "bg-emerald-50 border-emerald-200 text-emerald-800",
     },
     {
       title: "2. Verificação de Atestados",
-      highlightLine: "Cláusula 10.4: Comprovação de 15.000 m² de pavimentação asfáltica CBUQ. Vedado somatório.",
-      page: "Pág. 44, Linhas 2-6",
+      highlightLine: cenarioExemplo.requisitos[1].highlightLine,
+      page: cenarioExemplo.requisitos[1].localEdital,
       verdict: "RESSALVA / IMPUGNAÇÃO",
-      statusText: "Vedação de somatório ilegal (Súmula 263 TCU). Seu cofre possui 48.500 m² em 3 CATs. Minuta gerada.",
+      statusText: `Vedação de somatório ilegal (Súmula 263 TCU). Seu cofre comprova ${cenarioExemplo.metricas.atestadoComprovado} para exigência de ${cenarioExemplo.metricas.atestadoExigido}. Minuta gerada.`,
       statusColor: "text-amber-800",
       badgeBg: "bg-amber-50 border-amber-200 text-amber-900",
     },
     {
       title: "3. Validação de Certidões",
-      highlightLine: "Cláusula 8.1: Apresentação de Certidão Negativa de Falência com validade na data da sessão.",
-      page: "Pág. 29, Linhas 9-11",
-      verdict: "PASSA",
-      statusText: "Certidão Estadual emitida em 10/10/2026. Validade restante: 42 dias. Conforme Art. 68.",
-      statusColor: "text-emerald-700",
-      badgeBg: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      highlightLine: cenarioExemplo.requisitos[2].highlightLine,
+      page: cenarioExemplo.requisitos[2].localEdital,
+      verdict: cenarioExemplo.requisitos[2].status,
+      statusText: `Certidão Conjunta Federal regular perante a RFB/PGFN, porém com validade restante de ${cenarioExemplo.metricas.cndFederalDiasRestantes} dias úteis. Alerta de renovação emitido.`,
+      statusColor: "text-amber-800",
+      badgeBg: "bg-amber-50 border-amber-200 text-amber-900",
     },
   ];
 
@@ -66,7 +67,10 @@ export const InteractiveHeroScanner: React.FC = () => {
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block transition-transform hover:scale-125" />
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block transition-transform hover:scale-125" />
             <span className="ml-2.5 text-xs font-mono text-[#71717A] hidden sm:inline tracking-tight">
-              Edital_Pregao_Eletronico_14133_Obras.pdf
+              {cenarioExemplo.edital.arquivoNome}
+            </span>
+            <span className="ml-2 text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
+              Exemplo ilustrativo
             </span>
           </div>
 
@@ -98,7 +102,7 @@ export const InteractiveHeroScanner: React.FC = () => {
             </div>
 
             <p className="opacity-60 text-xs sm:text-[13px] leading-relaxed select-none">
-              "O MUNICÍPIO, por meio de sua Comissão de Contratação, torna público que realizará licitação na modalidade PREGÃO ELETRÔNICO..."
+              "A PREFEITURA MUNICIPAL, por meio de sua Comissão de Contratação, torna público que realizará licitação na modalidade {cenarioExemplo.edital.modalidade}..."
             </p>
 
             <div className="p-4 sm:p-5 rounded-xl bg-[#FAFAFA] border border-[#E4E4E7] text-[#09090B] shadow-md relative overflow-hidden transition-all duration-300 transform translate-y-0">
@@ -115,7 +119,7 @@ export const InteractiveHeroScanner: React.FC = () => {
             </div>
 
             <p className="opacity-60 text-xs sm:text-[13px] leading-relaxed select-none">
-              "A inabilitação da licitante importará preclusão do direito de participar das fases subsequentes, lavrando-se ata circunstanciada..."
+              "Objeto: {cenarioExemplo.edital.objeto}. A inabilitação da licitante importará preclusão do direito de participar das fases subsequentes..."
             </p>
 
             {/* Stepper Dots com Transição Fluida 60fps */}

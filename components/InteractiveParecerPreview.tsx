@@ -13,62 +13,13 @@ import {
   Sparkles,
   Award,
 } from "lucide-react";
+import { cenarioExemplo, getEstatisticasExemplo } from "@/data/exemplo";
 
 export const InteractiveParecerPreview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"todos" | "conformes" | "ressalvas">("todos");
 
-  const auditoriaItems = [
-    {
-      artigo: "Art. 69, § 4º",
-      categoria: "Qualificação Econômica",
-      exigencia: "Patrimônio Líquido Mínimo de 10% (R$ 425.000,00)",
-      localEdital: "Pág. 14, Item 8.2.1",
-      diagnostico: "Balanço Patrimonial apura PL de R$ 560.000,00 (13,1%). Margem positiva de +R$ 135.000,00.",
-      status: "PASSA",
-      statusLabel: "PASSA (+32% folga)",
-      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-300",
-    },
-    {
-      artigo: "Art. 67, § 2º",
-      categoria: "Capacidade Técnica",
-      exigencia: "Atestado de Pavimentação CBUQ em volume de 5.000 m²",
-      localEdital: "Pág. 19, Item 9.3",
-      diagnostico: "Soma de 2 CATs registradas no CREA atinge 7.200 m². Aplicável a regra da Súmula 263 do TCU.",
-      status: "PASSA",
-      statusLabel: "PASSA (Súmula 263)",
-      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-300",
-    },
-    {
-      artigo: "Art. 68, III",
-      categoria: "Regularidade Fiscal",
-      exigencia: "Certidão Conjunta Federal (RFB/PGFN) em plena validade",
-      localEdital: "Pág. 11, Item 7.1.3",
-      diagnostico: "Certidão cadastrada é válida, porém vence em 4 dias corridos. Requer renovação preventiva no e-CAC.",
-      status: "RESSALVA",
-      statusLabel: "RESSALVA (4 dias)",
-      badgeBg: "bg-amber-50 text-amber-900 border-amber-300",
-    },
-    {
-      artigo: "Art. 68, V",
-      categoria: "Trabalhista",
-      exigencia: "Certidão Negativa de Débitos Trabalhistas (CNDT)",
-      localEdital: "Pág. 12, Item 7.2",
-      diagnostico: "CNDT expedida pelo TST com validade assegurada por mais 120 dias.",
-      status: "PASSA",
-      statusLabel: "PASSA (Conforme)",
-      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-300",
-    },
-    {
-      artigo: "Art. 69, § 1º",
-      categoria: "Índices Contábeis",
-      exigencia: "Liquidez Geral (LG) ≥ 1,00 e Liquidez Corrente (LC) ≥ 1,00",
-      localEdital: "Pág. 16, Item 8.3",
-      diagnostico: "Índices apurados: LG = 1,42 e LC = 1,38. Dispensada garantia adicional de proposta.",
-      status: "PASSA",
-      statusLabel: "PASSA (LG/LC > 1)",
-      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-300",
-    },
-  ];
+  const auditoriaItems = cenarioExemplo.requisitos;
+  const stats = getEstatisticasExemplo(auditoriaItems);
 
   const filtered = auditoriaItems.filter((item) => {
     if (activeTab === "conformes") return item.status === "PASSA";
@@ -91,6 +42,9 @@ export const InteractiveParecerPreview: React.FC = () => {
             <span className="text-[#09090B] font-semibold text-xs ml-2 flex items-center gap-1.5">
               <FileText className="w-3.5 h-3.5 text-[#4A5FFF]" />
               <span>Parecer_Preliminar_Concorrencia_042_2026.pdf</span>
+            </span>
+            <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-[var(--mist)] text-[var(--ink)] border border-[var(--line)]">
+              Exemplo ilustrativo
             </span>
           </div>
 
@@ -122,17 +76,17 @@ export const InteractiveParecerPreview: React.FC = () => {
                   PARECER TÉCNICO DE HABILITAÇÃO PRELIMINAR (LEI 14.133/2021)
                 </span>
                 <span className="text-xs font-mono text-gray-500">
-                  Emissão: 29/10/2026 às 06:45 BRT
+                  Emissão: {cenarioExemplo.edital.dataEmissao}
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold font-display uppercase tracking-tight text-[#0E1626] mt-1">
                 PARECER TÉCNICO PRELIMINAR DE HABILITAÇÃO
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700 mt-2 font-mono">
-                <div>Licitante: <strong className="text-black">51.926.034 RENAN OSCAR ARAUJO CRUZ</strong></div>
-                <div>CNPJ: <strong className="text-black">51.926.034/0001-42</strong></div>
-                <div>Edital: <strong className="text-black">Concorrência nº 042/2026</strong></div>
-                <div>Órgão: <strong className="text-black">SEDUC - Secretaria de Educação</strong></div>
+                <div>Licitante: <strong className="text-black">{cenarioExemplo.licitante.razaoSocial}</strong></div>
+                <div>CNPJ: <strong className="text-black">{cenarioExemplo.licitante.cnpj}</strong></div>
+                <div>Edital: <strong className="text-black">{cenarioExemplo.edital.numero}</strong></div>
+                <div>Órgão: <strong className="text-black">{cenarioExemplo.edital.orgao}</strong></div>
               </div>
             </div>
 
@@ -141,19 +95,19 @@ export const InteractiveParecerPreview: React.FC = () => {
               <div className="grid grid-cols-4 gap-3 w-full sm:w-auto text-center font-mono">
                 <div className="border-r border-gray-200 pr-2">
                   <div className="text-xs uppercase text-gray-500 font-bold">Conformes</div>
-                  <div className="text-xl font-bold text-emerald-700">11</div>
+                  <div className="text-xl font-bold text-emerald-700">{stats.conformes}</div>
                 </div>
                 <div className="border-r border-gray-200 pr-2">
                   <div className="text-xs uppercase text-gray-500 font-bold">Ressalvas</div>
-                  <div className="text-xl font-bold text-amber-700">1</div>
+                  <div className="text-xl font-bold text-amber-700">{stats.ressalvas}</div>
                 </div>
                 <div className="border-r border-gray-200 pr-2">
                   <div className="text-xs uppercase text-gray-500 font-bold">Eliminatórias</div>
-                  <div className="text-xl font-bold text-rose-700">0</div>
+                  <div className="text-xl font-bold text-rose-700">{stats.eliminatorias}</div>
                 </div>
                 <div>
                   <div className="text-xs uppercase text-gray-500 font-bold">Revisões</div>
-                  <div className="text-xl font-bold text-gray-700">0</div>
+                  <div className="text-xl font-bold text-gray-700">{stats.revisões}</div>
                 </div>
               </div>
 
@@ -179,7 +133,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
-                  Todos ({auditoriaItems.length})
+                  Todos ({stats.total})
                 </button>
                 <button
                   type="button"
@@ -190,7 +144,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
-                  Conformes (4)
+                  Conformes ({stats.conformes})
                 </button>
                 <button
                   type="button"
@@ -201,7 +155,7 @@ export const InteractiveParecerPreview: React.FC = () => {
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
-                  Ressalvas (1)
+                  Ressalvas ({stats.ressalvas})
                 </button>
               </div>
 

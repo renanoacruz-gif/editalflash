@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,6 +56,15 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} scroll-smooth`}
     >
+      <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="https://unpkg.com/react-grab@0.0.18/dist/index.global.js"
+            strategy="beforeInteractive"
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className="min-h-screen bg-[var(--paper)] text-[var(--ink)] antialiased selection:bg-[var(--flash-lt)]/30 selection:text-[var(--ink)] font-sans">
         <AuthProvider>{children}</AuthProvider>
       </body>

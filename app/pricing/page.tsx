@@ -272,7 +272,7 @@ export default function PricingPage() {
 
           {/* PLANO PROFISSIONAL — MAIS ESCOLHIDO */}
           <div className="bg-[var(--surface)] rounded-xl p-6 border-2 border-[var(--brand)] shadow-md relative flex flex-col justify-between space-y-6">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow flex items-center gap-1 whitespace-nowrap">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[var(--brand)] text-white text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow flex items-center gap-1.5 whitespace-nowrap">
               <Award className="w-3.5 h-3.5 text-white" />
               <span>Mais escolhido</span>
             </div>

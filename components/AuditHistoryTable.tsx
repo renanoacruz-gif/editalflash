@@ -413,8 +413,30 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
           <tbody className="divide-y divide-[var(--line)]">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={6} className="py-8 text-center text-xs text-[var(--ink-2)] font-mono">
-                  Nenhuma auditoria encontrada com os filtros selecionados.
+                <td colSpan={6} className="py-12 text-center">
+                  <div className="flex flex-col items-center justify-center max-w-sm mx-auto space-y-3">
+                    <div className="w-10 h-10 rounded-full bg-[#F1F5F9] border border-[#CBD5E1] flex items-center justify-center text-[#64748B]">
+                      <Search className="w-5 h-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-semibold text-[#0F172A] font-display">Nenhum certame localizado</h4>
+                      <p className="text-xs text-[#475569] font-sans">
+                        Não encontramos auditorias para o termo ou filtro de veredito selecionado.
+                      </p>
+                    </div>
+                    {(searchTerm || statusFilter !== "ALL") && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchTerm("");
+                          setStatusFilter("ALL");
+                        }}
+                        className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-[#CBD5E1] text-[#0F172A] hover:bg-[#F8FAFC] transition-colors shadow-xs"
+                      >
+                        Limpar Filtros de Busca
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ) : (
@@ -574,8 +596,30 @@ export const AuditHistoryTable: React.FC<AuditHistoryTableProps> = ({
       {/* Visualização Mobile em Cards Empilhados (Visível exclusivamente em md:hidden) */}
       <div className="block md:hidden space-y-3">
         {filtered.length === 0 ? (
-          <div className="p-6 text-center text-xs text-[var(--ink-2)] font-mono border border-[var(--line)] rounded-lg bg-[var(--surface)]">
-            Nenhuma auditoria encontrada com os filtros selecionados.
+          <div className="p-8 text-center border border-[#E2E8F0] rounded-xl bg-white shadow-xs">
+            <div className="flex flex-col items-center justify-center max-w-xs mx-auto space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#F1F5F9] border border-[#CBD5E1] flex items-center justify-center text-[#64748B]">
+                <Search className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold text-[#0F172A] font-display">Nenhum certame localizado</h4>
+                <p className="text-xs text-[#475569] font-sans">
+                  Não encontramos auditorias para o termo ou filtro selecionado.
+                </p>
+              </div>
+              {(searchTerm || statusFilter !== "ALL") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setStatusFilter("ALL");
+                  }}
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white border border-[#CBD5E1] text-[#0F172A] hover:bg-[#F8FAFC] transition-colors shadow-xs"
+                >
+                  Limpar Filtros
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           filtered.map((item) => {
